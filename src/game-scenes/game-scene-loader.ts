@@ -1,9 +1,10 @@
 import {GameScene} from './game-scene';
 
 export class GameSceneLoader {
-    public activeGameScene: GameScene;
+    public gameScenes: GameScene[] = [];
 
-    constructor() {
+    public loadScene(scene: GameScene) {
+        this.gameScenes.push(scene);
     }
 }
 
