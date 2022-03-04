@@ -8,6 +8,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         height: 800,
         width: 1200,
+        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
