@@ -7,10 +7,12 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
+      "engine": [
+        "src/engine/engine"
+      ],
       "*": [
         "node_modules/*"
-      ],
-      "engine": ["src/engine/engine"]
+      ]
     }
   },
   "include": [

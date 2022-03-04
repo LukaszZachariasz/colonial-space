@@ -24,6 +24,7 @@
     "babylonjs": "4.2.1",
     "babylonjs-loaders": "4.2.1",
     "electron-reload": "2.0.0-alpha.1",
-    "electron-localshortcut": "3.2.1"
+    "electron-localshortcut": "3.2.1",
+    "tsconfig-paths-webpack-plugin": "3.5.2"
   }
 }
