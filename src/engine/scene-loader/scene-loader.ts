@@ -6,6 +6,10 @@ export class SceneLoader {
     public displayScene(scene: GameScene) {
         this.scenes.push(scene);
     }
+
+    public overrideScene(scene: GameScene) {
+        this.scenes = [scene];
+    }
 }
 
 const instance = new SceneLoader();

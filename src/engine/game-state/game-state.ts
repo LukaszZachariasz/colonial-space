@@ -7,7 +7,6 @@ export class GameState {
     startScenario(scenario: Scenario) {
         this.currentScenario = scenario;
         this.currentScenario.createScenario();
-
         sceneLoader.displayScene(this.currentScenario.planetScene);
     }
 }
