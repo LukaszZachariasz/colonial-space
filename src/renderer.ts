@@ -1,13 +1,9 @@
 import 'babylonjs-loaders'
 import engine from 'engine';
-import gameSceneLoader from "./game-scenes/game-scene-loader";
-import {PlanetScene} from "./game-scenes/planet-scene/planet-scene";
+import {InitializationScenario} from "./scenarios/01-initialization/initialization-scenario";
+import gameState from "./engine/game-state/game-state";
 
 require('./watcher')
 
 engine.initialize(document.getElementById('render-canvas') as HTMLCanvasElement);
-
-gameSceneLoader.loadScene(new PlanetScene());
-
-
-
+gameState.startScenario(new InitializationScenario());

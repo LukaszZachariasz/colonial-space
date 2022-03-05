@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import gameSceneLoader from "../game-scenes/game-scene-loader";
+import sceneLoader from "./scene-loader/scene-loader";
 
 export class Engine {
     public canvas: HTMLCanvasElement;
@@ -10,7 +10,7 @@ export class Engine {
         this.canvas = canvas;
 
         this.engine.runRenderLoop(() => {
-            gameSceneLoader.gameScenes.forEach(gameScene => gameScene.scene.render());
+            sceneLoader.scenes.forEach(scene => scene.scene.render());
         });
 
         window.addEventListener('resize', () => {
