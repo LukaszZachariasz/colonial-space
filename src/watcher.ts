@@ -1,9 +1,9 @@
-import {ipcRenderer} from "electron";
+import {ipcRenderer} from 'electron';
 
 const fs = require('fs');
 
 
-(async () => {
+(async (): Promise<void> => {
     const watcher = fs.watch('./dist/');
     watcher.on('change', () => {
         ipcRenderer.send('re-render');

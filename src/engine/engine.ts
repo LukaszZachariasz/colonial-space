@@ -1,16 +1,17 @@
 import * as BABYLON from 'babylonjs';
-import sceneLoader from "./scene-loader/scene-loader";
+import {GameScene} from '../game-scenes/game-scene';
+import sceneLoader from './scene-loader/scene-loader';
 
 export class Engine {
     public canvas: HTMLCanvasElement;
     public engine: BABYLON.Engine;
 
-    initialize(canvas: HTMLCanvasElement) {
+    public initialize(canvas: HTMLCanvasElement): void {
         this.engine = new BABYLON.Engine(canvas, true);
         this.canvas = canvas;
 
         this.engine.runRenderLoop(() => {
-            sceneLoader.scenes.forEach(scene => scene.scene.render());
+            sceneLoader.scenes.forEach((scene: GameScene) => scene.scene.render());
         });
 
         window.addEventListener('resize', () => {

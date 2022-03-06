@@ -1,9 +1,9 @@
-import 'babylonjs-loaders'
+import 'babylonjs-loaders';
+import {InitializationScenario} from './scenarios/01-initialization/initialization-scenario';
 import engine from 'engine';
-import {InitializationScenario} from "./scenarios/01-initialization/initialization-scenario";
-import gameState from "./engine/game-state/game-state";
+import gameState from './engine/game-state/game-state';
 
-require('./watcher')
+require('./watcher');
 
 engine.initialize(document.getElementById('render-canvas') as HTMLCanvasElement);
 gameState.startScenario(new InitializationScenario());

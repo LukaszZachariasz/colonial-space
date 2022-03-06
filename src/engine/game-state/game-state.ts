@@ -1,13 +1,13 @@
-import {Scenario} from "../../scenarios/scenario";
-import sceneLoader from "../scene-loader/scene-loader";
+import {Scenario} from '../../scenarios/scenario';
+import sceneLoader from '../scene-loader/scene-loader';
 
 export class GameState {
     public currentScenario: Scenario = null;
 
-    startScenario(scenario: Scenario) {
+    public startScenario(scenario: Scenario): void {
         this.currentScenario = scenario;
         this.currentScenario.createScenario();
-        sceneLoader.displayScene(this.currentScenario.planetScene);
+        sceneLoader.displayScene(this.currentScenario.initialScene);
     }
 }
 

@@ -1,8 +1,8 @@
-import * as BABYLON from "babylonjs";
-import {SpaceSkybox} from "../../game-objects/skybox/space-skybox/space-skybox";
-import {GameScene} from "../game-scene";
+import * as BABYLON from 'babylonjs';
+import {GameScene} from '../game-scene';
+import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class GalaxyScene extends GameScene {
-    camera: BABYLON.FreeCamera;
-    skybox: SpaceSkybox;
+    public camera: BABYLON.FreeCamera;
+    public skybox: SpaceSkybox;
 }

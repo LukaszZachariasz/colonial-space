@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import {BrowserWindow, app, ipcMain} from 'electron';
 const electronLocalShortcut = require('electron-localshortcut');
 
 
 let mainWindow: Electron.BrowserWindow;
 
-function createWindow() {
+function createWindow(): void {
     mainWindow = new BrowserWindow({
         height: 800,
         width: 1200,
@@ -17,7 +17,7 @@ function createWindow() {
 
     mainWindow.loadFile('index.html');
 
-    mainWindow.on("closed", () => {
+    mainWindow.on('closed', () => {
         mainWindow = null;
     });
 
@@ -26,15 +26,15 @@ function createWindow() {
     });
 }
 
-app.on("ready", createWindow);
+app.on('ready', createWindow);
 
-app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
         app.quit();
     }
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
     if (mainWindow === null) {
         createWindow();
     }
@@ -43,6 +43,6 @@ app.on("activate", () => {
 
 ipcMain.on('re-render', () => {
     mainWindow.loadFile('index.html');
-})
+});
 
 
