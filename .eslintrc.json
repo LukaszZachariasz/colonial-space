@@ -23,6 +23,7 @@
         "arrowParameter": true
       }
     ],
+    "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/explicit-function-return-type": [
       "error"
     ],

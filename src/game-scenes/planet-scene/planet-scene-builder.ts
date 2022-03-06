@@ -24,8 +24,8 @@ export class PlanetSceneBuilder {
         return this;
     }
 
-    public withPlanet(): PlanetSceneBuilder {
-        this.planetScene.planet = new Planet();
+    public withPlanet(planet: Planet): PlanetSceneBuilder {
+        this.planetScene.planet = planet;
         this.planetScene.planet.create(this.planetScene.scene);
         return this;
     }
