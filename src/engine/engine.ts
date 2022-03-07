@@ -10,8 +10,13 @@ export class Engine {
         this.engine = new BABYLON.Engine(canvas, true);
         this.canvas = canvas;
 
+
         this.engine.runRenderLoop(() => {
-            sceneLoader.scenes.forEach((scene: GameScene) => scene.scene.render());
+            sceneLoader.scenes.forEach((scene: GameScene) => {
+
+                //scene.scene.debugLayer.show();
+                scene.scene.render()
+            });
         });
 
         window.addEventListener('resize', () => {
