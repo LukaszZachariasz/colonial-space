@@ -21,6 +21,14 @@ function createWindow(): void {
         mainWindow = null;
     });
 
+    electronLocalShortcut.register(mainWindow, 'F5', () => {
+        mainWindow.reload();
+    });
+
+    electronLocalShortcut.register(mainWindow, 'F10', () => {
+        mainWindow.webContents.send('open-debug-layer');
+    });
+
     electronLocalShortcut.register(mainWindow, 'F12', () => {
         mainWindow.webContents.openDevTools();
     });
