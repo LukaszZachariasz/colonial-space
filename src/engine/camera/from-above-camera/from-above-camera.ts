@@ -22,9 +22,9 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         this.lowerRadiusLimit = 40;
         this.upperRadiusLimit = 200;
         this.upperBetaLimit = Math.PI / 4;
-
-
-        this;
+        this.lowerAlphaLimit = -Math.PI / 2;
+        this.upperAlphaLimit = -Math.PI / 2;
+        this.panningSensibility = 0;
     }
 
     private listenOnBoundaries(): void {

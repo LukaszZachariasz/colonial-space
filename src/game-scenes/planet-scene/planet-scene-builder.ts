@@ -16,6 +16,7 @@ export class PlanetSceneBuilder {
         this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', -Math.PI/2, Math.PI/4, 3, new BABYLON.Vector3(0, 0, -1), this.planetScene.scene);
         this.planetScene.camera.setTarget(BABYLON.Vector3.Zero());
         this.planetScene.camera.attachControl(engine.canvas, true);
+        this.planetScene.camera.panningSensibility = 0;
         return this;
     }
 

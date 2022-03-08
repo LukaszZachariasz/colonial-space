@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {GameSceneGui} from '../../game-scene-gui';
 import gameStage from '../../../engine/game-stage/game-stage';
@@ -7,8 +8,8 @@ export class PlanetSceneGui implements GameSceneGui {
     public advancedTexture: GUI.AdvancedDynamicTexture;
     private button: GUI.Button;
 
-    public create(): void {
-        this.advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('planetSceneGui', true);
+    public create(scene: BABYLON.Scene): void {
+        this.advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('planetSceneGui', true, scene);
 
         this.button = GUI.Button.CreateSimpleButton('galaxyView', 'Galaxy view');
         this.button.width = '100px';

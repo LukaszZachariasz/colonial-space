@@ -12,6 +12,7 @@ export class SectorSceneBuilder {
     public withArcCamera(): SectorSceneBuilder {
         this.sectorScene.camera = new FromAboveCamera('camera', 0, 0, 10, new BABYLON.Vector3(0, 50, -70), this.sectorScene.scene);
         this.sectorScene.camera.setTarget(BABYLON.Vector3.Zero());
+        this.sectorScene.camera.attachControl(false);
         return this;
     }
 
