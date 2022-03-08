@@ -11,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "uuid": "8.3.2",
-    "rxjs": "7.5.4",
     "babylonjs": "4.2.1",
     "babylonjs-gui": "4.2.1",
-    "babylonjs-loaders": "4.2.1",
-    "earcut": "2.2.3"
+    "babylonjs-loaders": "^4.2.1",
+    "earcut": "2.2.3",
+    "rxjs": "7.5.4",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/earcut": "2.1.1",
