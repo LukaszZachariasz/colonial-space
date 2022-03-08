@@ -1,23 +1,23 @@
 import {Scenario} from '../../scenarios/scenario';
 import {filter, take, tap} from 'rxjs';
-import loadingSceneManager from '../loading-scene/loading-scene-manager';
+import loadingSceneManager from '../loading-scene-manager/loading-scene-manager';
 import sceneLoader from '../scene-loader/scene-loader';
 
-export class GameState {
+export class GameStage {
     public currentScenario: Scenario = null;
 
     public startScenario(scenario: Scenario): void {
-        sceneLoader.overrideScenes(loadingSceneManager.loadingScene.scene);
+        sceneLoader.setScenes(loadingSceneManager.loadingScene);
         this.currentScenario = scenario;
         this.currentScenario.createScenario();
 
         loadingSceneManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
-            tap(() => sceneLoader.overrideScenes(this.currentScenario.initialScene))
+            tap(() => sceneLoader.setScenes(this.currentScenario.initialScene))
         ).subscribe();
     }
 }
 
-const instance = new GameState();
+const instance = new GameStage();
 export default instance;

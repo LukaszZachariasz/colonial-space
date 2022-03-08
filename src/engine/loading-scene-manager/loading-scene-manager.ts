@@ -1,10 +1,14 @@
 import {BehaviorSubject} from 'rxjs';
-import {LoadingScene} from './loading-scene';
+import {LoadingScene} from '../../game-scenes/loading-scene/loading-scene';
 
 export class LoadingSceneManager {
     public loadingScene: LoadingScene;
     public isLoading$ = new BehaviorSubject(false);
     public loadingScenesUuid: string[] = [];
+
+    public initialize(): void {
+        this.loadingScene = new LoadingScene();
+    }
 
     public startLoading(uuid: string): void {
         this.loadingScenesUuid.push(uuid);

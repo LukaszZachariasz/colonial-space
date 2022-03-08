@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {LoadingScene} from './loading-scene/loading-scene';
+import {GameScene} from '../game-scenes/game-scene';
 import debug from './debug/debug';
-import loadingSceneManager from './loading-scene/loading-scene-manager';
+import loadingSceneManager from './loading-scene-manager/loading-scene-manager';
 import sceneLoader from './scene-loader/scene-loader';
 
 export class Engine {
@@ -11,13 +11,12 @@ export class Engine {
     public initialize(canvas: HTMLCanvasElement): void {
         this.engine = new BABYLON.Engine(canvas, true);
         this.canvas = canvas;
-        loadingSceneManager.loadingScene = new LoadingScene();
+        loadingSceneManager.initialize();
         debug.debug();
 
         this.engine.runRenderLoop(() => {
-
-            sceneLoader.scenes.forEach((scene: BABYLON.Scene) => {
-                scene.render();
+            sceneLoader.scenes.forEach((gameScene: GameScene) => {
+                gameScene.scene.render();
             });
         });
 

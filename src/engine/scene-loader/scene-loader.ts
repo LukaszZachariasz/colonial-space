@@ -1,20 +1,12 @@
-import * as BABYLON from 'babylonjs';
+import {GameScene} from '../../game-scenes/game-scene';
 
 export class SceneLoader {
-    public scenes: BABYLON.Scene[] = [];
+    public scenes: GameScene[] = [];
 
-    constructor() {}
-
-    public addScene(scene: BABYLON.Scene): void {
-        this.scenes.push(scene);
-    }
-
-    public removeScene(scene: BABYLON.Scene): void {
-        this.scenes = this.scenes.filter((el: BABYLON.Scene) => el !== scene);
-    }
-
-    public overrideScenes(...scenes: BABYLON.Scene[]): void {
-        this.scenes = scenes;
+    public setScenes(...scenes: GameScene[]): void {
+        this.scenes.forEach((scene: GameScene) => scene.gui.dispose());
+        this.scenes = [...scenes];
+        this.scenes.forEach((scene: GameScene) => scene.gui.create(scene.scene));
     }
 }
 

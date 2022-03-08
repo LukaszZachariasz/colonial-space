@@ -1,7 +1,7 @@
-import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
 import {GalaxyScene} from '../../game-scenes/galaxy-scene/galaxy-scene';
 import {GalaxySceneBuilder} from '../../game-scenes/galaxy-scene/galaxy-scene-builder';
+import {GameScene} from '../../game-scenes/game-scene';
 import {PlanetBuilder} from '../../game-objects/planet/planet-builder';
 import {PlanetScene} from '../../game-scenes/planet-scene/planet-scene';
 import {PlanetSceneBuilder} from '../../game-scenes/planet-scene/planet-scene-builder';
@@ -11,8 +11,8 @@ export class InitializationScenario implements Scenario {
     public galaxyScene: GalaxyScene;
     public planetScene: PlanetScene;
 
-    public get initialScene(): BABYLON.Scene {
-        return this.planetScene.scene;
+    public get initialScene(): GameScene {
+        return this.galaxyScene;
     }
 
     public createScenario(): void {
@@ -26,6 +26,7 @@ export class InitializationScenario implements Scenario {
             .withSkybox()
             .withGalaxyArea(new GalaxyArea())
             .withLights()
+            .withGui()
             .build();
     }
 
@@ -40,6 +41,7 @@ export class InitializationScenario implements Scenario {
                     .build()
             )
             .withLights()
+            .withGui()
             .build();
     }
 }

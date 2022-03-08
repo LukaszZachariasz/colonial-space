@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {Planet} from '../../game-objects/planet/planet';
 import {PlanetScene} from './planet-scene';
+import {PlanetSceneGui} from './gui/planet-scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 import engine from 'engine';
 
@@ -33,6 +34,11 @@ export class PlanetSceneBuilder {
     public withLights(): PlanetSceneBuilder {
         const light = new BABYLON.HemisphericLight('planetLight', new BABYLON.Vector3(0, 1, 0), this.planetScene.scene);
         light.intensity = 1;
+        return this;
+    }
+
+    public withGui(): PlanetSceneBuilder {
+        this.planetScene.gui = new PlanetSceneGui();
         return this;
     }
 

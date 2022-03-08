@@ -1,5 +1,5 @@
-import * as BABYLON from 'babylonjs';
 import {FpsCounter} from './fps-counter/fps-counter';
+import {GameScene} from '../../game-scenes/game-scene';
 import {ipcRenderer} from 'electron';
 import sceneLoader from '../scene-loader/scene-loader';
 
@@ -13,7 +13,7 @@ export class Debug {
 
     private openDebugLayerListener(): void {
         ipcRenderer.on('open-debug-layer', () => {
-            sceneLoader.scenes.forEach((scene: BABYLON.Scene) => scene.debugLayer.show());
+            sceneLoader.scenes.forEach((gameScene: GameScene) => gameScene.scene.debugLayer.show());
         });
     }
 

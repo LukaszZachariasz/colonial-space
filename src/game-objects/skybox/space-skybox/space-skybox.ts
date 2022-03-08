@@ -18,10 +18,7 @@ export class SpaceSkybox implements Skybox {
         this.material.alphaCutOff = 0.5;
         this.skybox.material = this.material;
 
-        BABYLON.SceneLoader.Append('resources/galaxies/', 'galaxy.glb', scene);
-        BABYLON.SceneLoader.Append('resources/galaxies/', 'galaxy.glb', scene);
-
-        scene.executeWhenReady(() => {
+        BABYLON.SceneLoader.ImportMesh('', 'resources/galaxies/', 'galaxy.glb', scene, () => {
             const galaxies: AbstractMesh[] = scene.meshes.filter((el: AbstractMesh) => el.name.includes('galaxy'));
 
             galaxies.forEach((galaxy: AbstractMesh, index: number) => {
@@ -29,12 +26,6 @@ export class SpaceSkybox implements Skybox {
                 galaxy.rotation = new Vector3(100, 20, 50);
                 galaxy.scaling = new Vector3(100, 100, 100);
             });
-
-            galaxies.forEach((galaxy: AbstractMesh) => {
-                galaxy.rotate(new Vector3(0, 0, -1), 0.0001);
-                galaxy.rotate(new Vector3(-1, -1, -1), 0.0001);
-            });
         });
-    
     }
 }

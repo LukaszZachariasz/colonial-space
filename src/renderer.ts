@@ -1,7 +1,7 @@
 import 'babylonjs-loaders';
 import {InitializationScenario} from './scenarios/01-initialization/initialization-scenario';
 import engine from 'engine';
-import gameState from './engine/game-state/game-state';
+import gameState from './engine/game-stage/game-stage';
 
 require('./watcher');
 
