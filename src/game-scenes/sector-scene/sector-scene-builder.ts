@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from '../../engine/camera/from-above-camera/from-above-camera';
 import {SectorScene} from './sector-scene';
+import {SectorSceneGui} from './gui/sector-scene-gui';
 
 export class SectorSceneBuilder {
     public sectorScene: SectorScene;
@@ -24,6 +25,11 @@ export class SectorSceneBuilder {
     public withLights(): SectorSceneBuilder {
         const light = new BABYLON.HemisphericLight('planetLight', new BABYLON.Vector3(0, 1, 0), this.sectorScene.scene);
         light.intensity = 1;
+        return this;
+    }
+
+    public withGui(): SectorSceneBuilder {
+        this.sectorScene.gui = new SectorSceneGui();
         return this;
     }
 

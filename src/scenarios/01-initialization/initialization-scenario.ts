@@ -54,6 +54,7 @@ export class InitializationScenario implements Scenario {
             .withArcCamera()
             .withGround()
             .withLights()
+            .withGui()
             .build();
     }
 }
