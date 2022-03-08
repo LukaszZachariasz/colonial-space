@@ -14,7 +14,6 @@ export class GalaxySceneBuilder {
     public withLockedCamera(): GalaxySceneBuilder {
         this.galaxyScene.camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 50, -70), this.galaxyScene.scene);
         this.galaxyScene.camera.setTarget(BABYLON.Vector3.Zero());
-        this.galaxyScene.camera.attachControl(false);
         return this;
     }
 

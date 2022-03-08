@@ -19,7 +19,7 @@ export class SpaceSkybox implements Skybox {
         this.skybox.material = this.material;
 
         BABYLON.SceneLoader.ImportMesh('', 'resources/galaxies/', 'galaxy.glb', scene, () => {
-            const galaxies: AbstractMesh[] = scene.meshes.filter((el: AbstractMesh) => el.name.includes('galaxy'));
+            const galaxies: AbstractMesh[] = scene.meshes.filter((el: AbstractMesh) => el.name.includes('galaxy_01'));
 
             galaxies.forEach((galaxy: AbstractMesh, index: number) => {
                 galaxy.position = new Vector3(300 + (index * 100), index * 100, 300 + (index * 100));
