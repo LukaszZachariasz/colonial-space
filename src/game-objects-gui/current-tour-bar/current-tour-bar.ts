@@ -1,40 +1,30 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../game-object-gui';
-import gameStage from '../../engine/game-stage/game-stage';
+import {CurrentTourLabel} from './current-tour-label/current-tour-label';
+import {GameObjectGuiContainer} from '../game-object-gui-container';
+import {NextTourButton} from './next-tour-button/next-tour-button';
 
-export class CurrentTourBar implements GameObjectGui {
+export class CurrentTourBar implements GameObjectGuiContainer {
     public container: GUI.Container;
-    public button: GUI.Button;
-    public text: GUI.TextBlock;
+    public nextTourButton: NextTourButton;
+    public currentTourLabel: CurrentTourLabel;
 
     public create(scene: BABYLON.Scene): GUI.Container {
         this.container = new GUI.Container('currentTourBar');
+        this.container.width = '200px';
+        this.container.height = '150px';
+        this.container.top = '-60px';
+        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        this.button = GUI.Button.CreateSimpleButton('nextTour', 'Next tour');
-        this.button.width = '100px';
-        this.button.height = '50px';
-        this.button.color = 'red';
-        this.button.background = 'black';
-        this.button.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.button.onPointerUpObservable.add(() => {
-           gameStage.gameState.tour.nextTour();
-        });
+        this.nextTourButton = new NextTourButton();
+        this.nextTourButton.create();
 
-        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameStage.gameState.tour.currentTour);
-        this.text.width = '150px';
-        this.text.height = '16px';
-        this.text.top = '-60px';
-        this.text.color = 'red';
-        this.text.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        scene.registerBeforeRender(() => {
-            this.text.text = 'Current tour: ' + gameStage.gameState.tour.currentTour;
-        });
+        this.currentTourLabel = new CurrentTourLabel();
+        this.currentTourLabel.create(scene);
 
-        this.container.addControl(this.button);
-        this.container.addControl(this.text);
+        this.container.addControl(this.nextTourButton.button);
+        this.container.addControl(this.currentTourLabel.text);
 
         return this.container;
     }

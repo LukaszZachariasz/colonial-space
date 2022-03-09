@@ -1,11 +1,11 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../game-object-gui';
-import gameStage from '../../engine/game-stage/game-stage';
+import {GameObjectGuiContainer} from '../game-object-gui-container';
+import {WoodLabel} from './wood-label/wood-label';
 
-export class ResourceBar implements GameObjectGui {
+export class ResourceBar implements GameObjectGuiContainer {
     public container: GUI.Container;
-    public text: GUI.TextBlock;
+    public woodLabel: WoodLabel;
 
     public create(scene: BABYLON.Scene): GUI.Container {
         this.container = new GUI.Container('resourceBar');
@@ -15,19 +15,10 @@ export class ResourceBar implements GameObjectGui {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
+        this.woodLabel = new WoodLabel();
+        this.woodLabel.create(scene);
 
-        this.text = new GUI.TextBlock('currentWood', 'Wood: 0');
-        this.text.width = '100px';
-        this.text.height = '16px';
-        this.text.color = 'red';
-        this.text.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-
-        scene.registerBeforeRender(() => {
-            this.text.text = 'Wood: ' + gameStage.gameState.resource.wood;
-        });
-
-        this.container.addControl(this.text);
+        this.container.addControl(this.woodLabel.text);
 
         return this.container;
     }
