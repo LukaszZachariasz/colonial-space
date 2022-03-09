@@ -1,12 +1,13 @@
 import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-builder';
 import {GalaxyAreaState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
-import {GalaxyOrigin} from '../../../game-objects/galaxy-origin/galaxy-origin';
 import {GalaxySceneBuilder} from '../../../game-scenes/galaxy-scene/galaxy-scene-builder';
 import {GalaxyState} from '../../game-state/gameplay-state/galaxy-state/galaxy-state';
 import {LoadPlanetScene} from './load-planet-scene/load-planet-scene';
 import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
 import {PlanetState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import gameState from '../../game-state/game-state';
+import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-galaxy-origin';
+import {GeneratedGalaxyDust} from '../../../game-objects/galaxy/generated-galaxy-dust';
 
 export class LoadGalaxyScene {
     public loadPlanetScene: LoadPlanetScene = new LoadPlanetScene();
@@ -16,8 +17,9 @@ export class LoadGalaxyScene {
 
         builder
             .name(galaxyState.name)
-            .withLockedCamera()
-            .withGalaxyOrigin(new GalaxyOrigin()) // todo: builder
+            .withArcCamera()
+            .withGeneratedGalaxyOrigin(new GeneratedGalaxyOrigin())
+            .withGalaxyDust(new GeneratedGalaxyDust())
             .withSkybox()
             .withLights()
             .withGui();

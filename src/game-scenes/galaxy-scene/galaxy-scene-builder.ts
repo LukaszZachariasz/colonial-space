@@ -1,15 +1,17 @@
 import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
-import {GalaxyOrigin} from '../../game-objects/galaxy-origin/galaxy-origin';
 import {GalaxyScene} from './galaxy-scene';
 import {GalaxySceneGui} from './gui/galaxy-scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
+import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
+import engine from 'engine';
+import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
 
 export class GalaxySceneBuilder {
     public galaxyScene: GalaxyScene;
 
     constructor() {
-        this.galaxyScene = new GalaxyScene();
+        this.galaxyScene = new GalaxyScene()
     }
 
     public name(name: string): GalaxySceneBuilder {
@@ -23,18 +25,26 @@ export class GalaxySceneBuilder {
         return this;
     }
 
+    public withArcCamera(): GalaxySceneBuilder {
+        this.galaxyScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 0.8, 5, new BABYLON.Vector3(0, 0, 0), this.galaxyScene.scene);
+        this.galaxyScene.camera.setTarget(new BABYLON.Vector3(-10,0, 0));
+
+        this.galaxyScene.camera.lowerRadiusLimit = 2.5;
+        this.galaxyScene.camera.upperRadiusLimit = 100;
+        this.galaxyScene.camera.pinchDeltaPercentage = 0.01;
+        this.galaxyScene.camera.wheelDeltaPercentage = 0.01;
+        this.galaxyScene.camera.panningSensibility = 0;
+
+        this.galaxyScene.camera.attachControl(engine.canvas, true);
+        return this;
+    }
+
     public withSkybox(): GalaxySceneBuilder {
         this.galaxyScene.skybox = new SpaceSkybox();
         this.galaxyScene.skybox.create(this.galaxyScene.scene);
         return this;
     }
 
-    public withGalaxyOrigin(galaxyOrigin: GalaxyOrigin): GalaxySceneBuilder {
-        this.galaxyScene.galaxyOrigin = galaxyOrigin;
-        galaxyOrigin.create(this.galaxyScene.scene);
-        galaxyOrigin.galaxyScene = this.galaxyScene;
-        return this;
-    }
 
     public withGalaxyArea(galaxyArea: GalaxyArea): GalaxySceneBuilder {
         this.galaxyScene.galaxyAreas.push(galaxyArea);
@@ -53,7 +63,20 @@ export class GalaxySceneBuilder {
         return this;
     }
 
+    public withGeneratedGalaxyOrigin(generatedGalaxyOrigin: GeneratedGalaxyOrigin): GalaxySceneBuilder {
+        this.galaxyScene.generatedGalaxyOrigin = generatedGalaxyOrigin;
+        generatedGalaxyOrigin.create(this.galaxyScene.scene);
+        return this;
+    }
+
+
     public build(): GalaxyScene {
         return this.galaxyScene;
+    }
+
+    public withGalaxyDust(generatedGalaxyDust: GeneratedGalaxyDust) {
+        this.galaxyScene.generatedGalaxyDust = generatedGalaxyDust;
+        generatedGalaxyDust.create(this.galaxyScene.scene);
+        return this;
     }
 }

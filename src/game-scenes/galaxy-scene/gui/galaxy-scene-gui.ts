@@ -20,7 +20,7 @@ export class GalaxySceneGui implements GameSceneGui {
         this.galaxyNameLabel.label = this.galaxyScene.name;
         this.galaxyNameLabel.create();
 
-        this.galaxyOriginContent = new GalaxyOriginContent(this.galaxyScene.galaxyOrigin);
+        this.galaxyOriginContent = new GalaxyOriginContent(this.galaxyScene.generatedGalaxyOrigin);
         this.galaxyOriginContent.advanceTexture = this.advancedTexture;
 
         this.advancedTexture.addControl(this.galaxyNameLabel.text);
