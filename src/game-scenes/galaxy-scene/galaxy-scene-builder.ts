@@ -27,7 +27,7 @@ export class GalaxySceneBuilder {
 
     public withArcCamera(): GalaxySceneBuilder {
         this.galaxyScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 0.8, 5, new BABYLON.Vector3(0, 0, 0), this.galaxyScene.scene);
-        this.galaxyScene.camera.setTarget(new BABYLON.Vector3(-10,0, 0));
+        this.galaxyScene.camera.setTarget(new BABYLON.Vector3(-10, 0, 0));
 
         this.galaxyScene.camera.lowerRadiusLimit = 2.5;
         this.galaxyScene.camera.upperRadiusLimit = 100;
@@ -44,7 +44,6 @@ export class GalaxySceneBuilder {
         this.galaxyScene.skybox.create(this.galaxyScene.scene);
         return this;
     }
-
 
     public withGalaxyArea(galaxyArea: GalaxyArea): GalaxySceneBuilder {
         this.galaxyScene.galaxyAreas.push(galaxyArea);
