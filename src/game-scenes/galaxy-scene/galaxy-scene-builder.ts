@@ -41,7 +41,7 @@ export class GalaxySceneBuilder {
     }
 
     public withGui(): GalaxySceneBuilder {
-        this.galaxyScene.gui = new GalaxySceneGui();
+        this.galaxyScene.gui = new GalaxySceneGui(this.galaxyScene);
         return this;
     }
 
