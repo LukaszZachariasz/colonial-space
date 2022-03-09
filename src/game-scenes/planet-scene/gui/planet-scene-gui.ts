@@ -21,7 +21,7 @@ export class PlanetSceneGui implements GameSceneGui {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            sceneLoader.setScenes(gameStage.currentScenario.galaxyScene);
+            sceneLoader.setScenes(gameStage.currentScenario.initialScene);
         });
 
         this.advancedTexture.addControl(this.button);

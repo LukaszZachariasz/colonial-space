@@ -1,6 +1,5 @@
-import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
+import {AlphaGalaxy} from './alpha-galaxy/alpha-galaxy';
 import {GalaxyScene} from '../../game-scenes/galaxy-scene/galaxy-scene';
-import {GalaxySceneBuilder} from '../../game-scenes/galaxy-scene/galaxy-scene-builder';
 import {GameScene} from '../../game-scenes/game-scene';
 import {PlanetBuilder} from '../../game-objects/planet/planet-builder';
 import {PlanetScene} from '../../game-scenes/planet-scene/planet-scene';
@@ -10,28 +9,17 @@ import {SectorScene} from '../../game-scenes/sector-scene/sector-scene';
 import {SectorSceneBuilder} from '../../game-scenes/sector-scene/sector-scene-builder';
 
 export class InitializationScenario implements Scenario {
-    public galaxyScene: GalaxyScene;
+    public alphaGalaxy: GalaxyScene = new AlphaGalaxy().create();
     public planetScene: PlanetScene;
     public sectorOne: SectorScene;
 
     public get initialScene(): GameScene {
-        return this.sectorOne;
+        return this.alphaGalaxy;
     }
 
     public createScenario(): void {
-        this.galaxyScene = this.createGalaxyScene();
         this.planetScene = this.createPlanetScene();
         this.sectorOne = this.createSectorOne();
-    }
-
-    public createGalaxyScene(): GalaxyScene {
-        return new GalaxySceneBuilder()
-            .withLockedCamera()
-            .withSkybox()
-            .withGalaxyArea(new GalaxyArea())
-            .withLights()
-            .withGui()
-            .build();
     }
 
     public createPlanetScene(): PlanetScene {

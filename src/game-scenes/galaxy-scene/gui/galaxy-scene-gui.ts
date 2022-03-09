@@ -1,8 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {GameSceneGui} from '../../game-scene-gui';
-import gameStage from '../../../engine/game-stage/game-stage';
-import sceneLoader from '../../../engine/scene-loader/scene-loader';
 
 export class GalaxySceneGui implements GameSceneGui {
     public advancedTexture: GUI.AdvancedDynamicTexture;
@@ -20,9 +18,9 @@ export class GalaxySceneGui implements GameSceneGui {
         this.button.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        this.button.onPointerUpObservable.add(() => {
+/*        this.button.onPointerUpObservable.add(() => {
             sceneLoader.setScenes(gameStage.currentScenario.planetScene);
-        });
+        });*/
 
         this.advancedTexture.addControl(this.button);
     }

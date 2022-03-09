@@ -5,6 +5,7 @@ import {GameSceneLoading} from '../game-scene-loading';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class GalaxyScene extends GameSceneLoading {
+    public name: string;
     public camera: BABYLON.FreeCamera;
     public skybox: SpaceSkybox;
     public galaxyAreas: GalaxyArea[] = [];

@@ -11,6 +11,11 @@ export class GalaxySceneBuilder {
         this.galaxyScene = new GalaxyScene();
     }
 
+    public name(name: string): GalaxySceneBuilder {
+        this.galaxyScene.name = name;
+        return this;
+    }
+
     public withLockedCamera(): GalaxySceneBuilder {
         this.galaxyScene.camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 50, -70), this.galaxyScene.scene);
         this.galaxyScene.camera.setTarget(BABYLON.Vector3.Zero());

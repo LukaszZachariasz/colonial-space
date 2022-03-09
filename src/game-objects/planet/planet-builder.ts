@@ -2,11 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Planet} from './planet';
 
 export class PlanetBuilder {
-    public planet: Planet;
-
-    constructor() {
-        this.planet = new Planet();
-    }
+    public planet: Planet = new Planet();
 
     public size(size: number): PlanetBuilder {
         this.planet.size = size;

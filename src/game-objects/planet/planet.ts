@@ -11,6 +11,7 @@ export class Planet implements GameObject {
 
     public create(scene: BABYLON.Scene): void {
         this.sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, this.size, scene);
+        this.sphere.position = this.position;
         this.material = new BABYLON.StandardMaterial('ground', scene);
         this.material.diffuseTexture = new BABYLON.Texture(this.diffuseTexture, scene);
 
