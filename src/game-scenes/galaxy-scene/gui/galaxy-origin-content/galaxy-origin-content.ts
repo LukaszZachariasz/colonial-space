@@ -31,6 +31,11 @@ export class GalaxyOriginContent implements GameObjectGui {
         this.galaxyOriginNameTextBlock.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.galaxyOriginNameTextBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         this.rightContentBox.container.addControl(this.galaxyOriginNameTextBlock);
+
+
+        console.log('planet temp: ' +gameState.gameplayState.galaxyState.galaxyAreaStates[0].planetStates[0].temperature);
+        console.log('threats:' + gameState.gameplayState.galaxyState.galaxyOriginState.threats);
+
         this.isCreated = true;
     }
 }

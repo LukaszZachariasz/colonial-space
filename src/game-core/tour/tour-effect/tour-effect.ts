@@ -4,6 +4,7 @@ export type TourEffectExecute = () => void;
 
 export class TourEffect {
     constructor(public priority: number,
+                public onlyOnce: boolean,
                 public effect: TourEffectExecute) {
     }
 

@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {GameplayState} from '../../game-core/game-state/gameplay-state/gameplay-state';
+import {HighTemperatureThreat} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-threat';
 
 export const initialization: GameplayState = {
     currentGameSceneName: 'Alpha Galaxy',
@@ -9,7 +10,10 @@ export const initialization: GameplayState = {
     galaxyState: {
         name: 'Alpha Galaxy',
         galaxyOriginState: {
-            name: 'Origin 01'
+            name: 'Origin 01',
+            threats: [
+                new HighTemperatureThreat(4, 5, 7, 2, 4)
+            ]
         },
         galaxyAreaStates: [
             {
@@ -25,6 +29,7 @@ export const initialization: GameplayState = {
                 planetStates: [
                     {
                         name: 'Earth',
+                        temperature: 22,
                         size: 2.5,
                         textureUrl: 'resources/planet/earth.jpg',
                         position: new BABYLON.Vector3(-25, -1.5, -10),

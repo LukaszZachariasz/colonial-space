@@ -12,12 +12,9 @@ export class TourManager {
 
     constructor() {
         this.tourEffectManager.completeTourEffects$.pipe(
-            tap(() => this.completeTour$.next())
-        ).subscribe();
-
-        this.completeTour$.pipe(
             tap(() => this.tour++),
-            tap(() => this.isRunningNextTure = false)
+            tap(() => this.isRunningNextTure = false),
+            tap(() => this.completeTour$.next())
         ).subscribe();
     }
 
@@ -32,6 +29,6 @@ export class TourManager {
     }
 
     public addTourEffect(effect: TourEffect): void {
-        this.tourEffectManager.addPostTourEffect(effect);
+        this.tourEffectManager.addTourEffect(effect);
     }
 }

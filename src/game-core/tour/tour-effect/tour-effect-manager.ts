@@ -11,8 +11,11 @@ export class TourEffectManager {
 
     constructor() {
         this.executeEffectGroup$.pipe(
-            switchMap((executeEffectGroup: ExecuteEffectGroup) => forkJoin(executeEffectGroup.current.map((el: TourEffect) => el.execute())).pipe(
-                map(() => executeEffectGroup))
+            switchMap((executeEffectGroup: ExecuteEffectGroup) =>
+                forkJoin(executeEffectGroup.current.map((el: TourEffect) => el.execute())).pipe(
+                    tap(() => this.tourEffects = this.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
+                    map(() => executeEffectGroup)
+                )
             ),
             tap((executeEffectGroup: ExecuteEffectGroup) => {
                 if (executeEffectGroup.pending.length) {
@@ -40,9 +43,13 @@ export class TourEffectManager {
         }
     }
 
-    public addPostTourEffect(effect: TourEffect): void {
+    public addTourEffect(effect: TourEffect): void {
         this.tourEffects.push(effect);
         this.tourEffects.sort(this.sortByPriority);
+    }
+
+    public removeTourEffect(effect: TourEffect): void {
+        this.tourEffects = this.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
     }
 
     private sortByPriority(a: TourEffect, b: TourEffect): 1 | -1 | 0 {

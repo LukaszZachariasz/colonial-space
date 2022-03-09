@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
+import {CurrentTourBar} from '../../../game-objects-gui/current-tour-bar/current-tour-bar';
 import {GalaxyNameLabel} from './galaxy-name-label/galaxy-name-label';
 import {GalaxyOriginContent} from './galaxy-origin-content/galaxy-origin-content';
 import {GalaxyScene} from '../galaxy-scene';
@@ -9,6 +10,7 @@ export class GalaxySceneGui implements GameSceneGui {
     public advancedTexture: GUI.AdvancedDynamicTexture;
     public galaxyNameLabel: GalaxyNameLabel;
     public galaxyOriginContent: GalaxyOriginContent;
+    public currentTourBar: CurrentTourBar;
 
     constructor(public galaxyScene: GalaxyScene) {
     }
@@ -23,6 +25,9 @@ export class GalaxySceneGui implements GameSceneGui {
         this.galaxyOriginContent = new GalaxyOriginContent(this.galaxyScene.generatedGalaxyOrigin);
         this.galaxyOriginContent.advanceTexture = this.advancedTexture;
 
+        this.currentTourBar = new CurrentTourBar();
+
+        this.advancedTexture.addControl(this.currentTourBar.create(scene));
         this.advancedTexture.addControl(this.galaxyNameLabel.text);
     }
 
