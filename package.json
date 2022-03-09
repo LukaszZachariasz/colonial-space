@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "renderer:start": "webpack --watch",
-    "main:start": "electron ./dist/main.js",
+    "start": "webpack --watch",
     "lint": "eslint . --ext .ts"
   },
   "author": "",

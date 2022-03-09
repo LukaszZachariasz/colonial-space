@@ -1,16 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const exec = require('child_process').exec;
 
 module.exports = {
-    mode: "development",
+    mode: 'development',
     entry: {
-        main: "./src/main.ts",
-        renderer: "./src/renderer.ts",
+        main: './src/main.ts',
+        renderer: './src/renderer.ts',
     },
-    target: "electron-main",
+    target: 'electron-main',
     module: {
         rules: [
             {
@@ -27,9 +28,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: "./src/index.html",
+            template: './src/index.html',
             chunks: [
-                "renderer"
+                'renderer'
             ]
         }),
         new CopyWebpackPlugin({
@@ -39,13 +40,24 @@ module.exports = {
                     to: './resources'
                 }
             ]
-        })
+        }),
+        {
+            apply: compiler => {
+                let run = false;
+                compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
+                    if (run === false) {
+                        exec('electron ./dist/main.js');
+                        run = true;
+                    }
+                });
+            }
+        }
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "[name].js"
+        filename: '[name].js'
     }
-}
+};
 
 
 
