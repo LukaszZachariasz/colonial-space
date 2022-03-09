@@ -56,7 +56,7 @@ export class TourEffectManager {
     }
 
     private createGroupOfEffects(): TourEffect[][] {
-        const groups: TourEffect[][] = []; // todo zamiast tak to przy create robić grupe grup
+        const groups: TourEffect[][] = [];
         let copy = [...this.tourEffects];
 
         while (copy.length) {
