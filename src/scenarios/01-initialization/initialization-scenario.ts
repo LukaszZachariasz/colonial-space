@@ -9,17 +9,18 @@ import {SectorScene} from '../../game-scenes/sector-scene/sector-scene';
 import {SectorSceneBuilder} from '../../game-scenes/sector-scene/sector-scene-builder';
 
 export class InitializationScenario implements Scenario {
-    public alphaGalaxy: GalaxyScene = new AlphaGalaxy().create();
+    public alphaGalaxy: GalaxyScene;
     public planetScene: PlanetScene;
     public sectorOne: SectorScene;
 
     public get initialScene(): GameScene {
-        return this.planetScene;
+        return this.alphaGalaxy;
     }
 
     public createScenario(): void {
         this.planetScene = this.createPlanetScene();
         this.sectorOne = this.createSectorOne();
+        this.alphaGalaxy = new AlphaGalaxy().create(this.planetScene);
     }
 
     public createPlanetScene(): PlanetScene {

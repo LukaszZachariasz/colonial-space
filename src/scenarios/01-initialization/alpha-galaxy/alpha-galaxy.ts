@@ -3,9 +3,10 @@ import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-b
 import {GalaxyScene} from '../../../game-scenes/galaxy-scene/galaxy-scene';
 import {GalaxySceneBuilder} from '../../../game-scenes/galaxy-scene/galaxy-scene-builder';
 import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
+import {PlanetScene} from '../../../game-scenes/planet-scene/planet-scene';
 
 export class AlphaGalaxy {
-    public create(): GalaxyScene {
+    public create(planetScene: PlanetScene): GalaxyScene {
         return new GalaxySceneBuilder()
             .name('Alpha Galaxy')
             .withLockedCamera()
@@ -23,7 +24,8 @@ export class AlphaGalaxy {
                             .size(2.5)
                             .position(new BABYLON.Vector3(-25, -1.5, -10))
                             .texture('resources/planet/earth.jpg')
-                            .build()
+                            .build(),
+                        planetScene
                     )
                     .build()
             )

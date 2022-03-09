@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from './galaxy-area';
+import {GameScene} from '../../game-scenes/game-scene';
 import {Planet} from '../planet/planet';
 
 export class GalaxyAreaBuilder {
@@ -15,8 +16,9 @@ export class GalaxyAreaBuilder {
         return this;
     }
 
-    public withPlanet(planet: Planet): GalaxyAreaBuilder {
+    public withPlanet(planet: Planet, planetScene: GameScene): GalaxyAreaBuilder {
         this.galaxyArea.planet = planet;
+        this.galaxyArea.planetScene = planetScene;
         return this;
     }
 
