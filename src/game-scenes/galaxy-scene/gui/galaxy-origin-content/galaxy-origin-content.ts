@@ -1,7 +1,8 @@
 import * as GUI from 'babylonjs-gui';
 import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
-import {RightContentBox} from '../../../../game-objects-gui/right-content-box/right-content-box';
 import {GeneratedGalaxyOrigin} from '../../../../game-objects/galaxy/generated-galaxy-origin';
+import {RightContentBox} from '../../../../game-objects-gui/right-content-box/right-content-box';
+import gameState from '../../../../game-core/game-state/game-state';
 
 export class GalaxyOriginContent implements GameObjectGui {
     public advanceTexture: GUI.AdvancedDynamicTexture;
@@ -23,7 +24,7 @@ export class GalaxyOriginContent implements GameObjectGui {
 
         this.advanceTexture.addControl(this.rightContentBox.container);
 
-        this.galaxyOriginNameTextBlock = new GUI.TextBlock('galaxyOriginName', 'Test');
+        this.galaxyOriginNameTextBlock = new GUI.TextBlock('galaxyOriginName', gameState.gameplayState.galaxyState.galaxyOriginState.name);
         this.galaxyOriginNameTextBlock.color = 'white';
         this.galaxyOriginNameTextBlock.resizeToFit = true;
         this.galaxyOriginNameTextBlock.top = '20px';

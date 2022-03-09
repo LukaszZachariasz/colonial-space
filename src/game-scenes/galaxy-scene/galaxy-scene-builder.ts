@@ -65,6 +65,7 @@ export class GalaxySceneBuilder {
 
     public withGeneratedGalaxyOrigin(generatedGalaxyOrigin: GeneratedGalaxyOrigin): GalaxySceneBuilder {
         this.galaxyScene.generatedGalaxyOrigin = generatedGalaxyOrigin;
+        generatedGalaxyOrigin.gui = this.galaxyScene.gui as GalaxySceneGui;
         generatedGalaxyOrigin.create(this.galaxyScene.scene);
         return this;
     }

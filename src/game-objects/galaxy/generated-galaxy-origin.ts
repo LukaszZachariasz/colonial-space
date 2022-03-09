@@ -1,6 +1,8 @@
 import * as BABYLON from 'babylonjs';
+import {GalaxySceneGui} from '../../game-scenes/galaxy-scene/gui/galaxy-scene-gui';
 
 export class GeneratedGalaxyOrigin {
+    public gui: GalaxySceneGui;
 
     public create(scene: BABYLON.Scene): void {
         const surfaceParticles = new BABYLON.ParticleSystem('surfaceParticles', 1600, scene);
@@ -18,6 +20,12 @@ export class GeneratedGalaxyOrigin {
         originSphere.material = originMat;
 
         originSphere.renderingGroupId = 3;
+
+        const actionManager = new BABYLON.ActionManager(scene);
+        originSphere.actionManager = actionManager;
+        actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
+            this.gui.galaxyOriginContent.create();
+        }));
 
         const sunEmitter = new BABYLON.SphereParticleEmitter();
 

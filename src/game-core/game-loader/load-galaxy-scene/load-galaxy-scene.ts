@@ -2,12 +2,12 @@ import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-b
 import {GalaxyAreaState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
 import {GalaxySceneBuilder} from '../../../game-scenes/galaxy-scene/galaxy-scene-builder';
 import {GalaxyState} from '../../game-state/gameplay-state/galaxy-state/galaxy-state';
+import {GeneratedGalaxyDust} from '../../../game-objects/galaxy/generated-galaxy-dust';
+import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-galaxy-origin';
 import {LoadPlanetScene} from './load-planet-scene/load-planet-scene';
 import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
 import {PlanetState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import gameState from '../../game-state/game-state';
-import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-galaxy-origin';
-import {GeneratedGalaxyDust} from '../../../game-objects/galaxy/generated-galaxy-dust';
 
 export class LoadGalaxyScene {
     public loadPlanetScene: LoadPlanetScene = new LoadPlanetScene();
@@ -18,11 +18,11 @@ export class LoadGalaxyScene {
         builder
             .name(galaxyState.name)
             .withArcCamera()
+            .withGui()
             .withGeneratedGalaxyOrigin(new GeneratedGalaxyOrigin())
             .withGalaxyDust(new GeneratedGalaxyDust())
             .withSkybox()
-            .withLights()
-            .withGui();
+            .withLights();
 
         galaxyState.galaxyAreaStates.forEach((galaxyAreaState: GalaxyAreaState) => {
             const galaxyAreaBuilder: GalaxyAreaBuilder = new GalaxyAreaBuilder();
