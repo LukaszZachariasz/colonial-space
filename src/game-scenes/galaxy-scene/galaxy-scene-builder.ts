@@ -2,16 +2,16 @@ import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
 import {GalaxyScene} from './galaxy-scene';
 import {GalaxySceneGui} from './gui/galaxy-scene-gui';
-import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
-import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
-import engine from 'engine';
 import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
+import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
+import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
+import engine from 'engine';
 
 export class GalaxySceneBuilder {
     public galaxyScene: GalaxyScene;
 
     constructor() {
-        this.galaxyScene = new GalaxyScene()
+        this.galaxyScene = new GalaxyScene();
     }
 
     public name(name: string): GalaxySceneBuilder {
@@ -74,7 +74,7 @@ export class GalaxySceneBuilder {
         return this.galaxyScene;
     }
 
-    public withGalaxyDust(generatedGalaxyDust: GeneratedGalaxyDust) {
+    public withGalaxyDust(generatedGalaxyDust: GeneratedGalaxyDust): GalaxySceneBuilder {
         this.galaxyScene.generatedGalaxyDust = generatedGalaxyDust;
         generatedGalaxyDust.create(this.galaxyScene.scene);
         return this;

@@ -2,15 +2,15 @@ import * as BABYLON from 'babylonjs';
 
 export class GeneratedGalaxyDust {
 
-    create(scene: BABYLON.Scene): void {
+    public create(scene: BABYLON.Scene): void {
         const starsEmitter = new BABYLON.SphereParticleEmitter();
         starsEmitter.radius = 10;
         starsEmitter.radiusRange = 10;
 
-        const stars = BABYLON.Mesh.CreateBox("emitter", 0.01, scene);
-        const starsParticles = new BABYLON.ParticleSystem("starsParticles", 50000, scene);
+        const stars = BABYLON.Mesh.CreateBox('emitter', 0.01, scene);
+        const starsParticles = new BABYLON.ParticleSystem('starsParticles', 50000, scene);
 
-        starsParticles.particleTexture = new BABYLON.Texture("resources/galaxies/galaxy-origin-01/star_point.png", scene);
+        starsParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/star_point.png', scene);
         starsParticles.emitter = stars;
         starsParticles.particleEmitterType = starsEmitter;
         starsParticles.color1 = new BABYLON.Color4(0.898, 0.737, 0.718, 1.0);

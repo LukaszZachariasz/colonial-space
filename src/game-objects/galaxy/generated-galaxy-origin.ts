@@ -2,17 +2,17 @@ import * as BABYLON from 'babylonjs';
 
 export class GeneratedGalaxyOrigin {
 
-    create(scene: BABYLON.Scene): void {
-        const surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
-        const flareParticles = new BABYLON.ParticleSystem("flareParticles", 20, scene);
-        const glareParticles = new BABYLON.ParticleSystem("glareParticles", 600, scene);
+    public create(scene: BABYLON.Scene): void {
+        const surfaceParticles = new BABYLON.ParticleSystem('surfaceParticles', 1600, scene);
+        const flareParticles = new BABYLON.ParticleSystem('flareParticles', 20, scene);
+        const glareParticles = new BABYLON.ParticleSystem('glareParticles', 600, scene);
 
-        surfaceParticles.particleTexture = new BABYLON.Texture("resources/galaxies/galaxy-origin-01/surface.png", scene);
-        flareParticles.particleTexture = new BABYLON.Texture("resources/galaxies/galaxy-origin-01/flare.png", scene);
-        glareParticles.particleTexture = new BABYLON.Texture("resources/galaxies/galaxy-origin-01/star_point.png", scene);
+        surfaceParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/surface.png', scene);
+        flareParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/flare.png', scene);
+        glareParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/star_point.png', scene);
 
-        const originSphere = BABYLON.MeshBuilder.CreateSphere("coreSphere", {diameter: 2.01, segments: 64}, scene);
-        const originMat = new BABYLON.StandardMaterial("originMat", scene)
+        const originSphere = BABYLON.MeshBuilder.CreateSphere('coreSphere', {diameter: 2.01, segments: 64}, scene);
+        const originMat = new BABYLON.StandardMaterial('originMat', scene);
 
         originMat.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266);
         originSphere.material = originMat;
