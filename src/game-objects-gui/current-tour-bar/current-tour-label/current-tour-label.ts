@@ -7,7 +7,7 @@ export class CurrentTourLabel implements GameObjectGui {
     public text: GUI.TextBlock;
 
     public create(scene: BABYLON.Scene): void {
-        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameStage.gameState.tour.currentTour);
+        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameStage.gameState.tour.tour);
         this.text.width = '150px';
         this.text.height = '16px';
         this.text.top = '-60px';
@@ -16,7 +16,7 @@ export class CurrentTourLabel implements GameObjectGui {
         this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         scene.registerBeforeRender(() => {
-            this.text.text = 'Current tour: ' + gameStage.gameState.tour.currentTour;
+            this.text.text = 'Current tour: ' + gameStage.gameState.tour.tour;
         });
     }
 }

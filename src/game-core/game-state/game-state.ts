@@ -1,7 +1,7 @@
 import {Resource} from '../resource/resource';
-import {Tour} from '../tour/tour';
+import {TourManager} from '../tour/tour-manager';
 
 export class GameState {
-    public tour: Tour = new Tour();
+    public tour: TourManager = new TourManager();
     public resource: Resource = new Resource();
 }
