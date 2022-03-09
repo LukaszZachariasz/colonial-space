@@ -4,6 +4,7 @@ import {LoadingSceneGui} from './gui/loading-scene-gui';
 import engine from 'engine';
 
 export class LoadingScene {
+    public name = 'Loading';
     public scene: BABYLON.Scene = new BABYLON.Scene(engine.engine);
     public camera: BABYLON.FreeCamera;
     public gui: GameSceneGui;

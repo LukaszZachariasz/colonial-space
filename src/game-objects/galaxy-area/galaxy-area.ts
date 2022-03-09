@@ -3,6 +3,7 @@ import {GameObject} from '../game-object';
 import {GameScene} from '../../game-scenes/game-scene';
 import {Planet} from '../planet/planet';
 import earcut from 'earcut';
+import gameState from '../../game-core/game-state/game-state';
 import sceneLoader from '../../engine/scene-loader/scene-loader';
 
 export class GalaxyArea implements GameObject {
@@ -10,7 +11,6 @@ export class GalaxyArea implements GameObject {
     public polygon: BABYLON.Mesh;
 
     public planet: Planet;
-    public planetScene: GameScene;
     public actionManager: BABYLON.ActionManager;
 
     public create(scene: BABYLON.Scene): void {
@@ -34,8 +34,8 @@ export class GalaxyArea implements GameObject {
         }));
 
         this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-            if (this.planetScene) {
-                sceneLoader.setScenes(this.planetScene);
+            if (this.planet) {
+                sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === this.planet.name));
             }
         }));
     }

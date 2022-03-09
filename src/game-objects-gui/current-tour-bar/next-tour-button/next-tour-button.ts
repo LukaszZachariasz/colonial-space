@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {GameObjectGui} from '../../game-object-gui';
-import gameStage from '../../../engine/game-stage/game-stage';
+import gameState from '../../../game-core/game-state/game-state';
 
 export class NextTourButton implements GameObjectGui {
     public button: GUI.Button;
@@ -15,7 +15,7 @@ export class NextTourButton implements GameObjectGui {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.button.onPointerUpObservable.add(() => {
-            gameStage.gameState.tour.nextTour();
+            gameState.tourManager.nextTour();
         });
     }
 }

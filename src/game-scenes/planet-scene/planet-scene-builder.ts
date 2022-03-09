@@ -12,6 +12,11 @@ export class PlanetSceneBuilder {
         this.planetScene = new PlanetScene();
     }
 
+    public name(name: string): PlanetSceneBuilder {
+        this.planetScene.name = name;
+        return this;
+    }
+
     public withArcCamera(): PlanetSceneBuilder {
         this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 0.8, 5, new BABYLON.Vector3(0, 0, 0), this.planetScene.scene);
         this.planetScene.camera.setTarget(BABYLON.Vector3.Zero());

@@ -5,6 +5,7 @@ import {Planet} from '../../game-objects/planet/planet';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class PlanetScene extends GameSceneLoading {
+    public name: string;
     public camera: BABYLON.ArcRotateCamera;
     public skybox: SpaceSkybox;
     public planet: Planet;

@@ -4,6 +4,11 @@ import {Planet} from './planet';
 export class PlanetBuilder {
     public planet: Planet = new Planet();
 
+    public name(name: string): PlanetBuilder {
+        this.planet.name = name;
+        return this;
+    }
+
     public size(size: number): PlanetBuilder {
         this.planet.size = size;
         return this;

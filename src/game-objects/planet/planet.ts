@@ -2,6 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
 
 export class Planet implements GameObject {
+    public name: string;
     public position: BABYLON.Vector3 = new BABYLON.Vector3(0, 0, 0);
     public size = 1;
     public diffuseTexture = '';

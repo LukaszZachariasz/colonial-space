@@ -32,6 +32,7 @@ export class GalaxySceneBuilder {
     public withGalaxyOrigin(galaxyOrigin: GalaxyOrigin): GalaxySceneBuilder {
         this.galaxyScene.galaxyOrigin = galaxyOrigin;
         galaxyOrigin.create(this.galaxyScene.scene);
+        galaxyOrigin.galaxyScene = this.galaxyScene;
         return this;
     }
 

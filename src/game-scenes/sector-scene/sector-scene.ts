@@ -4,6 +4,8 @@ import {GameSceneGui} from '../game-scene-gui';
 import {GameSceneLoading} from '../game-scene-loading';
 
 export class SectorScene extends GameSceneLoading {
+    public name: string;
+
     public camera: FromAboveCamera;
     public gui: GameSceneGui;
     public ground: BABYLON.Mesh;
