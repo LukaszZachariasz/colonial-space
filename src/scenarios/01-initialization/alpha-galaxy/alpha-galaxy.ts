@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-builder';
+import {GalaxyOrigin} from '../../../game-objects/galaxy-origin/galaxy-origin';
 import {GalaxyScene} from '../../../game-scenes/galaxy-scene/galaxy-scene';
 import {GalaxySceneBuilder} from '../../../game-scenes/galaxy-scene/galaxy-scene-builder';
 import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
@@ -10,6 +11,7 @@ export class AlphaGalaxy {
         return new GalaxySceneBuilder()
             .name('Alpha Galaxy')
             .withLockedCamera()
+            .withGalaxyOrigin(new GalaxyOrigin())
             .withSkybox()
             .withGalaxyArea(
                 new GalaxyAreaBuilder()

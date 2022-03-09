@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
+import {GalaxyOrigin} from '../../game-objects/galaxy-origin/galaxy-origin';
 import {GalaxyScene} from './galaxy-scene';
 import {GalaxySceneGui} from './gui/galaxy-scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
@@ -25,6 +26,12 @@ export class GalaxySceneBuilder {
     public withSkybox(): GalaxySceneBuilder {
         this.galaxyScene.skybox = new SpaceSkybox();
         this.galaxyScene.skybox.create(this.galaxyScene.scene);
+        return this;
+    }
+
+    public withGalaxyOrigin(galaxyOrigin: GalaxyOrigin): GalaxySceneBuilder {
+        this.galaxyScene.galaxyOrigin = galaxyOrigin;
+        galaxyOrigin.create(this.galaxyScene.scene);
         return this;
     }
 
