@@ -23,14 +23,14 @@ export class GeneratedGalaxyDust {
         starsParticles.maxLifeTime = 999999;
 
         starsParticles.minEmitPower = 0.0;
-        starsParticles.maxAngularSpeed = 0.0;
+        starsParticles.maxEmitPower = 0.0;
+        starsParticles.minAngularSpeed = 11.1;
+        starsParticles.maxAngularSpeed = 11.1;
 
-        starsParticles.minAngularSpeed = 0.0;
-        starsParticles.maxAngularSpeed = 0.0;
 
         starsParticles.manualEmitCount = 500;
-        starsParticles.maxEmitPower = 0.0;
 
+        starsParticles.updateSpeed = 2;
         starsParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
         starsParticles.gravity = new BABYLON.Vector3(0, 0, 0);
 

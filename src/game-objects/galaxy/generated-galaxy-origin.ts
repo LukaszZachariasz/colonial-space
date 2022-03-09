@@ -13,7 +13,7 @@ export class GeneratedGalaxyOrigin {
         flareParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/flare.png', scene);
         glareParticles.particleTexture = new BABYLON.Texture('resources/galaxies/galaxy-origin-01/star_point.png', scene);
 
-        const originSphere = BABYLON.MeshBuilder.CreateSphere('coreSphere', {diameter: 2.01, segments: 64}, scene);
+        const originSphere = BABYLON.MeshBuilder.CreateSphere('coreSphere', {diameter: 6, segments: 64}, scene);
         const originMat = new BABYLON.StandardMaterial('originMat', scene);
 
         originMat.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266);
@@ -29,7 +29,7 @@ export class GeneratedGalaxyOrigin {
 
         const sunEmitter = new BABYLON.SphereParticleEmitter();
 
-        sunEmitter.radius = 1;
+        sunEmitter.radius = 3;
         sunEmitter.radiusRange = 0;
 
         surfaceParticles.preWarmStepOffset = 10;
@@ -44,8 +44,8 @@ export class GeneratedGalaxyOrigin {
         surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
         surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
 
-        surfaceParticles.minSize = 0.4;
-        surfaceParticles.maxSize = 0.7;
+        surfaceParticles.minSize = 1;
+        surfaceParticles.maxSize = 2;
         surfaceParticles.minLifeTime = 8.0;
         surfaceParticles.maxLifeTime = 8.0;
         surfaceParticles.emitRate = 200;
@@ -75,8 +75,8 @@ export class GeneratedGalaxyOrigin {
 
         flareParticles.minScaleX = 0.5;
         flareParticles.minScaleY = 0.5;
-        flareParticles.maxScaleX = 1.0;
-        flareParticles.maxScaleY = 1.0;
+        flareParticles.maxScaleX = 2;
+        flareParticles.maxScaleY = 2;
         flareParticles.minLifeTime = 10.0;
         flareParticles.maxLifeTime = 10.0;
         flareParticles.emitRate = 1;
@@ -103,10 +103,10 @@ export class GeneratedGalaxyOrigin {
         glareParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.12));
         glareParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
 
-        glareParticles.minScaleX = 0.5;
-        glareParticles.minScaleY = 0.75;
-        glareParticles.maxScaleX = 1.2;
-        glareParticles.maxScaleY = 3.0;
+        glareParticles.minScaleX = 2;
+        glareParticles.minScaleY = 2;
+        glareParticles.maxScaleX = 5;
+        glareParticles.maxScaleY = 10;
         glareParticles.minLifeTime = 2.0;
         glareParticles.maxLifeTime = 2.0;
         glareParticles.emitRate = 300;
