@@ -14,7 +14,7 @@ export class InitializationScenario implements Scenario {
     public sectorOne: SectorScene;
 
     public get initialScene(): GameScene {
-        return this.alphaGalaxy;
+        return this.planetScene;
     }
 
     public createScenario(): void {

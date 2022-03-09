@@ -13,10 +13,16 @@ export class PlanetSceneBuilder {
     }
 
     public withArcCamera(): PlanetSceneBuilder {
-        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', -Math.PI/2, Math.PI/4, 3, new BABYLON.Vector3(0, 0, -1), this.planetScene.scene);
+        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 0.8, 5, new BABYLON.Vector3(0, 0, 0), this.planetScene.scene);
         this.planetScene.camera.setTarget(BABYLON.Vector3.Zero());
-        this.planetScene.camera.attachControl(engine.canvas, true);
+
+        this.planetScene.camera.lowerRadiusLimit = 2.5;
+        this.planetScene.camera.upperRadiusLimit = 10;
+        this.planetScene.camera.pinchDeltaPercentage = 0.01;
+        this.planetScene.camera.wheelDeltaPercentage = 0.01;
         this.planetScene.camera.panningSensibility = 0;
+
+        this.planetScene.camera.attachControl(engine.canvas, true);
         return this;
     }
 
