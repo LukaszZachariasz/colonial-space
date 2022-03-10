@@ -7,4 +7,8 @@ export abstract class GameScene {
 
     public scene: BABYLON.Scene = new BABYLON.Scene(engine.engine);
     public gui: GameSceneGui;
+
+    protected constructor() {
+        this.scene.detachControl();
+    }
 }

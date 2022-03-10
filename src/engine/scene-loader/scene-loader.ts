@@ -4,8 +4,13 @@ export class SceneLoader {
     public currentScene: GameScene;
 
     public loadScene(gameScene: GameScene): void {
-        this.currentScene = gameScene;
-        this.currentScene.gui.create(gameScene.scene);
+        if (this.currentScene) {
+            this.currentScene.scene.detachControl();
+        }
+        this.currentScene = {...gameScene};
+        this.currentScene.gui.create(this.currentScene.scene);
+
+        this.currentScene.scene.attachControl();
     }
 }
 

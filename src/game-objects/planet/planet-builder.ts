@@ -1,5 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {Planet} from './planet';
+import {
+    PlanetState
+} from '../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 
 export class PlanetBuilder {
     public planet: Planet = new Planet();
@@ -21,6 +24,11 @@ export class PlanetBuilder {
 
     public position(position: BABYLON.Vector3): PlanetBuilder {
         this.planet.position = position;
+        return this;
+    }
+
+    public withState(planetState: PlanetState): PlanetBuilder {
+        this.planet.state = planetState;
         return this;
     }
 

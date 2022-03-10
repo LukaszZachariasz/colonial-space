@@ -18,15 +18,17 @@ export class LoadPlanetScene {
             .withSkyBox()
             .withPlanet(
                 new PlanetBuilder()
+                    .name(planetState.name)
                     .size(planetState.size)
                     .texture(planetState.textureUrl)
+                    .withState(planetState)
                     .build()
             )
             .withLights()
             .withGui();
 
         planetState.sectors.forEach((sector: SectorState) => {
-            this.loadSectorScene.loadSectorScene(sector);
+            this.loadSectorScene.loadSectorScene(sector, planetState);
         });
 
         gameState.gameScenes.push(builder.build());
