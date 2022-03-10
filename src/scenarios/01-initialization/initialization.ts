@@ -13,7 +13,7 @@ export const initialization: GameplayState = {
         galaxyOriginState: {
             name: 'Origin 01',
             threats: [
-                new HighTemperatureThreat(4, 5, 7, 2, 4)
+                new HighTemperatureThreat(4, 5, 7, 2, 3)
             ]
         },
         galaxyAreaStates: [

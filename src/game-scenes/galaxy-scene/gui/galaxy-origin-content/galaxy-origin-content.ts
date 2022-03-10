@@ -1,4 +1,6 @@
 import * as GUI from 'babylonjs-gui';
+import {ComingThreatsList} from './coming-threats-list/coming-threats-list';
+import {CurrentThreatsList} from './current-threats-list/current-threats-list';
 import {GalaxyOriginNameText} from './galaxy-origin-name-text/galaxy-origin-name-text';
 import {
     GalaxyOriginState
@@ -24,6 +26,8 @@ export class GalaxyOriginContent implements GameObjectGui {
         this.rightContentBox.container.onDisposeObservable.addOnce(() => this.isCreated = false);
 
         guiManager.create(new GalaxyOriginNameText(this.galaxyOriginState), this.rightContentBox.container);
+        guiManager.create(new CurrentThreatsList(this.galaxyOriginState), this.rightContentBox.container);
+        guiManager.create(new ComingThreatsList(this.galaxyOriginState), this.rightContentBox.container);
 
         this.isCreated = true;
 
