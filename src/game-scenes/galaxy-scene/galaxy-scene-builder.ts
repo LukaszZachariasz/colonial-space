@@ -2,6 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
 import {GalaxyScene} from './galaxy-scene';
 import {GalaxySceneGui} from './gui/galaxy-scene-gui';
+import {GalaxyState} from '../../game-core/game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
 import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
@@ -57,14 +58,13 @@ export class GalaxySceneBuilder {
         return this;
     }
 
-    public withGui(): GalaxySceneBuilder {
-        this.galaxyScene.gui = new GalaxySceneGui(this.galaxyScene);
+    public withGui(galaxyState: GalaxyState): GalaxySceneBuilder {
+        this.galaxyScene.gui = new GalaxySceneGui(galaxyState);
         return this;
     }
 
     public withGeneratedGalaxyOrigin(generatedGalaxyOrigin: GeneratedGalaxyOrigin): GalaxySceneBuilder {
         this.galaxyScene.generatedGalaxyOrigin = generatedGalaxyOrigin;
-        generatedGalaxyOrigin.gui = this.galaxyScene.gui as GalaxySceneGui;
         generatedGalaxyOrigin.create(this.galaxyScene.scene);
         return this;
     }

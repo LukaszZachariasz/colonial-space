@@ -1,25 +1,22 @@
-import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGuiContainer} from '../game-object-gui-container';
+import {GameObjectGui} from '../game-object-gui';
 import {WoodLabel} from './wood-label/wood-label';
+import gameState from '../../game-core/game-state/game-state';
+import guiManager from '../../engine/gui-manager/gui-manager';
 
-export class ResourceBar implements GameObjectGuiContainer {
-    public container: GUI.Container;
-    public woodLabel: WoodLabel;
+export class ResourceBar implements GameObjectGui {
+    public resourceBarContainer: GUI.Container;
 
-    public create(scene: BABYLON.Scene): GUI.Container {
-        this.container = new GUI.Container('resourceBar');
-        this.container.width = '100px';
-        this.container.height = '50px';
-        this.container.top = '-60px';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    public create(): GUI.Control {
+        this.resourceBarContainer = new GUI.Container('resourceBar');
+        this.resourceBarContainer.width = '100px';
+        this.resourceBarContainer.height = '50px';
+        this.resourceBarContainer.top = '-60px';
+        this.resourceBarContainer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        this.resourceBarContainer.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        this.woodLabel = new WoodLabel();
-        this.woodLabel.create(scene);
+        guiManager.create(new WoodLabel(gameState.gameplayState.resourceState), this.resourceBarContainer);
 
-        this.container.addControl(this.woodLabel.text);
-
-        return this.container;
+        return this.resourceBarContainer;
     }
 }

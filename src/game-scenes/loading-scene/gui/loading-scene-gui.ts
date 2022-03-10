@@ -1,21 +1,12 @@
 import * as BABYLON from 'babylonjs';
-import * as GUI from 'babylonjs-gui';
 import {GameSceneGui} from '../../game-scene-gui';
+import {LoadingText} from './loading-text/loading-text';
+import guiManager from '../../../engine/gui-manager/gui-manager';
 
 export class LoadingSceneGui implements GameSceneGui {
-    public advancedTexture: GUI.AdvancedDynamicTexture;
-
-    private text: GUI.TextBlock;
-
     public create(scene: BABYLON.Scene): void {
-        this.advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('loadingGUI', true, scene);
-        this.text = new GUI.TextBlock('loading', 'Loading...');
-        this.text.color = 'white';
-        this.advancedTexture.addControl(this.text);
-    }
+        guiManager.reset(scene);
 
-    public dispose(): void {
-        this.advancedTexture.dispose();
+        guiManager.create(new LoadingText());
     }
-
 }

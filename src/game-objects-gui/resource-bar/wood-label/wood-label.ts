@@ -1,12 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {GameObjectGui} from '../../game-object-gui';
-import gameState from '../../../game-core/game-state/game-state';
+import {ResourceState} from '../../../game-core/game-state/gameplay-state/resource-state/resource-state';
 
 export class WoodLabel implements GameObjectGui {
     public text: GUI.TextBlock;
 
-    public create(scene: BABYLON.Scene): void {
+    constructor(private resourceState: ResourceState) {
+    }
+
+    public create(scene: BABYLON.Scene): GUI.Control {
         this.text = new GUI.TextBlock('currentWood', 'Wood: 0');
         this.text.width = '100px';
         this.text.height = '16px';
@@ -15,7 +18,9 @@ export class WoodLabel implements GameObjectGui {
         this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         scene.registerBeforeRender(() => {
-            this.text.text = 'Wood: ' + gameState.gameplayState.resourceState.wood;
+            this.text.text = 'Wood: ' + this.resourceState.wood;
         });
+
+        return this.text;
     }
 }

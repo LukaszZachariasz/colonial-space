@@ -18,7 +18,7 @@ export class GameLoader {
         loadingSceneManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
-            tap(() => sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.currentGameSceneName)))
+            tap(() => sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.initGameSceneName)))
         ).subscribe();
     }
 }

@@ -1,41 +1,32 @@
 import * as GUI from 'babylonjs-gui';
+import {GalaxyOriginNameText} from './galaxy-origin-name-text/galaxy-origin-name-text';
+import {
+    GalaxyOriginState
+} from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
-import {GeneratedGalaxyOrigin} from '../../../../game-objects/galaxy/generated-galaxy-origin';
-import {RightContentBox} from '../../../../game-objects-gui/right-content-box/right-content-box';
-import gameState from '../../../../game-core/game-state/game-state';
+import {RightContentBox} from '../../../../game-objects-gui/shared/right-content-box/right-content-box';
+import guiManager from '../../../../engine/gui-manager/gui-manager';
 
 export class GalaxyOriginContent implements GameObjectGui {
-    public advanceTexture: GUI.AdvancedDynamicTexture;
     public rightContentBox: RightContentBox;
-    public galaxyOriginNameTextBlock: GUI.TextBlock;
 
     private isCreated = false;
 
-    constructor(private generatedGalaxyOrigin: GeneratedGalaxyOrigin) {
+    constructor(private galaxyOriginState: GalaxyOriginState) {
     }
 
-    public create(): void {
+    public create(): GUI.Control {
         if (this.isCreated) {
             return;
         }
-        this.rightContentBox = new RightContentBox();
-        this.rightContentBox.create();
+
+        this.rightContentBox = guiManager.create(new RightContentBox());
         this.rightContentBox.container.onDisposeObservable.addOnce(() => this.isCreated = false);
 
-        this.advanceTexture.addControl(this.rightContentBox.container);
-
-        this.galaxyOriginNameTextBlock = new GUI.TextBlock('galaxyOriginName', gameState.gameplayState.galaxyState.galaxyOriginState.name);
-        this.galaxyOriginNameTextBlock.color = 'white';
-        this.galaxyOriginNameTextBlock.resizeToFit = true;
-        this.galaxyOriginNameTextBlock.top = '20px';
-        this.galaxyOriginNameTextBlock.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.galaxyOriginNameTextBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-        this.rightContentBox.container.addControl(this.galaxyOriginNameTextBlock);
-
-
-        console.log('planet temp: ' +gameState.gameplayState.galaxyState.galaxyAreaStates[0].planetStates[0].temperature);
-        console.log('threats:' + gameState.gameplayState.galaxyState.galaxyOriginState.threats);
+        guiManager.create(new GalaxyOriginNameText(this.galaxyOriginState), this.rightContentBox.container);
 
         this.isCreated = true;
+
+        return this.rightContentBox.container;
     }
 }

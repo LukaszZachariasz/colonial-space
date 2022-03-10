@@ -18,12 +18,12 @@ export abstract class Threat {
                           public unknownUntilTour: number) {
         this.subscription = gameState.tourManager.completeTour$.pipe(
             tap(() => {
-                if (gameState.tourManager.tour + 1 === this.tourStart) {
+                if (gameState.gameplayState.currentTour + 1 === this.tourStart) {
                     this.start();
                 }
             }),
             tap(() => {
-                if (gameState.tourManager.tour + 1 === this.tourEnd) {
+                if (gameState.gameplayState.currentTour + 1 === this.tourEnd) {
                     this.stop();
                     this.remove();
                     this.subscription.unsubscribe();

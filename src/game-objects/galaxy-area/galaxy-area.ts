@@ -33,7 +33,7 @@ export class GalaxyArea implements GameObject {
             this.polygon.visibility = 0.1;
         }));
 
-        this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
+        this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
             if (this.planet) {
                 sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === this.planet.name));
             }

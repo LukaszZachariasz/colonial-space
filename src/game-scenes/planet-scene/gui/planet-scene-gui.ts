@@ -1,34 +1,16 @@
 import * as BABYLON from 'babylonjs';
-import * as GUI from 'babylonjs-gui';
-import {GameScene} from '../../game-scene';
+import {BackToGalaxyButton} from './back-to-galaxy-button/back-to-galaxy-button';
+import {CurrentTourBar} from '../../../game-objects-gui/current-tour-bar/current-tour-bar';
 import {GameSceneGui} from '../../game-scene-gui';
-import gameState from '../../../game-core/game-state/game-state';
-import sceneLoader from '../../../engine/scene-loader/scene-loader';
+import {ResourceBar} from '../../../game-objects-gui/resource-bar/resource-bar';
+import guiManager from '../../../engine/gui-manager/gui-manager';
 
 export class PlanetSceneGui implements GameSceneGui {
-    public advancedTexture: GUI.AdvancedDynamicTexture;
-    private button: GUI.Button;
-
     public create(scene: BABYLON.Scene): void {
-        this.advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('planetSceneGui', true, scene);
+        guiManager.reset(scene);
 
-        this.button = GUI.Button.CreateSimpleButton('galaxyView', 'Galaxy view');
-        this.button.width = '100px';
-        this.button.height = '50px';
-        this.button.color = 'white';
-        this.button.top = '5px';
-        this.button.left = '5px';
-        this.button.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-
-        this.button.onPointerUpObservable.add(() => {
-            sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.galaxyState.name));
-        });
-
-        this.advancedTexture.addControl(this.button);
-    }
-
-    public dispose(): void {
-        this.advancedTexture.dispose();
+        guiManager.create(new BackToGalaxyButton());
+        guiManager.create(new CurrentTourBar());
+        guiManager.create(new ResourceBar());
     }
 }

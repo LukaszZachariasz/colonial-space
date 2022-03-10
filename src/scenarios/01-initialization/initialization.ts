@@ -3,7 +3,8 @@ import {GameplayState} from '../../game-core/game-state/gameplay-state/gameplay-
 import {HighTemperatureThreat} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-threat';
 
 export const initialization: GameplayState = {
-    currentGameSceneName: 'Alpha Galaxy',
+    currentTour: 1,
+    initGameSceneName: 'Alpha Galaxy',
     resourceState: {
         wood: 500
     },

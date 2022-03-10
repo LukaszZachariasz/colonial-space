@@ -1,15 +1,14 @@
-import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {CurrentTourLabel} from './current-tour-label/current-tour-label';
-import {GameObjectGuiContainer} from '../game-object-gui-container';
+import {GameObjectGui} from '../game-object-gui';
 import {NextTourButton} from './next-tour-button/next-tour-button';
+import gameState from '../../game-core/game-state/game-state';
+import guiManager from '../../engine/gui-manager/gui-manager';
 
-export class CurrentTourBar implements GameObjectGuiContainer {
+export class CurrentTourBar implements GameObjectGui {
     public container: GUI.Container;
-    public nextTourButton: NextTourButton;
-    public currentTourLabel: CurrentTourLabel;
 
-    public create(scene: BABYLON.Scene): GUI.Container {
+    public create(): GUI.Control {
         this.container = new GUI.Container('currentTourBar');
         this.container.width = '200px';
         this.container.height = '150px';
@@ -17,14 +16,8 @@ export class CurrentTourBar implements GameObjectGuiContainer {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        this.nextTourButton = new NextTourButton();
-        this.nextTourButton.create();
-
-        this.currentTourLabel = new CurrentTourLabel();
-        this.currentTourLabel.create(scene);
-
-        this.container.addControl(this.nextTourButton.button);
-        this.container.addControl(this.currentTourLabel.text);
+        guiManager.create(new NextTourButton(gameState.tourManager), this.container);
+        guiManager.create(new CurrentTourLabel(gameState.gameplayState), this.container);
 
         return this.container;
     }

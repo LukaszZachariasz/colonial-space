@@ -18,7 +18,7 @@ export class LoadGalaxyScene {
         builder
             .name(galaxyState.name)
             .withArcCamera()
-            .withGui()
+            .withGui(galaxyState)
             .withGeneratedGalaxyOrigin(new GeneratedGalaxyOrigin())
             .withGalaxyDust(new GeneratedGalaxyDust())
             .withSkybox()

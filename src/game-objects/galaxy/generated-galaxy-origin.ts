@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
-import {GalaxySceneGui} from '../../game-scenes/galaxy-scene/gui/galaxy-scene-gui';
+import {GalaxyOriginContent} from '../../game-scenes/galaxy-scene/gui/galaxy-origin-content/galaxy-origin-content';
+import gameState from '../../game-core/game-state/game-state';
+import guiManager from '../../engine/gui-manager/gui-manager';
 
 export class GeneratedGalaxyOrigin {
-    public gui: GalaxySceneGui;
-
     public create(scene: BABYLON.Scene): void {
         const surfaceParticles = new BABYLON.ParticleSystem('surfaceParticles', 1600, scene);
         const flareParticles = new BABYLON.ParticleSystem('flareParticles', 20, scene);
@@ -23,8 +23,8 @@ export class GeneratedGalaxyOrigin {
 
         const actionManager = new BABYLON.ActionManager(scene);
         originSphere.actionManager = actionManager;
-        actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-            this.gui.galaxyOriginContent.create();
+        actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+            guiManager.create(new GalaxyOriginContent(gameState.gameplayState.galaxyState.galaxyOriginState));
         }));
 
         const sunEmitter = new BABYLON.SphereParticleEmitter();
