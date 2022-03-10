@@ -35,7 +35,7 @@ export class GalaxyArea implements GameObject {
 
         this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
             if (this.planet) {
-                sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === this.planet.name));
+                sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === this.planet.name));
             }
         }));
     }

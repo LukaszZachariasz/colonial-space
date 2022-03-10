@@ -10,7 +10,7 @@ export class GameLoader {
     public loadGalaxyScene: LoadGalaxyScene = new LoadGalaxyScene();
 
     public load(gameplayState: GameplayState): void {
-        sceneLoader.setScenes(loadingSceneManager.loadingScene);
+        sceneLoader.loadScene(loadingSceneManager.loadingScene);
 
         gameState.gameplayState = gameplayState;
         this.loadGalaxyScene.loadGalaxyScene(gameState.gameplayState.galaxyState);
@@ -18,7 +18,7 @@ export class GameLoader {
         loadingSceneManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
-            tap(() => sceneLoader.setScenes(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.initGameSceneName)))
+            tap(() => sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.initGameSceneName)))
         ).subscribe();
     }
 }

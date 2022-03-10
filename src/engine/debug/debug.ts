@@ -1,5 +1,4 @@
 import {FpsCounter} from './fps-counter/fps-counter';
-import {GameScene} from '../../game-scenes/game-scene';
 import {ipcRenderer} from 'electron';
 import sceneLoader from '../scene-loader/scene-loader';
 
@@ -13,11 +12,9 @@ export class Debug {
 
     private openDebugLayerListener(): void {
         ipcRenderer.on('open-debug-layer', () => {
-            sceneLoader.scenes.forEach((gameScene: GameScene) => {
-                gameScene.scene.debugLayer.show({
-                    showInspector: true,
-                    overlay: true
-                });
+            sceneLoader.currentScene.scene.debugLayer.show({
+                showInspector: true,
+                overlay: true
             });
         });
     }

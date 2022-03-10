@@ -1,11 +1,11 @@
 import {GameScene} from '../../game-scenes/game-scene';
 
 export class SceneLoader {
-    public scenes: GameScene[] = [];
+    public currentScene: GameScene;
 
-    public setScenes(...scenes: GameScene[]): void {
-        this.scenes = [...scenes];
-        this.scenes.forEach((scene: GameScene) => scene?.gui.create(scene.scene));
+    public loadScene(gameScene: GameScene): void {
+        this.currentScene = gameScene;
+        this.currentScene.gui.create(gameScene.scene);
     }
 }
 
