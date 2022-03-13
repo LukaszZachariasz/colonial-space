@@ -1,6 +1,6 @@
 import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-builder';
 import {GalaxyAreaState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
-import {GalaxySceneBuilder} from '../../../game-scenes/galaxy-scene/galaxy-scene-builder';
+import {GalaxySceneBuilder} from '../../../scenes/galaxy/galaxy-scene-builder';
 import {GalaxyState} from '../../game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GeneratedGalaxyDust} from '../../../game-objects/galaxy/generated-galaxy-dust';
 import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-galaxy-origin';

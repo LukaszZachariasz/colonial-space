@@ -1,6 +1,6 @@
 import {LoadSectorScene} from './load-sector-scene/load-sector-scene';
 import {PlanetBuilder} from '../../../../game-objects/planet/planet-builder';
-import {PlanetSceneBuilder} from '../../../../game-scenes/planet-scene/planet-scene-builder';
+import {PlanetSceneBuilder} from '../../../../scenes/planet/planet-scene-builder';
 import {PlanetState} from '../../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {
     SectorState

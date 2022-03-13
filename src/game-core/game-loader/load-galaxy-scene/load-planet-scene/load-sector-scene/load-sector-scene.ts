@@ -1,7 +1,7 @@
 import {
     PlanetState
 } from '../../../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {SectorSceneBuilder} from '../../../../../game-scenes/sector-scene/sector-scene-builder';
+import {SectorSceneBuilder} from '../../../../../scenes/sector-scene/sector-scene-builder';
 import {
     SectorState
 } from '../../../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/sector-state/sector-state';

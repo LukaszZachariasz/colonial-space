@@ -1,12 +1,12 @@
-import {GameScene} from '../../game-scenes/game-scene';
+import {Scene} from '../../scenes/scene';
 import {gamePlatform} from '../../core/game-platform';
 
 export class SceneManager {
-    public currentScene: GameScene;
-    public allScenes: GameScene[] = [];
+    public currentScene: Scene;
+    public allScenes: Scene[] = [];
 
-    public addScene(gameScene: GameScene): void {
-        const exists = this.allScenes.find((el: GameScene) => gameScene.name === el.name);
+    public addScene(gameScene: Scene): void {
+        const exists = this.allScenes.find((el: Scene) => gameScene.name === el.name);
         if (exists) {
             throw new Error(`Scene ${gameScene.name} already exists`);
         }
@@ -14,14 +14,14 @@ export class SceneManager {
     }
 
     public navigateToScene(name: string): void {
-        const scene = this.allScenes.find((gameScene: GameScene) => gameScene.name === name);
+        const scene = this.allScenes.find((gameScene: Scene) => gameScene.name === name);
         if (!scene) {
             throw new Error(`Scene ${name} is not found. Can't navigate to unknown scene.`);
         }
         this.setCurrentScene(scene);
     }
 
-    public setCurrentScene(gameScene: GameScene): void {
+    public setCurrentScene(gameScene: Scene): void {
         if (this.currentScene) {
             this.currentScene.scene.detachControl();
         }
