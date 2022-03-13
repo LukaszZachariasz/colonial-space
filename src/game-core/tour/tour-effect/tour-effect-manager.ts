@@ -1,6 +1,6 @@
 import {Subject, forkJoin, map, switchMap, tap} from 'rxjs';
-import {gameplayState, gameState} from '../../../core/game-platform';
 import {TourEffect} from './tour-effect';
+import {gameplayState} from '../../../core/game-platform';
 
 type ExecuteEffectGroup = {current: TourEffect[], pending: TourEffect[][]};
 
