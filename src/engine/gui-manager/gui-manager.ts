@@ -1,7 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiContainer} from '../../gui-objects/gui-container';
-import {gamePlatform} from '../../core/game-platform';
 import {GuiObject} from '../../gui-objects/gui-object';
+import {gamePlatform} from '../../core/game-platform';
 
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;

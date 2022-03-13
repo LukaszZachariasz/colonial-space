@@ -1,4 +1,3 @@
-import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
