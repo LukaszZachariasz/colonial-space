@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../gui-object';
-import {TourManager} from '../../../game-core/tour/tour-manager';
+import {gameState} from '../../../core/game-platform';
 
 export class NextTourButtonGuiObject extends GuiObject {
     public button: GUI.Button;
 
-    constructor(private tourManager: TourManager) {
+    constructor() {
         super();
     }
 
@@ -19,7 +19,7 @@ export class NextTourButtonGuiObject extends GuiObject {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.button.onPointerUpObservable.add(() => {
-            this.tourManager.nextTour();
+            gameState().tourManager.nextTour();
         });
 
         return this.button;

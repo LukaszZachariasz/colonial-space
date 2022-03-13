@@ -12,7 +12,7 @@ export class TourManager {
 
     constructor() {
         this.tourEffectManager.completeTourEffects$.pipe(
-            tap(() => gameplayState().currentTour++),
+            tap(() => gameplayState().tourState.currentTour++),
             tap(() => this.isRunningNextTure = false),
             tap(() => this.completeTour$.next())
         ).subscribe();

@@ -1,16 +1,16 @@
 import * as GUI from 'babylonjs-gui';
-import {GameplayState} from '../../../engine/game-state/gameplay-state/gameplay-state';
 import {GuiObject} from '../../gui-object';
+import {gameplayState} from '../../../core/game-platform';
 
 export class CurrentTourLabelGuiObject extends GuiObject {
     public text: GUI.TextBlock;
 
-    constructor(private gameplayState: GameplayState) {
+    constructor() {
         super();
     }
 
     public render(): GUI.Control {
-        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + this.gameplayState.currentTour);
+        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameplayState().tourState.currentTour);
         this.text.width = '150px';
         this.text.height = '16px';
         this.text.top = '-60px';
@@ -19,7 +19,7 @@ export class CurrentTourLabelGuiObject extends GuiObject {
         this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.scene.registerBeforeRender(() => {
-            this.text.text = 'Current tour: ' + this.gameplayState.currentTour;
+            this.text.text = 'Current tour: ' + gameplayState().tourState.currentTour;
         });
 
         return this.text;

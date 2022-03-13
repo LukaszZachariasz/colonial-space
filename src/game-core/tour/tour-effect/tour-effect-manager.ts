@@ -1,4 +1,5 @@
 import {Subject, forkJoin, map, switchMap, tap} from 'rxjs';
+import {gameplayState, gameState} from '../../../core/game-platform';
 import {TourEffect} from './tour-effect';
 
 type ExecuteEffectGroup = {current: TourEffect[], pending: TourEffect[][]};
@@ -6,14 +7,13 @@ type ExecuteEffectGroup = {current: TourEffect[], pending: TourEffect[][]};
 export class TourEffectManager {
     public completeTourEffects$ = new Subject<void>();
 
-    private tourEffects: TourEffect[] = [];
     private executeEffectGroup$ = new Subject<ExecuteEffectGroup>();
 
     constructor() {
         this.executeEffectGroup$.pipe(
             switchMap((executeEffectGroup: ExecuteEffectGroup) =>
                 forkJoin(executeEffectGroup.current.map((el: TourEffect) => el.execute())).pipe(
-                    tap(() => this.tourEffects = this.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
+                    tap(() => gameplayState().tourState.tourEffects = gameplayState().tourState.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
                     map(() => executeEffectGroup)
                 )
             ),
@@ -44,12 +44,12 @@ export class TourEffectManager {
     }
 
     public addTourEffect(effect: TourEffect): void {
-        this.tourEffects.push(effect);
-        this.tourEffects.sort(this.sortByPriority);
+        gameplayState().tourState.tourEffects.push(effect);
+        gameplayState().tourState.tourEffects.sort(this.sortByPriority);
     }
 
     public removeTourEffect(effect: TourEffect): void {
-        this.tourEffects = this.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
+        gameplayState().tourState.tourEffects = gameplayState().tourState.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
     }
 
     private sortByPriority(a: TourEffect, b: TourEffect): 1 | -1 | 0 {
@@ -64,7 +64,7 @@ export class TourEffectManager {
 
     private createGroupOfEffects(): TourEffect[][] {
         const groups: TourEffect[][] = [];
-        let copy = [...this.tourEffects];
+        let copy = [...gameplayState().tourState.tourEffects];
 
         while (copy.length) {
             const priority = copy[0].priority;

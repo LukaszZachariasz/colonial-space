@@ -37,7 +37,7 @@ export class CurrentThreatsScrollViewer extends GuiScrollViewer {
 
     private getCurrentThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart <= gameplayState().currentTour;
+            return el.tourStart <= gameplayState().tourState.currentTour;
         });
     }
 }

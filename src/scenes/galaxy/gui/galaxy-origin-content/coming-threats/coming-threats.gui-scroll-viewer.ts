@@ -28,7 +28,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
 
         this.scene.registerBeforeRender(() => {
             this.textBlock.text = 'Coming threats: \n' + this.getComingThreats().map((el: Threat) => {
-                if (gameplayState().currentTour < el.unknownUntilTour) {
+                if (gameplayState().tourState.currentTour < el.unknownUntilTour) {
                     return 'Unknown threat...';
                 }
                 return el.name + ' start tour ' + el.tourStart + ' until tour ' + el.tourEnd;
@@ -42,7 +42,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
 
     private getComingThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart > gameplayState().currentTour && el.visibleFromTour <= gameplayState().currentTour;
+            return el.tourStart > gameplayState().tourState.currentTour && el.visibleFromTour <= gameplayState().tourState.currentTour;
         });
     }
 }
