@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../../../gui-objects/gui-object';
-import {gamePlatform, gameplayState, gameState, sceneManager} from '../../../../core/game-platform';
+import {gameplayState, sceneManager} from '../../../../core/game-platform';
 
 export class BackToGalaxyButtonGuiObject extends GuiObject {
     public button: GUI.Button;

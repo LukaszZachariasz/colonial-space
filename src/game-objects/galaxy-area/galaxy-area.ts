@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
 import {Planet} from '../planet/planet';
-import {gamePlatform} from '../../core/game-platform';
+import {sceneManager} from '../../core/game-platform';
 import earcut from 'earcut';
 
 export class GalaxyArea implements GameObject {
@@ -33,7 +33,7 @@ export class GalaxyArea implements GameObject {
 
         this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
             if (this.planet) {
-                gamePlatform().engine.sceneManager.navigateToScene(this.planet.name);
+                sceneManager().navigateToScene(this.planet.name);
             }
         }));
     }

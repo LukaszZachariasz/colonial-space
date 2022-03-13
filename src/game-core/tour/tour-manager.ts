@@ -1,7 +1,7 @@
 import {Subject, tap} from 'rxjs';
-import {gameplayState} from '../../core/game-platform';
 import {TourEffect} from './tour-effect/tour-effect';
 import {TourEffectManager} from './tour-effect/tour-effect-manager';
+import {gameplayState} from '../../core/game-platform';
 
 export class TourManager {
     public startWaitingForTourEffects$ = new Subject<void>();

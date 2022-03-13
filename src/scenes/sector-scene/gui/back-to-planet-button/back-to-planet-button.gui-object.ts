@@ -3,7 +3,7 @@ import {GuiObject} from '../../../../gui-objects/gui-object';
 import {
     PlanetState
 } from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {gamePlatform} from '../../../../core/game-platform';
+import {sceneManager} from '../../../../core/game-platform';
 
 export class BackToPlanetButtonGuiObject extends GuiObject {
     public button: GUI.Button;
@@ -23,7 +23,7 @@ export class BackToPlanetButtonGuiObject extends GuiObject {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            gamePlatform().engine.sceneManager.navigateToScene(this.planetState.name);
+            sceneManager().navigateToScene(this.planetState.name);
         });
 
         return this.button;

@@ -1,7 +1,7 @@
-import {gamePlatform} from '../core/game-platform';
+import {guiManager} from '../core/game-platform';
 
 export abstract class SceneGui {
-    protected guiManager = gamePlatform().engine.guiManager;
+    protected guiManager = guiManager();
 
     public abstract render(): void;
 }

@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {gameplayState} from '../../core/game-platform';
 import {GuiContainer} from '../gui-container';
 import {WoodLabelGuiObject} from './wood-label/wood-label.gui-object';
+import {gameplayState} from '../../core/game-platform';
 
 export class ResourceGuiContainer extends GuiContainer {
     public container: GUI.Container;

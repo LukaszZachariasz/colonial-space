@@ -1,8 +1,8 @@
-import {gameplayState, gameState} from '../../../../core/game-platform';
 import {GalaxyAreaState} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
 import {PlanetState} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {Threat} from '../../threat';
 import {TourEffect} from '../../../tour/tour-effect/tour-effect';
+import {gameState, gameplayState} from '../../../../core/game-platform';
 
 export class HighTemperatureThreat extends Threat {
     public name = 'High temperature';

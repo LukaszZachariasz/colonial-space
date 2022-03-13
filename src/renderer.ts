@@ -1,5 +1,5 @@
 import 'babylonjs-loaders';
+import {Engine} from 'engine';
 import {gamePlatform} from './core/game-platform';
-import engine from 'engine';
 
-gamePlatform().startEngine(engine, document.getElementById('render-canvas') as HTMLCanvasElement);
+gamePlatform().startEngine(new Engine(), document.getElementById('render-canvas') as HTMLCanvasElement);

@@ -17,7 +17,7 @@ export class ScenarioLoader {
         gamePlatform().loadingManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
-            tap(() => gamePlatform().engine.sceneManager.navigateToScene(gameplayState().initGameSceneName))
+            tap(() => sceneManager().navigateToScene(gameplayState().initGameSceneName))
         ).subscribe();
     }
 }

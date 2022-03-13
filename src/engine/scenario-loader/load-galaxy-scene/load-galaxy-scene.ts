@@ -7,7 +7,7 @@ import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-gala
 import {LoadPlanetScene} from './load-planet-scene/load-planet-scene';
 import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
 import {PlanetState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {gamePlatform} from '../../../core/game-platform';
+import {sceneManager} from '../../../core/game-platform';
 
 export class LoadGalaxyScene {
     public loadPlanetScene: LoadPlanetScene = new LoadPlanetScene();
@@ -48,6 +48,6 @@ export class LoadGalaxyScene {
             builder.withGalaxyArea(galaxyAreaBuilder.build());
         });
 
-        gamePlatform().engine.sceneManager.addScene(builder.build());
+        sceneManager().addScene(builder.build());
     }
 }

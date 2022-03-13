@@ -35,6 +35,3 @@ export class Engine {
         });
     }
 }
-
-const instance = new Engine();
-export default instance;

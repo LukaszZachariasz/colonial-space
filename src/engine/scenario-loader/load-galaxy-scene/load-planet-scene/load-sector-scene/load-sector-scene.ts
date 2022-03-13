@@ -5,7 +5,7 @@ import {SectorSceneBuilder} from '../../../../../scenes/sector-scene/sector-scen
 import {
     SectorState
 } from '../../../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/sector-state/sector-state';
-import {gamePlatform} from '../../../../../core/game-platform';
+import {sceneManager} from '../../../../../core/game-platform';
 
 export class LoadSectorScene {
     public loadSectorScene(sectorState: SectorState, planetState: PlanetState): void {
@@ -17,6 +17,6 @@ export class LoadSectorScene {
             .withLights()
             .withGui(planetState);
 
-        gamePlatform().engine.sceneManager.addScene(builder.build());
+        sceneManager().addScene(builder.build());
     }
 }

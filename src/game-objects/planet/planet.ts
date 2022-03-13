@@ -3,7 +3,7 @@ import {GameObject} from '../game-object';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {gamePlatform} from '../../core/game-platform';
+import {sceneManager} from '../../core/game-platform';
 
 export class Planet implements GameObject {
     public name: string;
@@ -28,7 +28,7 @@ export class Planet implements GameObject {
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
                 if (this.state) {
-                    gamePlatform().engine.sceneManager.navigateToScene(this.state.sectors[0].name);
+                    sceneManager().navigateToScene(this.state.sectors[0].name);
                 }
             })
         );

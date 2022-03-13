@@ -1,11 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import {SceneGui} from './scene-gui';
-import {gamePlatform} from '../core/game-platform';
-import engine from 'engine';
+import {gameEngine, gamePlatform} from '../core/game-platform';
 
 export abstract class Scene<T extends BABYLON.Camera = BABYLON.Camera, Q extends SceneGui = SceneGui> {
     public name: string;
-    public scene: BABYLON.Scene = new BABYLON.Scene(engine.engine);
+    public scene: BABYLON.Scene = new BABYLON.Scene(gameEngine().engine);
     public camera: T;
     public gui: Q;
 

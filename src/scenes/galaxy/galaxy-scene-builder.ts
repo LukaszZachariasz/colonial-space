@@ -6,7 +6,7 @@ import {GalaxyState} from '../../engine/game-state/gameplay-state/galaxy-state/g
 import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
 import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
-import engine from 'engine';
+import {gameEngine} from '../../core/game-platform';
 
 export class GalaxySceneBuilder {
     public galaxyScene: GalaxyScene;
@@ -36,7 +36,7 @@ export class GalaxySceneBuilder {
         this.galaxyScene.camera.wheelDeltaPercentage = 0.01;
         this.galaxyScene.camera.panningSensibility = 0;
 
-        this.galaxyScene.camera.attachControl(engine.canvas, true);
+        this.galaxyScene.camera.attachControl(gameEngine().canvas, true);
         return this;
     }
 

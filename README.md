@@ -5,6 +5,7 @@
 ## Development
 
 1. npm install
-2. npm run renderer:start
-3. Wait for complete renderer script
-4. npm run main:start
+2. npm run prepare
+3. npm run renderer:start
+4. Wait for complete renderer script
+5. npm run main:start

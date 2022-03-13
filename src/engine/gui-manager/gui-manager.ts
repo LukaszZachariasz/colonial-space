@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../gui-objects/gui-object';
-import {gamePlatform} from '../../core/game-platform';
+import {sceneManager} from '../../core/game-platform';
 
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
@@ -10,7 +10,7 @@ export class GuiManager {
             this.advancedDynamicTexture.dispose();
         }
 
-        const currentScene = gamePlatform().engine.sceneManager.currentScene;
+        const currentScene = sceneManager().currentScene;
 
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('loadingGUI', true, currentScene.scene);
         currentScene.gui.render();

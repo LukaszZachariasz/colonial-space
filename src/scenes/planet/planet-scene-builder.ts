@@ -3,7 +3,7 @@ import {Planet} from '../../game-objects/planet/planet';
 import {PlanetScene} from './planet.scene';
 import {PlanetSceneGui} from './gui/planet.scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
-import engine from 'engine';
+import {gameEngine} from '../../core/game-platform';
 
 export class PlanetSceneBuilder {
     public planetScene: PlanetScene;
@@ -27,7 +27,7 @@ export class PlanetSceneBuilder {
         this.planetScene.camera.wheelDeltaPercentage = 0.01;
         this.planetScene.camera.panningSensibility = 0;
 
-        this.planetScene.camera.attachControl(engine.canvas, true);
+        this.planetScene.camera.attachControl(gameEngine().canvas, true);
         return this;
     }
 

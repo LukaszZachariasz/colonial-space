@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {gamePlatform} from '../../../core/game-platform';
+import {gameSettings} from '../../../core/game-platform';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public boundary = 50;
@@ -9,7 +9,7 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public maxTop = 50;
     public maxBottom = -50;
 
-    public movingSpeed = gamePlatform().engine.settings.mouseSettings.scrollingScreenSpeed;
+    public movingSpeed = gameSettings().mouseSettings.scrollingScreenSpeed;
 
     private shouldMoveTop = false;
     private shouldMoveRight = false;

@@ -1,4 +1,4 @@
-import engine from 'engine';
+import {gameEngine} from '../../game-platform';
 
 export class FpsCounter {
     private div: HTMLDivElement;
@@ -6,8 +6,8 @@ export class FpsCounter {
     public start(): void {
         this.createDivElement();
 
-        engine.engine.runRenderLoop(() => {
-            this.div.innerHTML = engine.engine.getFps().toFixed() + ' fps';
+        gameEngine().engine.runRenderLoop(() => {
+            this.div.innerHTML = gameEngine().engine.getFps().toFixed() + ' fps';
         });
     }
 
