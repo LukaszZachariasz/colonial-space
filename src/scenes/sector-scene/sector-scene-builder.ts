@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from '../../engine/camera/from-above-camera/from-above-camera';
 import {
     PlanetState
-} from '../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {SectorScene} from './sector.scene';
 import {SectorSceneGui} from './gui/sector.scene-gui';
 

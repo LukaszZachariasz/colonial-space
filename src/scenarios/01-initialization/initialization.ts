@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {GameplayState} from '../../game-core/game-state/gameplay-state/gameplay-state';
+import {GameplayState} from '../../engine/game-state/gameplay-state/gameplay-state';
 import {HighTemperatureThreat} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-threat';
 
-export const initialization: GameplayState = {
+export const initialization: () => GameplayState = () => ({
     currentTour: 1,
     initGameSceneName: 'Alpha Galaxy',
     resourceState: {
@@ -67,4 +67,4 @@ export const initialization: GameplayState = {
             }
         ]
     }
-};
+});

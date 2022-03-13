@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
+import {gameplayState} from '../../core/game-platform';
 import {GuiContainer} from '../gui-container';
 import {WoodLabelGuiObject} from './wood-label/wood-label.gui-object';
-import gameState from '../../game-core/game-state/game-state';
 
 export class ResourceGuiContainer extends GuiContainer {
     public container: GUI.Container;
@@ -14,7 +14,7 @@ export class ResourceGuiContainer extends GuiContainer {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        this.container.addControl(new WoodLabelGuiObject(gameState.gameplayState.resourceState).render());
+        this.container.addControl(new WoodLabelGuiObject(gameplayState().resourceState).render());
 
         return this.container;
     }

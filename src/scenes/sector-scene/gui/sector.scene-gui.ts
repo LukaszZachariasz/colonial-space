@@ -2,7 +2,7 @@ import {BackToPlanetButtonGuiObject} from './back-to-planet-button/back-to-plane
 import {CurrentTourBarGuiContainer} from '../../../gui-objects/current-tour/current-tour-bar.gui-container';
 import {
     PlanetState
-} from '../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {ResourceGuiContainer} from '../../../gui-objects/resource/resource.gui-container';
 import {SceneGui} from '../../scene-gui';
 

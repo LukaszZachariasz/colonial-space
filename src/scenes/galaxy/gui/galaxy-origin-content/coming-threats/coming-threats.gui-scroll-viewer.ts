@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
-} from '../../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
+} from '../../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GuiScrollViewer} from '../../../../../gui-objects/gui-scroll-viewer';
 import {Threat} from '../../../../../game-core/threat/threat';
-import gameState from '../../../../../game-core/game-state/game-state';
+import {gameplayState} from '../../../../../core/game-platform';
 
 export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
     public textBlock: GUI.TextBlock;
@@ -28,7 +28,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
 
         this.scene.registerBeforeRender(() => {
             this.textBlock.text = 'Coming threats: \n' + this.getComingThreats().map((el: Threat) => {
-                if (gameState.gameplayState.currentTour < el.unknownUntilTour) {
+                if (gameplayState().currentTour < el.unknownUntilTour) {
                     return 'Unknown threat...';
                 }
                 return el.name + ' start tour ' + el.tourStart + ' until tour ' + el.tourEnd;
@@ -42,7 +42,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
 
     private getComingThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart > gameState.gameplayState.currentTour && el.visibleFromTour <= gameState.gameplayState.currentTour;
+            return el.tourStart > gameplayState().currentTour && el.visibleFromTour <= gameplayState().currentTour;
         });
     }
 }

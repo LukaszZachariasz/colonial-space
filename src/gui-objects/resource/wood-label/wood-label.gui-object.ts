@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../gui-object';
-import {ResourceState} from '../../../game-core/game-state/gameplay-state/resource-state/resource-state';
+import {ResourceState} from '../../../engine/game-state/gameplay-state/resource-state/resource-state';
 
 export class WoodLabelGuiObject extends GuiObject {
     public text: GUI.TextBlock;

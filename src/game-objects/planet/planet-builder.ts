@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Planet} from './planet';
 import {
     PlanetState
-} from '../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 
 export class PlanetBuilder {
     public planet: Planet = new Planet();

@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../../../gui-objects/gui-object';
 import {
     PlanetState
-} from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {gamePlatform} from '../../../../core/game-platform';
 
 export class BackToPlanetButtonGuiObject extends GuiObject {

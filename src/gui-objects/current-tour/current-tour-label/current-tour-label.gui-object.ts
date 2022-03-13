@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {GameplayState} from '../../../game-core/game-state/gameplay-state/gameplay-state';
+import {GameplayState} from '../../../engine/game-state/gameplay-state/gameplay-state';
 import {GuiObject} from '../../gui-object';
 
 export class CurrentTourLabelGuiObject extends GuiObject {

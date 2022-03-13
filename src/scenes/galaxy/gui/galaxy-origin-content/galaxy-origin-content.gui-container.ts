@@ -4,7 +4,7 @@ import {CurrentThreatsScrollViewer} from './current-threats/current-threats.scro
 import {GalaxyOriginNameTextGuiObject} from './galaxy-origin-name-text/galaxy-origin-name-text.gui-object';
 import {
     GalaxyOriginState
-} from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
+} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GuiContainer} from '../../../../gui-objects/gui-container';
 import {RightContentBoxGuiContainer} from '../../../../gui-objects/shared/right-content-box/right-content-box.gui-container';
 

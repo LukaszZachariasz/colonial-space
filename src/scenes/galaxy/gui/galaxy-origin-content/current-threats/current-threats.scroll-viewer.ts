@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
-} from '../../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
+} from '../../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GuiScrollViewer} from '../../../../../gui-objects/gui-scroll-viewer';
 import {Threat} from '../../../../../game-core/threat/threat';
-import gameState from '../../../../../game-core/game-state/game-state';
+import {gameplayState} from '../../../../../core/game-platform';
 
 export class CurrentThreatsScrollViewer extends GuiScrollViewer {
     public textBlock: GUI.TextBlock;
@@ -37,7 +37,7 @@ export class CurrentThreatsScrollViewer extends GuiScrollViewer {
 
     private getCurrentThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart <= gameState.gameplayState.currentTour;
+            return el.tourStart <= gameplayState().currentTour;
         });
     }
 }

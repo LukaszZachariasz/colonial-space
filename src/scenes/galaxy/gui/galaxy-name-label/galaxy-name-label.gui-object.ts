@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {GalaxyState} from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-state';
+import {GalaxyState} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GuiObject} from '../../../../gui-objects/gui-object';
 
 export class GalaxyNameLabelGuiObject extends GuiObject {

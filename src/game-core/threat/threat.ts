@@ -1,5 +1,5 @@
 import {Observable, Subscription, tap} from 'rxjs';
-import gameState from '../game-state/game-state';
+import {gameState, gameplayState} from '../../core/game-platform';
 
 export abstract class Threat {
     public name: string;
@@ -16,14 +16,14 @@ export abstract class Threat {
                           public tourEnd: number,
                           public visibleFromTour: number,
                           public unknownUntilTour: number) {
-        this.subscription = gameState.tourManager.completeTour$.pipe(
+        this.subscription = gameState().tourManager.completeTour$.pipe(
             tap(() => {
-                if (gameState.gameplayState.currentTour + 1 === this.tourStart) {
+                if (gameplayState().currentTour + 1 === this.tourStart) {
                     this.start();
                 }
             }),
             tap(() => {
-                if (gameState.gameplayState.currentTour + 1 === this.tourEnd) {
+                if (gameplayState().currentTour + 1 === this.tourEnd) {
                     this.stop();
                     this.remove();
                     this.subscription.unsubscribe();

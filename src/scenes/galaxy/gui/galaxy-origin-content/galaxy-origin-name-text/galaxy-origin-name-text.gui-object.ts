@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
-} from '../../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
+} from '../../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GuiObject} from '../../../../../gui-objects/gui-object';
 
 export class GalaxyOriginNameTextGuiObject extends GuiObject {
