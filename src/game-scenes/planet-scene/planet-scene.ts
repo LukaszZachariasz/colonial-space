@@ -1,13 +1,14 @@
 import * as BABYLON from 'babylonjs';
-import {GameSceneGui} from '../game-scene-gui';
-import {GameSceneLoading} from '../game-scene-loading';
+import {GameScene} from '../game-scene';
 import {Planet} from '../../game-objects/planet/planet';
+import {PlanetSceneGui} from './gui/planet-scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
-export class PlanetScene extends GameSceneLoading {
-    public name: string;
-    public camera: BABYLON.ArcRotateCamera;
+export class PlanetScene extends GameScene<BABYLON.ArcRotateCamera, PlanetSceneGui> {
     public skybox: SpaceSkybox;
     public planet: Planet;
-    public gui: GameSceneGui;
+
+    constructor() {
+        super(true);
+    }
 }
