@@ -15,7 +15,7 @@ export class ResourceBar implements GameObjectGui {
         this.resourceBarContainer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.resourceBarContainer.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        gamePlatform().engine.guiManager.create(new WoodLabel(gameState.gameplayState.resourceState), this.resourceBarContainer);
+        gamePlatform().engine.guiManager.render(new WoodLabel(gameState.gameplayState.resourceState), this.resourceBarContainer);
 
         return this.resourceBarContainer;
     }

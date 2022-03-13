@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {gamePlatform} from '../../core/game-platform';
 import {CurrentTourLabel} from './current-tour-label/current-tour-label';
 import {GameObjectGui} from '../game-object-gui';
 import {NextTourButton} from './next-tour-button/next-tour-button';
+import {gamePlatform} from '../../core/game-platform';
 import gameState from '../../game-core/game-state/game-state';
 
 export class CurrentTourBar implements GameObjectGui {
@@ -16,8 +16,8 @@ export class CurrentTourBar implements GameObjectGui {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        gamePlatform().engine.guiManager.create(new NextTourButton(gameState.tourManager), this.container);
-        gamePlatform().engine.guiManager.create(new CurrentTourLabel(gameState.gameplayState), this.container);
+        gamePlatform().engine.guiManager.render(new NextTourButton(gameState.tourManager), this.container);
+        gamePlatform().engine.guiManager.render(new CurrentTourLabel(gameState.gameplayState), this.container);
 
         return this.container;
     }

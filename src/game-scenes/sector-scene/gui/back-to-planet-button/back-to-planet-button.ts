@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {gamePlatform} from '../../../../core/game-platform';
+import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
 import {
     PlanetState
 } from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
+import {gamePlatform} from '../../../../core/game-platform';
 
 export class BackToPlanetButton implements GameObjectGui {
     public button: GUI.Button;

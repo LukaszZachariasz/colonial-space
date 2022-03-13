@@ -1,4 +1,3 @@
-import {gamePlatform} from '../../../../core/game-platform';
 import {LoadSectorScene} from './load-sector-scene/load-sector-scene';
 import {PlanetBuilder} from '../../../../game-objects/planet/planet-builder';
 import {PlanetSceneBuilder} from '../../../../game-scenes/planet-scene/planet-scene-builder';
@@ -6,7 +5,7 @@ import {PlanetState} from '../../../game-state/gameplay-state/galaxy-state/galax
 import {
     SectorState
 } from '../../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/sector-state/sector-state';
-import gameState from '../../../game-state/game-state';
+import {gamePlatform} from '../../../../core/game-platform';
 
 export class LoadPlanetScene {
     public loadSectorScene: LoadSectorScene = new LoadSectorScene();

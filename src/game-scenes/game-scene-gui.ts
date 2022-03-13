@@ -1,5 +1,7 @@
-import * as BABYLON from 'babylonjs';
+import {gamePlatform} from '../core/game-platform';
 
-export interface GameSceneGui {
-    create(scene: BABYLON.Scene): void;
+export abstract class GameSceneGui {
+    protected guiManager = gamePlatform().engine.guiManager;
+
+    public abstract render(): void;
 }

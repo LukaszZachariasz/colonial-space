@@ -1,4 +1,3 @@
-import * as BABYLON from 'babylonjs';
 import {BackToPlanetButton} from './back-to-planet-button/back-to-planet-button';
 import {CurrentTourBar} from '../../../game-objects-gui/current-tour-bar/current-tour-bar';
 import {GameSceneGui} from '../../game-scene-gui';
@@ -8,16 +7,14 @@ import {
 import {ResourceBar} from '../../../game-objects-gui/resource-bar/resource-bar';
 import {gamePlatform} from '../../../core/game-platform';
 
-export class SectorSceneGui implements GameSceneGui {
-
+export class SectorSceneGui extends GameSceneGui {
     constructor(private planetState: PlanetState) {
+        super();
     }
 
-    public create(scene: BABYLON.Scene): void {
-        gamePlatform().engine.guiManager.reset(scene);
-
-        gamePlatform().engine.guiManager.create(new BackToPlanetButton(this.planetState));
-        gamePlatform().engine.guiManager.create(new CurrentTourBar());
-        gamePlatform().engine.guiManager.create(new ResourceBar());
+    public render(): void {
+        gamePlatform().engine.guiManager.render(new BackToPlanetButton(this.planetState));
+        gamePlatform().engine.guiManager.render(new CurrentTourBar());
+        gamePlatform().engine.guiManager.render(new ResourceBar());
     }
 }

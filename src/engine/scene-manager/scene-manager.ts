@@ -1,4 +1,5 @@
 import {GameScene} from '../../game-scenes/game-scene';
+import {gamePlatform} from '../../core/game-platform';
 
 export class SceneManager {
     public currentScene: GameScene;
@@ -25,7 +26,7 @@ export class SceneManager {
             this.currentScene.scene.detachControl();
         }
         this.currentScene = {...gameScene};
-        this.currentScene.gui.create(this.currentScene.scene);
+        gamePlatform().engine.guiManager.reset();
 
         this.currentScene.scene.attachControl();
     }

@@ -16,7 +16,7 @@ export class RightContentBox implements GameObjectGui, GameObjectGuiClosable {
         this.container.background = 'rgb(45,45,45)';
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        this.closeButton = gamePlatform().engine.guiManager.create(new CloseButton(), this.container);
+        this.closeButton = gamePlatform().engine.guiManager.render(new CloseButton(), this.container);
         this.closeButton.clicked$.pipe(
             take(1),
             tap(() => this.dispose())
