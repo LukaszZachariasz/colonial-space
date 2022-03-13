@@ -1,10 +1,14 @@
 import * as BABYLON from 'babylonjs';
+import {GuiManager} from './gui-manager/gui-manager';
+import {SceneManager} from './scene-manager/scene-manager';
 import {Settings} from './settings/settings';
-import sceneLoader from './scene-loader/scene-loader';
 
 export class Engine {
     public engine: BABYLON.Engine;
     public canvas: HTMLCanvasElement;
+
+    public sceneManager: SceneManager = new SceneManager();
+    public guiManager: GuiManager = new GuiManager();
     public settings: Settings = new Settings();
 
     public initialize(canvas: HTMLCanvasElement): void {
@@ -13,7 +17,7 @@ export class Engine {
         this.canvas = canvas;
 
         this.engine.runRenderLoop(() => {
-            sceneLoader.currentScene.scene.render();
+            this.sceneManager.currentScene.scene.render();
         });
 
         window.addEventListener('resize', () => {

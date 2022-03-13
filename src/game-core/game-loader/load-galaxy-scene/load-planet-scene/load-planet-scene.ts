@@ -1,3 +1,4 @@
+import {gamePlatform} from '../../../../core/game-platform';
 import {LoadSectorScene} from './load-sector-scene/load-sector-scene';
 import {PlanetBuilder} from '../../../../game-objects/planet/planet-builder';
 import {PlanetSceneBuilder} from '../../../../game-scenes/planet-scene/planet-scene-builder';
@@ -31,6 +32,6 @@ export class LoadPlanetScene {
             this.loadSectorScene.loadSectorScene(sector, planetState);
         });
 
-        gameState.gameScenes.push(builder.build());
+        gamePlatform().engine.sceneManager.addScene(builder.build());
     }
 }

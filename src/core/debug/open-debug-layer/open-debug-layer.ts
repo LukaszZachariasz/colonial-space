@@ -1,10 +1,10 @@
+import {gamePlatform} from '../../game-platform';
 import {ipcRenderer} from 'electron';
-import sceneLoader from '../../../engine/scene-loader/scene-loader';
 
 export class OpenDebugLayer {
   public start(): void {
     ipcRenderer.on('open-debug-layer', () => {
-      sceneLoader.currentScene.scene.debugLayer.show({
+      gamePlatform().engine.sceneManager.currentScene.scene.debugLayer.show({
         showInspector: true,
         overlay: true
       });

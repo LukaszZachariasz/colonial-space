@@ -25,6 +25,3 @@ export class GuiManager {
         return gameObjectGui;
     }
 }
-
-const instance = new GuiManager();
-export default instance;

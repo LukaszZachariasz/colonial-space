@@ -2,8 +2,8 @@ import * as GUI from 'babylonjs-gui';
 import {CloseButton} from '../close-button/close-button';
 import {GameObjectGui} from '../../game-object-gui';
 import {GameObjectGuiClosable} from '../../game-object-gui-closable';
+import {gamePlatform} from '../../../core/game-platform';
 import {take, tap} from 'rxjs';
-import guiManager from '../../../engine/gui-manager/gui-manager';
 
 export class RightContentBox implements GameObjectGui, GameObjectGuiClosable {
     public container: GUI.Container;
@@ -16,7 +16,7 @@ export class RightContentBox implements GameObjectGui, GameObjectGuiClosable {
         this.container.background = 'rgb(45,45,45)';
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        this.closeButton = guiManager.create(new CloseButton(), this.container);
+        this.closeButton = gamePlatform().engine.guiManager.create(new CloseButton(), this.container);
         this.closeButton.clicked$.pipe(
             take(1),
             tap(() => this.dispose())

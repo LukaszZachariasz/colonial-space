@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
 import {GameObjectGui} from '../game-object-gui';
 import {WoodLabel} from './wood-label/wood-label';
+import {gamePlatform} from '../../core/game-platform';
 import gameState from '../../game-core/game-state/game-state';
-import guiManager from '../../engine/gui-manager/gui-manager';
 
 export class ResourceBar implements GameObjectGui {
     public resourceBarContainer: GUI.Container;
@@ -15,7 +15,7 @@ export class ResourceBar implements GameObjectGui {
         this.resourceBarContainer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.resourceBarContainer.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        guiManager.create(new WoodLabel(gameState.gameplayState.resourceState), this.resourceBarContainer);
+        gamePlatform().engine.guiManager.create(new WoodLabel(gameState.gameplayState.resourceState), this.resourceBarContainer);
 
         return this.resourceBarContainer;
     }

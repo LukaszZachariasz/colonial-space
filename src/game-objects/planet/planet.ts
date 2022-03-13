@@ -1,11 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
-import {GameScene} from '../../game-scenes/game-scene';
 import {
     PlanetState
 } from '../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import gameState from '../../game-core/game-state/game-state';
-import sceneLoader from '../../engine/scene-loader/scene-loader';
+import {gamePlatform} from '../../core/game-platform';
 
 export class Planet implements GameObject {
     public name: string;
@@ -30,7 +28,7 @@ export class Planet implements GameObject {
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
                 if (this.state) {
-                    sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === this.state.sectors[0].name));
+                    gamePlatform().engine.sceneManager.navigateToScene(this.state.sectors[0].name);
                 }
             })
         );

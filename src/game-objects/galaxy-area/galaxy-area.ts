@@ -1,10 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
-import {GameScene} from '../../game-scenes/game-scene';
 import {Planet} from '../planet/planet';
+import {gamePlatform} from '../../core/game-platform';
 import earcut from 'earcut';
-import gameState from '../../game-core/game-state/game-state';
-import sceneLoader from '../../engine/scene-loader/scene-loader';
 
 export class GalaxyArea implements GameObject {
     public path: BABYLON.Path2;
@@ -35,7 +33,7 @@ export class GalaxyArea implements GameObject {
 
         this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
             if (this.planet) {
-                sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === this.planet.name));
+                gamePlatform().engine.sceneManager.navigateToScene(this.planet.name);
             }
         }));
     }

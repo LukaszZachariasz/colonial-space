@@ -1,11 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
-import {GameScene} from '../../../game-scene';
+import {gamePlatform} from '../../../../core/game-platform';
 import {
     PlanetState
 } from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import gameState from '../../../../game-core/game-state/game-state';
-import sceneLoader from '../../../../engine/scene-loader/scene-loader';
+import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
 
 export class BackToPlanetButton implements GameObjectGui {
     public button: GUI.Button;
@@ -24,7 +22,7 @@ export class BackToPlanetButton implements GameObjectGui {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === this.planetState.name));
+            gamePlatform().engine.sceneManager.navigateToScene(this.planetState.name);
         });
 
         return this.button;

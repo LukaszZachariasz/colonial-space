@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
 import {GameSceneGui} from '../../game-scene-gui';
 import {LoadingText} from './loading-text/loading-text';
-import guiManager from '../../../engine/gui-manager/gui-manager';
+import {gamePlatform} from '../../../core/game-platform';
 
 export class LoadingSceneGui implements GameSceneGui {
     public create(scene: BABYLON.Scene): void {
-        guiManager.reset(scene);
+        gamePlatform().engine.guiManager.reset(scene);
 
-        guiManager.create(new LoadingText());
+        gamePlatform().engine.guiManager.create(new LoadingText());
     }
 }

@@ -1,8 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
-import {GameScene} from '../../../game-scene';
+import {gamePlatform} from '../../../../core/game-platform';
 import gameState from '../../../../game-core/game-state/game-state';
-import sceneLoader from '../../../../engine/scene-loader/scene-loader';
 
 export class BackToGalaxyButton implements GameObjectGui {
     public button: GUI.Button;
@@ -18,7 +17,7 @@ export class BackToGalaxyButton implements GameObjectGui {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            sceneLoader.loadScene(gameState.gameScenes.find((el: GameScene) => el.name === gameState.gameplayState.galaxyState.name));
+            gamePlatform().engine.sceneManager.navigateToScene(gameState.gameplayState.galaxyState.name);
         });
 
         return this.button;
