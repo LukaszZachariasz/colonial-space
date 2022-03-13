@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../game-objects-gui/game-object-gui';
+import {GuiContainer} from '../../gui-objects/gui-container';
 import {gamePlatform} from '../../core/game-platform';
+import {GuiObject} from '../../gui-objects/gui-object';
 
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
@@ -10,15 +11,17 @@ export class GuiManager {
             this.advancedDynamicTexture.dispose();
         }
 
-        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('loadingGUI', true, gamePlatform().engine.sceneManager.currentScene.scene);
-        gamePlatform().engine.sceneManager.currentScene.gui.render();
+        const currentScene = gamePlatform().engine.sceneManager.currentScene;
+
+        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('loadingGUI', true, currentScene.scene);
+        currentScene.gui.render();
     }
 
-    public render<T extends GameObjectGui>(gameObjectGui: T, container?: GUI.Container): T {
+    public render<T extends GuiObject>(gameObjectGui: T, container?: GUI.Container): T {
         if (container) {
-            container.addControl(gameObjectGui.create(gamePlatform().engine.sceneManager.currentScene.scene));
+            container.addControl(gameObjectGui.render());
         } else {
-            this.advancedDynamicTexture.addControl(gameObjectGui.create(gamePlatform().engine.sceneManager.currentScene.scene));
+            this.advancedDynamicTexture.addControl(gameObjectGui.render());
         }
         return gameObjectGui;
     }

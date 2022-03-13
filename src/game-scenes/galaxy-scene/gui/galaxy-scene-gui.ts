@@ -1,8 +1,8 @@
-import {CurrentTourBar} from '../../../game-objects-gui/current-tour-bar/current-tour-bar';
+import {CurrentTourBar} from '../../../gui-objects/current-tour-bar/current-tour-bar';
 import {GalaxyNameLabel} from './galaxy-name-label/galaxy-name-label';
 import {GalaxyState} from '../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GameSceneGui} from '../../game-scene-gui';
-import {ResourceBar} from '../../../game-objects-gui/resource-bar/resource-bar';
+import {ResourceBar} from '../../../gui-objects/resource-bar/resource-bar';
 
 export class GalaxySceneGui extends GameSceneGui {
     constructor(private galaxyState: GalaxyState) {

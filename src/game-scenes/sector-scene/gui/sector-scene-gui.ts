@@ -1,11 +1,10 @@
 import {BackToPlanetButton} from './back-to-planet-button/back-to-planet-button';
-import {CurrentTourBar} from '../../../game-objects-gui/current-tour-bar/current-tour-bar';
+import {CurrentTourBar} from '../../../gui-objects/current-tour-bar/current-tour-bar';
 import {GameSceneGui} from '../../game-scene-gui';
 import {
     PlanetState
 } from '../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {ResourceBar} from '../../../game-objects-gui/resource-bar/resource-bar';
-import {gamePlatform} from '../../../core/game-platform';
+import {ResourceBar} from '../../../gui-objects/resource-bar/resource-bar';
 
 export class SectorSceneGui extends GameSceneGui {
     constructor(private planetState: PlanetState) {
@@ -13,8 +12,8 @@ export class SectorSceneGui extends GameSceneGui {
     }
 
     public render(): void {
-        gamePlatform().engine.guiManager.render(new BackToPlanetButton(this.planetState));
-        gamePlatform().engine.guiManager.render(new CurrentTourBar());
-        gamePlatform().engine.guiManager.render(new ResourceBar());
+        this.guiManager.render(new BackToPlanetButton(this.planetState));
+        this.guiManager.render(new CurrentTourBar());
+        this.guiManager.render(new ResourceBar());
     }
 }

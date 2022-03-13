@@ -1,14 +1,15 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../game-object-gui';
+import {GuiObject} from '../../gui-object';
 import {TourManager} from '../../../game-core/tour/tour-manager';
 
-export class NextTourButton implements GameObjectGui {
+export class NextTourButton extends GuiObject {
     public button: GUI.Button;
 
     constructor(private tourManager: TourManager) {
+        super();
     }
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         this.button = GUI.Button.CreateSimpleButton('nextTour', 'Next tour');
         this.button.width = '100px';
         this.button.height = '50px';

@@ -2,15 +2,16 @@ import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
 } from '../../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
-import {GameObjectGui} from '../../../../../game-objects-gui/game-object-gui';
+import {GuiObject} from '../../../../../gui-objects/gui-object';
 
-export class GalaxyOriginNameText implements GameObjectGui {
+export class GalaxyOriginNameText extends GuiObject {
     public text: GUI.TextBlock;
 
     constructor(private galaxyOriginState: GalaxyOriginState) {
+        super();
     }
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         this.text = new GUI.TextBlock('galaxyOriginName', this.galaxyOriginState.name);
         this.text.color = 'white';
         this.text.resizeToFit = true;

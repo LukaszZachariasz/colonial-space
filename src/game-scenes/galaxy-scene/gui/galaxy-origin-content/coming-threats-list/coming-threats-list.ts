@@ -3,18 +3,18 @@ import * as GUI from 'babylonjs-gui';
 import {
     GalaxyOriginState
 } from '../../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
-import {GameObjectGui} from '../../../../../game-objects-gui/game-object-gui';
+import {GuiScrollerView} from '../../../../../gui-objects/gui-scroller-view';
 import {Threat} from '../../../../../game-core/threat/threat';
 import gameState from '../../../../../game-core/game-state/game-state';
 
-export class ComingThreatsList implements GameObjectGui {
-    public scrollViewer: GUI.ScrollViewer;
+export class ComingThreatsList extends GuiScrollerView {
     public textBlock: GUI.TextBlock;
 
     constructor(private galaxyOriginState: GalaxyOriginState) {
+        super();
     }
 
-    public create(scene?: BABYLON.Scene): GUI.Control {
+    public render(): GUI.Control {
         this.scrollViewer = new GUI.ScrollViewer();
         this.scrollViewer.width = '100%';
         this.scrollViewer.height = '30%';
@@ -27,7 +27,7 @@ export class ComingThreatsList implements GameObjectGui {
         this.textBlock.resizeToFit = true;
         this.textBlock.color = 'white';
 
-        scene.registerBeforeRender(() => {
+        this.scene.registerBeforeRender(() => {
             this.textBlock.text = 'Coming threats: \n' + this.getComingThreats().map((el: Threat) => {
                 if (gameState.gameplayState.currentTour < el.unknownUntilTour) {
                     return 'Unknown threat...';

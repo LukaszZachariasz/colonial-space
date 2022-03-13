@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
+import {GuiObject} from '../../../../gui-objects/gui-object';
 
-export class LoadingText implements GameObjectGui {
+export class LoadingText extends GuiObject {
     public text: GUI.TextBlock;
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         this.text = new GUI.TextBlock('loading', 'Loading...');
         this.text.color = 'white';
 

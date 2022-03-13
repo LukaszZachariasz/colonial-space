@@ -1,17 +1,18 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
+import {GuiObject} from '../../../../gui-objects/gui-object';
 import {
     PlanetState
 } from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {gamePlatform} from '../../../../core/game-platform';
 
-export class BackToPlanetButton implements GameObjectGui {
+export class BackToPlanetButton extends GuiObject {
     public button: GUI.Button;
 
     constructor(private planetState: PlanetState) {
+        super();
     }
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         this.button = GUI.Button.CreateSimpleButton('planetView', 'Planet view');
         this.button.width = '100px';
         this.button.height = '50px';

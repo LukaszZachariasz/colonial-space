@@ -5,29 +5,31 @@ import {GalaxyOriginNameText} from './galaxy-origin-name-text/galaxy-origin-name
 import {
     GalaxyOriginState
 } from '../../../../game-core/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
-import {GameObjectGui} from '../../../../game-objects-gui/game-object-gui';
-import {RightContentBox} from '../../../../game-objects-gui/shared/right-content-box/right-content-box';
-import {gamePlatform} from '../../../../core/game-platform';
+import {GuiContainer} from '../../../../gui-objects/gui-container';
+import {RightContentBox} from '../../../../gui-objects/shared/right-content-box/right-content-box';
 
-export class GalaxyOriginContent implements GameObjectGui {
+export class GalaxyOriginContent extends GuiContainer {
     public rightContentBox: RightContentBox;
 
     private isCreated = false;
 
     constructor(private galaxyOriginState: GalaxyOriginState) {
+        super();
     }
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         if (this.isCreated) {
             return;
         }
 
-        this.rightContentBox = gamePlatform().engine.guiManager.render(new RightContentBox());
+        this.rightContentBox = new RightContentBox();
+        this.rightContentBox.render();
+
         this.rightContentBox.container.onDisposeObservable.addOnce(() => this.isCreated = false);
 
-        gamePlatform().engine.guiManager.render(new GalaxyOriginNameText(this.galaxyOriginState), this.rightContentBox.container);
-        gamePlatform().engine.guiManager.render(new CurrentThreatsList(this.galaxyOriginState), this.rightContentBox.container);
-        gamePlatform().engine.guiManager.render(new ComingThreatsList(this.galaxyOriginState), this.rightContentBox.container);
+        this.rightContentBox.container.addControl(new GalaxyOriginNameText(this.galaxyOriginState).render());
+        this.rightContentBox.container.addControl(new CurrentThreatsList(this.galaxyOriginState).render());
+        this.rightContentBox.container.addControl(new ComingThreatsList(this.galaxyOriginState).render());
 
         this.isCreated = true;
 

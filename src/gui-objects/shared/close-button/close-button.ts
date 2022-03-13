@@ -1,12 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {GameObjectGui} from '../../game-object-gui';
+import {GuiObject} from '../../gui-object';
 import {Subject} from 'rxjs';
 
-export class CloseButton implements GameObjectGui {
+export class CloseButton extends GuiObject {
     public closeButton: GUI.Button;
     public clicked$ = new Subject<void>();
 
-    public create(): GUI.Control {
+    public render(): GUI.Control {
         this.closeButton = GUI.Button.CreateSimpleButton('rightContentBoxCloseButton', 'X');
         this.closeButton.width = '50px';
         this.closeButton.height = '50px';
