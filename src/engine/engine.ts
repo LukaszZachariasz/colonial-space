@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {GameLoad} from './game-load/game-load';
 import {GameState} from './game-state/game-state';
 import {GuiManager} from './gui-manager/gui-manager';
 import {ScenarioLoader} from './scenario-loader/scenario-loader';
@@ -15,6 +16,7 @@ export class Engine {
 
     public gameState: GameState = new GameState();
 
+    public gameLoad: GameLoad = new GameLoad();
     public scenarioLoader: ScenarioLoader = new ScenarioLoader();
 
     public settings: Settings = new Settings();
@@ -24,7 +26,7 @@ export class Engine {
         this.engine = new BABYLON.Engine(canvas, true);
         this.canvas = canvas;
 
-        this.scenarioLoader.load(initialization);
+        this.scenarioLoader.load(this.gameLoad.load(initialization));
 
         this.engine.runRenderLoop(() => {
             this.sceneManager.currentScene.scene.render();

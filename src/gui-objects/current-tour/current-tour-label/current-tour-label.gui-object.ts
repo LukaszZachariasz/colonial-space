@@ -10,7 +10,7 @@ export class CurrentTourLabelGuiObject extends GuiObject {
     }
 
     public render(): GUI.Control {
-        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameplayState().tourState.currentTour);
+        this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameplayState().tour.currentTour);
         this.text.width = '150px';
         this.text.height = '16px';
         this.text.top = '-60px';
@@ -19,7 +19,7 @@ export class CurrentTourLabelGuiObject extends GuiObject {
         this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.scene.registerBeforeRender(() => {
-            this.text.text = 'Current tour: ' + gameplayState().tourState.currentTour;
+            this.text.text = 'Current tour: ' + gameplayState().tour.currentTour;
         });
 
         return this.text;

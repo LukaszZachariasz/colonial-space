@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-builder';
 import {GalaxyAreaState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
 import {GalaxySceneBuilder} from '../../../scenes/galaxy/galaxy-scene-builder';
@@ -24,7 +25,7 @@ export class LoadGalaxyScene {
             .withSkybox()
             .withLights();
 
-        galaxyState.galaxyAreaStates.forEach((galaxyAreaState: GalaxyAreaState) => {
+        galaxyState.galaxyAreas.forEach((galaxyAreaState: GalaxyAreaState) => {
             const galaxyAreaBuilder: GalaxyAreaBuilder = new GalaxyAreaBuilder();
 
             galaxyAreaBuilder.startPath(galaxyAreaState.startPath[0], galaxyAreaState.startPath[1]);
@@ -32,13 +33,13 @@ export class LoadGalaxyScene {
                 galaxyAreaBuilder.pathArcTo(arc[0], arc[1], arc[2], arc[3]);
             });
 
-            galaxyAreaState.planetStates.forEach((planetState: PlanetState) => {
+            galaxyAreaState.planets.forEach((planetState: PlanetState) => {
                 galaxyAreaBuilder.withPlanet(
                     new PlanetBuilder()
                         .name(planetState.name)
                         .size(planetState.size)
                         .texture(planetState.textureUrl)
-                        .position(planetState.position)
+                        .position(new BABYLON.Vector3(planetState.position.x, planetState.position.y, planetState.position.z))
                         .build()
                 );
 

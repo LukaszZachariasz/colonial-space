@@ -1,25 +1,38 @@
-import * as BABYLON from 'babylonjs';
-import {GameplayState} from '../../engine/game-state/gameplay-state/gameplay-state';
-import {HighTemperatureThreat} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-threat';
+import {GameSnapshot} from '../../engine/game-load/game-snapshot/game-snapshot';
+import {HighTemperatureData} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-data';
+import {
+    ThreatState
+} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/threat-state/threat-state';
+import {ThreatTypeEnum} from '../../game-core/threat/threat-type.enum';
 
-export const initialization: () => GameplayState = () => ({
-    tourState: {
-        currentTour: 1,
-        tourEffects: []
+export const initialization: GameSnapshot = {
+    tour: {
+        currentTour: 1
     },
     initGameSceneName: 'Alpha Galaxy',
-    resourceState: {
+    resource: {
         wood: 500
     },
-    galaxyState: {
+    galaxy: {
         name: 'Alpha Galaxy',
-        galaxyOriginState: {
+        galaxyOrigin: {
             name: 'Origin 01',
             threats: [
-                new HighTemperatureThreat(4, 5, 7, 2, 3)
+                {
+                    name: 'High Temperature',
+                    description: 'Big eruption on sun',
+                    type: ThreatTypeEnum.HIGH_TEMPERATURE_GALAXY_THREAT,
+                    tourStart: 4,
+                    tourEnd: 7,
+                    visibleFromTour: 2,
+                    unknownUntilTour: 3,
+                    data: {
+                        value: 5
+                    }
+                } as ThreatState<HighTemperatureData>
             ]
         },
-        galaxyAreaStates: [
+        galaxyAreas: [
             {
                 name: 'Area 01',
                 startPath: [-30, -20],
@@ -30,13 +43,17 @@ export const initialization: () => GameplayState = () => ({
                     [-19, -3, -21, 0],
                     [-32, -18, -30, -20],
                 ],
-                planetStates: [
+                planets: [
                     {
                         name: 'Earth',
                         temperature: 22,
                         size: 2.5,
                         textureUrl: 'resources/planet/earth.jpg',
-                        position: new BABYLON.Vector3(-25, -1.5, -10),
+                        position: {
+                            x: -25,
+                            y: -1.5,
+                            z: -10
+                        },
                         sectors: [
                             {
                                 name: 'Sector 1'
@@ -55,7 +72,7 @@ export const initialization: () => GameplayState = () => ({
                     [0, -7, -7, -12],
                     [-8, -13, -10, -15],
                 ],
-                planetStates: []
+                planets: []
             },
             {
                 name: 'Area 03',
@@ -66,8 +83,8 @@ export const initialization: () => GameplayState = () => ({
                     [-8, -9, -4, -7],
                     [-2, 0, -7, 2]
                 ],
-                planetStates: []
+                planets: []
             }
         ]
     }
-});
+};

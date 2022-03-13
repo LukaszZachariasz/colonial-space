@@ -4,6 +4,5 @@ export class GalaxyAreaState {
     public name: string;
     public startPath: [number, number];
     public arcPathTo: [number, number, number, number][];
-
-    public planetStates: PlanetState[] = [];
+    public planets: PlanetState[] = [];
 }

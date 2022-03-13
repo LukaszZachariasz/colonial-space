@@ -16,7 +16,7 @@ export class BackToGalaxyButtonGuiObject extends GuiObject {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            sceneManager().navigateToScene(gameplayState().galaxyState.name);
+            sceneManager().navigateToScene(gameplayState().galaxy.name);
         });
 
         return this.button;

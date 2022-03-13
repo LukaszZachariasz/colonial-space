@@ -13,7 +13,7 @@ export class TourEffectManager {
         this.executeEffectGroup$.pipe(
             switchMap((executeEffectGroup: ExecuteEffectGroup) =>
                 forkJoin(executeEffectGroup.current.map((el: TourEffect) => el.execute())).pipe(
-                    tap(() => gameplayState().tourState.tourEffects = gameplayState().tourState.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
+                    tap(() => gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
                     map(() => executeEffectGroup)
                 )
             ),
@@ -44,12 +44,12 @@ export class TourEffectManager {
     }
 
     public addTourEffect(effect: TourEffect): void {
-        gameplayState().tourState.tourEffects.push(effect);
-        gameplayState().tourState.tourEffects.sort(this.sortByPriority);
+        gameplayState().tour.tourEffects.push(effect);
+        gameplayState().tour.tourEffects.sort(this.sortByPriority);
     }
 
     public removeTourEffect(effect: TourEffect): void {
-        gameplayState().tourState.tourEffects = gameplayState().tourState.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
+        gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
     }
 
     private sortByPriority(a: TourEffect, b: TourEffect): 1 | -1 | 0 {
@@ -64,7 +64,7 @@ export class TourEffectManager {
 
     private createGroupOfEffects(): TourEffect[][] {
         const groups: TourEffect[][] = [];
-        let copy = [...gameplayState().tourState.tourEffects];
+        let copy = [...gameplayState().tour.tourEffects];
 
         while (copy.length) {
             const priority = copy[0].priority;

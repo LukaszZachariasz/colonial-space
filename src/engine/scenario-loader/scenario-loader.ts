@@ -7,12 +7,11 @@ import {gamePlatform, gameState, gameplayState, sceneManager} from '../../core/g
 export class ScenarioLoader {
     public loadGalaxyScene: LoadGalaxyScene = new LoadGalaxyScene();
 
-    public load(scenario: () => GameplayState): void {
+    public load(scenario: GameplayState): void {
         sceneManager().setCurrentScene(new LoadingScene());
-        gameState().initialize();
-        gameState().gameplayState = scenario();
+        gameState().gameplayState = scenario;
 
-        this.loadGalaxyScene.loadGalaxyScene(gameplayState().galaxyState);
+        this.loadGalaxyScene.loadGalaxyScene(gameplayState().galaxy);
 
         gamePlatform().loadingManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),

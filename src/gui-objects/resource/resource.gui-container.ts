@@ -14,7 +14,7 @@ export class ResourceGuiContainer extends GuiContainer {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-        this.container.addControl(new WoodLabelGuiObject(gameplayState().resourceState).render());
+        this.container.addControl(new WoodLabelGuiObject(gameplayState().resource).render());
 
         return this.container;
     }

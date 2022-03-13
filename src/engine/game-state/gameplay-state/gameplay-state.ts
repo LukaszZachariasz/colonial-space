@@ -4,7 +4,7 @@ import {TourState} from './tour-state/tour-state';
 
 export class GameplayState {
     public initGameSceneName: string;
-    public tourState: TourState = new TourState();
-    public galaxyState: GalaxyState = new GalaxyState();
-    public resourceState: ResourceState = new ResourceState();
+    public galaxy: GalaxyState = new GalaxyState();
+    public tour: TourState = new TourState();
+    public resource: ResourceState = new ResourceState();
 }

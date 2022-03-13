@@ -3,7 +3,6 @@ import {GalaxyOriginState} from './galaxy-origin-state/galaxy-origin-state';
 
 export class GalaxyState {
     public name: string;
-    public galaxyOriginState: GalaxyOriginState;
-
-    public galaxyAreaStates: GalaxyAreaState[] = [];
+    public galaxyOrigin: GalaxyOriginState;
+    public galaxyAreas: GalaxyAreaState[] = [];
 }

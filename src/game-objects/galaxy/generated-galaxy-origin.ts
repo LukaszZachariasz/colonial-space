@@ -23,7 +23,7 @@ export class GeneratedGalaxyOrigin {
         const actionManager = new BABYLON.ActionManager(scene);
         originSphere.actionManager = actionManager;
         actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-            guiManager().render(new GalaxyOriginContentGuiContainer(gameplayState().galaxyState.galaxyOriginState));
+            guiManager().render(new GalaxyOriginContentGuiContainer(gameplayState().galaxy.galaxyOrigin));
         }));
 
         const sunEmitter = new BABYLON.SphereParticleEmitter();

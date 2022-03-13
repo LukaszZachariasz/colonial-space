@@ -1,9 +1,12 @@
 import {Observable, Subscription, tap} from 'rxjs';
+import {ThreatTypeEnum} from './threat-type.enum';
 import {gameState, gameplayState} from '../../core/game-platform';
 
-export abstract class Threat {
+export abstract class Threat<T = any> {
     public name: string;
     public description: string;
+    public type: ThreatTypeEnum;
+    public data: T;
 
     public abstract start(): void;
     public abstract stop(): void;
@@ -18,12 +21,12 @@ export abstract class Threat {
                           public unknownUntilTour: number) {
         this.subscription = gameState().tourManager.completeTour$.pipe(
             tap(() => {
-                if (gameplayState().tourState.currentTour + 1 === this.tourStart) {
+                if (gameplayState().tour.currentTour + 1 === this.tourStart) {
                     this.start();
                 }
             }),
             tap(() => {
-                if (gameplayState().tourState.currentTour + 1 === this.tourEnd) {
+                if (gameplayState().tour.currentTour + 1 === this.tourEnd) {
                     this.stop();
                     this.remove();
                     this.subscription.unsubscribe();
