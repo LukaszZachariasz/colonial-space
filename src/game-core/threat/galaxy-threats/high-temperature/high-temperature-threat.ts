@@ -9,6 +9,7 @@ import {
 } from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {Threat} from '../../threat';
 import {ThreatTypeEnum} from '../../threat-type.enum';
+import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';
 import {gameplayState} from '../../../../core/game-platform';
 
 @HasTourEffects()
@@ -26,9 +27,9 @@ export class HighTemperatureThreat extends Threat<HighTemperatureData> {
 
     @AddTourEffect({
         name: 'start',
-        priority: 9999,
-        fromTourFieldName: 'fromTour',
-        toTourFieldName: 'fromTour'
+        priority: TourEffectPriorityEnum.START_THREAT_PRIORITY,
+        fromTourFieldName: Threat.fromTourFieldName,
+        toTourFieldName: Threat.fromTourFieldName
     })
     public start(): void {
         gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {
@@ -40,9 +41,9 @@ export class HighTemperatureThreat extends Threat<HighTemperatureData> {
 
     @AddTourEffect({
         name: 'stop',
-        priority: 9999,
-        fromTourFieldName: 'toTour',
-        toTourFieldName: 'toTour'
+        priority: TourEffectPriorityEnum.STOP_THREAT_PRIORITY,
+        fromTourFieldName: Threat.toTourFieldName,
+        toTourFieldName: Threat.toTourFieldName
     })
     public stop(): void {
         gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {

@@ -1,8 +1,12 @@
 import {AddTourEffect} from '../tour/tour-effect/add-tour-effect';
 import {ThreatTypeEnum} from './threat-type.enum';
+import {TourEffectPriorityEnum} from '../tour/tour-effect/tour-effect-priority.enum';
 import {gameplayState} from '../../core/game-platform';
 
 export abstract class Threat<T = {}> {
+    public static fromTourFieldName = 'fromTour';
+    public static toTourFieldName = 'toTour';
+
     public name: string;
     public type: ThreatTypeEnum;
 
@@ -19,9 +23,9 @@ export abstract class Threat<T = {}> {
 
     @AddTourEffect({
         name: 'remove',
-        priority: 9999,
-        fromTourFieldName: 'toTour',
-        toTourFieldName: 'toTour'
+        priority: TourEffectPriorityEnum.REMOVE_THREAT_PRIORITY,
+        fromTourFieldName: Threat.toTourFieldName,
+        toTourFieldName: Threat.toTourFieldName
     })
     public remove(): void {
         gameplayState().galaxy.galaxyOrigin.threats = gameplayState().galaxy.galaxyOrigin.threats.filter((el: Threat) => el !== this);
