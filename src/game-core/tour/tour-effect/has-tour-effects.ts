@@ -4,11 +4,11 @@ import {gameState} from '../../../core/game-platform';
 
 export const TOUR_EFFECT_METADATA_KEY = 'Tour Effect: ';
 
-export function HasTourEffects(): any {
+export function HasTourEffects(): (constructor: any) => any {
     return function (constructor: any): any {
         const original = constructor;
 
-        const f: any = function (...args: any[]) {
+        const overrideConstructor: any = function (...args: any[]) {
             const instance = new original(...args);
 
             let metadataKeys = Reflect.getMetadataKeys(instance);
@@ -29,7 +29,7 @@ export function HasTourEffects(): any {
             return instance;
         };
 
-        f.prototype = original.prototype;
-        return f;
+        overrideConstructor.prototype = original.prototype;
+        return overrideConstructor;
     };
 }
