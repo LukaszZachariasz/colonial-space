@@ -6,10 +6,10 @@ import {
 import {ThreatTypeEnum} from '../../game-core/threat/threat-type.enum';
 
 export const initialization: GameSnapshot = {
+    route: 'Alpha Galaxy',
     tour: {
         currentTour: 1
     },
-    initGameSceneName: 'Alpha Galaxy',
     resource: {
         wood: 500
     },

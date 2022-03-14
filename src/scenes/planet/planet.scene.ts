@@ -5,6 +5,7 @@ import {Scene} from '../scene';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class PlanetScene extends Scene<BABYLON.ArcRotateCamera, PlanetSceneGui> {
+    public name: string;
     public skybox: SpaceSkybox;
     public planet: Planet;
 

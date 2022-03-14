@@ -1,19 +1,24 @@
 import * as BABYLON from 'babylonjs';
-import {GalaxyAreaBuilder} from '../../../game-objects/galaxy-area/galaxy-area-builder';
-import {GalaxyAreaState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
-import {GalaxySceneBuilder} from '../../../scenes/galaxy/galaxy-scene-builder';
-import {GalaxyState} from '../../game-state/gameplay-state/galaxy-state/galaxy-state';
-import {GeneratedGalaxyDust} from '../../../game-objects/galaxy/generated-galaxy-dust';
-import {GeneratedGalaxyOrigin} from '../../../game-objects/galaxy/generated-galaxy-origin';
-import {LoadPlanetScene} from './load-planet-scene/load-planet-scene';
-import {PlanetBuilder} from '../../../game-objects/planet/planet-builder';
-import {PlanetState} from '../../game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
-import {sceneManager} from '../../../core/game-platform';
+import {GalaxyAreaBuilder} from '../../game-objects/galaxy-area/galaxy-area-builder';
+import {GalaxyAreaState} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
+import {GalaxySceneBuilder} from './galaxy-scene-builder';
+import {GalaxyState} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-state';
+import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
+import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
+import {PlanetBuilder} from '../../game-objects/planet/planet-builder';
+import {PlanetSceneCreator} from '../planet/planet-scene-creator';
+import {
+    PlanetState
+} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+import {SceneCreator} from '../scene-creator';
+import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
-export class LoadGalaxyScene {
-    public loadPlanetScene: LoadPlanetScene = new LoadPlanetScene();
+export class GalaxySceneCreator extends SceneCreator<GalaxyState> {
+    private planetSceneCreator: PlanetSceneCreator = new PlanetSceneCreator();
 
-    public loadGalaxyScene(galaxyState: GalaxyState): void {
+    public create(galaxyState: GalaxyState, parentRoute: SceneRoute): void {
+        this.createRoute(galaxyState.name, parentRoute);
+
         const builder: GalaxySceneBuilder = new GalaxySceneBuilder();
 
         builder
@@ -42,13 +47,14 @@ export class LoadGalaxyScene {
                         .position(new BABYLON.Vector3(planetState.position.x, planetState.position.y, planetState.position.z))
                         .build()
                 );
+                galaxyAreaBuilder.withSceneRoute(new SceneRoute(planetState.name, this.route));
 
-                this.loadPlanetScene.loadPlanetScene(planetState);
+                this.planetSceneCreator.create(planetState, this.route);
             });
 
             builder.withGalaxyArea(galaxyAreaBuilder.build());
         });
 
-        sceneManager().addScene(builder.build());
+        this.addScene(builder.build());
     }
 }

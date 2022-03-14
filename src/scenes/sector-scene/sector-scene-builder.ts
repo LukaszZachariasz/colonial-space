@@ -1,8 +1,5 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from '../../engine/camera/from-above-camera/from-above-camera';
-import {
-    PlanetState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {SectorScene} from './sector.scene';
 import {SectorSceneGui} from './gui/sector.scene-gui';
 
@@ -36,8 +33,8 @@ export class SectorSceneBuilder {
         return this;
     }
 
-    public withGui(planetState: PlanetState): SectorSceneBuilder {
-        this.sectorScene.gui = new SectorSceneGui(planetState);
+    public withGui(): SectorSceneBuilder {
+        this.sectorScene.gui = new SectorSceneGui();
         return this;
     }
 

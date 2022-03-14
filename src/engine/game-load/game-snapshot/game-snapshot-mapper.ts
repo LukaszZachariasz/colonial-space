@@ -13,7 +13,7 @@ export class GameSnapshotMapper {
     
     public map(snapshot: GameSnapshot): GameplayState {
         return {
-            initGameSceneName: snapshot.initGameSceneName,
+            route: snapshot.route,
             tour: {
                 currentTour: snapshot.tour.currentTour,
                 tourEffects: gameplayState().tour.tourEffects // In order to persist tour effects we need to rewrite this, but no worries about old state - initialize is called before.

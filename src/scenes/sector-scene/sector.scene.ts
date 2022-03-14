@@ -4,6 +4,7 @@ import {Scene} from '../scene';
 import {SectorSceneGui} from './gui/sector.scene-gui';
 
 export class SectorScene extends Scene<FromAboveCamera, SectorSceneGui> {
+    public name: string;
     public ground: BABYLON.Mesh;
 
     constructor() {

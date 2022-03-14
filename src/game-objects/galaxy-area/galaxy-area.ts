@@ -1,12 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
 import {Planet} from '../planet/planet';
+import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {sceneManager} from '../../core/game-platform';
 import earcut from 'earcut';
 
 export class GalaxyArea implements GameObject {
     public path: BABYLON.Path2;
     public polygon: BABYLON.Mesh;
+
+    public route: SceneRoute;
 
     public planet: Planet;
     public actionManager: BABYLON.ActionManager;
@@ -31,10 +34,10 @@ export class GalaxyArea implements GameObject {
             this.polygon.visibility = 0.1;
         }));
 
-        this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-            if (this.planet) {
-                sceneManager().navigateToScene(this.planet.name);
-            }
-        }));
+        if (this.route) {
+            this.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+                sceneManager().navigateToScene(this.route.route);
+            }));
+        }
     }
 }

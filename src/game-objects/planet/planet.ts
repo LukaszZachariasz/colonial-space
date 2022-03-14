@@ -3,6 +3,7 @@ import {GameObject} from '../game-object';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {sceneManager} from '../../core/game-platform';
 
 export class Planet implements GameObject {
@@ -10,6 +11,8 @@ export class Planet implements GameObject {
     public position: BABYLON.Vector3 = new BABYLON.Vector3(0, 0, 0);
     public size = 1;
     public diffuseTexture = '';
+
+    public route: SceneRoute;
 
     public state: PlanetState;
 
@@ -23,18 +26,22 @@ export class Planet implements GameObject {
         this.material.diffuseTexture = new BABYLON.Texture(this.diffuseTexture, scene);
         this.sphere.material = this.material;
 
-        const actionManager = new BABYLON.ActionManager(scene);
-        this.sphere.actionManager = actionManager;
-        actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-                if (this.state) {
-                    sceneManager().navigateToScene(this.state.sectors[0].name);
-                }
-            })
-        );
+        if (this.route) {
+            this.routeOnClick(scene);
+        }
 
         scene.registerBeforeRender(() => {
             this.sphere.rotate(new BABYLON.Vector3(0, -1, -1), 0.001);
         });
+    }
+
+    private routeOnClick(scene: BABYLON.Scene): void {
+        const actionManager = new BABYLON.ActionManager(scene);
+        this.sphere.actionManager = actionManager;
+        actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+                sceneManager().navigateToScene(this.route.route);
+            })
+        );
     }
 }

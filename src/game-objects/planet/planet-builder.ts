@@ -3,6 +3,7 @@ import {Planet} from './planet';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
 export class PlanetBuilder {
     public planet: Planet = new Planet();
@@ -29,6 +30,11 @@ export class PlanetBuilder {
 
     public withState(planetState: PlanetState): PlanetBuilder {
         this.planet.state = planetState;
+        return this;
+    }
+
+    public withSceneRoute(sceneRoute: SceneRoute): PlanetBuilder {
+        this.planet.route = sceneRoute;
         return this;
     }
 

@@ -6,7 +6,8 @@ import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-
 import {Scene} from '../scene';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
-export class GalaxyScene extends Scene<BABYLON.FreeCamera | BABYLON.ArcRotateCamera, GalaxySceneGui> {
+export class GalaxyScene extends Scene<BABYLON.ArcRotateCamera, GalaxySceneGui> {
+    public name: string;
     public skybox: SpaceSkybox;
     public galaxyAreas: GalaxyArea[] = [];
     public generatedGalaxyOrigin: GeneratedGalaxyOrigin;

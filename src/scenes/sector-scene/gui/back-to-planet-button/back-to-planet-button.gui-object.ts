@@ -1,14 +1,11 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../../../gui-objects/gui-object';
-import {
-    PlanetState
-} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {sceneManager} from '../../../../core/game-platform';
 
 export class BackToPlanetButtonGuiObject extends GuiObject {
     public button: GUI.Button;
 
-    constructor(private planetState: PlanetState) {
+    constructor() {
         super();
     }
 
@@ -23,7 +20,7 @@ export class BackToPlanetButtonGuiObject extends GuiObject {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.button.onPointerUpObservable.add(() => {
-            sceneManager().navigateToScene(this.planetState.name);
+            sceneManager().navigateBack();
         });
 
         return this.button;
