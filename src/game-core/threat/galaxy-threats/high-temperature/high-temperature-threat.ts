@@ -1,51 +1,54 @@
-import {GalaxyAreaState} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
+import {AddTourEffect} from '../../../tour/tour-effect/add-tour-effect';
+import {
+    GalaxyAreaState
+} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
+import {HasTourEffects} from '../../../tour/tour-effect/has-tour-effects';
 import {HighTemperatureData} from './high-temperature-data';
-import {PlanetState} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+import {
+    PlanetState
+} from '../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {Threat} from '../../threat';
 import {ThreatTypeEnum} from '../../threat-type.enum';
-import {TourEffect} from '../../../tour/tour-effect/tour-effect';
-import {gameState, gameplayState} from '../../../../core/game-platform';
+import {gameplayState} from '../../../../core/game-platform';
 
+@HasTourEffects()
 export class HighTemperatureThreat extends Threat<HighTemperatureData> {
     public type = ThreatTypeEnum.HIGH_TEMPERATURE_GALAXY_THREAT;
 
-    constructor(public value: number,
-                public tourStart: number,
-                public tourEnd: number,
+    constructor(public name: string,
+                public data: HighTemperatureData,
+                public fromTour: number,
+                public toTour: number,
                 public visibleFromTour: number,
                 public unknownUntilTour: number) {
-        super(tourStart, tourEnd, visibleFromTour, unknownUntilTour);
+        super(data, fromTour, toTour, visibleFromTour, unknownUntilTour);
     }
 
+    @AddTourEffect({
+        name: 'start',
+        priority: 9999,
+        fromTourFieldName: 'fromTour',
+        toTourFieldName: 'fromTour'
+    })
     public start(): void {
-        gameState().tourManager.addTourEffect(
-            new TourEffect(9999, true, () => {
-                gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {
-                    area.planets.forEach((planet: PlanetState) => {
-                        planet.temperature += this.value;
-                    });
-                });
-            })
-        );
+        gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {
+            area.planets.forEach((planet: PlanetState) => {
+                planet.temperature += this.data.value;
+            });
+        });
     }
 
+    @AddTourEffect({
+        name: 'stop',
+        priority: 9999,
+        fromTourFieldName: 'toTour',
+        toTourFieldName: 'toTour'
+    })
     public stop(): void {
-        gameState().tourManager.addTourEffect(
-            new TourEffect(9999, true, () => {
-                gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {
-                    area.planets.forEach((planet: PlanetState) => {
-                        planet.temperature -= this.value;
-                    });
-                });
-            })
-        );
-    }
-
-    public remove(): void {
-/*        gameState().tourManager.addTourEffect(
-            new TourEffect(10000, true, () => {
-                gameplayState().galaxyState.galaxyOriginState.threats = gameplayState().galaxyState.galaxyOriginState.threats.filter((el: Threat) => el !== this);
-            })
-        );*/
+        gameplayState().galaxy.galaxyAreas.forEach((area: GalaxyAreaState) => {
+            area.planets.forEach((planet: PlanetState) => {
+                planet.temperature -= this.data.value;
+            });
+        });
     }
 }

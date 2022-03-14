@@ -1,8 +1,7 @@
 import {ThreatTypeEnum} from '../../../../../../game-core/threat/threat-type.enum';
 
-export class ThreatSnapshot<T> {
+export class ThreatSnapshot<T = {}> {
     public name: string;
-    public description: string;
     public type: ThreatTypeEnum;
 
     public tourStart: number;

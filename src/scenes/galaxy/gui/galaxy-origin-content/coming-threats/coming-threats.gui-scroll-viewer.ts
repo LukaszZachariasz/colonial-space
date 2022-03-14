@@ -31,7 +31,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
                 if (gameplayState().tour.currentTour < el.unknownUntilTour) {
                     return 'Unknown threat...';
                 }
-                return el.name + ' start tour ' + el.tourStart + ' until tour ' + el.tourEnd;
+                return el.name + ' start tour ' + el.fromTour + ' until tour ' + el.toTour;
             }).join('\n');
         });
 
@@ -42,7 +42,7 @@ export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {
 
     private getComingThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart > gameplayState().tour.currentTour && el.visibleFromTour <= gameplayState().tour.currentTour;
+            return el.fromTour > gameplayState().tour.currentTour && el.visibleFromTour <= gameplayState().tour.currentTour;
         });
     }
 }

@@ -1,37 +1,29 @@
-import {Observable, Subscription, tap} from 'rxjs';
+import {AddTourEffect} from '../tour/tour-effect/add-tour-effect';
 import {ThreatTypeEnum} from './threat-type.enum';
-import {gameState, gameplayState} from '../../core/game-platform';
+import {gameplayState} from '../../core/game-platform';
 
-export abstract class Threat<T = any> {
+export abstract class Threat<T = {}> {
     public name: string;
-    public description: string;
     public type: ThreatTypeEnum;
-    public data: T;
 
     public abstract start(): void;
+
     public abstract stop(): void;
-    public abstract remove(): void;
 
-    private remove$: Observable<void>;
-    private subscription: Subscription;
-
-    protected constructor(public tourStart: number,
-                          public tourEnd: number,
+    protected constructor(public data: T,
+                          public fromTour: number,
+                          public toTour: number,
                           public visibleFromTour: number,
                           public unknownUntilTour: number) {
-        this.subscription = gameState().tourManager.completeTour$.pipe(
-            tap(() => {
-                if (gameplayState().tour.currentTour + 1 === this.tourStart) {
-                    this.start();
-                }
-            }),
-            tap(() => {
-                if (gameplayState().tour.currentTour + 1 === this.tourEnd) {
-                    this.stop();
-                    this.remove();
-                    this.subscription.unsubscribe();
-                }
-            }),
-        ).subscribe();
+    }
+
+    @AddTourEffect({
+        name: 'remove',
+        priority: 9999,
+        fromTourFieldName: 'toTour',
+        toTourFieldName: 'toTour'
+    })
+    public remove(): void {
+        gameplayState().galaxy.galaxyOrigin.threats = gameplayState().galaxy.galaxyOrigin.threats.filter((el: Threat) => el !== this);
     }
 }

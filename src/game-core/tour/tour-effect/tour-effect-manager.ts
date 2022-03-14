@@ -13,7 +13,6 @@ export class TourEffectManager {
         this.executeEffectGroup$.pipe(
             switchMap((executeEffectGroup: ExecuteEffectGroup) =>
                 forkJoin(executeEffectGroup.current.map((el: TourEffect) => el.execute())).pipe(
-                    tap(() => gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.filter((el: TourEffect) => !el.onlyOnce)),
                     map(() => executeEffectGroup)
                 )
             ),
@@ -26,7 +25,12 @@ export class TourEffectManager {
                 } else {
                     this.completeTourEffects$.next();
                 }
-            })
+            }),
+            tap(() => gameplayState().tour.tourEffects
+                .filter((el: TourEffect) => el.toTour)
+                .filter((el: TourEffect) => gameplayState().tour.currentTour >= el.toTour)
+                .forEach((el: TourEffect) => this.removeTourEffect(el))
+            )
         ).subscribe();
     }
 
@@ -45,11 +49,28 @@ export class TourEffectManager {
 
     public addTourEffect(effect: TourEffect): void {
         gameplayState().tour.tourEffects.push(effect);
-        gameplayState().tour.tourEffects.sort(this.sortByPriority);
+        gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.sort(this.sortByPriority);
     }
 
     public removeTourEffect(effect: TourEffect): void {
         gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
+    }
+
+    private createGroupOfEffects(): TourEffect[][] {
+        const groups: TourEffect[][] = [];
+        let effectsInThisTour = this.copyEffectsExecutedInThisTour();
+
+        while (effectsInThisTour.length) {
+            const priority = effectsInThisTour[0].priority;
+            groups.push(effectsInThisTour.filter((el: TourEffect) => el.priority === priority));
+            effectsInThisTour = effectsInThisTour.filter((el: TourEffect) => el.priority !== priority);
+        }
+        return groups;
+    }
+
+    private copyEffectsExecutedInThisTour(): TourEffect[] {
+        return [...gameplayState().tour.tourEffects]
+            .filter((el: TourEffect) => el.fromTour === undefined || el.fromTour <= gameplayState().tour.currentTour + 1 && (el.toTour === undefined || el.toTour > gameplayState().tour.currentTour));
     }
 
     private sortByPriority(a: TourEffect, b: TourEffect): 1 | -1 | 0 {
@@ -60,17 +81,5 @@ export class TourEffectManager {
             return -1;
         }
         return 0;
-    }
-
-    private createGroupOfEffects(): TourEffect[][] {
-        const groups: TourEffect[][] = [];
-        let copy = [...gameplayState().tour.tourEffects];
-
-        while (copy.length) {
-            const priority = copy[0].priority;
-            groups.push(copy.filter((el: TourEffect) => el.priority === priority));
-            copy = copy.filter((el: TourEffect) => el.priority !== priority);
-        }
-        return groups;
     }
 }

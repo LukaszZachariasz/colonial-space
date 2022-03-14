@@ -27,7 +27,7 @@ export class CurrentThreatsScrollViewer extends GuiScrollViewer {
         this.textBlock.color = 'white';
 
         this.scene.registerBeforeRender(() => {
-            this.textBlock.text = 'Current threats: \n' + this.getCurrentThreats().map((el: Threat) => el.name + ' until tour ' + el.tourEnd).join('\n');
+            this.textBlock.text = 'Current threats: \n' + this.getCurrentThreats().map((el: Threat) => el.name + ' until tour ' + el.toTour).join('\n');
         });
 
         this.scrollViewer.addControl(this.textBlock);
@@ -37,7 +37,7 @@ export class CurrentThreatsScrollViewer extends GuiScrollViewer {
 
     private getCurrentThreats(): Threat[] {
         return this.galaxyOriginState.threats.filter((el: Threat) => {
-            return el.tourStart <= gameplayState().tour.currentTour;
+            return el.fromTour <= gameplayState().tour.currentTour;
         });
     }
 }

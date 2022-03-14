@@ -1,3 +1,4 @@
+import {HighTemperatureData} from './galaxy-threats/high-temperature/high-temperature-data';
 import {HighTemperatureThreat} from './galaxy-threats/high-temperature/high-temperature-threat';
 import {Threat} from './threat';
 import {
@@ -6,10 +7,17 @@ import {
 import {ThreatTypeEnum} from './threat-type.enum';
 
 export class ThreatFactory {
-    public create(threatType: ThreatTypeEnum, threatSnapshot: ThreatSnapshot<any>): Threat<any> {
+    public create(threatType: ThreatTypeEnum, threatSnapshot: ThreatSnapshot): Threat {
         switch (threatType) {
             case ThreatTypeEnum.HIGH_TEMPERATURE_GALAXY_THREAT:
-                return new HighTemperatureThreat(threatSnapshot.data.value, threatSnapshot.tourStart, threatSnapshot.tourEnd, threatSnapshot.visibleFromTour, threatSnapshot.unknownUntilTour);
+                return new HighTemperatureThreat(
+                    threatSnapshot.name,
+                    threatSnapshot.data as HighTemperatureData,
+                    threatSnapshot.tourStart,
+                    threatSnapshot.tourEnd,
+                    threatSnapshot.visibleFromTour,
+                    threatSnapshot.unknownUntilTour
+                );
         }
     }
 }

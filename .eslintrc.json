@@ -13,6 +13,7 @@
   ],
   "ignorePatterns": ["webpack.config.js"],
   "rules": {
+    "@typescript-eslint/ban-types": 0,
     "@typescript-eslint/no-var-requires": 0,
     "prefer-const": [
       "error"
