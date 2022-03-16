@@ -18,7 +18,10 @@ export class PlanetSceneBuilder {
     }
 
     public withArcCamera(planetSize: number): PlanetSceneBuilder {
-        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 1, planetSize + 3, new BABYLON.Vector3(-(planetSize / 2), 0, 0), this.planetScene.scene);
+        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 1, planetSize + 5, new BABYLON.Vector3(0, 0, 0), this.planetScene.scene);
+
+        this.planetScene.camera.target = new BABYLON.Vector3(-(planetSize / 2), 0, 0);
+        this.planetScene.camera.position = new BABYLON.Vector3(-(planetSize / 2), 0, 0);
 
         this.planetScene.camera.lowerRadiusLimit = planetSize + 1;
         this.planetScene.camera.upperRadiusLimit = planetSize + 10;
