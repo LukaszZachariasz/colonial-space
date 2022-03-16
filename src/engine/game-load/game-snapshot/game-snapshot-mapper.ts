@@ -31,6 +31,7 @@ export class GameSnapshotMapper {
                         planetCurrentPosition: orbit.planetCurrentPosition,
                         planet: {
                             name: orbit.planet.name,
+                            type: orbit.planet.type,
                             belongsToPlayer: orbit.planet.belongsToPlayer,
                             size: orbit.planet.size,
                             temperature: orbit.planet.temperature,

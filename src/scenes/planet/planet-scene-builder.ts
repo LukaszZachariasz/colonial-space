@@ -17,12 +17,11 @@ export class PlanetSceneBuilder {
         return this;
     }
 
-    public withArcCamera(): PlanetSceneBuilder {
-        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 0.8, 5, new BABYLON.Vector3(0, 0, 0), this.planetScene.scene);
-        this.planetScene.camera.setTarget(BABYLON.Vector3.Zero());
+    public withArcCamera(planetSize: number): PlanetSceneBuilder {
+        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 1, planetSize + 3, new BABYLON.Vector3(-(planetSize / 2), 0, 0), this.planetScene.scene);
 
-        this.planetScene.camera.lowerRadiusLimit = 2.5;
-        this.planetScene.camera.upperRadiusLimit = 10;
+        this.planetScene.camera.lowerRadiusLimit = planetSize + 1;
+        this.planetScene.camera.upperRadiusLimit = planetSize + 10;
         this.planetScene.camera.pinchDeltaPercentage = 0.01;
         this.planetScene.camera.wheelDeltaPercentage = 0.01;
         this.planetScene.camera.panningSensibility = 0;

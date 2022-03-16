@@ -6,24 +6,22 @@ import {
 import {SceneCreator} from '../scene-creator';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
-
-
 export class PlanetSceneCreator extends SceneCreator<PlanetState> {
     public create(planetState: PlanetState, parentRoute: SceneRoute): void {
         this.createRoute(planetState.name, parentRoute);
 
         const builder: PlanetSceneBuilder = new PlanetSceneBuilder();
 
-        builder.withArcCamera()
+        builder.withArcCamera(planetState.size)
             .name(planetState.name)
             .withSkyBox()
             .withPlanet(
                 new PlanetBuilder()
                     .name(planetState.name)
+                    .type(planetState.type)
                     .size(planetState.size)
                     .texture(planetState.textureUrl)
                     .withState(planetState)
-                    .withSceneRoute(new SceneRoute(planetState.sectors[0].name, this.route))
                     .build()
             )
             .withLights()

@@ -34,6 +34,7 @@ export class GalaxySceneCreator extends SceneCreator<GalaxyState> {
 
             const planetBuilder = new PlanetBuilder()
                 .name(orbitState.planet.name)
+                .type(orbitState.planet.type)
                 .size(orbitState.planet.size)
                 .texture(orbitState.planet.textureUrl);
 

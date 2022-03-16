@@ -3,17 +3,17 @@ import {GameObject} from '../game-object';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
+import {PlanetTypeEnum} from './planet-type.enum';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {sceneManager} from '../../core/game-platform';
 
 export class Planet implements GameObject {
     public name: string;
+    public type: PlanetTypeEnum;
     public position: BABYLON.Vector3 = new BABYLON.Vector3(0, 0, 0);
     public size = 1;
     public diffuseTexture = '';
-
     public route: SceneRoute;
-
     public state: PlanetState;
 
     private sphere: BABYLON.Mesh;

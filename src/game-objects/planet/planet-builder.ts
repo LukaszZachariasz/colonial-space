@@ -1,8 +1,8 @@
-import * as BABYLON from 'babylonjs';
 import {Planet} from './planet';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
+import {PlanetTypeEnum} from './planet-type.enum';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
 export class PlanetBuilder {
@@ -13,6 +13,11 @@ export class PlanetBuilder {
         return this;
     }
 
+    public type(type: PlanetTypeEnum): PlanetBuilder{
+        this.planet.type = type;
+        return this;
+    }
+
     public size(size: number): PlanetBuilder {
         this.planet.size = size;
         return this;
@@ -20,11 +25,6 @@ export class PlanetBuilder {
 
     public texture(resourceSrc: string): PlanetBuilder {
         this.planet.diffuseTexture = resourceSrc;
-        return this;
-    }
-
-    public position(position: BABYLON.Vector3): PlanetBuilder {
-        this.planet.position = position;
         return this;
     }
 
