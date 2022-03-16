@@ -5,14 +5,10 @@ import {
 } from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
 import {SceneCreator} from '../scene-creator';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
-import {SectorSceneCreator} from '../sector-scene/sector-scene-creator';
-import {
-    SectorState
-} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/sector-state/sector-state';
+
+
 
 export class PlanetSceneCreator extends SceneCreator<PlanetState> {
-    private sectorSceneCreator: SectorSceneCreator = new SectorSceneCreator();
-
     public create(planetState: PlanetState, parentRoute: SceneRoute): void {
         this.createRoute(planetState.name, parentRoute);
 
@@ -32,10 +28,6 @@ export class PlanetSceneCreator extends SceneCreator<PlanetState> {
             )
             .withLights()
             .withGui();
-
-        planetState.sectors.forEach((sectorState: SectorState) => {
-            this.sectorSceneCreator.create(sectorState, this.route);
-        });
 
         this.addScene(builder.build());
     }

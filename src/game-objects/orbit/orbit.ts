@@ -17,7 +17,7 @@ export class Orbit implements GameObject {
         }
         const baseCircle = BABYLON.Mesh.CreateLines('qbezier2', mySinus, scene);
         baseCircle.color = this.color;
-        baseCircle.alpha = Math.random() % 0.15 + 0.25;
+        baseCircle.alpha = 0.5;
 
         const x = this.radius * Math.cos(this.planetCurrentPosition * 360);
         const z = this.radius * Math.sin(this.planetCurrentPosition * 360);
