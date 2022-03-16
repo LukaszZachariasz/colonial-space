@@ -1,15 +1,11 @@
-import * as BABYLON from 'babylonjs';
-import {GalaxyAreaBuilder} from '../../game-objects/galaxy-area/galaxy-area-builder';
-import {GalaxyAreaState} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/galaxy-area-state';
 import {GalaxySceneBuilder} from './galaxy-scene-builder';
 import {GalaxyState} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
 import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
+import {OrbitBuilder} from '../../game-objects/orbit/orbit-builder';
+import {OrbitState} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/orbit-state';
 import {PlanetBuilder} from '../../game-objects/planet/planet-builder';
 import {PlanetSceneCreator} from '../planet/planet-scene-creator';
-import {
-    PlanetState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
 import {SceneCreator} from '../scene-creator';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
@@ -30,29 +26,25 @@ export class GalaxySceneCreator extends SceneCreator<GalaxyState> {
             .withSkybox()
             .withLights();
 
-        galaxyState.galaxyAreas.forEach((galaxyAreaState: GalaxyAreaState) => {
-            const galaxyAreaBuilder: GalaxyAreaBuilder = new GalaxyAreaBuilder();
 
-            galaxyAreaBuilder.startPath(galaxyAreaState.startPath[0], galaxyAreaState.startPath[1]);
-            galaxyAreaState.arcPathTo.forEach((arc: [number, number, number, number]) => {
-                galaxyAreaBuilder.pathArcTo(arc[0], arc[1], arc[2], arc[3]);
-            });
+        galaxyState.orbits.forEach((orbitState: OrbitState) => {
+            const orbitBuilder: OrbitBuilder =
+                new OrbitBuilder()
+                    .radius(orbitState.distance);
 
-            galaxyAreaState.planets.forEach((planetState: PlanetState) => {
-                galaxyAreaBuilder.withPlanet(
-                    new PlanetBuilder()
-                        .name(planetState.name)
-                        .size(planetState.size)
-                        .texture(planetState.textureUrl)
-                        .position(new BABYLON.Vector3(planetState.position.x, planetState.position.y, planetState.position.z))
-                        .build()
-                );
-                galaxyAreaBuilder.withSceneRoute(new SceneRoute(planetState.name, this.route));
+            const planetBuilder = new PlanetBuilder()
+                .name(orbitState.planet.name)
+                .size(orbitState.planet.size)
+                .texture(orbitState.planet.textureUrl);
 
-                this.planetSceneCreator.create(planetState, this.route);
-            });
+            if (orbitState.planet.belongsToPlayer) {
+                planetBuilder.withSceneRoute(new SceneRoute(orbitState.planet.name, this.route));
+            }
 
-            builder.withGalaxyArea(galaxyAreaBuilder.build());
+            orbitBuilder.withPlanet(planetBuilder.build(), orbitState.planetCurrentPosition);
+
+            this.planetSceneCreator.create(orbitState.planet, this.route);
+            builder.addOrbit(orbitBuilder.build());
         });
 
         this.addScene(builder.build());

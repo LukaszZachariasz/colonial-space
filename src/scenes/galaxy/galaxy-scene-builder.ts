@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
-import {GalaxyArea} from '../../game-objects/galaxy-area/galaxy-area';
 import {GalaxyScene} from './galaxy.scene';
 import {GalaxySceneGui} from './gui/galaxy.scene-gui';
 import {GalaxyState} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-state';
 import {GeneratedGalaxyDust} from '../../game-objects/galaxy/generated-galaxy-dust';
 import {GeneratedGalaxyOrigin} from '../../game-objects/galaxy/generated-galaxy-origin';
+import {Orbit} from '../../game-objects/orbit/orbit';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 import {gameEngine} from '../../core/game-platform';
 
@@ -40,9 +40,9 @@ export class GalaxySceneBuilder {
         return this;
     }
 
-    public withGalaxyArea(galaxyArea: GalaxyArea): GalaxySceneBuilder {
-        this.galaxyScene.galaxyAreas.push(galaxyArea);
-        galaxyArea.create(this.galaxyScene.scene);
+    public addOrbit(orbit: Orbit): GalaxySceneBuilder {
+        this.galaxyScene.orbits.push(orbit);
+        orbit.create(this.galaxyScene.scene);
         return this;
     }
 

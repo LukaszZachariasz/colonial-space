@@ -1,9 +1,7 @@
-import * as BABYLON from 'babylonjs';
-import {GalaxyAreaSnapshot} from './galaxy-snapshot/galaxy-area-snapshot/galaxy-area-snapshot';
 import {GameSnapshot} from './game-snapshot';
 import {GameplayState} from '../../game-state/gameplay-state/gameplay-state';
-import {PlanetSnapshot} from './galaxy-snapshot/galaxy-area-snapshot/planet-snapshot/planet-snapshot';
-import {SectorSnapshot} from './galaxy-snapshot/galaxy-area-snapshot/planet-snapshot/sector-snapshot/sector-snapshot';
+import {OrbitSnapshot} from './galaxy-snapshot/orbit-snapshot/orbit-snapshot';
+import {SectorSnapshot} from './galaxy-snapshot/orbit-snapshot/planet-snapshot/sector-snapshot/sector-snapshot';
 import {ThreatFactory} from '../../../game-core/threat/threat.factory';
 import {ThreatSnapshot} from './galaxy-snapshot/galaxy-origin-snapshot/threat-snapshot/threat-snapshot';
 import {gameplayState} from '../../../core/game-platform';
@@ -27,25 +25,22 @@ export class GameSnapshotMapper {
                         return this.threatFactory.create(threat.type, threat);
                     })
                 },
-                galaxyAreas: snapshot.galaxy.galaxyAreas.map((galaxyArea: GalaxyAreaSnapshot) => {
+                orbits: snapshot.galaxy.orbits.map((orbit: OrbitSnapshot) => {
                     return {
-                        name: galaxyArea.name,
-                        arcPathTo: galaxyArea.arcPathTo,
-                        startPath: galaxyArea.startPath,
-                        planets: galaxyArea.planets.map((planet: PlanetSnapshot) => {
-                            return {
-                                name: planet.name,
-                                position: new BABYLON.Vector3(planet.position.x, planet.position.y, planet.position.z),
-                                size: planet.size,
-                                temperature: planet.temperature,
-                                textureUrl: planet.textureUrl,
-                                sectors: planet.sectors.map((sector: SectorSnapshot) => {
-                                    return {
-                                        name: sector.name
-                                    };
-                                })
-                            };
-                        })
+                        distance: orbit.distance,
+                        planetCurrentPosition: orbit.planetCurrentPosition,
+                        planet: {
+                            name: orbit.planet.name,
+                            belongsToPlayer: orbit.planet.belongsToPlayer,
+                            size: orbit.planet.size,
+                            temperature: orbit.planet.temperature,
+                            textureUrl: orbit.planet.textureUrl,
+                            sectors: orbit.planet.sectors.map((sector: SectorSnapshot) => {
+                                return {
+                                    name: sector.name
+                                };
+                            })
+                        }
                     };
                 })
             }

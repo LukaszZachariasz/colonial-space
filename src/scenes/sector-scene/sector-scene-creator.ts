@@ -3,7 +3,7 @@ import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {SectorSceneBuilder} from './sector-scene-builder';
 import {
     SectorState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/sector-state/sector-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/sector-state/sector-state';
 
 export class SectorSceneCreator extends SceneCreator<SectorState> {
     public create(sectorState: SectorState, parentRoute: SceneRoute): void {

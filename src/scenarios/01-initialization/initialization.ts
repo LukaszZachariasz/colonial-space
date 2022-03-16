@@ -32,58 +32,54 @@ export const initialization: GameSnapshot = {
                 } as ThreatState<HighTemperatureData>
             ]
         },
-        galaxyAreas: [
+        orbits: [
             {
-                name: 'Area 01',
-                startPath: [-30, -20],
-                arcPathTo: [
-                    [-28, -19.5, -21.5, -21],
-                    [-16.5, -16, -18, -14],
-                    [-15, -1, -19, -5],
-                    [-19, -3, -21, 0],
-                    [-32, -18, -30, -20],
-                ],
-                planets: [
-                    {
-                        name: 'Earth',
-                        temperature: 22,
-                        size: 2.5,
-                        textureUrl: 'resources/planet/earth.jpg',
-                        position: {
-                            x: -25,
-                            y: -1.5,
-                            z: -10
-                        },
-                        sectors: [
-                            {
-                                name: 'Sector 1'
-                            }
-                        ]
-                    }
-                ]
+                distance: 20,
+                planetCurrentPosition: 0.9,
+                planet: {
+                    name: 'Earth',
+                    belongsToPlayer: true,
+                    temperature: 22,
+                    size: 2.5,
+                    textureUrl: 'resources/planet/earth.jpg',
+                    sectors: [
+                        {
+                            name: 'Sector 1'
+                        }
+                    ]
+                }
             },
             {
-                name: 'Area 02',
-                startPath: [-10, -15],
-                arcPathTo: [
-                    [-7, -19.5, -5, -20],
-                    [0, -19, 5, -20],
-                    [9, -17, 8, -10],
-                    [0, -7, -7, -12],
-                    [-8, -13, -10, -15],
-                ],
-                planets: []
+                distance: 30,
+                planetCurrentPosition: 0.1,
+                planet: {
+                    name: 'Mars',
+                    belongsToPlayer: false,
+                    temperature: 10,
+                    size: 1,
+                    textureUrl: 'resources/planet/mars.jpg',
+                    sectors: [
+                        {
+                            name: 'Sector 1'
+                        }
+                    ]
+                }
             },
             {
-                name: 'Area 03',
-                startPath: [-15, 0],
-                arcPathTo: [
-                    [-18, -5, -17, -12],
-                    [-14, -13, -10, -12],
-                    [-8, -9, -4, -7],
-                    [-2, 0, -7, 2]
-                ],
-                planets: []
+                distance: 45,
+                planetCurrentPosition: 0.5,
+                planet: {
+                    name: 'Jupiter',
+                    belongsToPlayer: false,
+                    temperature: -33,
+                    size: 7,
+                    textureUrl: 'resources/planet/jupiter.jpg',
+                    sectors: [
+                        {
+                            name: 'Sector 1'
+                        }
+                    ]
+                }
             }
         ]
     }

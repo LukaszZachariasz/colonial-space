@@ -2,13 +2,13 @@ import {PlanetBuilder} from '../../game-objects/planet/planet-builder';
 import {PlanetSceneBuilder} from './planet-scene-builder';
 import {
     PlanetState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
 import {SceneCreator} from '../scene-creator';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {SectorSceneCreator} from '../sector-scene/sector-scene-creator';
 import {
     SectorState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/sector-state/sector-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/sector-state/sector-state';
 
 export class PlanetSceneCreator extends SceneCreator<PlanetState> {
     private sectorSceneCreator: SectorSceneCreator = new SectorSceneCreator();

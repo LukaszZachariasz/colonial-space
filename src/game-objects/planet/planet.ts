@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
 import {
     PlanetState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-area-state/planet-state/planet-state';
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {sceneManager} from '../../core/game-platform';
 

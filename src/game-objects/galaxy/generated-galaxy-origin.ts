@@ -18,7 +18,6 @@ export class GeneratedGalaxyOrigin {
         originMat.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266);
         originSphere.material = originMat;
 
-        originSphere.renderingGroupId = 3;
 
         const actionManager = new BABYLON.ActionManager(scene);
         originSphere.actionManager = actionManager;
@@ -58,7 +57,6 @@ export class GeneratedGalaxyOrigin {
         surfaceParticles.updateSpeed = 0.005;
         surfaceParticles.isBillboardBased = false;
 
-        surfaceParticles.renderingGroupId = 3;
         surfaceParticles.start();
 
         flareParticles.preWarmStepOffset = 10;
@@ -87,7 +85,6 @@ export class GeneratedGalaxyOrigin {
         flareParticles.maxEmitPower = 0.01;
         flareParticles.isBillboardBased = true;
 
-        flareParticles.renderingGroupId = 2;
 
         flareParticles.start();
 
@@ -116,7 +113,6 @@ export class GeneratedGalaxyOrigin {
         glareParticles.minEmitPower = 0.0;
         glareParticles.maxEmitPower = 0.0;
         glareParticles.isBillboardBased = true;
-        glareParticles.renderingGroupId = 1;
 
         glareParticles.start();
     }

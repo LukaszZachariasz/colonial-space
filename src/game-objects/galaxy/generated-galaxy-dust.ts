@@ -34,7 +34,6 @@ export class GeneratedGalaxyDust {
         starsParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
         starsParticles.gravity = new BABYLON.Vector3(0, 0, 0);
 
-        starsParticles.renderingGroupId = 0;
 
         starsParticles.isBillboardBased = false;
 
