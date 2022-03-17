@@ -10,7 +10,7 @@ export class RightSectionGuiContainer extends GuiContainer {
     public edge: RightSectionEdgeGuiObject;
 
     public render(): GUI.Control {
-        this.container = new GUI.Container('leftSectionContainer');
+        this.container = new GUI.Container('rightSectionContainer');
         this.container.width = '30%';
         this.container.height = '70%';
         this.container.left = '-5%';

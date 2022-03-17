@@ -25,7 +25,7 @@ export class PlanetSceneCreator extends SceneCreator<PlanetState> {
                     .build()
             )
             .withLights()
-            .withGui();
+            .withGui(planetState);
 
         this.addScene(builder.build());
     }

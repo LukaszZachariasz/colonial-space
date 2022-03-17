@@ -2,6 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Planet} from '../../game-objects/planet/planet';
 import {PlanetScene} from './planet.scene';
 import {PlanetSceneGui} from './gui/planet.scene-gui';
+import {PlanetState} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class PlanetSceneBuilder {
@@ -41,8 +42,8 @@ export class PlanetSceneBuilder {
         return this;
     }
 
-    public withGui(): PlanetSceneBuilder {
-        this.planetScene.gui = new PlanetSceneGui();
+    public withGui(planetState: PlanetState): PlanetSceneBuilder {
+        this.planetScene.gui = new PlanetSceneGui(planetState);
         return this;
     }
 
