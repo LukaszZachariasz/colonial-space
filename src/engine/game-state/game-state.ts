@@ -1,5 +1,5 @@
 import {GameplayState} from './gameplay-state/gameplay-state';
-import {TourManager} from '../../game-core/tour/tour-manager';
+import {TourManager} from '../../game-logic/tour/tour-manager';
 
 export class GameState {
     public tourManager: TourManager;

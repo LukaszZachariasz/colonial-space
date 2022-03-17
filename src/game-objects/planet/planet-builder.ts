@@ -2,7 +2,7 @@ import {Planet} from './planet';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
-import {PlanetTypeEnum} from './planet-type.enum';
+import {PlanetTypeEnum} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-type.enum';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 
 export class PlanetBuilder {

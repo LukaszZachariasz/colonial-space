@@ -3,7 +3,7 @@ import {GameObject} from '../game-object';
 import {
     PlanetState
 } from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-state';
-import {PlanetTypeEnum} from './planet-type.enum';
+import {PlanetTypeEnum} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-type.enum';
 import {SceneRoute} from '../../engine/scene-manager/scene-route';
 import {sceneManager} from '../../core/game-platform';
 

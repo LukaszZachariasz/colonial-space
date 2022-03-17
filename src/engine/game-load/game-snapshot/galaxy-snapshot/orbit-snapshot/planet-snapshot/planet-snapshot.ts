@@ -1,4 +1,4 @@
-import {PlanetTypeEnum} from '../../../../../../game-objects/planet/planet-type.enum';
+import {PlanetTypeEnum} from '../../../../../game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-type.enum';
 import {SectorSnapshot} from './sector-snapshot/sector-snapshot';
 
 export class PlanetSnapshot {
@@ -8,5 +8,5 @@ export class PlanetSnapshot {
     public belongsToPlayer: boolean;
     public size: number;
     public textureUrl: string;
-    public sectors: SectorSnapshot[] = [];
+    public sectors: SectorSnapshot[][] = [];
 }

@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import {GameObject} from '../game-object';
 
-export class GeneratedGalaxyDust {
+export class GeneratedGalaxyDust implements GameObject {
 
     public create(scene: BABYLON.Scene): void {
         const starsEmitter = new BABYLON.SphereParticleEmitter();

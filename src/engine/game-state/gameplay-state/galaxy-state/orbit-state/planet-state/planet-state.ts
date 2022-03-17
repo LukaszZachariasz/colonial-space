@@ -1,4 +1,4 @@
-import {PlanetTypeEnum} from '../../../../../../game-objects/planet/planet-type.enum';
+import {PlanetTypeEnum} from './planet-type.enum';
 import {SectorState} from './sector-state/sector-state';
 
 export class PlanetState {
@@ -8,5 +8,5 @@ export class PlanetState {
     public temperature: number;
     public size: number;
     public textureUrl: string;
-    public sectors: SectorState[] = [];
+    public sectors: SectorState[][] = [];
 }

@@ -1,4 +1,4 @@
-import {ThreatTypeEnum} from '../../../../../../game-core/threat/threat-type.enum';
+import {ThreatTypeEnum} from '../../../../../../game-logic/threat/threat-type.enum';
 
 export class ThreatSnapshot<T = {}> {
     public name: string;

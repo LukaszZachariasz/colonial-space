@@ -3,7 +3,7 @@ import {
     GalaxyOriginState
 } from '../../../../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/galaxy-origin-state';
 import {GuiScrollViewer} from '../../../../../gui-objects/gui-scroll-viewer';
-import {Threat} from '../../../../../game-core/threat/threat';
+import {Threat} from '../../../../../game-logic/threat/threat';
 import {gameplayState} from '../../../../../core/game-platform';
 
 export class ComingThreatsGuiScrollViewer extends GuiScrollViewer {

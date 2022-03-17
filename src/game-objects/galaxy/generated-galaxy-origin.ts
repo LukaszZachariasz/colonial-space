@@ -1,8 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {GalaxyOriginContentGuiContainer} from '../../scenes/galaxy/gui/galaxy-origin-content/galaxy-origin-content.gui-container';
+import {GameObject} from '../game-object';
 import {gameplayState, guiManager} from '../../core/game-platform';
 
-export class GeneratedGalaxyOrigin {
+export class GeneratedGalaxyOrigin implements GameObject {
     public create(scene: BABYLON.Scene): void {
         const surfaceParticles = new BABYLON.ParticleSystem('surfaceParticles', 1600, scene);
         const flareParticles = new BABYLON.ParticleSystem('flareParticles', 20, scene);

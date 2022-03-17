@@ -2,7 +2,7 @@ import {GameSnapshot} from './game-snapshot';
 import {GameplayState} from '../../game-state/gameplay-state/gameplay-state';
 import {OrbitSnapshot} from './galaxy-snapshot/orbit-snapshot/orbit-snapshot';
 import {SectorSnapshot} from './galaxy-snapshot/orbit-snapshot/planet-snapshot/sector-snapshot/sector-snapshot';
-import {ThreatFactory} from '../../../game-core/threat/threat.factory';
+import {ThreatFactory} from '../../../game-logic/threat/threat.factory';
 import {ThreatSnapshot} from './galaxy-snapshot/galaxy-origin-snapshot/threat-snapshot/threat-snapshot';
 import {gameplayState} from '../../../core/game-platform';
 
@@ -36,10 +36,13 @@ export class GameSnapshotMapper {
                             size: orbit.planet.size,
                             temperature: orbit.planet.temperature,
                             textureUrl: orbit.planet.textureUrl,
-                            sectors: orbit.planet.sectors.map((sector: SectorSnapshot) => {
-                                return {
-                                    name: sector.name
-                                };
+                            sectors: orbit.planet.sectors.map((sectors: SectorSnapshot[]) => {
+                                return sectors.map((sector: SectorSnapshot) => {
+                                    return {
+                                        type: sector.type,
+                                        build: sector.build
+                                    };
+                                });
                             })
                         }
                     };

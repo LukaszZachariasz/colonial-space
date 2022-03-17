@@ -1,4 +1,4 @@
-import {Threat} from '../../../../../game-core/threat/threat';
+import {Threat} from '../../../../../game-logic/threat/threat';
 
 export class GalaxyOriginState {
     public name: string;

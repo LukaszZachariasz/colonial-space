@@ -1,9 +1,14 @@
 import {GameSnapshot} from '../../engine/game-load/game-snapshot/game-snapshot';
-import {HighTemperatureData} from '../../game-core/threat/galaxy-threats/high-temperature/high-temperature-data';
 import {
-    ThreatState
-} from '../../engine/game-state/gameplay-state/galaxy-state/galaxy-origin-state/threat-state/threat-state';
-import {ThreatTypeEnum} from '../../game-core/threat/threat-type.enum';
+    PlanetTypeEnum
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/planet-type.enum';
+import {
+    SectorBuildEnum
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/sector-state/sector-build.enum';
+import {
+    SectorTypeEnum
+} from '../../engine/game-state/gameplay-state/galaxy-state/orbit-state/planet-state/sector-state/sector-type.enum';
+import {ThreatTypeEnum} from '../../game-logic/threat/threat-type.enum';
 
 export const initialization: GameSnapshot = {
     route: 'Alpha Galaxy',
@@ -20,7 +25,6 @@ export const initialization: GameSnapshot = {
             threats: [
                 {
                     name: 'High Temperature',
-                    description: 'Big eruption on sun',
                     type: ThreatTypeEnum.HIGH_TEMPERATURE_GALAXY_THREAT,
                     tourStart: 4,
                     tourEnd: 7,
@@ -29,7 +33,7 @@ export const initialization: GameSnapshot = {
                     data: {
                         value: 5
                     }
-                } as ThreatState<HighTemperatureData>
+                }
             ]
         },
         orbits: [
@@ -38,14 +42,84 @@ export const initialization: GameSnapshot = {
                 planetCurrentPosition: 0.9,
                 planet: {
                     name: 'Earth',
+                    type: PlanetTypeEnum.DEVELOPMENTAL,
                     belongsToPlayer: true,
                     temperature: 22,
                     size: 2.5,
                     textureUrl: 'resources/planet/earth.jpg',
                     sectors: [
-                        {
-                            name: 'Sector 1'
-                        }
+                        [
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.INDUSTRIAL,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.WATER,
+                                build: SectorBuildEnum.EMPTY
+                            }
+                        ],
+                        [
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.INDUSTRIAL,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            }
+                        ],
+                        [
+                            {
+                                type: SectorTypeEnum.WATER,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.WATER,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.INDUSTRIAL,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            }
+                        ],
+                        [
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.SCIENCE,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.SCIENCE,
+                                build: SectorBuildEnum.EMPTY
+                            },
+                            {
+                                type: SectorTypeEnum.EMPTY,
+                                build: SectorBuildEnum.EMPTY
+                            }
+                        ],
                     ]
                 }
             },
@@ -54,15 +128,12 @@ export const initialization: GameSnapshot = {
                 planetCurrentPosition: 0.1,
                 planet: {
                     name: 'Mars',
+                    type: PlanetTypeEnum.DEVELOPMENTAL,
                     belongsToPlayer: false,
                     temperature: 10,
                     size: 1,
                     textureUrl: 'resources/planet/mars.jpg',
-                    sectors: [
-                        {
-                            name: 'Sector 1'
-                        }
-                    ]
+                    sectors: []
                 }
             },
             {
@@ -70,15 +141,12 @@ export const initialization: GameSnapshot = {
                 planetCurrentPosition: 0.5,
                 planet: {
                     name: 'Jupiter',
+                    type: PlanetTypeEnum.DEVELOPMENTAL,
                     belongsToPlayer: false,
                     temperature: -33,
                     size: 7,
                     textureUrl: 'resources/planet/jupiter.jpg',
-                    sectors: [
-                        {
-                            name: 'Sector 1'
-                        }
-                    ]
+                    sectors: []
                 }
             }
         ]
