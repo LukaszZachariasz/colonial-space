@@ -15,9 +15,6 @@ export const initialization: GameSnapshot = {
     tour: {
         currentTour: 1
     },
-    resource: {
-        wood: 500
-    },
     galaxy: {
         name: 'Alpha Galaxy',
         galaxyOrigin: {

@@ -16,7 +16,6 @@ export class GameSnapshotMapper {
                 currentTour: snapshot.tour.currentTour,
                 tourEffects: gameplayState().tour.tourEffects // In order to persist tour effects we need to rewrite this, but no worries about old state - initialize is called before.
             },
-            resource: snapshot.resource,
             galaxy: {
                 name: snapshot.galaxy.name,
                 galaxyOrigin: {

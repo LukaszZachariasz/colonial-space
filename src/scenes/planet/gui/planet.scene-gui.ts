@@ -16,9 +16,5 @@ export class PlanetSceneGui extends SceneGui {
         this.guiManager.render(new RightSectionGuiContainer());
 
         this.guiManager.render(new NavigateBackButtonGuiObject('Galaxy view'));
-/*        this.guiManager.render(new CurrentTourGuiContainer());
-        this.guiManager.render(new ResourceGuiContainer());*/
-
-        // this.guiManager.render(new SectorsGuiContainer());
     }
 }
