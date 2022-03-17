@@ -1,7 +1,6 @@
 import {Subject, tap} from 'rxjs';
 import {TourEffect} from './tour-effect/tour-effect';
 import {TourEffectManager} from './tour-effect/tour-effect-manager';
-import {gameplayState} from '../../core/game-platform';
 
 export class TourManager {
     public startWaitingForTourEffects$ = new Subject<void>();
@@ -12,7 +11,7 @@ export class TourManager {
 
     constructor() {
         this.tourEffectManager.completeTourEffects$.pipe(
-            tap(() => gameplayState().tour.currentTour++),
+            // tap(() => gameplayState().tour.currentTour++),
             tap(() => this.isRunningNextTure = false),
             tap(() => this.completeTour$.next())
         ).subscribe();

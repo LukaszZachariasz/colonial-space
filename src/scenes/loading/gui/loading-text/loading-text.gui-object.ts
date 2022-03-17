@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiObject} from '../../../../gui-objects/gui-object';
+import {GuiObject} from '../../../space/gui/gui-object';
 
 export class LoadingTextGuiObject extends GuiObject {
     public text: GUI.TextBlock;
