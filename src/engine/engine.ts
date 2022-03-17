@@ -24,7 +24,6 @@ export class Engine {
     public initialize(canvas: HTMLCanvasElement): void {
         this.canvas = canvas;
         this.engine = new BABYLON.Engine(canvas, true);
-        this.canvas = canvas;
 
         this.scenarioLoader.load(this.gameLoad.load(initialization));
 

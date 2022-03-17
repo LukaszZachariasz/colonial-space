@@ -3,7 +3,6 @@ import {Planet} from '../../game-objects/planet/planet';
 import {PlanetScene} from './planet.scene';
 import {PlanetSceneGui} from './gui/planet.scene-gui';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
-import {gameEngine} from '../../core/game-platform';
 
 export class PlanetSceneBuilder {
     public planetScene: PlanetScene;
@@ -18,18 +17,9 @@ export class PlanetSceneBuilder {
     }
 
     public withArcCamera(planetSize: number): PlanetSceneBuilder {
-        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 1, planetSize + 5, new BABYLON.Vector3(0, 0, 0), this.planetScene.scene);
+        this.planetScene.camera = new BABYLON.ArcRotateCamera('camera', 1, 1, planetSize + 5, BABYLON.Vector3.Zero(), this.planetScene.scene);
+        // this.planetScene.camera.useAutoRotationBehavior = true;
 
-        this.planetScene.camera.target = new BABYLON.Vector3(-(planetSize / 2), 0, 0);
-        this.planetScene.camera.position = new BABYLON.Vector3(-(planetSize / 2), 0, 0);
-
-        this.planetScene.camera.lowerRadiusLimit = planetSize + 1;
-        this.planetScene.camera.upperRadiusLimit = planetSize + 10;
-        this.planetScene.camera.pinchDeltaPercentage = 0.01;
-        this.planetScene.camera.wheelDeltaPercentage = 0.01;
-        this.planetScene.camera.panningSensibility = 0;
-
-        this.planetScene.camera.attachControl(gameEngine().canvas, true);
         return this;
     }
 
