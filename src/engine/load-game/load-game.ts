@@ -19,7 +19,6 @@ export class LoadGame {
         gameEngine().gameState = this.gameGenerator.generate();
         this.gameBuilder.build();
 
-
         gamePlatform().loadingManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),

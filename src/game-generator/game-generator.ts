@@ -1,4 +1,5 @@
 import {GameState} from '../game-state/game.state';
+import {HexState} from '../game-state/map/hex/hex.state';
 import {MapGenerator} from './map-generator/map-generator';
 import {PlayerGenerator} from './player-generator/player-generator';
 import {TourGenerator} from './tour-generator/tour-generator';
@@ -13,7 +14,7 @@ export class GameGenerator {
         const player = this.playerGenerator.generate();
         const map = this.mapGenerator.generate(player);
 
-        this.playerGenerator.assignRandomPlanetToPlayer(player, map.getPlanets(), 1);
+        this.playerGenerator.assignRandomHexWithPlanetToPlayer(player, map.hexes.flat().filter((el: HexState) => el.territory), 1);
 
         return {
             player: player,

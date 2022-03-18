@@ -1,5 +1,4 @@
-import {HexTerritoryState} from '../../game-state/map/hex/hex-territory/hex-territory.state';
-import {PlanetData} from '../../game-state/map/hex/hex-territory/planet/planet-data';
+import {HexState} from '../../game-state/map/hex/hex.state';
 import {PlayerState} from '../../game-state/player/player.state';
 import {v4 as uuid} from 'uuid';
 
@@ -11,12 +10,12 @@ export class PlayerGenerator {
         };
     }
 
-    public assignRandomPlanetToPlayer(player: PlayerState, planets: HexTerritoryState<PlanetData>[], amount: number): void {
+    public assignRandomHexWithPlanetToPlayer(player: PlayerState, hexWithPlanet: HexState[], amount: number): void {
         for (let i = 0; i < amount; i++) {
-            const random = planets[Math.floor(Math.random() * planets.length)];
-            random.data.playerId = player.id;
+            const random = hexWithPlanet[Math.floor(Math.random() * hexWithPlanet.length)];
+            random.playerId = player.id;
 
-            planets = planets.filter((el: HexTerritoryState<PlanetData>) => el != random);
+            hexWithPlanet = hexWithPlanet.filter((el: HexState) => el != random);
         }
     }
 }
