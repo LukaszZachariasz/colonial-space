@@ -1,25 +1,20 @@
-import {GameSeed} from './game-seed';
 import {GameState} from '../game-state/game.state';
 import {MapGenerator} from './map-generator/map-generator';
+import {PlayerGenerator} from './player-generator/player-generator';
 
 export class GameGenerator {
-    public static readonly SeedSalt = 100000000;
-    public static GameSeed: GameSeed = NaN;
-
-    public static RandomSeed(): GameSeed {
-        return Math.floor(Math.random() * GameGenerator.SeedSalt);
-    }
-
-    public static CheckProbability(gameSeed: GameSeed, percentage: number): boolean {
-        return gameSeed % percentage === 0;
-    }
-
     private mapGenerator: MapGenerator = new MapGenerator();
+    private playerGenerator: PlayerGenerator = new PlayerGenerator();
 
-    public generate(gameSeed: GameSeed = GameGenerator.RandomSeed()): GameState {
-        GameGenerator.GameSeed = gameSeed;
+    public generate(): GameState {
+        const player = this.playerGenerator.generate();
+        const map = this.mapGenerator.generate(player);
+
+        this.playerGenerator.assignRandomPlanetToPlayer(player, map.getPlanets(), 1);
+
         return {
-            map: this.mapGenerator.generate()
+            player: player,
+            map: map
         };
     }
 }

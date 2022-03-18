@@ -1,33 +1,41 @@
 import * as BABYLON from 'babylonjs';
 import {GameObject} from '../game-object';
-import {HexObject} from './hex-object';
+import {HexLines} from './hex-lines/hex-lines';
+import {HexPolygon} from './hex-polygon/hex-polygon';
+import {HexTerritory} from './hex-territory/hex-territory';
 
 export class Hex implements GameObject {
-    public static readonly HexEdgeWidth = 2.7;
+    public static readonly HexEdgeWidth = 5;
     public static readonly HexRadius = (Hex.HexEdgeWidth * Math.sqrt(3)) / 2;
     public static readonly HexWidth = Hex.HexEdgeWidth * 2;
     public static readonly HexHeight = Hex.HexRadius * 2;
 
-    public object: HexObject;
+    public territory: HexTerritory;
 
-    private scene: BABYLON.Scene;
-    private lines: BABYLON.LinesMesh;
+    private hexPoints: BABYLON.Vector3[];
+
+    private hexLines: HexLines;
+    private hexPolygon: HexPolygon;
 
     constructor(private position: BABYLON.Vector2) {
+        this.hexPoints = this.generateHexPolygon();
     }
 
     public create(scene: BABYLON.Scene): void {
-        this.scene = scene;
-        
-        const position: BABYLON.Vector3[] = this.generateHexPolygon();
-        this.lines = BABYLON.MeshBuilder.CreateLines('hex', {points: position}, this.scene);
-        this.lines.alpha = 0.1;
+        this.hexLines = new HexLines(this.hexPoints);
+        this.hexPolygon = new HexPolygon(this.hexPoints);
+
+        this.hexLines.create(scene);
+        this.hexPolygon.create(scene);
+
+        if (this.territory) {
+            this.territory.create(scene);
+        }
     }
 
-    public setGameObject(hexObject: HexObject): void {
-        this.object = hexObject;
-        this.object.position = this.position;
-        this.object.create(this.scene);
+    public setTerritory(hexTerritory: HexTerritory): void {
+        this.territory = hexTerritory;
+        this.territory.position = this.position;
     }
 
     private generateHexPolygon(): BABYLON.Vector3[] {

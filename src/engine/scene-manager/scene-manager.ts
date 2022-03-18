@@ -18,4 +18,12 @@ export class SceneManager {
 
         this.currentScene.scene.attachControl();
     }
+
+    public navigateToScene(name: string): void {
+        this.setCurrentScene(this.getScene(name));
+    }
+
+    public getScene(name: string): Scene {
+        return this.allScenes.find((el: Scene) => el.name === name);
+    }
 }

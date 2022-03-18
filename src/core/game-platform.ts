@@ -5,7 +5,6 @@ import {GameState} from '../game-state/game.state';
 import {GuiManager} from '../engine/gui-manager/gui-manager';
 import {LoadingManager} from './loading-manager/loading-manager';
 import {SceneManager} from '../engine/scene-manager/scene-manager';
-import {Settings} from '../engine/settings/settings';
 
 @BuildWatcher(true) // todo: process.env.buildWatcher
 export class GamePlatform {
@@ -27,5 +26,4 @@ export const gameEngine = (): Engine => instance.engine;
 export const sceneManager = (): SceneManager => instance.engine.sceneManager;
 export const guiManager = (): GuiManager => instance.engine.guiManager;
 export const gameState = (): GameState => instance.engine.gameState;
-export const gameSettings = (): Settings => instance.engine.settings;
 

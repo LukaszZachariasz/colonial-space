@@ -1,23 +1,23 @@
 import {HexState} from '../../../game-state/map/hex/hex.state';
-import {MapGenerator} from '../map-generator';
+import {HexTerritoryState} from '../../../game-state/map/hex/hex-territory/hex-territory.state';
+import {HexTerritoryTypeEnum} from '../../../game-objects/hex/hex-territory/hex-territory-type.enum';
+import {PlanetData} from '../../../game-state/map/hex/hex-territory/planet/planet-data';
+import {PlanetNameGenerator} from './planet-name-generator';
+import {PlayerState} from '../../../game-state/player/player.state';
 
 export class PlanetGenerator {
-    private static readonly Planets = 10;
+    private static readonly Planets = 20;
 
+    public generate(player: PlayerState, hexes: HexState[][]): void {
+        for (let i = 0; i < PlanetGenerator.Planets; i++) {
+            const planetState = new HexTerritoryState<PlanetData>();
+            planetState.type = HexTerritoryTypeEnum.PLANET;
+            planetState.data.name = PlanetNameGenerator.generate();
 
-    public generate(hexes: HexState[][]): void {
-        const yRows = Math.floor(MapGenerator.MapHeight / PlanetGenerator.Planets);
-        const xRows = Math.floor(PlanetGenerator.Planets / yRows);
-
-        const xSize = MapGenerator.MapWidth / xRows;
-        const ySize = MapGenerator.MapHeight / yRows;
-        console.log(xSize, ySize);
-
-
-        for (let x = 0; x < xRows; x++) {
-            for (let y = 0; y < yRows; y++) {
-                //
-            }
+            hexes
+                .flat()
+                .filter((el: HexState) => el.territory == null)[Math.floor(Math.random() * hexes.flat().filter((el: HexState) => el.territory == null).length)]
+                .territory = planetState;
         }
     }
 }

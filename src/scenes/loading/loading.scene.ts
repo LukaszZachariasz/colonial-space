@@ -4,17 +4,17 @@ import {Scene} from '../scene';
 import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
 
 export class LoadingScene extends Scene<BABYLON.FreeCamera, LoadingSceneGui> {
-    public skybox: SpaceSkybox;
+    public static readonly SCENE_NAME = 'loading-scene';
+
+    public name: string = LoadingScene.SCENE_NAME;
+    public skybox: SpaceSkybox = new SpaceSkybox();
+    public gui: LoadingSceneGui = new LoadingSceneGui();
 
     constructor() {
         super(false);
-
-        this.skybox = new SpaceSkybox();
-        this.gui = new LoadingSceneGui();
-
         this.camera = new BABYLON.FreeCamera('loadingSceneCamera', new BABYLON.Vector3(0, 0, 0), this.scene);
-        this.skybox.create(this.scene);
 
+        this.skybox.create(this.scene);
         this.scene.registerBeforeRender(() => {
             this.camera.fov -= 0.0001;
         });

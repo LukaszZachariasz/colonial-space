@@ -1,5 +1,7 @@
+import {HexTerritoryState} from './hex-territory/hex-territory.state';
+
 export class HexState {
     public x: number;
     public y: number;
-    public object: boolean; // todo: planet or other
+    public territory: HexTerritoryState<any>;
 }

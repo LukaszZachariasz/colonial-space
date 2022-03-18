@@ -6,6 +6,10 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
+    "lib": [
+      "DOM",
+      "ES2019"
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
