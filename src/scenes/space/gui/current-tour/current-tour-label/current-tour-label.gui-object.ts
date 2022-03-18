@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {gameState} from '../../../../../core/game-platform';
 import {GuiObject} from '../../gui-object';
+import {gameState} from '../../../../../core/game-platform';
 
 export class CurrentTourLabelGuiObject extends GuiObject {
     public text: GUI.TextBlock;
