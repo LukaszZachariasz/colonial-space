@@ -6,7 +6,8 @@ export class PlayerGenerator {
     public generate(): PlayerState {
         return {
             id: uuid(),
-            name: 'Player 1'
+            name: 'Player 1',
+            color: BABYLON.Color3.Random()
         };
     }
 

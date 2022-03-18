@@ -11,9 +11,9 @@ export class Hex implements GameObject {
     public static readonly HexHeight = Hex.HexRadius * 2;
 
     public territory: HexTerritory;
+    public playerId: string | undefined;
 
     private hexPoints: BABYLON.Vector3[];
-
     private hexLines: HexLines;
     private hexPolygon: HexPolygon;
 
@@ -24,6 +24,10 @@ export class Hex implements GameObject {
     public create(scene: BABYLON.Scene): void {
         this.hexLines = new HexLines(this.hexPoints);
         this.hexPolygon = new HexPolygon(this.hexPoints);
+
+        if (this.playerId) {
+            this.hexLines.playerId = this.playerId;
+        }
 
         this.hexLines.create(scene);
         this.hexPolygon.create(scene);
