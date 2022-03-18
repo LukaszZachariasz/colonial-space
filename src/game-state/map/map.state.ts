@@ -4,6 +4,7 @@ import {HexTerritoryTypeEnum} from '../../game-objects/hex/hex-territory/hex-ter
 import {PlanetData} from './hex/hex-territory/planet/planet-data';
 
 export class MapState {
+    public skyboxType: string;
     public hexes: HexState[][] = [];
 
     public getPlanets(): HexTerritoryState<PlanetData>[] {

@@ -3,7 +3,7 @@ import {Hex} from '../../game-objects/hex/hex';
 import {HexState} from '../../game-state/map/hex/hex.state';
 import {HexTerritoryFactory} from '../../game-objects/hex/hex-territory/hex-territory.factory';
 import {SpaceSceneBuilder} from '../../scenes/space/space.scene-builder';
-import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
+import {SpaceSkybox} from '../../game-objects/space-skybox/space-skybox';
 import {gameState, sceneManager} from '../../core/game-platform';
 
 export class GameBuilder {
@@ -13,7 +13,7 @@ export class GameBuilder {
     public build(): void {
         this.spaceSceneBuilder
             .camera()
-            .skybox(new SpaceSkybox())
+            .skybox(new SpaceSkybox(gameState().map.skyboxType))
             .galaxyDust()
             .gui();
 

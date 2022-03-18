@@ -1,4 +1,5 @@
 import {Hex} from '../../game-objects/hex/hex';
+import {randomSpaceSkybox, SpaceSkyboxConst} from '../../game-objects/space-skybox/space-skybox.const';
 import {HexState} from '../../game-state/map/hex/hex.state';
 import {MapState} from '../../game-state/map/map.state';
 import {PlanetGenerator} from './planet-generator/planet-generator';
@@ -12,6 +13,8 @@ export class MapGenerator {
 
     public generate(playerState: PlayerState): MapState {
         const map = new MapState();
+        map.skyboxType = randomSpaceSkybox();
+
         for (let x = 0; x < MapGenerator.MapHeight; x++) {
             const row: HexState[] = [];
             for (let y = 0; y < MapGenerator.MapWidth; y++) {

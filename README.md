@@ -19,3 +19,8 @@
 | gui-objects  | All shareable gui objects should be defined in this folder                                                                                                               |
 | scenarios    | List of predefined scenarios.                                                                                                                                            |
 | scenes       | All game scenes                                                                                                                                                          |
+
+## Thanks to
+
+Insane skybox generator
+https://tools.wwwtyro.net/space-3d/index.html

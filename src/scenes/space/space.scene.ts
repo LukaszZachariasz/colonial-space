@@ -4,7 +4,7 @@ import {GalaxyDust} from '../../game-objects/galaxy-dust/galaxy-dust';
 import {Hex} from '../../game-objects/hex/hex';
 import {Scene} from '../scene';
 import {SpaceSceneGui} from './gui/space.scene-gui';
-import {SpaceSkybox} from '../../game-objects/skybox/space-skybox/space-skybox';
+import {SpaceSkybox} from '../../game-objects/space-skybox/space-skybox';
 
 export class SpaceScene extends Scene<FromAboveCamera, SpaceSceneGui> {
     public static readonly SCENE_NAME = 'space-scene';

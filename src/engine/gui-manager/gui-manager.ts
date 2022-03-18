@@ -12,7 +12,7 @@ export class GuiManager {
 
         const currentScene = sceneManager().currentScene;
 
-        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('loadingGUI', true, currentScene.scene);
+        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
         currentScene.gui.render();
     }
 
