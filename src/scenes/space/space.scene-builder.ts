@@ -1,11 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from '../../engine/camera/from-above-camera';
 import {GalaxyDust} from '../../game-objects/galaxy-dust/galaxy-dust';
-import {GameObject} from '../../game-objects/game-object';
 import {Hex} from '../../game-objects/hex/hex';
-import {SpaceSkybox} from '../../game-objects/space-skybox/space-skybox';
 import {SpaceScene} from './space.scene';
 import {SpaceSceneGui} from './gui/space.scene-gui';
+import {SpaceSkybox} from '../../game-objects/space-skybox/space-skybox';
 
 export class SpaceSceneBuilder {
     public spaceScene: SpaceScene;

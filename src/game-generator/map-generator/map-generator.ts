@@ -1,9 +1,9 @@
 import {Hex} from '../../game-objects/hex/hex';
-import {randomSpaceSkybox, SpaceSkyboxConst} from '../../game-objects/space-skybox/space-skybox.const';
 import {HexState} from '../../game-state/map/hex/hex.state';
 import {MapState} from '../../game-state/map/map.state';
 import {PlanetGenerator} from './planet-generator/planet-generator';
 import {PlayerState} from '../../game-state/player/player.state';
+import {randomSpaceSkybox} from '../../game-objects/space-skybox/space-skybox.const';
 
 export class MapGenerator {
     public static readonly MapHeight = 15;
