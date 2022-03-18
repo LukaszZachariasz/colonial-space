@@ -5,8 +5,8 @@ import {HexTerritoryFactory} from '../../game-objects/hex/hex-territory/hex-terr
 import {SpaceSceneBuilder} from '../../scenes/space/space.scene-builder';
 import {SpaceSkybox} from '../../game-objects/space-skybox/space-skybox';
 import {gameState, sceneManager} from '../../core/game-platform';
-import {selectPlayerHexes} from '../../game-state/map/hex/hex-state.selectors';
 import {selectCurrentPlayerId} from '../../game-state/player/player-state.selectors';
+import {selectPlayerHexes} from '../../game-state/map/hex/hex-state.selectors';
 
 export class GameBuilder {
     public spaceSceneBuilder: SpaceSceneBuilder = new SpaceSceneBuilder();
