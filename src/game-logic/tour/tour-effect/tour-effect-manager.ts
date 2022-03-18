@@ -1,5 +1,6 @@
 import {Subject, forkJoin, map, switchMap, tap} from 'rxjs';
 import {TourEffect} from './tour-effect';
+import {gameState} from '../../../core/game-platform';
 
 type ExecuteEffectGroup = {current: TourEffect[], pending: TourEffect[][]};
 
@@ -25,11 +26,11 @@ export class TourEffectManager {
                     this.completeTourEffects$.next();
                 }
             }),
-           /* tap(() => gameplayState().tour.tourEffects
+            tap(() => gameState().tour.tourEffects
                 .filter((el: TourEffect) => el.toTour)
-                .filter((el: TourEffect) => gameplayState().tour.currentTour >= el.toTour)
+                .filter((el: TourEffect) => gameState().tour.tour >= el.toTour)
                 .forEach((el: TourEffect) => this.removeTourEffect(el))
-            )*/
+            )
         ).subscribe();
     }
 
@@ -47,12 +48,12 @@ export class TourEffectManager {
     }
 
     public addTourEffect(effect: TourEffect): void {
-/*        gameplayState().tour.tourEffects.push(effect);
-        gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.sort(this.sortByPriority);*/
+        gameState().tour.tourEffects.push(effect);
+        gameState().tour.tourEffects = gameState().tour.tourEffects.sort(this.sortByPriority);
     }
 
     public removeTourEffect(effect: TourEffect): void {
-/*        gameplayState().tour.tourEffects = gameplayState().tour.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);*/
+        gameState().tour.tourEffects = gameState().tour.tourEffects.filter((tourEffect: TourEffect) => tourEffect !== effect);
     }
 
     private createGroupOfEffects(): TourEffect[][] {
@@ -68,9 +69,8 @@ export class TourEffectManager {
     }
 
     private copyEffectsExecutedInThisTour(): TourEffect[] {
-        return [];
-        /*return [...gameplayState().tour.tourEffects]
-            .filter((el: TourEffect) => el.fromTour === undefined || el.fromTour <= gameplayState().tour.currentTour + 1 && (el.toTour === undefined || el.toTour > gameplayState().tour.currentTour));*/
+        return [...gameState().tour.tourEffects]
+            .filter((el: TourEffect) => el.fromTour === undefined || el.fromTour <= gameState().tour.tour + 1 && (el.toTour === undefined || el.toTour > gameState().tour.tour));
     }
 
     private sortByPriority(a: TourEffect, b: TourEffect): 1 | -1 | 0 {

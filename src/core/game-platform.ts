@@ -1,6 +1,7 @@
 import {BuildWatcher} from './build-watcher/build-watcher';
 import {Debug} from './debug/debug';
 import {Engine} from 'engine';
+import {GameLogic} from '../game-logic/game-logic';
 import {GameState} from '../game-state/game.state';
 import {GuiManager} from '../engine/gui-manager/gui-manager';
 import {LoadingManager} from './loading-manager/loading-manager';
@@ -26,4 +27,4 @@ export const gameEngine = (): Engine => instance.engine;
 export const sceneManager = (): SceneManager => instance.engine.sceneManager;
 export const guiManager = (): GuiManager => instance.engine.guiManager;
 export const gameState = (): GameState => instance.engine.gameState;
-
+export const gameLogic = (): GameLogic => instance.engine.gameLogic;

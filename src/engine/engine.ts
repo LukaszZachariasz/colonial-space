@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {GameLogic} from '../game-logic/game-logic';
 import {GameState} from '../game-state/game.state';
 import {GuiManager} from './gui-manager/gui-manager';
 import {LoadGame} from './load-game/load-game';
@@ -10,8 +11,9 @@ export class Engine {
 
     public sceneManager: SceneManager;
     public guiManager: GuiManager;
-    public gameState: GameState;
     public loadGame: LoadGame;
+    public gameState: GameState;
+    public gameLogic: GameLogic;
 
     public initialize(canvas: HTMLCanvasElement): void {
         this.canvas = canvas;
@@ -36,7 +38,8 @@ export class Engine {
     private createServices(): void {
         this.sceneManager = new SceneManager();
         this.guiManager = new GuiManager();
-        this.gameState = new GameState();
         this.loadGame = new LoadGame();
+        this.gameState = new GameState();
+        this.gameLogic = new GameLogic();
     }
 }

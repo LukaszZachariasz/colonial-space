@@ -1,5 +1,2 @@
 export enum TourEffectPriorityEnum {
-    START_THREAT_PRIORITY = 500,
-    STOP_THREAT_PRIORITY = 500,
-    REMOVE_THREAT_PRIORITY = 500
 }

@@ -1,4 +1,6 @@
 import 'reflect-metadata';
+import {TourEffect} from './tour-effect';
+import {gameLogic} from '../../../core/game-platform';
 
 export const TOUR_EFFECT_METADATA_KEY = 'Tour Effect: ';
 
@@ -14,14 +16,14 @@ export function HasTourEffects(): (constructor: any) => any {
             metadataKeys.forEach((key: string) => {
                 const metadataValue = Reflect.getMetadata(key, instance);
 
-                /*gameState().tourManager.addTourEffect(
+                gameLogic().tourManager.addTourEffect(
                     new TourEffect(
                         metadataValue.priority,
                         instance[metadataValue.fromTourFieldName],
                         instance[metadataValue.toTourFieldName],
                         metadataValue.effect.bind(instance)
                     )
-                );*/
+                );
             });
 
             return instance;
