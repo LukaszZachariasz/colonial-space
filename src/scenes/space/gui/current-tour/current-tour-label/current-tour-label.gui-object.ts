@@ -1,13 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {GuiObject} from '../../gui-object';
-import {gameState} from '../../../../../core/game-platform';
+import {currentBabylonScene, gameState} from '../../../../../core/game-platform';
 
 export class CurrentTourLabelGuiObject extends GuiObject {
     public text: GUI.TextBlock;
-
-    constructor() {
-        super();
-    }
 
     public render(): GUI.Control {
         this.text = new GUI.TextBlock('currentTour', 'Current tour: ' + gameState().tour.tour);
@@ -18,7 +14,7 @@ export class CurrentTourLabelGuiObject extends GuiObject {
         this.text.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.text.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
-        this.scene.registerBeforeRender(() => {
+        currentBabylonScene().registerBeforeRender(() => {
             this.text.text = 'Current tour: ' + gameState().tour.tour;
         });
 

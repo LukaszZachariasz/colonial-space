@@ -15,7 +15,7 @@ export class SpaceSkybox implements GameObject {
 
         this.material = new BABYLON.StandardMaterial('spaceSkyBox', scene);
         this.material.backFaceCulling = false;
-        this.material.reflectionTexture = new BABYLON.CubeTexture(`resources/skybox/${this.type}/`, scene);
+        this.material.reflectionTexture = new BABYLON.CubeTexture(`resources/skybox/space/${this.type}/`, scene);
         this.material.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         this.material.diffuseColor = new BABYLON.Color3(0, 0, 0);
         this.material.specularColor = new BABYLON.Color3(0, 0, 0);

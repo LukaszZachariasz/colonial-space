@@ -3,6 +3,8 @@ import {Hex} from '../../game-objects/hex/hex';
 import {MapGenerator} from '../../game-generator/map-generator/map-generator';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {
+    public static readonly CameraUnitPerPixel = 30;
+
     public boundary = 5;
 
     public maxLeft = -Hex.HexWidth;
@@ -12,10 +14,14 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
 
     public movingSpeed = 0.4;
 
+    public widthInPixels = 0;
+    public heightInPixels = 0;
+
     private shouldMoveTop = false;
     private shouldMoveRight = false;
     private shouldMoveBottom = false;
     private shouldMoveLeft = false;
+
 
     constructor(name: string, alpha: number, beta: number, radius: number, position: BABYLON.Vector3, scene: BABYLON.Scene) {
         super(name, alpha, beta, radius, position, scene);
@@ -28,6 +34,12 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         this.upperAlphaLimit = -Math.PI / 2;
 
         this.panningSensibility = 0;
+
+        this.calculateInPixels();
+    }
+
+    public getProportion(): number {
+        return (Math.abs(this.maxLeft) + Math.abs(this.maxRight)) / (Math.abs(this.maxTop) + Math.abs(this.maxBottom));
     }
 
     private listenOnBoundaries(): void {
@@ -72,5 +84,10 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         if (this.target.z < this.maxBottom) {
             this.target.z = this.maxBottom;
         }
+    }
+
+    private calculateInPixels(): void {
+        this.widthInPixels = (Math.abs(this.maxLeft) + Math.abs(this.maxRight)) * FromAboveCamera.CameraUnitPerPixel;
+        this.heightInPixels = (Math.abs(this.maxTop) + Math.abs(this.maxBottom)) * FromAboveCamera.CameraUnitPerPixel;
     }
 }
