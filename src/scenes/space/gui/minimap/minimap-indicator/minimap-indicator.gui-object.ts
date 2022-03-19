@@ -30,7 +30,7 @@ export class MinimapIndicatorGuiObject extends GuiObject {
         this.indicator.width = width + '%';
         this.indicator.height = height + '%';
 
-        this.indicator.top = ((-this.camera.target.z * 100 * FromAboveCamera.CameraUnitPerPixel) / (this.camera.heightInPixels)) + '%';
-        this.indicator.left = ((this.camera.target.x * 100 * FromAboveCamera.CameraUnitPerPixel - width) / (this.camera.widthInPixels)) + '%';
+        this.indicator.left = this.camera.getXPositionPercentage() * (1 - (width / 100)) + '%';
+        this.indicator.top = this.camera.getZPositionPercentage() * (1 - (height / 100)) + '%';
     }
 }

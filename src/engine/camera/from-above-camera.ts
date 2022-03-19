@@ -39,7 +39,15 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     }
 
     public getProportion(): number {
-        return (Math.abs(this.maxLeft) + Math.abs(this.maxRight)) / (Math.abs(this.maxTop) + Math.abs(this.maxBottom));
+        return (this.maxRight - this.maxLeft) / (this.maxTop - this.maxBottom);
+    }
+
+    public getXPositionPercentage(): number {
+        return (this.target.x - this.maxLeft) / (this.maxRight - this.maxLeft) * 100;
+    }
+
+    public getZPositionPercentage(): number {
+        return (this.target.z - this.maxTop) / (this.maxBottom - this.maxTop) * 100;
     }
 
     private listenOnBoundaries(): void {
