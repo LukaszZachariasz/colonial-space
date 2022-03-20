@@ -6,6 +6,9 @@ import {sceneManager} from 'engine';
 export class MinimapIndicatorControl extends Control {
     public indicator: GUI.Rectangle;
 
+    public widthInPercentage = 0;
+    public heightInPercentage = 0;
+
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
 
     public render(): GUI.Control {
@@ -27,10 +30,12 @@ export class MinimapIndicatorControl extends Control {
         let height = ((document.body.clientWidth * 100) / this.camera.widthInPixels) * this.camera.getProportion();
         width = (width * this.camera.radius) / this.camera.upperRadiusLimit;
         height = (height * this.camera.radius) / this.camera.upperRadiusLimit;
-        this.indicator.width = width + '%';
-        this.indicator.height = height + '%';
+        this.widthInPercentage = width;
+        this.heightInPercentage = height;
+        this.indicator.width = this.widthInPercentage + '%';
+        this.indicator.height = this.heightInPercentage + '%';
 
-        this.indicator.left = this.camera.getXPositionPercentage() * (1 - (width / 100)) + '%';
-        this.indicator.top = this.camera.getZPositionPercentage() * (1 - (height / 100)) + '%';
+        this.indicator.left = this.camera.getXPositionPercentage() * (1 - (this.widthInPercentage / 100)) + '%';
+        this.indicator.top = this.camera.getZPositionPercentage() * (1 - (this.heightInPercentage / 100)) + '%';
     }
 }

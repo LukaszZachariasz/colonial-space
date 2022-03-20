@@ -50,6 +50,11 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         return (this.target.z - this.maxTop) / (this.maxBottom - this.maxTop) * 100;
     }
 
+    public navigateToPercentage(xPercentage: number, yPercentage: number): void {
+        this.target.x = (xPercentage * (this.maxRight - this.maxLeft)) / 100;
+        this.target.z = (yPercentage * (this.maxTop - this.maxBottom)) / -100;
+    }
+
     private listenOnBoundaries(): void {
         this._scene.onPointerObservable.add((pointer: BABYLON.PointerInfo) => {
             this.shouldMoveTop = pointer.event.y < this.boundary;
