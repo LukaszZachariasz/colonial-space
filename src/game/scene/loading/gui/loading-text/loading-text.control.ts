@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../space/gui/control';
 
-export class LoadingTextGuiObject extends Control {
+export class LoadingTextControl extends Control {
     public text: GUI.TextBlock;
 
     public render(): GUI.Control {
