@@ -7,9 +7,9 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
 
     public boundary = 5;
 
-    public maxLeft = -HexModel.HexWidth;
-    public maxRight = MapGenerator.MapHeight * (HexModel.HexWidth + HexModel.HexEdgeWidth) - HexModel.HexWidth;
-    public maxTop = -HexModel.HexHeight;
+    public maxLeft = 0;
+    public maxRight = MapGenerator.MapWidth * (HexModel.HexWidth - (HexModel.HexEdgeWidth / 2));
+    public maxTop = 0;
     public maxBottom = -MapGenerator.MapHeight * HexModel.HexHeight;
 
     public movingSpeed = 0.4;

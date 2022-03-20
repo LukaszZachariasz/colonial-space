@@ -6,7 +6,7 @@ import {PlanetState} from '../../../store/map/hex/hex-territory/planet/planet.st
 import {PlayerState} from '../../../store/player/player.state';
 
 export class PlanetGenerator {
-    private static readonly Planets = 20;
+    private static readonly Planets = 1;
 
     public generate(player: PlayerState, hexes: HexState[][]): void {
         for (let i = 0; i < PlanetGenerator.Planets; i++) {

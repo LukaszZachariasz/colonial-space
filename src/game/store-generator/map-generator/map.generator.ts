@@ -7,7 +7,7 @@ import {randomSpaceSkybox} from '../../scene/space/skybox/space/space-skybox.con
 
 export class MapGenerator {
     public static readonly MapHeight = 15;
-    public static readonly MapWidth = 30;
+    public static readonly MapWidth = 20;
 
     private planetGenerator: PlanetGenerator = new PlanetGenerator();
 
@@ -15,15 +15,15 @@ export class MapGenerator {
         const map = new MapState();
         map.skyboxType = randomSpaceSkybox();
 
-        for (let x = 0; x < MapGenerator.MapHeight; x++) {
+        for (let y = 0; y < MapGenerator.MapHeight; y++) {
             const row: HexState[] = [];
-            for (let y = 0; y < MapGenerator.MapWidth; y++) {
-                const xOffset = y % 2 === 1 ? HexModel.HexEdgeWidth + (HexModel.HexEdgeWidth / 2) : 0;
+            const yColumnOffset = y * HexModel.HexRadius;
+            for (let x = 0; x < MapGenerator.MapWidth; x++) {
+                const yOffset = x % 2 === 1 ? HexModel.HexRadius : 0;
 
                 const hex = new HexState();
-                hex.x = (x * (HexModel.HexWidth + HexModel.HexEdgeWidth)) - xOffset;
-                hex.y = -y * HexModel.HexRadius;
-
+                hex.y = -y * HexModel.HexRadius - yOffset - yColumnOffset;
+                hex.x = (x * (HexModel.HexWidth - (HexModel.HexEdgeWidth / 2)));
                 row.push(hex);
             }
             map.hexes.push(row);
