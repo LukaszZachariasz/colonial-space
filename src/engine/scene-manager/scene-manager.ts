@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {guiManager} from 'engine';
 import {Scene} from '../../game/scene/scene';
+import {guiManager} from 'engine';
 
 export class SceneManager {
     public scene: Scene;

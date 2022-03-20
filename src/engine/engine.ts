@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {gameEngine} from '../core/game-platform';
 import {Game} from '../game/game';
 import {GuiManager} from './gui-manager/gui-manager';
 import {SceneManager} from './scene-manager/scene-manager';
+import {gameEngine} from '../core/game-platform';
 
 export class Engine {
     public engine: BABYLON.Engine;

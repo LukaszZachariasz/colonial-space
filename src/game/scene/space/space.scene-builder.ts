@@ -2,8 +2,8 @@ import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from './camera/from-above-camera';
 import {GalaxyDustModel} from './model/galaxy-dust/galaxy-dust.model';
 import {HexModel} from './model/hex/hex.model';
-import {SpaceScene} from './space.scene';
 import {SpaceGui} from './gui/space.gui';
+import {SpaceScene} from './space.scene';
 import {SpaceSkybox} from './skybox/space/space.skybox';
 
 export class SpaceSceneBuilder {
