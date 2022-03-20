@@ -5,7 +5,7 @@ import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.con
 import {sceneManager} from 'engine';
 
 export class MinimapContainer extends Container {
-    public minimapIndicatorGuiObject: MinimapIndicatorControl;
+    public minimapIndicatorControl: MinimapIndicatorControl;
     
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
     private width = 20;
@@ -19,8 +19,8 @@ export class MinimapContainer extends Container {
         this.container.background = 'black';
         this.container.alpha = 0.3;
 
-        this.minimapIndicatorGuiObject = new MinimapIndicatorControl();
-        this.container.addControl(this.minimapIndicatorGuiObject.render());
+        this.minimapIndicatorControl = new MinimapIndicatorControl();
+        this.container.addControl(this.minimapIndicatorControl.render());
 
         this.container.isPointerBlocker = true;
         this.container.onPointerDownObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
@@ -42,8 +42,8 @@ export class MinimapContainer extends Container {
         let xPercentage = (relativeX * 100) / eventState.currentTarget._currentMeasure.width;
         let yPercentage = (relativeY * 100) / eventState.currentTarget._currentMeasure.height;
 
-        xPercentage = xPercentage * (100 + this.minimapIndicatorGuiObject.widthInPercentage) / 100;
-        xPercentage -= this.minimapIndicatorGuiObject.widthInPercentage / 2;
+        xPercentage = xPercentage * (100 + this.minimapIndicatorControl.widthInPercentage) / 100;
+        xPercentage -= this.minimapIndicatorControl.widthInPercentage / 2;
         if (xPercentage < 0) {
             xPercentage = 0;
         }
@@ -51,8 +51,8 @@ export class MinimapContainer extends Container {
             xPercentage = 100;
         }
 
-        yPercentage = yPercentage * (100 + this.minimapIndicatorGuiObject.heightInPercentage) / 100;
-        yPercentage -= this.minimapIndicatorGuiObject.heightInPercentage / 2;
+        yPercentage = yPercentage * (100 + this.minimapIndicatorControl.heightInPercentage) / 100;
+        yPercentage -= this.minimapIndicatorControl.heightInPercentage / 2;
         if (yPercentage < 0) {
             yPercentage = 0;
         }
