@@ -22,5 +22,10 @@ export class SpaceSkybox implements Model {
         this.material.alphaCutOff = 0.5;
 
         this.skybox.material = this.material;
+
+        scene.registerAfterRender(() => {
+            this.skybox.rotation.x += 0.00005;
+            this.skybox.rotation.z += 0.00005;
+        });
     }
 }
