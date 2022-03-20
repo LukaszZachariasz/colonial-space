@@ -1,8 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {GameLogic} from '../game-logic/game-logic';
-import {GameState} from '../game-state/game.state';
+import {gameEngine} from '../core/game-platform';
+import {Game} from '../game/game';
 import {GuiManager} from './gui-manager/gui-manager';
-import {LoadGame} from './load-game/load-game';
 import {SceneManager} from './scene-manager/scene-manager';
 
 export class Engine {
@@ -11,35 +10,30 @@ export class Engine {
 
     public sceneManager: SceneManager;
     public guiManager: GuiManager;
-    public loadGame: LoadGame;
-    public gameState: GameState;
-    public gameLogic: GameLogic;
+    public game: Game;
 
     public initialize(canvas: HTMLCanvasElement): void {
         this.canvas = canvas;
         this.engine = new BABYLON.Engine(canvas, true);
 
-        this.createServices();
-        this.startListeners();
+        this.sceneManager = new SceneManager();
+        this.guiManager = new GuiManager();
 
-        this.loadGame.load();
-    }
+        this.game = new Game();
+        this.game.generate();
+        this.game.start();
 
-    private startListeners(): void {
         this.engine.runRenderLoop(() => {
-            this.sceneManager?.currentScene.scene.render();
+            this.sceneManager?.scene.scene.render();
         });
 
         window.addEventListener('resize', () => {
             this.engine.resize();
         });
     }
-
-    private createServices(): void {
-        this.sceneManager = new SceneManager();
-        this.guiManager = new GuiManager();
-        this.loadGame = new LoadGame();
-        this.gameState = new GameState();
-        this.gameLogic = new GameLogic();
-    }
 }
+
+export const sceneManager = (): SceneManager => gameEngine().sceneManager;
+export const guiManager = (): GuiManager => gameEngine().guiManager;
+export const game = (): Game => gameEngine().game;
+

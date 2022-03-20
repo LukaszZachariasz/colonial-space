@@ -1,13 +1,7 @@
-import * as BABYLON from 'babylonjs';
 import {BuildWatcher} from './build-watcher/build-watcher';
 import {Debug} from './debug/debug';
 import {Engine} from 'engine';
-import {GameLogic} from '../game-logic/game-logic';
-import {GameState} from '../game-state/game.state';
-import {GuiManager} from '../engine/gui-manager/gui-manager';
 import {LoadingManager} from './loading-manager/loading-manager';
-import {Scene} from '../scenes/scene';
-import {SceneManager} from '../engine/scene-manager/scene-manager';
 
 @BuildWatcher(true) // todo: process.env.buildWatcher
 export class GamePlatform {
@@ -26,10 +20,3 @@ export class GamePlatform {
 const instance = new GamePlatform();
 export const gamePlatform = (): GamePlatform => instance;
 export const gameEngine = (): Engine => instance.engine;
-export const sceneManager = (): SceneManager => instance.engine.sceneManager;
-export const currentScene = (): Scene => instance.engine.sceneManager.currentScene;
-export const currentBabylonScene = (): BABYLON.Scene => instance.engine.sceneManager.currentScene.scene;
-export const currentCamera = (): BABYLON.Camera => instance.engine.sceneManager.currentScene.camera;
-export const guiManager = (): GuiManager => instance.engine.guiManager;
-export const gameState = (): GameState => instance.engine.gameState;
-export const gameLogic = (): GameLogic => instance.engine.gameLogic;

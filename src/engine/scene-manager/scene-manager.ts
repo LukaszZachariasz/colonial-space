@@ -1,26 +1,39 @@
-import {Scene} from '../../scenes/scene';
-import {guiManager} from '../../core/game-platform';
+import * as BABYLON from 'babylonjs';
+import {guiManager} from 'engine';
+import {Scene} from '../../game/scene/scene';
 
 export class SceneManager {
-    public currentScene: Scene;
+    public scene: Scene;
     public allScenes: Scene[] = [];
+
+    public get currentScene(): Scene {
+        return this.scene;
+    }
+
+    public get currentBabylonScene(): BABYLON.Scene {
+        return this.scene.scene;
+    }
+
+    public get currentCamera(): BABYLON.Camera {
+        return this.scene.camera;
+    }
 
     public addScene(gameScene: Scene): void {
         this.allScenes.push(gameScene);
     }
 
-    public setCurrentScene(gameScene: Scene): void {
-        if (this.currentScene) {
-            this.currentScene.scene.detachControl();
+    public setScene(gameScene: Scene): void {
+        if (this.scene) {
+            this.scene.scene.detachControl();
         }
-        this.currentScene = {...gameScene};
+        this.scene = {...gameScene};
         guiManager().reset();
 
-        this.currentScene.scene.attachControl();
+        this.scene.scene.attachControl();
     }
 
     public navigateToScene(name: string): void {
-        this.setCurrentScene(this.getScene(name));
+        this.setScene(this.getScene(name));
     }
 
     public getScene(name: string): Scene {

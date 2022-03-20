@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiObject} from '../../scenes/space/gui/gui-object';
-import {sceneManager} from '../../core/game-platform';
+import {Control} from '../../game/scene/space/gui/control';
+import {sceneManager} from 'engine';
 
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
@@ -16,7 +16,7 @@ export class GuiManager {
         currentScene.gui.render();
     }
 
-    public render<T extends GuiObject>(gameObjectGui: T, container?: GUI.Container): T {
+    public render<T extends Control>(gameObjectGui: T, container?: GUI.Container): T {
         if (container) {
             container.addControl(gameObjectGui.render());
         } else {
