@@ -5,6 +5,7 @@ import {HexModel} from './model/hex/hex.model';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceScene} from './space.scene';
 import {SpaceSkybox} from './skybox/space/space.skybox';
+import {UnitModel} from './model/unit/unit.model';
 
 export class SpaceSceneBuilder {
     public spaceScene: SpaceScene;
@@ -22,6 +23,12 @@ export class SpaceSceneBuilder {
     public addHex(hex: HexModel): SpaceSceneBuilder {
         this.spaceScene.hexes.push(hex);
         hex.create(this.spaceScene.scene);
+        return this;
+    }
+
+    public addUnit(unit: UnitModel): SpaceSceneBuilder {
+        this.spaceScene.units.push(unit);
+        unit.create(this.spaceScene.scene);
         return this;
     }
 

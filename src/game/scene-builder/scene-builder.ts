@@ -2,8 +2,10 @@ import * as BABYLON from 'babylonjs';
 import {HexModel} from '../scene/space/model/hex/hex.model';
 import {HexState} from '../store/map/hex/hex.state';
 import {HexTerritoryFactory} from '../scene/space/model/hex/hex-territory/hex-territory.factory';
+import {ScoutShipModel} from '../scene/space/model/unit/scout-ship/scout-ship.model';
 import {SpaceSceneBuilder} from '../scene/space/space.scene-builder';
 import {SpaceSkybox} from '../scene/space/skybox/space/space.skybox';
+import {UnitState} from '../store/unit/unit.state';
 import {sceneManager} from 'engine';
 import {selectCurrentPlayerId} from '../store/player/player.selectors';
 import {selectPlayerHexes} from '../store/map/hex/hex.selectors';
@@ -35,6 +37,12 @@ export class SceneBuilder {
 
                 this.spaceSceneBuilder.addHex(hex);
             });
+        });
+
+        store().units.forEach((unitState: UnitState) => {
+            const scoutShipModel = new ScoutShipModel(); // todo: factory
+            scoutShipModel.state = unitState;
+            this.spaceSceneBuilder.addUnit(scoutShipModel);
         });
 
         this.setCameraTargetToFirstTerritory();
