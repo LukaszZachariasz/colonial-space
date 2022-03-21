@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {HexTerritoryModel} from '../hex-territory.model';
-import {HexTerritoryTypeEnum} from '../hex-territory-type.enum';
+import {HexTerritoryType} from '../../../../../../store/map/hex/hex-territory/hex-territory-type';
 
 export class PlanetModel extends HexTerritoryModel {
-    public type: HexTerritoryTypeEnum = HexTerritoryTypeEnum.PLANET;
+    public type: HexTerritoryType = HexTerritoryType.PLANET;
 
     public create(scene: BABYLON.Scene): void {
         BABYLON.SceneLoader.ImportMesh('', 'resources/planet/', 'planet_01.gltf', scene, (meshes: BABYLON.AbstractMesh[]) => {

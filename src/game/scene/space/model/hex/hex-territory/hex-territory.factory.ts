@@ -1,11 +1,11 @@
 import {HexTerritoryModel} from './hex-territory.model';
-import {HexTerritoryTypeEnum} from './hex-territory-type.enum';
+import {HexTerritoryType} from '../../../../../store/map/hex/hex-territory/hex-territory-type';
 import {PlanetModel} from './planet/planet.model';
 
 export class HexTerritoryFactory {
-    public create(type: HexTerritoryTypeEnum): HexTerritoryModel {
+    public create(type: HexTerritoryType): HexTerritoryModel {
         switch (type) {
-            case HexTerritoryTypeEnum.PLANET:
+            case HexTerritoryType.PLANET:
                 return new PlanetModel();
         }
     }

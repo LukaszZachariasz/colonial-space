@@ -5,4 +5,5 @@ export class HexState {
     public y: number;
     public playerId: string | undefined;
     public territory: HexTerritoryState;
+    public unitId: string | undefined;
 }

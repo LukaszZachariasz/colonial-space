@@ -1,6 +1,6 @@
-import {HexTerritoryTypeEnum} from '../../../../scene/space/model/hex/hex-territory/hex-territory-type.enum';
+import {HexTerritoryType} from './hex-territory-type';
 
 export class HexTerritoryState<T extends { } = any> {
-    public type: HexTerritoryTypeEnum;
+    public type: HexTerritoryType;
     public data: T = {} as T;
 }
