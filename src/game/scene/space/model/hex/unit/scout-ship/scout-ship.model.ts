@@ -8,7 +8,7 @@ export class ScoutShipModel extends UnitModel {
     public state: ScoutShipState;
 
     public create(scene: BABYLON.Scene): void {
-        BABYLON.SceneLoader.ImportMesh('', 'resources/unit/scout-ship/', 'scout-ship.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
+        BABYLON.SceneLoader.ImportMesh('', 'resources/unit/scout-ship/', 'scout-ship.obj', scene, (meshes: BABYLON.AbstractMesh[]) => {
             this.mesh = meshes[0];
             this.afterModelLoaded(scene);
         });
@@ -19,7 +19,7 @@ export class ScoutShipModel extends UnitModel {
         this.mesh.position.y = 1.5;
         this.mesh.position.x += 2;
         this.mesh.position.z += 2;
-        this.mesh.scaling = new BABYLON.Vector3(0.3, 0.3, 0.3);
+        this.mesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
 
         this.actionManager = new BABYLON.ActionManager(scene);
         this.actionManager.registerAction(
