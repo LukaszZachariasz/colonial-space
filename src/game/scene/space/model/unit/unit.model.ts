@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
-import {Observable, Subscriber} from 'rxjs';
-import {logic} from '../../../../game';
-import {Selectable} from '../../../../logic/select-model-manager/selectable';
 import {AddTourEffect} from '../../../../logic/tour-manager/tour-effect/add-tour-effect';
-import {UnitState} from '../../../../store/unit/unit.state';
 import {Model} from '../model';
+import {Observable, Subscriber} from 'rxjs';
+import {Selectable} from '../../../../logic/select-model-manager/selectable';
+import {UnitState} from '../../../../store/unit/unit.state';
+import {logic} from '../../../../game';
 
 export abstract class UnitModel extends Model implements Selectable {
     public state: UnitState;
