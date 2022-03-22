@@ -2,10 +2,9 @@ import * as BABYLON from 'babylonjs';
 import {HexModel} from '../scene/space/model/hex/hex.model';
 import {HexState} from '../store/map/hex/hex.state';
 import {HexTerritoryFactory} from '../scene/space/model/hex/hex-territory/hex-territory.factory';
-import {ScoutShipModel} from '../scene/space/model/unit/scout-ship/scout-ship.model';
 import {SpaceSceneBuilder} from '../scene/space/space.scene-builder';
 import {SpaceSkybox} from '../scene/space/skybox/space/space.skybox';
-import {UnitState} from '../store/unit/unit.state';
+import {UnitFactory} from '../scene/space/model/hex/unit/unit.factory';
 import {sceneManager} from 'engine';
 import {selectCurrentPlayerId} from '../store/player/player.selectors';
 import {selectPlayerHexes} from '../store/map/hex/hex.selectors';
@@ -14,6 +13,7 @@ import {store} from '../game';
 export class SceneBuilder {
     public spaceSceneBuilder: SpaceSceneBuilder = new SpaceSceneBuilder();
     public hexTerritoryFactory: HexTerritoryFactory = new HexTerritoryFactory();
+    public unitFactory: UnitFactory = new UnitFactory();
 
     public build(): void {
         this.spaceSceneBuilder
@@ -35,14 +35,16 @@ export class SceneBuilder {
                     );
                 }
 
+                if (hexState.unit) {
+                    hex.setUnit(
+                        this.unitFactory.create(
+                            hexState.unit.unitType
+                        )
+                    );
+                }
+
                 this.spaceSceneBuilder.addHex(hex);
             });
-        });
-
-        store().units.forEach((unitState: UnitState) => {
-            const scoutShipModel = new ScoutShipModel(); // todo: factory
-            scoutShipModel.state = unitState;
-            this.spaceSceneBuilder.addUnit(scoutShipModel);
         });
 
         this.setCameraTargetToFirstTerritory();

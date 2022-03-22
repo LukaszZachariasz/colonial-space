@@ -7,7 +7,7 @@ export class PlanetModel extends HexTerritoryModel {
 
     public create(scene: BABYLON.Scene): void {
         BABYLON.SceneLoader.ImportMesh('', 'resources/hex/hex-territory/planet/', 'planet_01.gltf', scene, (meshes: BABYLON.AbstractMesh[]) => {
-            meshes[0].position = new BABYLON.Vector3(this.position.x, 1, this.position.y);
+            meshes[0].position = new BABYLON.Vector3(this.position.x, 0, this.position.y);
         });
     }
 }
