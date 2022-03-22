@@ -3,10 +3,10 @@ import {FromAboveCamera} from './camera/from-above-camera';
 import {GalaxyDustModel} from './model/galaxy-dust/galaxy-dust.model';
 import {HexModel} from './model/hex/hex.model';
 import {SpaceGui} from './gui/space.gui';
-import {TerritoryModel} from './model/territory/territory.model';
-import {UnitModel} from './model/unit/unit.model';
 import {SpaceScene} from './space.scene';
 import {SpaceSkybox} from './skybox/space/space.skybox';
+import {TerritoryModel} from './model/territory/territory.model';
+import {UnitModel} from './model/unit/unit.model';
 
 export class SpaceSceneBuilder {
     public spaceScene: SpaceScene;

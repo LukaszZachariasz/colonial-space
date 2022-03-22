@@ -11,7 +11,7 @@ import {UnitModel} from '../scene/space/model/unit/unit.model';
 import {UnitState} from '../store/unit/unit.state';
 import {sceneManager} from 'engine';
 import {selectCurrentPlayerId} from '../store/player/player.selectors';
-import {selectHexById, selectPlayerHexes} from '../store/map/hex/hex.selectors';
+import {selectPlayerHexes} from '../store/map/hex/hex.selectors';
 import {store} from '../game';
 
 export class SceneBuilder {

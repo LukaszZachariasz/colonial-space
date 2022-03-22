@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {selectHexById} from '../../../../../store/map/hex/hex.selectors';
 import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
+import {selectHexById} from '../../../../../store/map/hex/hex.selectors';
 
 export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
