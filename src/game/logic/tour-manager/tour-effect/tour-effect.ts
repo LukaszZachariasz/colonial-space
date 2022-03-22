@@ -1,6 +1,6 @@
-import {EMPTY, Observable, of, tap} from 'rxjs';
+import {EMPTY, Observable, of, switchMap} from 'rxjs';
 
-export type TourEffectExecute = () => void;
+export type TourEffectExecute = () => Observable<any>;
 
 export class TourEffect {
     constructor(public priority: number,
@@ -11,7 +11,7 @@ export class TourEffect {
 
     public execute(): Observable<any> {
         return of(EMPTY).pipe(
-            tap(() => this.effect())
+            switchMap(() => this.effect())
         );
     }
 }

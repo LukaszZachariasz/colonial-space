@@ -1,8 +1,10 @@
 import * as BABYLON from 'babylonjs';
+import {HasTourEffects} from '../../../../../logic/tour-manager/tour-effect/has-tour-effects';
 import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
 import {selectHexById} from '../../../../../store/map/hex/hex.selectors';
 
+@HasTourEffects()
 export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
     public state: ScoutShipState;
