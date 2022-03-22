@@ -5,7 +5,8 @@ import {HexModel} from './model/hex/hex.model';
 import {Scene} from '../scene';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceSkybox} from './skybox/space/space.skybox';
-import {UnitModel} from './model/hex/unit/unit.model';
+import {TerritoryModel} from './model/territory/territory.model';
+import {UnitModel} from './model/unit/unit.model';
 
 export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
     public static readonly SCENE_NAME = 'space-scene';
@@ -15,6 +16,7 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
     public skybox: SpaceSkybox;
     public galaxyDust: GalaxyDustModel;
     public hexes: HexModel[] = [];
+    public territories: TerritoryModel[] = [];
     public units: UnitModel[] = [];
 
     constructor() {

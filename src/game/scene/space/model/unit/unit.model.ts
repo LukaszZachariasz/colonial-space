@@ -1,10 +1,11 @@
 import * as BABYLON from 'babylonjs';
-import {Model} from '../../model';
-import {Selectable} from '../../../../../logic/select-model-manager/selectable';
-import {logic} from '../../../../../game';
+import {Model} from '../model';
+import {Selectable} from '../../../../logic/select-model-manager/selectable';
+import {UnitState} from '../../../../store/unit/unit.state';
+import {logic} from '../../../../game';
 
 export abstract class UnitModel extends Model implements Selectable{
-    public position: BABYLON.Vector3;
+    public state: UnitState;
 
     public abstract artUrl: string;
 

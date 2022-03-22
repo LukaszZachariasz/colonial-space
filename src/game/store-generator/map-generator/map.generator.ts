@@ -1,17 +1,13 @@
 import {HexModel} from '../../scene/space/model/hex/hex.model';
 import {HexState} from '../../store/map/hex/hex.state';
 import {MapState} from '../../store/map/map.state';
-import {PlanetGenerator} from './planet-generator/planet.generator';
-import {PlayerState} from '../../store/player/player.state';
 import {randomSpaceSkybox} from '../../scene/space/skybox/space/space-skybox.const';
 
 export class MapGenerator {
     public static readonly MapHeight = 15;
     public static readonly MapWidth = 20;
 
-    private planetGenerator: PlanetGenerator = new PlanetGenerator();
-
-    public generate(playerState: PlayerState): MapState {
+    public generate(): MapState {
         const map = new MapState();
         map.skyboxType = randomSpaceSkybox();
 
@@ -28,8 +24,6 @@ export class MapGenerator {
             }
             map.hexes.push(row);
         }
-
-        this.planetGenerator.generate(playerState, map.hexes);
 
         return map;
     }

@@ -1,10 +1,9 @@
 import * as BABYLON from 'babylonjs';
-import {HexTerritoryType} from '../../../../../../store/map/hex/hex-territory/hex-territory-type';
-import {ScoutShipState} from '../../../../../../store/map/hex/unit/scout/scout-ship.state';
+import {selectHexById} from '../../../../../store/map/hex/hex.selectors';
+import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
 
 export class ScoutShipModel extends UnitModel {
-    public type: HexTerritoryType = HexTerritoryType.PLANET;
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
     public state: ScoutShipState;
 
@@ -17,11 +16,10 @@ export class ScoutShipModel extends UnitModel {
 
     public afterModelLoaded(scene: BABYLON.Scene): void {
         this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
-            mesh.position = this.position;
+            mesh.position = new BABYLON.Vector3(selectHexById(this.state.hexId).x, 2, selectHexById(this.state.hexId).y);
             mesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
-            mesh.position.y = 1;
-            mesh.position.x += 0.2;
-            mesh.position.z += 0.2;
+            mesh.position.x += 1.5;
+            mesh.position.z += 1.5;
 
             this.actionManager = new BABYLON.ActionManager(scene);
             this.actionManager.registerAction(
