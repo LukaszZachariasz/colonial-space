@@ -1,6 +1,6 @@
-import {HexModel} from '../../scene/space/model/hex/hex.model';
-import {HexState} from '../../store/map/hex/hex.state';
 import {MapState} from '../../store/map/map.state';
+import {SquareModel} from '../../scene/space/model/square/square.model';
+import {SquareState} from '../../store/map/square/square.state';
 import {randomSpaceSkybox} from '../../scene/space/skybox/space/space-skybox.const';
 
 export class MapGenerator {
@@ -12,17 +12,15 @@ export class MapGenerator {
         map.skyboxType = randomSpaceSkybox();
 
         for (let y = 0; y < MapGenerator.MapHeight; y++) {
-            const row: HexState[] = [];
-            const yColumnOffset = y * HexModel.HexRadius;
+            const row: SquareState[] = [];
             for (let x = 0; x < MapGenerator.MapWidth; x++) {
-                const yOffset = x % 2 === 1 ? HexModel.HexRadius : 0;
 
-                const hex = new HexState();
-                hex.y = -y * HexModel.HexRadius - yOffset - yColumnOffset;
-                hex.x = (x * (HexModel.HexWidth - (HexModel.HexEdgeWidth / 2)));
-                row.push(hex);
+                const square = new SquareState();
+                square.y = -y * SquareModel.SquareEdgeWidth;
+                square.x = x * SquareModel.SquareEdgeWidth;
+                row.push(square);
             }
-            map.hexes.push(row);
+            map.squares.push(row);
         }
 
         return map;

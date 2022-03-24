@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {AddTourEffect} from '../../../../logic/tour-manager/tour-effect/add-tour-effect';
+import {AddTourEffect} from '../../../../logic/tour/tour-effect/add-tour-effect';
 import {Model} from '../model';
 import {Observable, Subscriber} from 'rxjs';
-import {Selectable} from '../../../../logic/select-model-manager/selectable';
+import {Selectable} from '../../../../logic/selection/selectable';
 import {UnitState} from '../../../../store/unit/unit.state';
 import {logic} from '../../../../game';
 
@@ -10,12 +10,13 @@ export abstract class UnitModel extends Model implements Selectable {
     public state: UnitState;
 
     public abstract artUrl: string;
+    public canBeMoved = true;
 
     protected meshes: BABYLON.AbstractMesh[];
     protected actionManager: BABYLON.ActionManager;
 
     protected select(): void {
-        logic().selectModelManager.select(this);
+        logic().selectionService.select(this);
     }
 
     @AddTourEffect({

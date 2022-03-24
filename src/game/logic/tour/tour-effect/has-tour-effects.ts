@@ -16,7 +16,7 @@ export function HasTourEffects(): (constructor: any) => any {
             metadataKeys.forEach((key: string) => {
                 const metadataValue = Reflect.getMetadata(key, instance);
 
-                logic().tourManager.addTourEffect(
+                logic().tourService.addTourEffect(
                     new TourEffect(
                         metadataValue.priority,
                         instance[metadataValue.fromTourFieldName],

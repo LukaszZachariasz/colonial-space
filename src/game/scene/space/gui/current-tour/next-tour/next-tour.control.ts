@@ -19,7 +19,7 @@ export class NextTourControl extends Control {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.button.onPointerUpObservable.add(() => {
-            logic().tourManager.nextTour();
+            logic().tourService.nextTour();
         });
 
         return this.button;

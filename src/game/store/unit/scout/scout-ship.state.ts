@@ -5,6 +5,6 @@ import {v4 as uuid} from 'uuid';
 export class ScoutShipState extends UnitState {
     public id: string = uuid();
     public type = UnitType.SCOUT;
-    public movement = 2;
+    public movementSpeed = 2;
     public health = 1;
 }

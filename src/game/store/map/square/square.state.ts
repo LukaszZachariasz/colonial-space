@@ -1,6 +1,6 @@
 import {v4 as uuid} from 'uuid';
 
-export class HexState {
+export class SquareState {
     public id: string = uuid();
     public x: number;
     public y: number;

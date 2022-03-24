@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {HexModel} from '../model/hex/hex.model';
 import {MapGenerator} from '../../../store-generator/map-generator/map.generator';
+import {SquareModel} from '../model/square/square.model';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public static readonly CameraUnitPerPixel = 30;
@@ -8,9 +8,9 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public boundary = 5;
 
     public maxLeft = 0;
-    public maxRight = MapGenerator.MapWidth * (HexModel.HexWidth - (HexModel.HexEdgeWidth / 2));
+    public maxRight = MapGenerator.MapWidth * SquareModel.SquareEdgeWidth;
     public maxTop = 0;
-    public maxBottom = -MapGenerator.MapHeight * HexModel.HexHeight;
+    public maxBottom = -MapGenerator.MapHeight * SquareModel.SquareEdgeWidth;
 
     public movingSpeed = 0.4;
 

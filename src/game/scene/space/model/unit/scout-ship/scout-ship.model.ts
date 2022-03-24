@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {HasTourEffects} from '../../../../../logic/tour-manager/tour-effect/has-tour-effects';
+import {HasTourEffects} from '../../../../../logic/tour/tour-effect/has-tour-effects';
 import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
-import {selectHexById} from '../../../../../store/map/hex/hex.selectors';
+import {selectSquareById} from '../../../../../store/map/square/square.selectors';
 
 @HasTourEffects()
 export class ScoutShipModel extends UnitModel {
@@ -18,7 +18,7 @@ export class ScoutShipModel extends UnitModel {
 
     public afterModelLoaded(scene: BABYLON.Scene): void {
         this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
-            mesh.position = new BABYLON.Vector3(selectHexById(this.state.hexId).x, 2, selectHexById(this.state.hexId).y);
+            mesh.position = new BABYLON.Vector3(selectSquareById(this.state.squareId).x, 2, selectSquareById(this.state.squareId).y);
             mesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
             mesh.position.x += 1.5;
             mesh.position.z += 1.5;

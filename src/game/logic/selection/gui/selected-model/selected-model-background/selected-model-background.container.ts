@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../container';
+import {Container} from '../../../../../scene/space/gui/container';
 
 export class SelectedModelBackgroundContainer extends Container {
     public render(): GUI.Control {

@@ -1,13 +1,13 @@
-import {HexState} from '../../store/map/hex/hex.state';
 import {ScoutShipState} from '../../store/unit/scout/scout-ship.state';
+import {SquareState} from '../../store/map/square/square.state';
 import {UnitState} from '../../store/unit/unit.state';
 
 export class UnitGenerator {
-    public generate(hex: HexState): UnitState[] {
+    public generate(square: SquareState): UnitState[] {
         const scout = new ScoutShipState();
 
-        scout.hexId = hex.id;
-        hex.unitId = scout.id;
+        scout.squareId = square.id;
+        square.unitId = scout.id;
 
         return [scout];
     }

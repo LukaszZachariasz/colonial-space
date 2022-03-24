@@ -4,7 +4,7 @@ import {store} from '../../../game';
 
 type ExecuteEffectGroup = {current: TourEffect[], pending: TourEffect[][]};
 
-export class TourEffectManager {
+export class TourEffectService {
     public completeTourEffects$ = new Subject<void>();
 
     private executeEffectGroup$ = new Subject<ExecuteEffectGroup>();

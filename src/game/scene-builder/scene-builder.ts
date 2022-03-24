@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {HexModel} from '../scene/space/model/hex/hex.model';
-import {HexState} from '../store/map/hex/hex.state';
 import {SpaceSceneBuilder} from '../scene/space/space.scene-builder';
 import {SpaceSkybox} from '../scene/space/skybox/space/space.skybox';
+import {SquareModel} from '../scene/space/model/square/square.model';
+import {SquareState} from '../store/map/square/square.state';
 import {TerritoryFactory} from '../scene/space/model/territory/territory.factory';
 import {TerritoryModel} from '../scene/space/model/territory/territory.model';
 import {TerritoryState} from '../store/territory/territory.state';
@@ -11,7 +11,7 @@ import {UnitModel} from '../scene/space/model/unit/unit.model';
 import {UnitState} from '../store/unit/unit.state';
 import {sceneManager} from 'engine';
 import {selectCurrentPlayerId} from '../store/player/player.selectors';
-import {selectPlayerHexes} from '../store/map/hex/hex.selectors';
+import {selectPlayerSquares} from '../store/map/square/square.selectors';
 import {store} from '../game';
 
 export class SceneBuilder {
@@ -26,11 +26,11 @@ export class SceneBuilder {
             .galaxyDust()
             .gui();
 
-        store().map.hexes.forEach((hexStates: HexState[]) => {
-            hexStates.forEach((hexState: HexState) => {
-                const hex = new HexModel(new BABYLON.Vector2(hexState.x, hexState.y));
-                hex.state = hexState;
-                this.spaceSceneBuilder.addHex(hex);
+        store().map.squares.forEach((squareStates: SquareState[]) => {
+            squareStates.forEach((squareState: SquareState) => {
+                const square = new SquareModel(new BABYLON.Vector2(squareState.x, squareState.y));
+                square.state = squareState;
+                this.spaceSceneBuilder.addSquare(square);
             });
         });
 
@@ -51,7 +51,7 @@ export class SceneBuilder {
     }
 
     private setCameraTargetToFirstTerritory(): void {
-        const playerHex = selectPlayerHexes(selectCurrentPlayerId())[0];
-        this.spaceSceneBuilder.spaceScene.camera.setTarget(new BABYLON.Vector3(playerHex.x, this.spaceSceneBuilder.spaceScene.camera.target.y, playerHex.y));
+        const playerSquare = selectPlayerSquares(selectCurrentPlayerId())[0];
+        this.spaceSceneBuilder.spaceScene.camera.setTarget(new BABYLON.Vector3(playerSquare.x, this.spaceSceneBuilder.spaceScene.camera.target.y, playerSquare.y));
     }
 }

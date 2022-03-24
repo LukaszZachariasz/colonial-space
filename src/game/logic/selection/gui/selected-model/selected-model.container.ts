@@ -1,10 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../container';
-import {Selectable} from '../../../../logic/select-model-manager/selectable';
+import {Container} from '../../../../scene/space/gui/container';
 import {SelectedModelArtControl} from './selected-model-art/selected-model-art.control';
 import {SelectedModelBackgroundContainer} from './selected-model-background/selected-model-background.container';
-import {filter, tap} from 'rxjs';
-import {logic} from '../../../../game';
 
 export class SelectedModelContainer extends Container {
     public render(): GUI.Control {
@@ -15,12 +12,7 @@ export class SelectedModelContainer extends Container {
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.container.addControl(new SelectedModelBackgroundContainer().render());
-
-        logic().selectModelManager.selected$.pipe(
-            tap((model: Selectable) => this.container.isVisible = !!model),
-            filter(() => this.container.isVisible),
-            tap(() => this.container.addControl(new SelectedModelArtControl().render()))
-        ).subscribe();
+        this.container.addControl(new SelectedModelArtControl().render());
 
         return this.container;
     }

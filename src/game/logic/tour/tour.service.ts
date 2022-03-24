@@ -1,13 +1,13 @@
 import {Subject, tap} from 'rxjs';
 import {TourEffect} from './tour-effect/tour-effect';
-import {TourEffectManager} from './tour-effect/tour-effect-manager';
+import {TourEffectService} from './tour-effect/tour-effect.service';
 import {store} from '../../game';
 
-export class TourManager {
+export class TourService {
     public startWaitingForTourEffects$ = new Subject<void>();
     public completeTour$ = new Subject<void>();
 
-    private tourEffectManager: TourEffectManager = new TourEffectManager();
+    private tourEffectManager: TourEffectService = new TourEffectService();
     private isRunningNextTure = false;
 
     constructor() {

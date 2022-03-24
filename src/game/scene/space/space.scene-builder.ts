@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from './camera/from-above-camera';
 import {GalaxyDustModel} from './model/galaxy-dust/galaxy-dust.model';
-import {HexModel} from './model/hex/hex.model';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceScene} from './space.scene';
 import {SpaceSkybox} from './skybox/space/space.skybox';
+import {SquareModel} from './model/square/square.model';
 import {TerritoryModel} from './model/territory/territory.model';
 import {UnitModel} from './model/unit/unit.model';
 
@@ -21,9 +21,9 @@ export class SpaceSceneBuilder {
         return this;
     }
 
-    public addHex(hex: HexModel): SpaceSceneBuilder {
-        this.spaceScene.hexes.push(hex);
-        hex.create(this.spaceScene.scene);
+    public addSquare(square: SquareModel): SpaceSceneBuilder {
+        this.spaceScene.squares.push(square);
+        square.create(this.spaceScene.scene);
         return this;
     }
 
