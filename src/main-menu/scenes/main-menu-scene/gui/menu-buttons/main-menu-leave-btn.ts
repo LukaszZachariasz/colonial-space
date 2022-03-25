@@ -8,7 +8,13 @@ export class MainMenuLeaveBtn extends AbstractMenuBtn {
         super();
     }
 
-    public generateButton(): void {
+    public render(): GUI.Control {
+        this.create();
+        this.registerChanges();
+        return this.btn;
+    }
+
+    public create(): void {
         this.btn = GUI.Button.CreateImageOnlyButton(this.BTN_NAME, 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg');
 
         this.btn.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -20,7 +26,9 @@ export class MainMenuLeaveBtn extends AbstractMenuBtn {
         this.btn.widthInPixels = 500;
         this.btn.leftInPixels = 40;
         this.btn.topInPixels = -50;
+    }
 
+    private registerChanges(): void {
         this.btn.onPointerEnterObservable.add(() => {
             this.btn.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-hover.svg';
         });
@@ -28,9 +36,5 @@ export class MainMenuLeaveBtn extends AbstractMenuBtn {
         this.btn.onPointerOutObservable.add(() => {
             this.btn.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg';
         });
-    }
-
-    public render(): GUI.Control {
-        return this.btn;
     }
 }
