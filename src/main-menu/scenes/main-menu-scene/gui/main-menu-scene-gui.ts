@@ -1,10 +1,10 @@
-import {tap} from 'rxjs';
-import {gameEngine} from '../../../../core/game-platform';
 import {Gui} from '../../../../game/scene/gui';
 import {MainMenuBeginBtn} from './menu-buttons/main-menu-begin-btn';
 import {MainMenuLeaveBtn} from './menu-buttons/main-menu-leave-btn';
 import {MainMenuLoadBtn} from './menu-buttons/main-menu-load-btn';
 import {MainMenuOptionsBtn} from './menu-buttons/main-menu-options-btn';
+import {gameEngine} from '../../../../core/game-platform';
+import {tap} from 'rxjs';
 
 
 export class MainMenuSceneGui extends Gui {
