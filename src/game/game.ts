@@ -16,7 +16,7 @@ export class Game {
     public sceneBuilder: SceneBuilder = new SceneBuilder();
     
     public generate(): void {
-        sceneManager().addScene(new LoadingScene());
+        sceneManager().register(new LoadingScene());
         sceneManager().navigateToScene(LoadingScene.SCENE_NAME);
         this.store = this.storeGenerator.generate();
         this.logic = new Logic();

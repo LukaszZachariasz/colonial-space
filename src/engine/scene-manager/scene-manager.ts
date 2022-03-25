@@ -18,7 +18,7 @@ export class SceneManager {
         return this.scene.camera;
     }
 
-    public addScene(gameScene: Scene): void {
+    public register(gameScene: Scene): void {
         this.allScenes.push(gameScene);
     }
 
@@ -37,6 +37,12 @@ export class SceneManager {
     }
 
     public getScene(name: string): Scene {
-        return this.allScenes.find((el: Scene) => el.name === name);
+        const scene = this.allScenes.find((el: Scene) => el.name === name);
+
+        if (!scene) {
+           throw new Error('Scene not found, are you sure scene is registered?');
+        }
+
+        return scene;
     }
 }

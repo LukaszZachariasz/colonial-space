@@ -38,7 +38,7 @@ export class SceneBuilder {
         });
 
         this.setCameraTargetToFirstTerritory();
-        sceneManager().addScene(this.spaceSceneBuilder.build());
+        sceneManager().register(this.spaceSceneBuilder.build());
     }
 
     private setCameraTargetToFirstTerritory(): void {
