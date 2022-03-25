@@ -29,6 +29,8 @@ export class MainMenuLoadBtn extends AbstractMenuBtn {
     }
 
     private registerChanges(): void {
+        this.btn.onPointerClickObservable.add(() => this.onClick$.next());
+
         this.btn.onPointerEnterObservable.add(() => {
             this.btn.image.source = 'resources/gui/main-menu/buttons/mm-load-btn-hover.svg';
         });

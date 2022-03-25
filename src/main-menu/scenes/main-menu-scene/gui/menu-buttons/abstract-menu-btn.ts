@@ -4,11 +4,10 @@ import {Subject} from 'rxjs';
 
 
 export abstract class AbstractMenuBtn extends Control {
-    protected btn = new GUI.Button();
+    protected btn: GUI.Button;
     public onClick$ = new Subject<void>();
 
     protected constructor() {
         super();
-        this.btn.onPointerClickObservable.add(() => this.onClick$.next());
     }
 }

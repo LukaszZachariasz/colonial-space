@@ -63,7 +63,7 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
 
         BABYLON.SceneLoader.ImportMesh('',
             'resources/blender_src/rocket_plane_01/', 'rocket_plane_1.glb',
-            this.scene, (mesh: BABYLON.AbstractMesh[]) => this.handleMesh(mesh));
+            this.scene, (mesh: BABYLON.AbstractMesh[], particleSystems, skeletons, animationGroups) => this.handleMesh(mesh));
 
     }
 

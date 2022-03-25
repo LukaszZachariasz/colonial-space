@@ -29,6 +29,8 @@ export class MainMenuLeaveBtn extends AbstractMenuBtn {
     }
 
     private registerChanges(): void {
+        this.btn.onPointerClickObservable.add(() => this.onClick$.next());
+
         this.btn.onPointerEnterObservable.add(() => {
             this.btn.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-hover.svg';
         });
