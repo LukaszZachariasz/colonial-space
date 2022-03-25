@@ -1,4 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import {AnimationGroup} from 'babylonjs/Animations/animationGroup';
+import {Skeleton} from 'babylonjs/Bones/skeleton';
+import {IParticleSystem} from 'babylonjs/Particles/IParticleSystem';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
 import {Scene} from '../../../engine/scene-manager/scene';
 import {gameEngine} from '../../../core/game-platform';
@@ -63,7 +66,9 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
 
         BABYLON.SceneLoader.ImportMesh('',
             'resources/blender_src/rocket_plane_01/', 'rocket_plane_1.glb',
-            this.scene, (mesh: BABYLON.AbstractMesh[], particleSystems, skeletons, animationGroups) => this.handleMesh(mesh));
+            this.scene, (mesh: BABYLON.AbstractMesh[], particleSystems: IParticleSystem[], skeletons: Skeleton[], animationGroups: AnimationGroup[]) => {
+                this.handleMesh(mesh);
+            });
 
     }
 
