@@ -1,18 +1,13 @@
 import * as BABYLON from 'babylonjs';
-import {Inject} from '../../../../../../core/injector/inject';
 import {Model} from '../../model';
-import {SelectionService} from '../../../../../logic/selection/selection.service';
 import {UnitModel} from '../../unit/unit.model';
-import {UnitMovementService} from '../../../../../logic/unit/unit-movement.service';
+import {logic} from '../../../../../game';
 import earcut from 'earcut';
 
 export class SquarePolygonModel implements Model {
     public polygon: BABYLON.Mesh;
 
     private material: BABYLON.StandardMaterial;
-    
-    @Inject(SelectionService) private selectionService: SelectionService;
-    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
 
     constructor(private squareId: string,
                 private squarePoints: BABYLON.Vector3[]) {
@@ -31,13 +26,13 @@ export class SquarePolygonModel implements Model {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                this.selectionService.deselect();
+                logic().selectionService.deselect();
             })
         );
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                if (this.selectionService.selection$.value) {
+                if (logic().selectionService.selection$.value) {
                     this.material.alpha = 0.1;
                 }
             })
@@ -51,9 +46,9 @@ export class SquarePolygonModel implements Model {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
-                if (this.selectionService.selection$.value) {
-                    this.unitMovementService.planMovingForUnit(
-                        (this.selectionService.selection$.value as UnitModel).state,
+                if (logic().selectionService.selection$.value) {
+                    logic().unitMovementService.planMovingForUnit(
+                        (logic().selectionService.selection$.value as UnitModel).state,
                         this.squareId
                     );
                 }
