@@ -1,11 +1,11 @@
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../../logic/tour/tour-effect/add-tour-effect';
-import {selectSquareById} from '../../../../store/map/square/square.selectors';
 import {Model} from '../model';
 import {Observable, Subscriber} from 'rxjs';
 import {Selectable} from '../../../../logic/selection/selectable';
 import {UnitState} from '../../../../store/unit/unit.state';
 import {logic} from '../../../../game';
+import {selectSquareById} from '../../../../store/map/square/square.selectors';
 
 export abstract class UnitModel extends Model implements Selectable {
     public state: UnitState;
