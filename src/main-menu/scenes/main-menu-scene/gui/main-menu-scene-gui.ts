@@ -1,4 +1,4 @@
-import {Gui} from '../../../../game/scene/gui';
+import {Gui} from '../../../../engine/gui-manager/gui';
 import {MainMenuBeginBtn} from './menu-buttons/main-menu-begin-btn';
 import {MainMenuLeaveBtn} from './menu-buttons/main-menu-leave-btn';
 import {MainMenuLoadBtn} from './menu-buttons/main-menu-load-btn';

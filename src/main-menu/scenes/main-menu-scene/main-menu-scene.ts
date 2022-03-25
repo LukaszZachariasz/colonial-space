@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
-import {Scene} from '../../../game/scene/scene';
+import {Scene} from '../../../engine/scene-manager/scene';
 import {gameEngine} from '../../../core/game-platform';
 
 
