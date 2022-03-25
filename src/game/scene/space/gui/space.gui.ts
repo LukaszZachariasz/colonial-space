@@ -1,5 +1,5 @@
 import {CurrentTourContainer} from './current-tour/current-tour.container';
-import {Gui} from '../../gui';
+import {Gui} from '../../../../engine/gui-manager/gui';
 import {MinimapContainer} from './minimap/minimap.container';
 import {ToolbarContainer} from './toolbar/toolbar.container';
 

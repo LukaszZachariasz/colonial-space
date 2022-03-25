@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../control';
+import {Control} from '../../../../../../engine/gui-manager/control';
 import {logic} from '../../../../../game';
 
 export class NextTourControl extends Control {

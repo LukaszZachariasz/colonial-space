@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {LoadingGui} from './gui/loading.gui';
-import {Scene} from '../scene';
+import {Scene} from '../../../engine/scene-manager/scene';
 import {SpaceSkybox} from '../space/skybox/space/space.skybox';
 
 export class LoadingScene extends Scene<BABYLON.FreeCamera, LoadingGui> {

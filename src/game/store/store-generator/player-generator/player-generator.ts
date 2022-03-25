@@ -1,4 +1,4 @@
-import {PlayerState} from '../../store/player/player.state';
+import {PlayerState} from '../../player/player.state';
 import {v4 as uuid} from 'uuid';
 
 export class PlayerGenerator {

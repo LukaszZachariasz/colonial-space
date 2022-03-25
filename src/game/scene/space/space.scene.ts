@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from './camera/from-above-camera';
 import {GalaxyDustModel} from './model/galaxy-dust/galaxy-dust.model';
-import {Scene} from '../scene';
+import {Scene} from '../../../engine/scene-manager/scene';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceSkybox} from './skybox/space/space.skybox';
 import {SquareModel} from './model/square/square.model';

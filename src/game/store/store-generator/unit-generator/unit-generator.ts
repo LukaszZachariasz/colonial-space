@@ -1,6 +1,6 @@
-import {ScoutShipState} from '../../store/unit/scout/scout-ship.state';
-import {SquareState} from '../../store/map/square/square.state';
-import {UnitState} from '../../store/unit/unit.state';
+import {ScoutShipState} from '../../unit/scout/scout-ship.state';
+import {SquareState} from '../../map/square/square.state';
+import {UnitState} from '../../unit/unit.state';
 
 export class UnitGenerator {
     public generate(square: SquareState): UnitState[] {

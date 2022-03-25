@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../container';
+import {Container} from '../../../../../engine/gui-manager/container';
 import {CurrentTourControl} from './current-tour/current-tour.control';
 import {NextTourControl} from './next-tour/next-tour.control';
 

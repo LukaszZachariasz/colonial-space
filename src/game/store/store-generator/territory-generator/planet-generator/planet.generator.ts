@@ -1,8 +1,8 @@
 import {PlanetNameGenerator} from './planet-name/planet-name.generator';
-import {PlanetState} from '../../../store/territory/planet/planet.state';
-import {SquareState} from '../../../store/map/square/square.state';
-import {TerritoryState} from '../../../store/territory/territory.state';
-import {TerritoryType} from '../../../store/territory/territory-type';
+import {PlanetState} from '../../../territory/planet/planet.state';
+import {SquareState} from '../../../map/square/square.state';
+import {TerritoryState} from '../../../territory/territory.state';
+import {TerritoryType} from '../../../territory/territory-type';
 
 export class PlanetGenerator {
     private static readonly Planets = 10;

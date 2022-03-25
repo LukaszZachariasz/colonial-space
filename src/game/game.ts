@@ -3,7 +3,7 @@ import {LoadingScene} from './scene/loading/loading.scene';
 import {Logic} from './logic/logic';
 import {SpaceScene} from './scene/space/space.scene';
 import {Store} from './store/store';
-import {StoreGenerator} from './store-generator/store.generator';
+import {StoreGenerator} from './store/store-generator/store.generator';
 import {filter, take, tap} from 'rxjs';
 import {game, sceneManager} from 'engine';
 import {gamePlatform} from '../core/game-platform';

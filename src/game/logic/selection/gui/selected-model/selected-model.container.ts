@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../scene/space/gui/container';
+import {Container} from '../../../../../engine/gui-manager/container';
 import {SelectedModelArtControl} from './selected-model-art/selected-model-art.control';
 import {SelectedModelBackgroundContainer} from './selected-model-background/selected-model-background.container';
 

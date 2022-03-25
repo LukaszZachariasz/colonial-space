@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../scene/space/gui/control';
+import {Control} from '../../../../../../engine/gui-manager/control';
 import {logic} from '../../../../../game';
 
 export class SelectedModelArtControl extends Control {

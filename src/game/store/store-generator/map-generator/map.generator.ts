@@ -1,7 +1,7 @@
-import {MapState} from '../../store/map/map.state';
-import {SquareModel} from '../../scene/space/model/square/square.model';
-import {SquareState} from '../../store/map/square/square.state';
-import {randomSpaceSkybox} from '../../scene/space/skybox/space/space-skybox.const';
+import {MapState} from '../../map/map.state';
+import {SquareModel} from '../../../scene/space/model/square/square.model';
+import {SquareState} from '../../map/square/square.state';
+import {randomSpaceSkybox} from '../../../scene/space/skybox/space/space-skybox.const';
 
 export class MapGenerator {
     public static readonly MapHeight = 15;
