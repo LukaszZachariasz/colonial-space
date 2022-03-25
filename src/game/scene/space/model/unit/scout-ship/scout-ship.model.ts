@@ -1,17 +1,20 @@
 import * as BABYLON from 'babylonjs';
-import {HasTourEffects} from '../../../../../logic/tour/tour-effect/has-tour-effects';
 import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
 import {selectSquareById} from '../../../../../store/map/square/square.selectors';
 
-@HasTourEffects()
 export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
-    public state: ScoutShipState;
+    private actionManager: BABYLON.ActionManager;
+
+    constructor(public state: ScoutShipState) {
+        super(state);
+    }
 
     public create(scene: BABYLON.Scene): void {
         BABYLON.SceneLoader.ImportMesh('', 'resources/unit/scout-ship/', 'scout-ship.obj', scene, (meshes: BABYLON.AbstractMesh[]) => {
             this.meshes = meshes;
+            super.initialize();
             this.afterModelLoaded(scene);
         });
     }
