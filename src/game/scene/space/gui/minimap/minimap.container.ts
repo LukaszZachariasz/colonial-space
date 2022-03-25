@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../container';
+import {Container} from '../../../../../engine/gui-manager/container';
 import {FromAboveCamera} from '../../camera/from-above-camera';
 import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.control';
 import {sceneManager} from 'engine';
@@ -15,7 +15,7 @@ export class MinimapContainer extends Container {
         this.container.width = this.width + '%';
         this.container.height = (this.width / this.camera.getProportion()) + '%';
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
         this.container.background = 'black';
         this.container.alpha = 0.3;
 

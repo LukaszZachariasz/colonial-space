@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../control';
+import {Control} from '../../../../../../engine/gui-manager/control';
 import {sceneManager} from 'engine';
 import {store} from '../../../../../game';
 

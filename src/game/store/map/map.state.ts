@@ -1,6 +1,6 @@
-import {HexState} from './hex/hex.state';
+import {SquareState} from './square/square.state';
 
 export class MapState {
     public skyboxType: string;
-    public hexes: HexState[][] = [];
+    public squares: SquareState[][] = [];
 }

@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {Scene} from '../../game/scene/scene';
+import {Scene} from './scene';
 import {guiManager} from 'engine';
 
 export class SceneManager {

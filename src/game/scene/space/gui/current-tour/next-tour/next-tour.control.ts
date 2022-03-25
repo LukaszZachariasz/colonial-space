@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../control';
+import {Control} from '../../../../../../engine/gui-manager/control';
 import {logic} from '../../../../../game';
 
 export class NextTourControl extends Control {
@@ -19,7 +19,7 @@ export class NextTourControl extends Control {
         this.button.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 
         this.button.onPointerUpObservable.add(() => {
-            logic().tourManager.nextTour();
+            logic().tourService.nextTour();
         });
 
         return this.button;

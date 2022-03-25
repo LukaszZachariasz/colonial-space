@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../game/scene/space/gui/control';
+import {Control} from './control';
 import {sceneManager} from 'engine';
 
 export class GuiManager {

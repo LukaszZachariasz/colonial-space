@@ -1,10 +1,14 @@
 import * as BABYLON from 'babylonjs';
+import {ActionManager} from 'babylonjs/Actions/actionManager';
 import {Model} from '../../model/model';
 import {SpaceSkyboxConst} from './space-skybox.const';
+import {logic} from '../../../../game';
 
 export class SpaceSkybox implements Model {
     public skybox: BABYLON.Mesh;
     public material: BABYLON.StandardMaterial;
+
+    private actionManager: ActionManager;
 
     constructor(private type: string = SpaceSkyboxConst[0]) {
     }
@@ -27,5 +31,13 @@ export class SpaceSkybox implements Model {
             this.skybox.rotation.x += 0.00005;
             this.skybox.rotation.z += 0.00005;
         });
+
+        this.actionManager = new BABYLON.ActionManager(scene);
+        this.skybox.actionManager = this.actionManager;
+        this.actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
+                logic().selectionService.deselect();
+            })
+        );
     }
 }
