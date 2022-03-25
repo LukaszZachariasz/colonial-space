@@ -41,8 +41,7 @@ export class GameBuilder {
         });
         
         store().units.forEach((unitState: UnitState) => {
-            const unit: UnitModel = this.unitFactory.create(unitState.type);
-            unit.state = unitState;
+            const unit: UnitModel = this.unitFactory.create(unitState.type, unitState);
             this.spaceSceneBuilder.addUnit(unit);
         });
 
