@@ -1,6 +1,6 @@
+import {GameBuilder} from './game-builder/game-builder';
 import {LoadingScene} from './scene/loading/loading.scene';
 import {Logic} from './logic/logic';
-import {SceneBuilder} from './scene-builder/scene-builder';
 import {SpaceScene} from './scene/space/space.scene';
 import {Store} from './store/store';
 import {StoreGenerator} from './store-generator/store.generator';
@@ -13,7 +13,7 @@ export class Game {
     public logic: Logic;
     
     public storeGenerator: StoreGenerator = new StoreGenerator();
-    public sceneBuilder: SceneBuilder = new SceneBuilder();
+    public gameBuilder: GameBuilder = new GameBuilder();
     
     public generate(): void {
         sceneManager().addScene(new LoadingScene());
@@ -23,7 +23,7 @@ export class Game {
     }
 
     public start(): void {
-        this.sceneBuilder.build();
+        this.gameBuilder.build();
 
         gamePlatform().loadingManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),

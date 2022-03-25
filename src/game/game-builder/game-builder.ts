@@ -14,7 +14,7 @@ import {selectCurrentPlayerId} from '../store/player/player.selectors';
 import {selectPlayerSquares} from '../store/map/square/square.selectors';
 import {store} from '../game';
 
-export class SceneBuilder {
+export class GameBuilder {
     public spaceSceneBuilder: SpaceSceneBuilder = new SpaceSceneBuilder();
     public territoryFactory: TerritoryFactory = new TerritoryFactory();
     public unitFactory: UnitFactory = new UnitFactory();
