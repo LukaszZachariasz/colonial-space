@@ -13,6 +13,7 @@
   ],
   "ignorePatterns": ["webpack.config.js"],
   "rules": {
+    "no-prototype-builtins": 0,
     "no-case-declarations": 0,
     "@typescript-eslint/ban-types": 0,
     "@typescript-eslint/no-var-requires": 0,

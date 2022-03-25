@@ -1,13 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import {ActionManager} from 'babylonjs/Actions/actionManager';
+import {Inject} from '../../../../../core/injector/inject';
 import {Model} from '../../model/model';
+import {SelectionService} from '../../../../logic/selection/selection.service';
 import {SpaceSkyboxConst} from './space-skybox.const';
-import {logic} from '../../../../game';
 
 export class SpaceSkybox implements Model {
     public skybox: BABYLON.Mesh;
     public material: BABYLON.StandardMaterial;
 
+    @Inject(SelectionService) private selectionService: SelectionService;
     private actionManager: ActionManager;
 
     constructor(private type: string = SpaceSkyboxConst[0]) {
@@ -36,7 +38,7 @@ export class SpaceSkybox implements Model {
         this.skybox.actionManager = this.actionManager;
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                logic().selectionService.deselect();
+                this.selectionService.deselect();
             })
         );
     }
