@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {AnimationGroup} from 'babylonjs/Animations/animationGroup';
-import {Skeleton} from 'babylonjs/Bones/skeleton';
 import {IParticleSystem} from 'babylonjs/Particles/IParticleSystem';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
 import {Scene} from '../../../engine/scene-manager/scene';
+import {Skeleton} from 'babylonjs/Bones/skeleton';
 import {gameEngine} from '../../../core/game-platform';
 
 
