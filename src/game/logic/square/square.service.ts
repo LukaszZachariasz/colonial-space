@@ -10,6 +10,6 @@ export class SquareService {
     }
 
     public getSquareByPosition(position: BABYLON.Vector2): SquareState {
-        return store().map.squares[position.x][position.y];
+        return store().map.squares[position.y][position.x];
     }
 }
