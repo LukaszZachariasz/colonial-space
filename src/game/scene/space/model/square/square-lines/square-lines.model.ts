@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {Model} from '../../model';
-import {selectPlayerColor} from '../../../../../store/player/player.selectors';
+import {selectPlayerColor} from '../../../../../logic/store/player/player.selectors';
 
 export class SquareLinesModel implements Model {
     public lines: BABYLON.LinesMesh;
@@ -14,7 +14,7 @@ export class SquareLinesModel implements Model {
         this.lines.alpha = 0.05;
 
         if (this.playerId) {
-            this.lines.color = selectPlayerColor();
+            this.lines.color = BABYLON.Color3.FromHexString(selectPlayerColor());
             this.lines.alpha = 1;
         }
     }

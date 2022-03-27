@@ -1,10 +1,11 @@
 import * as BABYLON from 'babylonjs';
-import {AddTourEffect} from '../../../../logic/tour/tour-effect/add-tour-effect';
-import {HasTourEffects} from '../../../../logic/tour/tour-effect/has-tour-effects';
+import {AddTourEffect} from '../../../../logic/services/tour/tour-effect/add-tour-effect';
+import {HasTourEffects} from '../../../../logic/services/tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber} from 'rxjs';
-import {TourEffectPriorityEnum} from '../../../../logic/tour/tour-effect/tour-effect-priority.enum';
-import {UnitState} from '../../../../store/unit/unit.state';
-import {selectSquareById} from '../../../../store/map/square/square.selectors';
+import {TourEffectPriorityEnum} from '../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
+import {UnitState} from '../../../../logic/store/unit/unit.state';
+import {logic} from '../../../../game';
+import {selectSquareById} from '../../../../logic/store/map/square/square.selectors';
 
 @HasTourEffects()
 export class UnitMovement {
@@ -20,33 +21,26 @@ export class UnitMovement {
     })
     protected move(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
-            if (this.state.plannedMovement.length === 0) {
+            const position = logic().unitMovementService.moveUnit(this.state.id);
+            if (position === undefined) {
                 subscriber.next();
                 subscriber.complete();
             }
-
-            for (let i = 0; i < this.state.movementSpeed; i++) {
-                const plannedMovingId = this.state.plannedMovement.shift();
-                if (plannedMovingId === undefined) {
-                    subscriber.next();
-                    subscriber.complete();
-                }
-                this.animationCompleted = 0;
-                this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
-                    BABYLON.Animation.CreateAndStartAnimation(
-                        'anim',
-                        mesh,
-                        'position',
-                        30,
-                        100,
-                        mesh.position,
-                        new BABYLON.Vector3(selectSquareById(plannedMovingId).x, mesh.position.y, selectSquareById(plannedMovingId).y),
-                        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-                        undefined,
-                        () => this.onAnimationEnd(subscriber)
-                    );
-                });
-            }
+            this.animationCompleted = 0;
+            this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
+                BABYLON.Animation.CreateAndStartAnimation(
+                    'anim',
+                    mesh,
+                    'position',
+                    30,
+                    100,
+                    mesh.position,
+                    new BABYLON.Vector3(position.x, mesh.position.y, position.y),
+                    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
+                    undefined,
+                    () => this.onAnimationEnd(subscriber)
+                );
+            });
         });
     }
 

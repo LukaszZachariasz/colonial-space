@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Model} from '../model';
 import {SquareLinesModel} from './square-lines/square-lines.model';
 import {SquarePolygonModel} from './square-polygon/square-polygon.model';
-import {SquareState} from '../../../../store/map/square/square.state';
+import {SquareState} from '../../../../logic/store/map/square/square.state';
 
 export class SquareModel implements Model {
     public static readonly SquareEdgeWidth = 10;

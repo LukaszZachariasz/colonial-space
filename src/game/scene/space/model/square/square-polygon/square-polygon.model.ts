@@ -47,8 +47,8 @@ export class SquarePolygonModel implements Model {
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
                 if (logic().selectionService.selection$.value) {
-                    logic().unitMovementService.planMovingForUnit(
-                        (logic().selectionService.selection$.value as UnitModel).state,
+                    logic().unitMovementService.createPlanMovement(
+                        (logic().selectionService.selection$.value as UnitModel).id,
                         this.squareId
                     );
                 }

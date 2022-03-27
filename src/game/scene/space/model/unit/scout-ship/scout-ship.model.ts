@@ -1,14 +1,13 @@
 import * as BABYLON from 'babylonjs';
-import {ScoutShipState} from '../../../../../store/unit/scout/scout-ship.state';
 import {UnitModel} from '../unit.model';
-import {selectSquareById} from '../../../../../store/map/square/square.selectors';
+import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 
 export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
     private actionManager: BABYLON.ActionManager;
 
-    constructor(public state: ScoutShipState) {
-        super(state);
+    constructor(public id: string) {
+        super(id);
     }
 
     public create(scene: BABYLON.Scene): void {
@@ -21,7 +20,7 @@ export class ScoutShipModel extends UnitModel {
 
     public afterModelLoaded(scene: BABYLON.Scene): void {
         this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
-            mesh.position = new BABYLON.Vector3(selectSquareById(this.state.squareId).x, 2, selectSquareById(this.state.squareId).y);
+            mesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 2, selectSquareByUnitId(this.id).y);
             mesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
             mesh.position.x += 1.5;
             mesh.position.z += 1.5;
