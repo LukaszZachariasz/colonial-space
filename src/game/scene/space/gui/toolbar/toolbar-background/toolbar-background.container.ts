@@ -13,5 +13,4 @@ export class ToolbarBackgroundContainer extends Container {
         this.container.alpha = ToolbarContainer.TOOLBAR_OPACITY;
         return this.container;
     }
-
 }
