@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {Subject} from 'rxjs';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
 import {
     selectSquareArrayPosition,
@@ -10,6 +11,8 @@ import {setSquareUnitId} from '../../store/map/map.slice';
 import {store} from '../../store/store';
 
 export class UnitMovementService {
+    public addedPlanMovement$ = new Subject<string>();
+
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
         const destination: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
         let currentDimensions: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
@@ -30,6 +33,7 @@ export class UnitMovementService {
                 plannedMovementId: selectSquareByArrayPosition(currentDimensions).id
             }));
         }
+        this.addedPlanMovement$.next(unitId);
     }
 
     public moveUnit(unitId: string): BABYLON.Vector2 {
