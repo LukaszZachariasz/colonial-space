@@ -1,4 +1,3 @@
-import {selectUnits} from '../../store/unit/unit.selectors';
 import {MapGenerator} from './map-generator/map.generator';
 import {PlayerGenerator} from './player-generator/player-generator';
 import {TerritoryGenerator} from './territory-generator/territory-generator';
@@ -9,6 +8,7 @@ import {addTerritory} from '../../store/territory/territory.slice';
 import {addUnit} from '../../store/unit/unit.slice';
 import {selectPlayerId} from '../../store/player/player.selectors';
 import {selectRandomEmptySquare, selectSquaresWithTerritory} from '../../store/map/square/square.selectors';
+import {selectUnits} from '../../store/unit/unit.selectors';
 import {setMap, setSquarePlayerId, setSquareTerritoryId, setSquareUnitId} from '../../store/map/map.slice';
 import {setPlayer} from '../../store/player/player.slice';
 import {setTour} from '../../store/tour/tour.slice';

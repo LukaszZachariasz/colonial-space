@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
-import {setSquareUnitId} from '../../store/map/map.slice';
-import {selectUnitById} from '../../store/unit/unit.selectors';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
 import {
     selectSquareArrayPosition,
     selectSquareByArrayPosition,
     selectSquareById, selectSquareByUnitId
 } from '../../store/map/square/square.selectors';
+import {selectUnitById} from '../../store/unit/unit.selectors';
+import {setSquareUnitId} from '../../store/map/map.slice';
 import {store} from '../../store/store';
 
 export class UnitMovementService {

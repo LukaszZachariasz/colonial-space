@@ -5,7 +5,6 @@ import {Observable, Subscriber} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitState} from '../../../../logic/store/unit/unit.state';
 import {logic} from '../../../../game';
-import {selectSquareById} from '../../../../logic/store/map/square/square.selectors';
 
 @HasTourEffects()
 export class UnitMovement {

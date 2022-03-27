@@ -1,5 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import {store} from '../../../../logic/store/store';
 import {Model} from '../model';
 import {Selectable} from '../../../../logic/services/selection/selectable';
 import {UnitMovement} from './unit-movement';
