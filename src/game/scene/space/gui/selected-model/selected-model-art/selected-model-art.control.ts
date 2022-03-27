@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../../engine/gui-manager/control';
-import {logic} from '../../../../../../game';
+import {Control} from '../../../../../../engine/gui-manager/control';
+import {logic} from '../../../../../game';
 
 export class SelectedModelArtControl extends Control {
     public artImage: GUI.Image;

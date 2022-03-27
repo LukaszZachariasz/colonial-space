@@ -14,7 +14,6 @@ export class UnitMovement {
 
     constructor(private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
-
         merge(
             logic().selectionService.selection$.pipe(
                 tap(() => this.unitMovementPathModel?.lines?.dispose()),
@@ -27,13 +26,6 @@ export class UnitMovement {
                 tap(() => this.unitMovementPathModel.recalculate())
             )
         ).subscribe();
-
-        logic().selectionService.selection$.pipe(
-            tap(() => this.unitMovementPathModel?.lines?.dispose()),
-            filter((unitModel: UnitModel) => this.id === unitModel?.id),
-            tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.id)),
-            tap(() => this.unitMovementPathModel.create(sceneManager().currentBabylonScene)),
-        ).subscribe();
     }
 
     @AddTourEffect({
@@ -43,7 +35,9 @@ export class UnitMovement {
     private move(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
             const position = logic().unitMovementService.moveUnit(this.id);
-            this.unitMovementPathModel.recalculate();
+            if (this.unitMovementPathModel?.lines?.isDisposed() === false) {
+                this.unitMovementPathModel.recalculate();
+            }
             if (position === undefined) {
                 subscriber.next();
                 subscriber.complete();
