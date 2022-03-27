@@ -1,5 +1,5 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {MapState} from './map.state';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {SquareState} from './square/square.state';
 
 export const mapSlice = createSlice({
