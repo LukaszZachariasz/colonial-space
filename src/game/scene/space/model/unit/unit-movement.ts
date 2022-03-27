@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {AddTourEffect} from '../../../../logic/tour/tour-effect/add-tour-effect';
-import {HasTourEffects} from '../../../../logic/tour/tour-effect/has-tour-effects';
+import {AddTourEffect} from '../../../../logic/services/tour/tour-effect/add-tour-effect';
+import {HasTourEffects} from '../../../../logic/services/tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitState} from '../../../../logic/store/unit/unit.state';

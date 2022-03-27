@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 import {UnitModel} from '../unit.model';
 
 export class ScoutShipModel extends UnitModel {
@@ -19,6 +20,8 @@ export class ScoutShipModel extends UnitModel {
                 this.transformMesh = meshes[0];
                 this.actionMesh = meshes[0].getChildMeshes()[0];
                 this.meshes = meshes;
+                this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 2, selectSquareByUnitId(this.id).y);
+                this.transformMesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
                 super.initialize();
                 this.afterModelLoaded(scene);
             });
