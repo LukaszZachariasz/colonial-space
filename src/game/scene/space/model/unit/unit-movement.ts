@@ -11,7 +11,7 @@ export class UnitMovement {
     private animationCompleted = 0;
 
     constructor(private state: UnitState,
-                private meshes: BABYLON.AbstractMesh[]) {
+                private transformMesh: BABYLON.AbstractMesh) {
     }
 
     @AddTourEffect({
@@ -32,29 +32,29 @@ export class UnitMovement {
                     subscriber.complete();
                 }
                 this.animationCompleted = 0;
-                this.meshes.forEach((mesh: BABYLON.AbstractMesh) => {
-                    BABYLON.Animation.CreateAndStartAnimation(
-                        'anim',
-                        mesh,
-                        'position',
-                        30,
-                        100,
-                        mesh.position,
-                        new BABYLON.Vector3(selectSquareById(plannedMovingId).x, mesh.position.y, selectSquareById(plannedMovingId).y),
-                        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-                        undefined,
-                        () => this.onAnimationEnd(subscriber)
-                    );
-                });
+
+                // TODO: Quaternion rotation check ~ based on physic of babylon
+
+                BABYLON.Animation.CreateAndStartAnimation(
+                    'anim',
+                    this.transformMesh,
+                    'position',
+                    30,
+                    100,
+                    this.transformMesh.position,
+                    new BABYLON.Vector3(selectSquareById(plannedMovingId).x, this.transformMesh.position.y, selectSquareById(plannedMovingId).y),
+                    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
+                    undefined,
+                    () => this.onAnimationEnd(subscriber)
+                );
+
             }
         });
     }
 
     private onAnimationEnd(subscriber: Subscriber<void>): void {
         this.animationCompleted++;
-        if (this.animationCompleted === this.meshes.length) {
-            subscriber.next();
-            subscriber.complete();
-        }
+        subscriber.next();
+        subscriber.complete();
     }
 }

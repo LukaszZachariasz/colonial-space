@@ -12,6 +12,10 @@ export abstract class UnitModel extends Model implements Selectable {
 
     protected meshes: BABYLON.AbstractMesh[];
 
+    protected transformMesh: BABYLON.AbstractMesh;
+
+    protected actionMesh: BABYLON.AbstractMesh;
+
     private unitMovement: UnitMovement;
 
     protected constructor(public state: UnitState) {
@@ -19,7 +23,7 @@ export abstract class UnitModel extends Model implements Selectable {
     }
 
     protected initialize(): void {
-        this.unitMovement = new UnitMovement(this.state, this.meshes);
+        this.unitMovement = new UnitMovement(this.state, this.transformMesh);
     }
 
     protected select(): void {

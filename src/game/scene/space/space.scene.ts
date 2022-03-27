@@ -21,6 +21,9 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
 
     constructor() {
         super(true);
-        new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);
+        const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);
+        light.intensity = 0.1;
+
+        // TODO: improve visual effects
     }
 }
