@@ -7,8 +7,8 @@ export class SelectedModelArtControl extends Control {
 
     public render(): GUI.Control {
         this.artImage = new GUI.Image('selectedModelArt', logic().selectionService.selection$.value.artUrl);
-        this.artImage.width = '80%';
-        this.artImage.height = '30%';
+        this.artImage.width = '100%';
+        this.artImage.height = '100%';
         this.artImage.top = '10px';
         this.artImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
