@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 import {UnitModel} from '../unit.model';
+import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 
 export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
