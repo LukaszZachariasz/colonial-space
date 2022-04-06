@@ -29,8 +29,8 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
         pipeline.fxaaEnabled = true;
         pipeline.samples = 8;
         pipeline.chromaticAberrationEnabled = true;
-        pipeline.chromaticAberration.aberrationAmount = 300;
-        pipeline.chromaticAberration.radialIntensity = 3;
+        pipeline.chromaticAberration.aberrationAmount = 800;
+        pipeline.chromaticAberration.radialIntensity = 4;
 
         pipeline.chromaticAberration.direction.x = Math.sin(Math.PI);
         pipeline.chromaticAberration.direction.y = Math.cos(Math.PI);
@@ -39,9 +39,9 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
     private initMainMenuCamera(): void {
         this.camera = new BABYLON.ArcRotateCamera(
             'MainMenuCamera',
-            1.186,
-            1.204,
-            10,
+            5.5,
+            1,
+            2,
             Vector3.Zero(),
             this.scene
         );

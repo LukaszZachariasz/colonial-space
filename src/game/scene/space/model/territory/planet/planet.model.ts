@@ -13,7 +13,7 @@ export class PlanetModel extends TerritoryModel {
     }
 
     public create(scene: BABYLON.Scene): void {
-        BABYLON.SceneLoader.ImportMesh('', 'resources/territory/planet/', 'planet_01.gltf', scene, (meshes: BABYLON.AbstractMesh[]) => {
+        BABYLON.SceneLoader.ImportMesh('', 'resources/territory/planet/', 'planet_01.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
             meshes[0].position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
         });
     }
