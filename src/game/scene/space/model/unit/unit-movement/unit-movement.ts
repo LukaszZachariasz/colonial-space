@@ -5,12 +5,17 @@ import {Observable, Subscriber, filter, merge, tap} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitModel} from '../unit.model';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
+import {gameEngine} from '../../../../../../core/game-platform';
 import {logic} from '../../../../../game';
 import {sceneManager} from 'engine';
 
 @HasTourEffects()
 export class UnitMovement {
     public unitMovementPathModel: UnitMovementPathModel;
+
+    private position: BABYLON.Vector2;
+    private unitRotate = (): void => this.lerpUnitRotate();
+    private unitRotationSubscriber: Subscriber<any>;
 
     constructor(private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
@@ -29,32 +34,53 @@ export class UnitMovement {
     }
 
     @AddTourEffect({
+        name: 'unit init move',
+        priority: TourEffectPriorityEnum.UNIT_INIT_MOVE_TOUR_EFFECT_PRIORITY
+    })
+    private initMove(): Observable<any> {
+        return new Observable<any>((subscriber: Subscriber<any>) => {
+            this.position = logic().unitMovementService.moveUnit(this.id);
+            subscriber.next();
+            subscriber.complete();
+        });
+    }
+
+    @AddTourEffect({
+        name: 'unit rotation',
+        priority: TourEffectPriorityEnum.UNIT_ROTATE_TOUR_EFFECT_PRIORITY
+    })
+    private rotation(): Observable<any> {
+        return new Observable<any>((subscriber: Subscriber<any>) => {
+            this.unitRotationSubscriber = subscriber;
+            gameEngine().sceneManager.currentScene.scene.registerBeforeRender(this.unitRotate);
+        });
+    }
+
+    @AddTourEffect({
         name: 'unit movement',
         priority: TourEffectPriorityEnum.UNIT_MOVE_TOUR_EFFECT_PRIORITY
     })
     private move(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
-            const position = logic().unitMovementService.moveUnit(this.id);
+
             if (this.unitMovementPathModel?.lines?.isDisposed() === false) {
                 this.unitMovementPathModel.recalculate();
             }
-            if (position === undefined) {
+            if (this.position === undefined) {
                 subscriber.next();
                 subscriber.complete();
             }
-
-            // TODO: Quaternion rotation check ~ based on physic of babylon
 
             BABYLON.Animation.CreateAndStartAnimation(
                 'anim',
                 this.transformMesh,
                 'position',
                 30,
-                100,
+                60,
                 this.transformMesh.position,
-                new BABYLON.Vector3(position.x, this.transformMesh.position.y, position.y),
+                new BABYLON.Vector3(this.position.x, this.transformMesh.position.y, this.position.y),
                 BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-                undefined,
+                new BABYLON.BezierCurveEase(0.60, 0, 0.50, 1),
                 () => this.onAnimationEnd(subscriber)
             );
         });
@@ -63,5 +89,20 @@ export class UnitMovement {
     private onAnimationEnd(subscriber: Subscriber<void>): void {
         subscriber.next();
         subscriber.complete();
+    }
+
+    private lerpUnitRotate(): void {
+        const tempQuat = BABYLON.Quaternion.Identity();
+        const slerpAmount = .1;
+        tempQuat.copyFrom(this.transformMesh.rotationQuaternion);
+        this.transformMesh.lookAt(new BABYLON.Vector3(this.position.x, this.transformMesh.position.y, this.position.y));
+
+        BABYLON.Quaternion.SlerpToRef(tempQuat, this.transformMesh.rotationQuaternion, slerpAmount, this.transformMesh.rotationQuaternion);
+
+        if (this.transformMesh.rotationQuaternion.equalsWithEpsilon(tempQuat)) {
+            gameEngine().sceneManager.currentScene.scene.unregisterBeforeRender(this.unitRotate);
+            this.unitRotationSubscriber.next();
+            this.unitRotationSubscriber.complete();
+        }
     }
 }

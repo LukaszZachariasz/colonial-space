@@ -9,7 +9,6 @@ export abstract class UnitModel extends Model implements Selectable {
     protected meshes: BABYLON.AbstractMesh[];
 
     protected transformMesh: BABYLON.AbstractMesh;
-
     protected actionMesh: BABYLON.AbstractMesh;
 
     private unitMovement: UnitMovement;
