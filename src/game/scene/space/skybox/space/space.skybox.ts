@@ -36,7 +36,7 @@ export class SpaceSkybox implements Model {
         this.skybox.actionManager = this.actionManager;
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                logic().selectionService.deselect();
+                logic().selectedUnitService.deselect();
             })
         );
     }

@@ -1,6 +1,5 @@
 import * as BABYLON from 'babylonjs';
 import {Model} from '../../model';
-import {UnitModel} from '../../unit/unit.model';
 import {logic} from '../../../../../game';
 import earcut from 'earcut';
 
@@ -9,7 +8,7 @@ export class SquarePolygonModel implements Model {
 
     private material: BABYLON.StandardMaterial;
 
-    constructor(private squareId: string,
+    constructor(private id: string,
                 private squarePoints: BABYLON.Vector3[]) {
     }
 
@@ -26,13 +25,13 @@ export class SquarePolygonModel implements Model {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                logic().selectionService.deselect();
+                logic().selectedUnitService.deselect();
             })
         );
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                if (logic().selectionService.selection$.value) {
+                if (logic().selectedUnitService.selectedUnit$.value) {
                     this.material.alpha = 0.1;
                 }
             })
@@ -46,12 +45,7 @@ export class SquarePolygonModel implements Model {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
-                if (logic().selectionService.selection$.value) {
-                    logic().unitMovementService.createPlanMovement(
-                        (logic().selectionService.selection$.value as UnitModel).id,
-                        this.squareId
-                    );
-                }
+                logic().unitMovementService.handleMovement(this.id);
             })
         );
     }

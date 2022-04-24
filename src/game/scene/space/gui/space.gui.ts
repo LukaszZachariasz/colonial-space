@@ -1,15 +1,15 @@
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
 import {MinimapContainer} from './minimap/minimap.container';
-import {Selectable} from '../../../logic/services/selection/selectable';
-import {SelectedModelContainer} from './selected-model/selected-model.container';
+import {SelectedUnitContainer} from './selected-unit/selected-unit.container';
 import {ToolbarContainer} from './toolbar/toolbar.container';
+import {UnitModel} from '../model/unit/unit.model';
 import {filter, tap} from 'rxjs';
 import {guiManager} from 'engine';
 import {logic} from '../../../game';
 
 export class SpaceGui extends Gui {
-    private selectedModelContainer: SelectedModelContainer;
+    private selectedUnitContainer: SelectedUnitContainer;
 
     constructor() {
         super();
@@ -20,10 +20,10 @@ export class SpaceGui extends Gui {
         this.guiManager.render(new CurrentTourContainer());
         this.guiManager.render(new MinimapContainer());
 
-        logic().selectionService.selection$.pipe(
-            tap(() => this.selectedModelContainer?.container.dispose()),
-            filter((selected: Selectable) => !!selected),
-            tap(() => this.selectedModelContainer = guiManager().render(new SelectedModelContainer())),
+        logic().selectedUnitService.selectedUnit$.pipe(
+            tap(() => this.selectedUnitContainer?.container.dispose()),
+            filter((unitModel: UnitModel) => !!unitModel),
+            tap(() => this.selectedUnitContainer = guiManager().render(new SelectedUnitContainer())),
         ).subscribe();
     }
 }

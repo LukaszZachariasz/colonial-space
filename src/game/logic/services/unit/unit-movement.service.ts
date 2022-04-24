@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {Subject} from 'rxjs';
+import {Subject, switchMap, take} from 'rxjs';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
+import {logic} from '../../../game';
 import {
     selectSquareArrayPosition,
     selectSquareByArrayPosition,
@@ -12,6 +13,24 @@ import {store} from '../../store/store';
 
 export class UnitMovementService {
     public addedPlanMovement$ = new Subject<string>();
+
+    public handleMovement(squareId: string): void {
+        if (!logic().selectedUnitService.selectedUnit$.value) {
+            return;
+        }
+        const unitState = selectUnitById(logic().selectedUnitService.selectedUnit$.value.id);
+        const selectedUnit = logic().selectedUnitService.selectedUnit$.value;
+
+        if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
+            selectedUnit.unitMovement.initMove().pipe(
+                take(1),
+                switchMap(() => selectedUnit.unitMovement.rotation().pipe(take(1))),
+                switchMap(() => selectedUnit.unitMovement.move().pipe(take(1)))
+            ).subscribe();
+        } else {
+            this.createPlanMovement(selectedUnit.id, squareId);
+        }
+    }
 
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
         const destination: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
@@ -38,11 +57,11 @@ export class UnitMovementService {
 
     public moveUnit(unitId: string): BABYLON.Vector2 {
         const unit = selectUnitById(unitId);
-        if (unit.plannedMovement.length === 0) {
+        if (!unit.movementPlanning.length || !unit.movementPointsLeft) {
             return undefined;
         }
-        const movement = Math.min(unit.plannedMovement.length, unit.movementSpeed);
-        const plannedId = unit.plannedMovement[movement - 1];
+        const movement = Math.min(unit.movementPlanning.length, unit.movementPointsLeft);
+        const plannedId = unit.movementPlanning[movement - 1];
         store.dispatch(setSquareUnitId({
             unitId: null,
             squareId: selectSquareByUnitId(unitId).id

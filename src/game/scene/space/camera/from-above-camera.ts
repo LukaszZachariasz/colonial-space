@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {MapGenerator} from '../../../logic/services/store-generator/map-generator/map.generator';
+import {MapGenerator} from '../../../logic/store-generator/map-generator/map.generator';
 import {SquareModel} from '../model/square/square.model';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {

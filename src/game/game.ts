@@ -2,7 +2,7 @@ import {GameBuilder} from './game-builder/game-builder';
 import {LoadingScene} from './scene/loading/loading.scene';
 import {Logic} from './logic/logic';
 import {SpaceScene} from './scene/space/space.scene';
-import {StoreGenerator} from './logic/services/store-generator/store.generator';
+import {StoreGenerator} from './logic/store-generator/store.generator';
 import {filter, take, tap} from 'rxjs';
 import {game, sceneManager} from 'engine';
 import {gamePlatform} from '../core/game-platform';

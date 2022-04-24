@@ -1,7 +1,7 @@
 import {PlanetNameGenerator} from './planet-name/planet-name.generator';
-import {PlanetState} from '../../../../store/territory/planet/planet.state';
-import {TerritoryState} from '../../../../store/territory/territory.state';
-import {TerritoryType} from '../../../../store/territory/territory-type';
+import {PlanetState} from '../../../store/territory/planet/planet.state';
+import {TerritoryState} from '../../../store/territory/territory.state';
+import {TerritoryType} from '../../../store/territory/territory-type';
 import {v4 as uuid} from 'uuid';
 
 export class PlanetGenerator {

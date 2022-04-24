@@ -1,4 +1,4 @@
-import {GlobalResourceState} from '../../../store/global-resource/global-resource.state';
+import {GlobalResourceState} from '../../store/global-resource/global-resource.state';
 
 export class GlobalResourceGenerator {
     public generate(): GlobalResourceState {

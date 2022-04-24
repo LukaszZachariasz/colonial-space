@@ -1,7 +1,7 @@
-import {MapState} from '../../../store/map/map.state';
-import {SquareModel} from '../../../../scene/space/model/square/square.model';
-import {SquareState} from '../../../store/map/square/square.state';
-import {randomSpaceSkybox} from '../../../../scene/space/skybox/space/space-skybox.const';
+import {MapState} from '../../store/map/map.state';
+import {SquareModel} from '../../../scene/space/model/square/square.model';
+import {SquareState} from '../../store/map/square/square.state';
+import {randomSpaceSkybox} from '../../../scene/space/skybox/space/space-skybox.const';
 import {v4 as uuid} from 'uuid';
 
 export class MapGenerator {

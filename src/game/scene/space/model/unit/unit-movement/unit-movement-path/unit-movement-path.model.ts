@@ -28,7 +28,7 @@ export class UnitMovementPathModel extends Model {
     private createPlannedMovementPoints(): void {
         this.plannedMovementPoints = [];
         this.plannedMovementPoints.push(new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 0, selectSquareByUnitId(this.id).y));
-        selectUnitById(this.id).plannedMovement.forEach((squareId: string) => {
+        selectUnitById(this.id).movementPlanning.forEach((squareId: string) => {
             this.plannedMovementPoints.push(
                 new BABYLON.Vector3(selectSquareById(squareId).x, 0, selectSquareById(squareId).y)
             );

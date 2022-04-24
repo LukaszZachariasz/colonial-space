@@ -20,7 +20,7 @@ export class UnitMovement {
     constructor(private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
         merge(
-            logic().selectionService.selection$.pipe(
+            logic().selectedUnitService.selectedUnit$.pipe(
                 tap(() => this.unitMovementPathModel?.lines?.dispose()),
                 filter((unitModel: UnitModel) => this.id === unitModel?.id),
                 tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.id)),
@@ -37,7 +37,7 @@ export class UnitMovement {
         name: 'unit init move',
         priority: TourEffectPriorityEnum.UNIT_INIT_MOVE_TOUR_EFFECT_PRIORITY
     })
-    private initMove(): Observable<any> {
+    public initMove(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
             this.position = logic().unitMovementService.moveUnit(this.id);
             subscriber.next();
@@ -49,8 +49,13 @@ export class UnitMovement {
         name: 'unit rotation',
         priority: TourEffectPriorityEnum.UNIT_ROTATE_TOUR_EFFECT_PRIORITY
     })
-    private rotation(): Observable<any> {
+    public rotation(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
+            if (this.position === undefined) {
+                subscriber.next();
+                subscriber.complete();
+                return;
+            }
             this.unitRotationSubscriber = subscriber;
             gameEngine().sceneManager.currentScene.scene.registerBeforeRender(this.unitRotate);
         });
@@ -60,15 +65,15 @@ export class UnitMovement {
         name: 'unit movement',
         priority: TourEffectPriorityEnum.UNIT_MOVE_TOUR_EFFECT_PRIORITY
     })
-    private move(): Observable<any> {
+    public move(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
-
             if (this.unitMovementPathModel?.lines?.isDisposed() === false) {
                 this.unitMovementPathModel.recalculate();
             }
             if (this.position === undefined) {
                 subscriber.next();
                 subscriber.complete();
+                return;
             }
 
             BABYLON.Animation.CreateAndStartAnimation(
