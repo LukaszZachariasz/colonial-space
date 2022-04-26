@@ -62,18 +62,10 @@ export class UnitMovementService {
         }
         const movement = Math.min(unit.movementPlanning.length, unit.movementPointsLeft);
         const plannedId = unit.movementPlanning[movement - 1];
-        store.dispatch(setSquareUnitId({
-            unitId: null,
-            squareId: selectSquareByUnitId(unitId).id
-        }));
-        store.dispatch(moveUnit({
-            id: unitId,
-            amount: movement
-        }));
-        store.dispatch(setSquareUnitId({
-            unitId: unitId,
-            squareId: plannedId
-        }));
+
+        store.dispatch(setSquareUnitId({unitId: null, squareId: selectSquareByUnitId(unitId).id}));
+        store.dispatch(moveUnit({id: unitId, amount: movement}));
+        store.dispatch(setSquareUnitId({unitId: unitId, squareId: plannedId}));
 
         const destinationSquare = selectSquareById(plannedId);
         return new BABYLON.Vector2(destinationSquare.x, destinationSquare.y);

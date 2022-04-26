@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
 import {Model} from '../model';
 import {SquareLinesModel} from './square-lines/square-lines.model';
 import {SquarePolygonModel} from './square-polygon/square-polygon.model';
@@ -10,6 +11,8 @@ export class SquareModel implements Model {
     public state: SquareState;
 
     private readonly squarePoints: BABYLON.Vector3[];
+
+    private fogOfWar: FogOfWarModel;
     private squareLines: SquareLinesModel;
     private squarePolygon: SquarePolygonModel;
 
@@ -18,6 +21,9 @@ export class SquareModel implements Model {
     }
 
     public create(scene: BABYLON.Scene): void {
+        if (this.state.fogOfWar) {
+            this.fogOfWar = new FogOfWarModel(this.state.id, this.squarePoints);
+        }
         this.squareLines = new SquareLinesModel(this.squarePoints);
         this.squarePolygon = new SquarePolygonModel(this.state.id, this.squarePoints);
 
@@ -27,6 +33,9 @@ export class SquareModel implements Model {
 
         this.squareLines.create(scene);
         this.squarePolygon.create(scene);
+        if (this.state.fogOfWar) {
+            this.fogOfWar.create(scene);
+        }
     }
 
     private generateSquarePolygon(): BABYLON.Vector3[] {

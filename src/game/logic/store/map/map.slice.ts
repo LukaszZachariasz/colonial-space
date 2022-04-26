@@ -1,6 +1,7 @@
 import {MapState} from './map.state';
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {SquareState} from './square/square.state';
+import {logic} from '../../../game';
 
 export const mapSlice = createSlice({
     name: 'map',
@@ -48,6 +49,24 @@ export const mapSlice = createSlice({
                     }
                 });
             });
+        },
+        removeFogOfWar: (state: MapState, action: PayloadAction<{
+            position: {
+                x: number,
+                y: number
+            },
+            range: number
+        }>) => {
+            for (let i = action.payload.position.x - action.payload.range; i < action.payload.position.x + action.payload.range + 1; i++) {
+                for (let j = action.payload.position.y - action.payload.range; j < action.payload.position.y + action.payload.range + 1; j++) {
+                    if (j >= 0 && j <= state.squares.length && i >= 0 && i <= state.squares[0].length) {
+                        if (state.squares[j][i].fogOfWar) {
+                            state.squares[j][i].fogOfWar = false;
+                            logic().fogOfWarService.removeFogOfWar$.next(state.squares[j][i].id);
+                        }
+                    }
+                }
+            }
         }
     }
 });
@@ -56,5 +75,6 @@ export const {
     setMap,
     setSquareTerritoryId,
     setSquareUnitId,
-    setSquarePlayerId
+    setSquarePlayerId,
+    removeFogOfWar
 } = mapSlice.actions;

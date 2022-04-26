@@ -23,7 +23,8 @@ export class MapGenerator {
                     y: -y * SquareModel.SquareEdgeWidth,
                     playerId: undefined,
                     territoryId: undefined,
-                    unitId: undefined
+                    unitId: undefined,
+                    fogOfWar: true
                 };
                 row.push(square);
             }
