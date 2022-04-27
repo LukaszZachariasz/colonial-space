@@ -11,7 +11,8 @@ export class UnitGenerator {
             playerId: playerId,
             movementPoints: 2,
             movementPointsLeft: 2,
-            movementPlanning: []
+            movementPlanning: [],
+            scoutRange: 1
         };
     }
 }

@@ -2,13 +2,13 @@ import * as BABYLON from 'babylonjs';
 import {Subject, switchMap, take} from 'rxjs';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
 import {logic} from '../../../game';
+import {removeFogOfWar, setSquareUnitId} from '../../store/map/map.slice';
 import {
     selectSquareArrayPosition,
     selectSquareByArrayPosition,
     selectSquareById, selectSquareByUnitId
 } from '../../store/map/square/square.selectors';
 import {selectUnitById} from '../../store/unit/unit.selectors';
-import {setSquareUnitId} from '../../store/map/map.slice';
 import {store} from '../../store/store';
 
 export class UnitMovementService {
@@ -63,11 +63,25 @@ export class UnitMovementService {
         const movement = Math.min(unit.movementPlanning.length, unit.movementPointsLeft);
         const plannedId = unit.movementPlanning[movement - 1];
 
+        for (let i = 0; i < movement; i++) {
+            this.scoutTerritory(unit.movementPlanning[i], unit.scoutRange);
+        }
+
         store.dispatch(setSquareUnitId({unitId: null, squareId: selectSquareByUnitId(unitId).id}));
         store.dispatch(moveUnit({id: unitId, amount: movement}));
         store.dispatch(setSquareUnitId({unitId: unitId, squareId: plannedId}));
 
         const destinationSquare = selectSquareById(plannedId);
         return new BABYLON.Vector2(destinationSquare.x, destinationSquare.y);
+    }
+
+    public scoutTerritory(squareId: string, range: number): void {
+        store.dispatch(removeFogOfWar({
+            position: {
+                x: selectSquareArrayPosition(squareId).x,
+                y: selectSquareArrayPosition(squareId).y
+            },
+            range: range
+        }));
     }
 }

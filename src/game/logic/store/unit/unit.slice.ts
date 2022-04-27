@@ -29,7 +29,6 @@ export const unitSlice = createSlice({
         }>) => {
             const unit = state.units.find((el: UnitState) => el.id === action.payload.id);
             unit.movementPointsLeft -= action.payload.amount;
-            console.log(unit.movementPointsLeft);
 
             for (let i = 0; i < action.payload.amount; i++) {
                 unit.movementPlanning.shift();

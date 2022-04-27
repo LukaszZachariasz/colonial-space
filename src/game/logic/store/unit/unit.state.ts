@@ -9,4 +9,6 @@ export interface UnitState {
     movementPoints: number;
     movementPlanning: string[];
     movementPointsLeft: number;
+
+    scoutRange: number;
 }

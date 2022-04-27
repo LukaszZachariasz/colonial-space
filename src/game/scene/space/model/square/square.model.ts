@@ -4,6 +4,8 @@ import {Model} from '../model';
 import {SquareLinesModel} from './square-lines/square-lines.model';
 import {SquarePolygonModel} from './square-polygon/square-polygon.model';
 import {SquareState} from '../../../../logic/store/map/square/square.state';
+import {filter, tap} from 'rxjs';
+import {logic} from '../../../../game';
 
 export class SquareModel implements Model {
     public static readonly SquareEdgeWidth = 10;
@@ -36,6 +38,14 @@ export class SquareModel implements Model {
         if (this.state.fogOfWar) {
             this.fogOfWar.create(scene);
         }
+
+        logic().fogOfWarService.removeFogOfWar$.pipe(
+            filter((id: string) => this.state.id === id),
+            tap(() => this.fogOfWar.polygon.dispose()),
+            tap(() => {
+                this.fogOfWar = undefined;
+            })
+        ).subscribe();
     }
 
     private generateSquarePolygon(): BABYLON.Vector3[] {
