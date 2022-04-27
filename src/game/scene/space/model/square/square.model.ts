@@ -42,6 +42,7 @@ export class SquareModel implements Model {
         logic().fogOfWarService.removeFogOfWar$.pipe(
             filter((id: string) => this.state.id === id),
             tap(() => this.fogOfWar.polygon.dispose()),
+            tap(() => this.fogOfWar.emitter.dispose()),
             tap(() => {
                 this.fogOfWar = undefined;
             })

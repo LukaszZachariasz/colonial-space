@@ -70,18 +70,18 @@ export class FogOfWarModel implements Model {
     private createNewSystem(scene: BABYLON.Scene): void {
         const fogTexture = new BABYLON.Texture('resources/fog/fog.png', scene);
 
-        this.particleSystem = new BABYLON.ParticleSystem(('square_particles_' + this.id), 250, scene);
+        this.particleSystem = new BABYLON.ParticleSystem(('square_particles_' + this.id), 50, scene);
         this.particleSystem.manualEmitCount = this.particleSystem.getCapacity();
-        this.particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0); // Starting all from
-        this.particleSystem.maxEmitBox = new BABYLON.Vector3(SquareModel.SquareEdgeWidth, -2, SquareModel.SquareEdgeWidth); // To...
+        this.particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0);
+        this.particleSystem.maxEmitBox = new BABYLON.Vector3(SquareModel.SquareEdgeWidth, -2, SquareModel.SquareEdgeWidth);
         this.particleSystem.particleTexture = fogTexture.clone();
         this.particleSystem.emitter = this.emitter;
 
-        this.particleSystem.color1 = new BABYLON.Color4(0.8, 0.8, 0.8, 0.1);
-        this.particleSystem.color2 = new BABYLON.Color4(.95, .95, .95, 0.15);
+        this.particleSystem.color1 = new BABYLON.Color4(0.8, 0.1, 0.2, 0.1);
+        this.particleSystem.color2 = new BABYLON.Color4(.2, .1, .95, 0.15);
         this.particleSystem.colorDead = new BABYLON.Color4(0.9, 0.9, 0.9, 0.1);
         this.particleSystem.minSize = 3.5;
-        this.particleSystem.maxSize = 5.0;
+        this.particleSystem.maxSize = 15.0;
         this.particleSystem.minLifeTime = Number.MAX_SAFE_INTEGER;
         this.particleSystem.emitRate = 50;
         this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
