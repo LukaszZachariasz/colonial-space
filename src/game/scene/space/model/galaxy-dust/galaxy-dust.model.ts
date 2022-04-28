@@ -1,16 +1,15 @@
 import * as BABYLON from 'babylonjs';
-import {Model} from '../model';
 
-export class GalaxyDustModel extends Model {
-    public create(scene: BABYLON.Scene): void {
+export class GalaxyDustModel {
+    constructor(private scene: BABYLON.Scene) {
         const starsEmitter = new BABYLON.SphereParticleEmitter();
         starsEmitter.radius = 10;
         starsEmitter.radiusRange = 10;
 
-        const stars = BABYLON.Mesh.CreateBox('emitter', 0.01, scene);
-        const starsParticles = new BABYLON.ParticleSystem('starsParticles', 50000, scene);
+        const stars = BABYLON.Mesh.CreateBox('emitter', 0.01, this.scene);
+        const starsParticles = new BABYLON.ParticleSystem('starsParticles', 50000, this.scene);
 
-        starsParticles.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', scene);
+        starsParticles.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', this.scene);
         starsParticles.emitter = stars;
         starsParticles.particleEmitterType = starsEmitter;
         starsParticles.color1 = new BABYLON.Color4(0.898, 0.737, 0.718, 1.0);
@@ -27,13 +26,11 @@ export class GalaxyDustModel extends Model {
         starsParticles.minAngularSpeed = 11.1;
         starsParticles.maxAngularSpeed = 11.1;
 
-
         starsParticles.manualEmitCount = 500;
 
         starsParticles.updateSpeed = 2;
         starsParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
         starsParticles.gravity = new BABYLON.Vector3(0, 0, 0);
-
 
         starsParticles.isBillboardBased = false;
 

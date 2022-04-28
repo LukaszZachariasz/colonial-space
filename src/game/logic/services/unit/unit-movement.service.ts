@@ -18,7 +18,7 @@ export class UnitMovementService {
         if (!logic().selectedUnitService.selectedUnit$.value) {
             return;
         }
-        const unitState = selectUnitById(logic().selectedUnitService.selectedUnit$.value.id);
+        const unitState = selectUnitById(logic().selectedUnitService.selectedUnit$.value.unitId);
         const selectedUnit = logic().selectedUnitService.selectedUnit$.value;
 
         if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
@@ -28,7 +28,7 @@ export class UnitMovementService {
                 switchMap(() => selectedUnit.unitMovement.move().pipe(take(1)))
             ).subscribe();
         } else {
-            this.createPlanMovement(selectedUnit.id, squareId);
+            this.createPlanMovement(selectedUnit.unitId, squareId);
         }
     }
 

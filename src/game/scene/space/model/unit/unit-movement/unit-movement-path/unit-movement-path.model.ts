@@ -1,30 +1,29 @@
 import * as BABYLON from 'babylonjs';
-import {Model} from '../../../model';
-import {sceneManager} from 'engine';
 import {selectSquareById, selectSquareByUnitId} from '../../../../../../logic/store/map/square/square.selectors';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
-export class UnitMovementPathModel extends Model {
+export class UnitMovementPathModel {
     public lines: BABYLON.LinesMesh;
     private plannedMovementPoints: BABYLON.Vector3[] = [];
-    
-    constructor(private id: string) {
-        super();
+
+    constructor(private scene: BABYLON.Scene,
+                private id: string) {
+        this.render();
     }
-    
-    public create(scene: BABYLON.Scene): void {
+
+    public render(): void {
         this.createPlannedMovementPoints();
 
         if (this.plannedMovementPoints.length) {
-            this.lines = BABYLON.MeshBuilder.CreateLines('unitMovementPath', {points: this.plannedMovementPoints}, scene);
+            this.lines = BABYLON.MeshBuilder.CreateLines('unitMovementPath', {points: this.plannedMovementPoints}, this.scene);
         }
     }
-    
+
     public recalculate(): void {
         this.lines?.dispose();
-        this.create(sceneManager().currentBabylonScene);
+        this.render();
     }
-    
+
     private createPlannedMovementPoints(): void {
         this.plannedMovementPoints = [];
         this.plannedMovementPoints.push(new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 0, selectSquareByUnitId(this.id).y));

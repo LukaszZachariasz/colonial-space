@@ -6,11 +6,9 @@ export class ScoutShipModel extends UnitModel {
     public artUrl = 'resources/unit/scout-ship/scout-ship-art.png';
     private actionManager: BABYLON.ActionManager;
 
-    constructor(public id: string) {
-        super(id);
-    }
-
-    public create(scene: BABYLON.Scene): void {
+    constructor(protected scene: BABYLON.Scene,
+                protected id: string) {
+        super(scene, id);
         BABYLON.SceneLoader.ImportMesh(
             '',
             'resources/unit/scout-ship/',
@@ -21,13 +19,13 @@ export class ScoutShipModel extends UnitModel {
                 this.actionMesh = meshes[0].getChildMeshes()[0];
                 this.meshes = meshes;
                 this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 2, selectSquareByUnitId(this.id).y);
-                super.initialize();
-                this.afterModelLoaded(scene);
+                super.createUnitMovement();
+                this.afterModelLoaded();
             });
     }
 
-    public afterModelLoaded(scene: BABYLON.Scene): void {
-        this.actionManager = new BABYLON.ActionManager(scene);
+    public afterModelLoaded(): void {
+        this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
                 this.actionMesh.enableEdgesRendering();

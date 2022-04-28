@@ -7,7 +7,6 @@ import {UnitModel} from '../unit.model';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
 import {gameEngine} from '../../../../../../core/game-platform';
 import {logic} from '../../../../../game';
-import {sceneManager} from 'engine';
 
 @HasTourEffects()
 export class UnitMovement {
@@ -17,14 +16,14 @@ export class UnitMovement {
     private unitRotate = (): void => this.lerpUnitRotate();
     private unitRotationSubscriber: Subscriber<any>;
 
-    constructor(private id: string,
+    constructor(private scene: BABYLON.Scene,
+                private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
         merge(
             logic().selectedUnitService.selectedUnit$.pipe(
                 tap(() => this.unitMovementPathModel?.lines?.dispose()),
-                filter((unitModel: UnitModel) => this.id === unitModel?.id),
-                tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.id)),
-                tap(() => this.unitMovementPathModel.create(sceneManager().currentBabylonScene)),
+                filter((unitModel: UnitModel) => this.id === unitModel?.unitId),
+                tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),
             ),
             logic().unitMovementService.addedPlanMovement$.pipe(
                 filter((id: string) => this.id === id),
