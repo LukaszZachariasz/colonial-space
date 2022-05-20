@@ -3,12 +3,36 @@ import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
 import {logic} from '../../../../../../game';
 
+export interface FogOfWarParticlesConfig {
+    minSize: number;
+    maxSize: number;
+    updateSpeed: number;
+    angleSpeed: number;
+    minHeight: number;
+    maxHeight: number;
+    color1: BABYLON.Color4;
+    color2: BABYLON.Color4;
+}
+
 export class FogOfWarModel {
     public plane: BABYLON.Mesh;
     public emitter: BABYLON.Mesh;
 
-    private readonly material: BABYLON.StandardMaterial;
     private particleSystem: BABYLON.ParticleSystem;
+
+    private fogConfig: FogOfWarParticlesConfig = {
+        minSize: 5,
+        maxSize: 18,
+        maxHeight: 0,
+        minHeight: -2,
+        updateSpeed: 0.005,
+        angleSpeed: 0.0002,
+        color1: new BABYLON.Color4(.8, .1, .8, .3),
+        color2: new BABYLON.Color4(.2, .1, .9, .3)
+    };
+
+    private readonly material: BABYLON.StandardMaterial;
+
 
     constructor(private scene: BABYLON.Scene,
                 private state: SquareState) {
@@ -16,7 +40,6 @@ export class FogOfWarModel {
             width: SquareModel.SquareEdgeSize,
             height: SquareModel.SquareEdgeSize
         }, this.scene);
-        this.plane.rotation.x = Math.PI / 2;
         this.plane.position.y = 1;
 
         this.material = new BABYLON.StandardMaterial('SquarePolygonMaterial', this.scene);
@@ -24,8 +47,6 @@ export class FogOfWarModel {
         this.plane.material = this.material;
 
         this.emitter = this.plane;
-        this.emitter.material = new BABYLON.StandardMaterial('SquareEmitterPolygonMaterial', this.scene);
-        this.emitter.material.alpha = 0;
 
         const actionManager: BABYLON.ActionManager = new BABYLON.ActionManager(this.scene);
         this.plane.actionManager = actionManager;
@@ -36,21 +57,9 @@ export class FogOfWarModel {
             })
         );
 
-        this.createNewSystem();
-        /*
-                actionManager.registerAction(
-                    new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                        if (logic().selectedUnitService.selectedUnit$.value) {
-                            this.material.alpha = 0.1;
-                        }
-                    })
-                );
+        this.particleSystem = this.createNewSystem(this.fogConfig);
 
-                actionManager.registerAction(
-                    new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                        this.material.alpha = 0;
-                    })
-                );*/
+        this.particleSystem.start();
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
@@ -59,35 +68,40 @@ export class FogOfWarModel {
         );
     }
 
-    private createNewSystem(): void {
+    private createNewSystem(config: FogOfWarParticlesConfig): BABYLON.ParticleSystem {
         const fogTexture = new BABYLON.Texture('resources/fog/fog.png', this.scene);
+        const particleSystem = new BABYLON.ParticleSystem(('square_particles_' + this.state.id), 15, this.scene);
 
-        this.particleSystem = new BABYLON.ParticleSystem(('square_particles_' + this.state.id), 15, this.scene);
-        this.particleSystem.manualEmitCount = this.particleSystem.getCapacity();
-        this.particleSystem.minEmitBox = new BABYLON.Vector3(-SquareModel.SquareEdgeSize / 2, 0, -SquareModel.SquareEdgeSize / 2);
-        this.particleSystem.maxEmitBox = new BABYLON.Vector3(SquareModel.SquareEdgeSize / 2, -2, SquareModel.SquareEdgeSize / 2);
-        this.particleSystem.particleTexture = fogTexture.clone();
-        this.particleSystem.emitter = this.emitter;
+        particleSystem.manualEmitCount = particleSystem.getCapacity();
+        particleSystem.minEmitBox = new BABYLON.Vector3(-SquareModel.SquareEdgeSize / 2, config.maxHeight, -SquareModel.SquareEdgeSize / 2);
+        particleSystem.maxEmitBox = new BABYLON.Vector3(SquareModel.SquareEdgeSize / 2, config.minHeight, SquareModel.SquareEdgeSize / 2);
+        particleSystem.particleTexture = fogTexture.clone();
+        particleSystem.emitter = this.emitter;
 
-        this.particleSystem.color1 = new BABYLON.Color4(0.8, 0.1, 0.8, 0.3);
-        this.particleSystem.color2 = new BABYLON.Color4(.2, .1, .95, 0.3);
-        this.particleSystem.minSize = 5;
-        this.particleSystem.maxSize = 18.0;
-        this.particleSystem.minLifeTime = 10;
-        this.particleSystem.emitRate = 50;
-        this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
-        this.particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
-        this.particleSystem.direction1 = new BABYLON.Vector3(0, 0, 0);
-        this.particleSystem.direction2 = new BABYLON.Vector3(0, 0, 0);
-        this.particleSystem.updateSpeed = 0.005;
+        particleSystem.color1 = config.color1;
+        particleSystem.color2 = config.color2;
+        particleSystem.minSize = config.minSize;
+        particleSystem.maxSize = config.maxSize;
+        particleSystem.minLifeTime = 10;
+        particleSystem.emitRate = 50;
+        particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
+        particleSystem.gravity = BABYLON.Vector3.Zero();
+        particleSystem.direction1 = BABYLON.Vector3.Zero();
+        particleSystem.direction2 = BABYLON.Vector3.Zero();
+        particleSystem.updateSpeed = config.updateSpeed;
 
-        this.particleSystem.updateFunction = (particles: BABYLON.Particle[]): void => {
+        particleSystem.updateFunction = (particles: BABYLON.Particle[]): void => {
             particles.forEach((singleParticle: BABYLON.Particle) => {
                 singleParticle.age = 10;
-                singleParticle.angle += singleParticle.size * 0.0002;
+
+                if (singleParticle.size < (config.minSize + config.maxSize) * 0.5) {
+                    singleParticle.angle += singleParticle.size * config.angleSpeed;
+                } else {
+                    singleParticle.angle -= singleParticle.size * config.angleSpeed;
+                }
             });
         };
 
-        this.particleSystem.start();
+        return particleSystem;
     }
 }
