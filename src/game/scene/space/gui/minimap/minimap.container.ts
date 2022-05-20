@@ -17,7 +17,7 @@ export class MinimapContainer extends Container {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
         this.container.background = 'black';
-        this.container.alpha = 0.3;
+        this.container.alpha = 0.4;
 
         this.minimapIndicatorControl = new MinimapIndicatorControl();
         this.container.addControl(this.minimapIndicatorControl.render());

@@ -1,6 +1,5 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../engine/gui-manager/container';
-import {SelectedUnitArtControl} from './selected-unit-art/selected-unit-art.control';
 import {SelectedUnitBackgroundContainer} from './selected-unit-background/selected-unit-background.container';
 
 export class SelectedUnitContainer extends Container {
@@ -14,7 +13,6 @@ export class SelectedUnitContainer extends Container {
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
         this.container.addControl(new SelectedUnitBackgroundContainer().render());
-        this.container.addControl(new SelectedUnitArtControl().render());
 
         return this.container;
     }
