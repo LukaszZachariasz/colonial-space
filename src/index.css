@@ -1,0 +1,18 @@
+@font-face {
+    font-family: JuiceLight;
+    src: url('./assets/fonts/juice/JuiceLight-lByy.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: JuiceRegular;
+    src: url('./assets/fonts/juice/JuiceRegular-1XWg.ttf');
+}
+
+@font-face {
+    font-family: JuiceBold;
+    src: url('./assets/fonts/juice/JuiceBoldBold-6g3D.ttf') format('truetype');
+}
+
+body {
+    font-family: JuiceRegular;
+}
