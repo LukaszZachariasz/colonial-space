@@ -6,6 +6,7 @@ export class UnitGenerator {
     public generate(playerId: string): UnitState {
         return {
             id: uuid(),
+            name: 'Scout ship',
             type: UnitType.SCOUT,
             health: 1,
             playerId: playerId,
