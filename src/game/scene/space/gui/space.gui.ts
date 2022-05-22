@@ -1,9 +1,9 @@
-import {TerritoryModel} from '../model/territory/territory.model';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
 import {MinimapContainer} from './minimap/minimap.container';
 import {SelectedTerritoryContainer} from './selected-territory/selected-territory.container';
 import {SelectedUnitContainer} from './selected-unit/selected-unit.container';
+import {TerritoryModel} from '../model/territory/territory.model';
 import {ToolbarContainer} from './toolbar/toolbar.container';
 import {UnitModel} from '../model/unit/unit.model';
 import {filter, tap} from 'rxjs';

@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
-import {tap} from 'rxjs';
-import {logic} from '../../../../game';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
+import {logic} from '../../../../game';
 import {selectTerritoryById} from '../../../../logic/store/territory/territory.selectors';
+import {tap} from 'rxjs';
 
 export abstract class TerritoryModel {
     public state: TerritoryState;
