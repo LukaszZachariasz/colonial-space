@@ -7,7 +7,8 @@ export class UnitSignModel {
     public advancedTexture: GUI.AdvancedDynamicTexture;
 
     constructor(private scene: BABYLON.Scene) {
-        this.signMesh = BABYLON.Mesh.CreatePlane('plane', 2, this.scene);
+        this.signMesh = BABYLON.Mesh.CreatePlane('sign', 2, this.scene);
+        this.signMesh.rotation.x = Math.PI;
         this.signMesh.position.y = -5; // TODO: why -5 instead of 5?
         this.signMesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
 
