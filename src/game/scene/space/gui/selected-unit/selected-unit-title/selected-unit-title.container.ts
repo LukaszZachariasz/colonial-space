@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../../engine/gui-manager/container';
-import {IconControl} from '../../../shared/icon/icon.control';
+import {Container} from '../../../../../../engine/gui-manager/container';
+import {IconControl} from '../../shared/icon/icon.control';
 import {SelectedUnitNameControl} from './selected-unit-name/selected-unit-title.control';
 
 export class SelectedUnitTitleContainer extends Container {

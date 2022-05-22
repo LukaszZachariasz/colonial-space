@@ -16,6 +16,10 @@ export class TextControl extends Control {
         this.textBlock.fontSize = '12px';
         this.textBlock.color = this.options?.color || 'white';
 
+        if (this.options?.uppercase) {
+            this.textBlock.text = this.textBlock.text.toUpperCase();
+        }
+
         return this.textBlock;
     }
 }
