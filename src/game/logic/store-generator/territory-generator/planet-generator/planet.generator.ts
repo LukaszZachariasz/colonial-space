@@ -13,6 +13,7 @@ export class PlanetGenerator {
             const planetState: TerritoryState<PlanetState> = {
                 id: uuid(),
                 type: TerritoryType.PLANET,
+                name: PlanetNameGenerator.generate(),
                 data: {
                     name: PlanetNameGenerator.generate()
                 }
