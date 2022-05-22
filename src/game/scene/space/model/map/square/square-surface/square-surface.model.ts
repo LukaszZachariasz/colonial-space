@@ -25,6 +25,7 @@ export class SquareSurfaceModel {
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
                 logic().selectedUnitService.deselect();
+                logic().selectedTerritoryService.deselect();
             })
         );
 

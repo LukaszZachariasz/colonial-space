@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {logic} from '../../../../game';
+import {tap} from 'rxjs';
 
 export abstract class UnitModel {
     public abstract artUrl: string;

@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {Subject} from 'rxjs';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
+import {Subject} from 'rxjs';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../gui/shared/text/text.control';
 

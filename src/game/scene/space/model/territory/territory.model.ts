@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {tap} from 'rxjs';
 import {logic} from '../../../../game';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
@@ -21,6 +22,7 @@ export abstract class TerritoryModel {
     protected afterModelLoaded(): void {
         this.territorySignModel = new TerritorySignModel(this.scene, this.state);
         this.territorySignModel.signMesh.parent = this.transformMesh;
+        this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }
 
     protected select(): void {

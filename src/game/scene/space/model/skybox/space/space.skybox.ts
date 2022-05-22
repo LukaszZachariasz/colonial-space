@@ -34,6 +34,7 @@ export class SpaceSkybox {
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
                 logic().selectedUnitService.deselect();
+                logic().selectedTerritoryService.deselect();
             })
         );
     }
