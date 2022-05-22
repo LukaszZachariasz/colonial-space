@@ -19,7 +19,7 @@ export class ScoutShipModel extends UnitModel {
                 this.actionMesh = meshes[0].getChildMeshes()[0];
                 this.meshes = meshes;
                 this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 2, selectSquareByUnitId(this.id).y);
-                super.createUnitMovement();
+                super.afterModelLoaded();
                 this.afterModelLoaded();
             });
     }
