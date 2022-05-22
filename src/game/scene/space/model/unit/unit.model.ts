@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {logic} from '../../../../game';
@@ -25,6 +26,7 @@ export abstract class UnitModel {
     protected afterModelLoaded(): void {
         this.unitSignModel = new UnitSignModel(this.scene);
         this.unitSignModel.signMesh.parent = this.transformMesh;
+        this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
 
         this.unitMovement = new UnitMovement(this.scene, this.id, this.transformMesh);
     }

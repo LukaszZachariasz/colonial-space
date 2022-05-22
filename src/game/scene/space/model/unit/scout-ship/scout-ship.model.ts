@@ -19,12 +19,13 @@ export class ScoutShipModel extends UnitModel {
                 this.actionMesh = meshes[0].getChildMeshes()[0];
                 this.meshes = meshes;
                 this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.id).x + 3, 2, selectSquareByUnitId(this.id).y - 4);
-                super.afterModelLoaded();
                 this.afterModelLoaded();
             });
     }
 
     public afterModelLoaded(): void {
+        super.afterModelLoaded();
+
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
@@ -46,6 +47,5 @@ export class ScoutShipModel extends UnitModel {
             })
         );
         this.actionMesh.actionManager = this.actionManager;
-
     }
 }

@@ -14,6 +14,7 @@ export class SelectedUnitContainer extends Container {
         this.container.top = '-50px';
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.container.isPointerBlocker = true;
 
         this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
         this.backgroundImage.width = '100%';

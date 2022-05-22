@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
+import {Subject} from 'rxjs';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../gui/shared/text/text.control';
@@ -10,6 +11,8 @@ export class TerritorySignModel {
 
     public icon: IconControl;
     public text: TextControl;
+
+    public clicked$ = new Subject<void>();
 
     private readonly WIDTH = 10;
     private readonly HEIGHT = 2;
@@ -33,6 +36,9 @@ export class TerritorySignModel {
         this.icon.render();
         this.icon.icon.widthInPixels = this.GUI_SIZE * this.HEIGHT;
         this.icon.icon.heightInPixels = this.GUI_SIZE * this.HEIGHT;
+        this.icon.icon.onPointerDownObservable.add(() => {
+            this.clicked$.next();
+        });
 
         this.text = new TextControl(this.territoryState.name);
         this.text.render();
@@ -40,6 +46,9 @@ export class TerritorySignModel {
         this.text.textBlock.left = (this.GUI_SIZE * this.HEIGHT) + this.TEXT_PADDING + 'px';
         this.text.textBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.text.textBlock.widthInPixels = (this.GUI_SIZE * this.WIDTH) - (this.GUI_SIZE * this.HEIGHT) - this.TEXT_PADDING;
+        this.text.textBlock.onPointerDownObservable.add(() => {
+            this.clicked$.next();
+        });
 
         this.advancedTexture.addControl(this.icon.icon);
         this.advancedTexture.addControl(this.text.textBlock);

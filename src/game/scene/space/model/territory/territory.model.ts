@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {logic} from '../../../../game';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
@@ -9,6 +10,7 @@ export abstract class TerritoryModel {
     public territorySignModel: TerritorySignModel;
     public abstract type: TerritoryType;
 
+    protected actionMesh: BABYLON.AbstractMesh;
     protected transformMesh: BABYLON.AbstractMesh;
 
     protected constructor(protected scene: BABYLON.Scene,
@@ -19,5 +21,9 @@ export abstract class TerritoryModel {
     protected afterModelLoaded(): void {
         this.territorySignModel = new TerritorySignModel(this.scene, this.state);
         this.territorySignModel.signMesh.parent = this.transformMesh;
+    }
+
+    protected select(): void {
+        logic().selectedTerritoryService.select(this);
     }
 }
