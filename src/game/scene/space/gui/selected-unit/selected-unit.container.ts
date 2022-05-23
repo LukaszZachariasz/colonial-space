@@ -2,9 +2,13 @@ import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../engine/gui-manager/container';
 import {SelectedUnitArtControl} from './selected-unit-art/selected-unit-art.control';
 import {SelectedUnitTitleContainer} from './selected-unit-title/selected-unit-title.container';
+import {UnitState} from '../../../../logic/store/unit/unit.state';
+import {logic} from '../../../../game';
+import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
 export class SelectedUnitContainer extends Container {
     public backgroundImage: GUI.Image;
+    public unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
     public render(): GUI.Control {
         this.container = new GUI.Container('selectedUnitContainer');
@@ -20,8 +24,8 @@ export class SelectedUnitContainer extends Container {
         this.backgroundImage.width = '100%';
         this.backgroundImage.height = '100%';
         this.container.addControl(this.backgroundImage);
-        this.container.addControl(new SelectedUnitArtControl().render());
-        this.container.addControl(new SelectedUnitTitleContainer().render());
+        this.container.addControl(new SelectedUnitArtControl(this.unitState).render());
+        this.container.addControl(new SelectedUnitTitleContainer(this.unitState).render());
 
         return this.container;
     }

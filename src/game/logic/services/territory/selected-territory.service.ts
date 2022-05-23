@@ -1,14 +1,13 @@
 import {BehaviorSubject} from 'rxjs';
-import {TerritoryModel} from '../../../scene/space/model/territory/territory.model';
 
 export class SelectedTerritoryService {
-    public selectedTerritory$: BehaviorSubject<TerritoryModel> = new BehaviorSubject<TerritoryModel>(null);
+    public selectedTerritoryId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-    public select(model: TerritoryModel): void {
-        this.selectedTerritory$.next(model);
+    public select(id: string): void {
+        this.selectedTerritoryId$.next(id);
     }
 
     public deselect(): void {
-        this.selectedTerritory$.next(null);
+        this.selectedTerritoryId$.next(null);
     }
 }

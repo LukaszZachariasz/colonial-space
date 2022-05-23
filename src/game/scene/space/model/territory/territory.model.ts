@@ -3,11 +3,9 @@ import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
 import {logic} from '../../../../game';
-import {selectTerritoryById} from '../../../../logic/store/territory/territory.selectors';
 import {tap} from 'rxjs';
 
 export abstract class TerritoryModel {
-    public state: TerritoryState;
     public territorySignModel: TerritorySignModel;
     public abstract type: TerritoryType;
 
@@ -15,8 +13,7 @@ export abstract class TerritoryModel {
     protected transformMesh: BABYLON.AbstractMesh;
 
     protected constructor(protected scene: BABYLON.Scene,
-                          protected id: string) {
-        this.state = selectTerritoryById(id);
+                          protected state: TerritoryState) {
     }
 
     protected afterModelLoaded(): void {
@@ -26,6 +23,6 @@ export abstract class TerritoryModel {
     }
 
     protected select(): void {
-        logic().selectedTerritoryService.select(this);
+        logic().selectedTerritoryService.select(this.state.id);
     }
 }

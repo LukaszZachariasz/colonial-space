@@ -17,8 +17,8 @@ export class GameBuilder {
         sceneManager().register(spaceScene);
         new MapModel(spaceScene.scene);
 
-        selectTerritories().forEach((territoryState: TerritoryState) => new PlanetModel(spaceScene.scene, territoryState.id));
-        selectUnits().forEach((unitState: UnitState) => new ScoutShipModel(spaceScene.scene, unitState.id));
+        selectTerritories().forEach((territoryState: TerritoryState) => new PlanetModel(spaceScene.scene, territoryState));
+        selectUnits().forEach((unitState: UnitState) => new ScoutShipModel(spaceScene.scene, unitState));
 
         this.setCameraTargetToFirstTerritory(spaceScene);
     }

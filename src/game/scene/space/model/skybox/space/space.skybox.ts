@@ -25,8 +25,8 @@ export class SpaceSkybox {
         this.skybox.material = this.material;
 
         this.scene.registerAfterRender(() => {
-            this.skybox.rotation.x += 0.00005;
-            this.skybox.rotation.z += 0.00005;
+            this.skybox.rotation.x += 0.00001;
+            this.skybox.rotation.z += 0.00001;
         });
 
         this.actionManager = new BABYLON.ActionManager(this.scene);

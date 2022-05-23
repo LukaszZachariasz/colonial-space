@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {Subject, switchMap, take} from 'rxjs';
+import {Subject} from 'rxjs';
+import {UnitState} from '../../store/unit/unit.state';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
 import {logic} from '../../../game';
 import {removeFogOfWar, setSquareUnitId} from '../../store/map/map.slice';
@@ -13,22 +14,18 @@ import {store} from '../../store/store';
 
 export class UnitMovementService {
     public addedPlanMovement$ = new Subject<string>();
+    public moveUnit$ = new Subject<string>();
 
     public handleMovement(squareId: string): void {
-        if (!logic().selectedUnitService.selectedUnit$.value) {
+        if (!logic().selectedUnitService.selectedUnitId$.value) {
             return;
         }
-        const unitState = selectUnitById(logic().selectedUnitService.selectedUnit$.value.unitId);
-        const selectedUnit = logic().selectedUnitService.selectedUnit$.value;
+        const unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
         if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
-            selectedUnit.unitMovement.initMove().pipe(
-                take(1),
-                switchMap(() => selectedUnit.unitMovement.rotation().pipe(take(1))),
-                switchMap(() => selectedUnit.unitMovement.move().pipe(take(1)))
-            ).subscribe();
+            this.moveUnit$.next(unitState.id);
         } else {
-            this.createPlanMovement(selectedUnit.unitId, squareId);
+            this.createPlanMovement(unitState.id, squareId);
         }
     }
 

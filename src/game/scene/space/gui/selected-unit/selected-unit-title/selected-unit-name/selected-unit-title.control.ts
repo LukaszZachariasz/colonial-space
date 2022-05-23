@@ -1,16 +1,17 @@
 import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../../engine/gui-manager/control';
 import {TextControl} from '../../../shared/text/text.control';
-import {logic} from '../../../../../../game';
-import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
+import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 
 export class SelectedUnitNameControl extends Control {
     public text: TextControl;
 
-    public render(): GUI.Control {
-        const unit = selectUnitById(logic().selectedUnitService.selectedUnit$.value.unitId);
+    constructor(private unitState: UnitState) {
+        super();
+    }
 
-        this.text = new TextControl(unit.name, {
+    public render(): GUI.Control {
+        this.text = new TextControl(this.unitState.name, {
             uppercase: true
         });
         this.text.textBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -18,5 +19,4 @@ export class SelectedUnitNameControl extends Control {
 
         return this.text.render();
     }
-
 }

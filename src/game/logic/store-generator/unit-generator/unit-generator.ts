@@ -7,6 +7,7 @@ export class UnitGenerator {
         return {
             id: uuid(),
             name: 'Scout ship',
+            artUrl: 'resources/unit/scout-ship/scout-ship-art.png',
             type: UnitType.SCOUT,
             health: 1,
             playerId: playerId,

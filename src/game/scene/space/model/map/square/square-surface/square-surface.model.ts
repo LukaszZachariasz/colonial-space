@@ -31,7 +31,7 @@ export class SquareSurfaceModel {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                if (logic().selectedUnitService.selectedUnit$.value) {
+                if (logic().selectedUnitService.selectedUnitId$.value) {
                     this.material.alpha = 0.1;
                 }
             })
