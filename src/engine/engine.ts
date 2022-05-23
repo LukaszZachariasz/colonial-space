@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {Game} from '../game/game';
 import {GuiManager} from './gui-manager/gui-manager';
+import {Loading} from '../loading/loading';
 import {MainMenu} from '../main-menu/main-menu';
 import {SceneManager} from './scene-manager/scene-manager';
 import {gameEngine} from '../core/game-platform';
@@ -13,6 +14,7 @@ export class Engine {
     public guiManager: GuiManager;
     public game: Game;
     public mainMenu: MainMenu;
+    public loading: Loading;
 
     public initialize(canvas: HTMLCanvasElement): void {
         this.canvas = canvas;
@@ -20,6 +22,9 @@ export class Engine {
 
         this.sceneManager = new SceneManager();
         this.guiManager = new GuiManager();
+
+        this.loading = new Loading();
+        this.loading.register();
 
         this.mainMenu = new MainMenu();
         this.mainMenu.start();

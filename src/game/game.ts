@@ -1,5 +1,5 @@
 import {GameBuilder} from './game-builder/game-builder';
-import {LoadingScene} from './scene/loading/loading.scene';
+import {LoadingScene} from '../loading/scenes/loading-scene/loading.scene';
 import {Logic} from './logic/logic';
 import {SpaceScene} from './scene/space/space.scene';
 import {StoreGenerator} from './logic/store-generator/store.generator';
@@ -14,7 +14,6 @@ export class Game {
     public gameBuilder: GameBuilder = new GameBuilder();
     
     public generate(): void {
-        sceneManager().register(new LoadingScene());
         sceneManager().navigateToScene(LoadingScene.SCENE_NAME);
         this.logic = new Logic();
         this.logic.storeGenerator.generate();
