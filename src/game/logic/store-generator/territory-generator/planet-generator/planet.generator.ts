@@ -14,8 +14,10 @@ export class PlanetGenerator {
                 id: uuid(),
                 type: TerritoryType.PLANET,
                 name: PlanetNameGenerator.generate(),
+                artUrl: './resources/territory/planet/planet-art.png',
                 data: {
-                    name: PlanetNameGenerator.generate()
+                    water: Math.floor(Math.random() * 101),
+                    sunlight: Math.floor(Math.random() * 101)
                 }
             };
             planets.push(planetState);

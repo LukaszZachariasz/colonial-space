@@ -1,3 +1,4 @@
 export interface PlanetState {
-    name: string;
+    water: number;
+    sunlight: number;
 }
