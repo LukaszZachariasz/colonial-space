@@ -1,4 +1,3 @@
-import {GlobalResourceGenerator} from './global-resource-generator/global-resource.generator';
 import {MapGenerator} from './map-generator/map.generator';
 import {PlayerGenerator} from './player-generator/player-generator';
 import {TerritoryGenerator} from './territory-generator/territory-generator';
@@ -15,14 +14,12 @@ import {
     selectSquaresWithTerritory
 } from '../store/map/square/square.selectors';
 import {selectUnits} from '../store/unit/unit.selectors';
-import {setGlobalResources} from '../store/global-resource/global-resource.slice';
 import {setPlayer} from '../store/player/player.slice';
 import {setTour} from '../store/tour/tour.slice';
 import {store} from '../store/store';
 
 export class StoreGenerator {
     private mapGenerator: MapGenerator = new MapGenerator();
-    private globalResourceGenerator: GlobalResourceGenerator = new GlobalResourceGenerator();
     private playerGenerator: PlayerGenerator = new PlayerGenerator();
     private territoryGenerator: TerritoryGenerator = new TerritoryGenerator();
     private tourGenerator: TourGenerator = new TourGenerator();
@@ -31,7 +28,6 @@ export class StoreGenerator {
     public generate(): void {
         store.dispatch(setMap(this.mapGenerator.generate()));
         store.dispatch(setPlayer(this.playerGenerator.generate()));
-        store.dispatch(setGlobalResources(this.globalResourceGenerator.generate()));
         store.dispatch(setTour(this.tourGenerator.generate()));
 
         this.territoryGenerator.generate().forEach((territoryState: TerritoryState) => {

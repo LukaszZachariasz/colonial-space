@@ -1,6 +1,5 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../engine/gui-manager/container';
-import {GlobalResourceContainer} from '../global-resource/global-resource.container';
 import {ToolbarBackgroundContainer} from './toolbar-background/toolbar-background.container';
 import {ToolbarTitleControl} from './toolbar-title/toolbar-title.control';
 
@@ -20,7 +19,6 @@ export class ToolbarContainer extends Container {
 
         this.container.addControl(this.toolbarBackground.render());
         this.container.addControl(this.toolbarTitleGuiObject.render());
-        this.container.addControl(new GlobalResourceContainer().render());
 
         return this.container;
     }
