@@ -1,3 +1,4 @@
+import {DialogService} from './services/dialog/dialog.service';
 import {EnhancedStore} from '@reduxjs/toolkit';
 import {FogOfWarService} from './services/fog-of-war/fog-of-war.service';
 import {RefillGameService} from './services/refill-game/refill-game.service';
@@ -13,6 +14,7 @@ export class Logic {
     public storeGenerator: StoreGenerator = new StoreGenerator();
 
     public tourService: TourService = new TourService();
+    public dialogService: DialogService = new DialogService();
 
     public refillGameService: RefillGameService = new RefillGameService();
     public fogOfWarService: FogOfWarService = new FogOfWarService();
