@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
-import {delay, EMPTY, of, take, tap} from 'rxjs';
-import {logic} from '../../../../../../game';
-import {SquareState} from '../../../../../../logic/store/map/square/square.state';
+import {EMPTY, delay, of, take, tap} from 'rxjs';
 import {SquareModel} from '../square.model';
+import {SquareState} from '../../../../../../logic/store/map/square/square.state';
+import {logic} from '../../../../../../game';
 
 export interface FogOfWarParticlesConfig {
     minSize: number;
