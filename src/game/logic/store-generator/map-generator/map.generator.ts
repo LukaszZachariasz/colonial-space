@@ -1,7 +1,7 @@
 import {MapState} from '../../store/map/map.state';
-import {SquareModel} from '../../../scene/space/model/square/square.model';
+import {SquareModel} from '../../../scene/space/model/map/square/square.model';
 import {SquareState} from '../../store/map/square/square.state';
-import {randomSpaceSkybox} from '../../../scene/space/skybox/space/space-skybox.const';
+import {randomSpaceSkybox} from '../../../scene/space/model/skybox/space/space-skybox.const';
 import {v4 as uuid} from 'uuid';
 
 export class MapGenerator {
@@ -19,11 +19,12 @@ export class MapGenerator {
             for (let x = 0; x < MapGenerator.MapWidth; x++) {
                 const square: SquareState = {
                     id: uuid(),
-                    x: x * SquareModel.SquareEdgeWidth,
-                    y: -y * SquareModel.SquareEdgeWidth,
+                    x: x * SquareModel.SquareEdgeSize,
+                    y: -y * SquareModel.SquareEdgeSize,
                     playerId: undefined,
                     territoryId: undefined,
-                    unitId: undefined
+                    unitId: undefined,
+                    fogOfWar: true
                 };
                 row.push(square);
             }

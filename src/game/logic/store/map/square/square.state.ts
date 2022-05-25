@@ -5,4 +5,5 @@ export interface SquareState {
     playerId: string | undefined;
     territoryId: string | undefined;
     unitId: string | undefined;
+    fogOfWar: boolean;
 }

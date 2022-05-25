@@ -6,12 +6,15 @@ export class UnitGenerator {
     public generate(playerId: string): UnitState {
         return {
             id: uuid(),
+            name: 'Scout ship',
+            artUrl: 'resources/unit/scout-ship/scout-ship-art.png',
             type: UnitType.SCOUT,
             health: 1,
             playerId: playerId,
             movementPoints: 2,
             movementPointsLeft: 2,
-            movementPlanning: []
+            movementPlanning: [],
+            scoutRange: 1
         };
     }
 }

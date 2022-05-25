@@ -1,13 +1,11 @@
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../../../logic/services/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../../logic/services/tour/tour-effect/has-tour-effects';
-import {Observable, Subscriber, filter, merge, tap} from 'rxjs';
+import {Observable, Subscriber, filter, switchMap, take, tap} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
-import {UnitModel} from '../unit.model';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
 import {gameEngine} from '../../../../../../core/game-platform';
 import {logic} from '../../../../../game';
-import {sceneManager} from 'engine';
 
 @HasTourEffects()
 export class UnitMovement {
@@ -17,19 +15,25 @@ export class UnitMovement {
     private unitRotate = (): void => this.lerpUnitRotate();
     private unitRotationSubscriber: Subscriber<any>;
 
-    constructor(private id: string,
+    constructor(private scene: BABYLON.Scene,
+                private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
-        merge(
-            logic().selectedUnitService.selectedUnit$.pipe(
-                tap(() => this.unitMovementPathModel?.lines?.dispose()),
-                filter((unitModel: UnitModel) => this.id === unitModel?.id),
-                tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.id)),
-                tap(() => this.unitMovementPathModel.create(sceneManager().currentBabylonScene)),
-            ),
-            logic().unitMovementService.addedPlanMovement$.pipe(
-                filter((id: string) => this.id === id),
-                tap(() => this.unitMovementPathModel.recalculate())
-            )
+        logic().selectedUnitService.selectedUnitId$.pipe(
+            tap(() => this.unitMovementPathModel?.lines?.dispose()),
+            filter((id: string) => this.id === id),
+            tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),
+        ).subscribe();
+
+        logic().unitMovementService.addedPlanMovement$.pipe(
+            filter((id: string) => this.id === id),
+            tap(() => this.unitMovementPathModel.recalculate())
+        ).subscribe();
+
+        logic().unitMovementService.moveUnit$.pipe(
+            filter((id: string) => this.id === id),
+            switchMap(() => this.initMove().pipe(take(1))),
+            switchMap(() => this.rotation().pipe(take(1))),
+            switchMap(() => this.move().pipe(take(1)))
         ).subscribe();
     }
 

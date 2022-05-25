@@ -5,6 +5,6 @@ export class PlanetNameGenerator {
     public static readonly PlanetNamesLength = PlanetNameGenerator.PlanetNames.length;
 
     public static generate(): string {
-        return PlanetNameGenerator.PlanetNames[Math.floor(Math.random() * PlanetNameGenerator.PlanetNamesLength)];
+        return PlanetNameGenerator.PlanetNames[Math.floor(BABYLON.Scalar.RandomRange(0, PlanetNameGenerator.PlanetNamesLength))];
     }
 }

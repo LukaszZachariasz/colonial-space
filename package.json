@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babylonjs": "4.2.1",
-    "babylonjs-gui": "4.2.1",
-    "babylonjs-loaders": "4.2.1",
+    "babylonjs": "5.7.0",
+    "babylonjs-gui": "5.7.0",
+    "babylonjs-loaders": "5.7.0",
     "earcut": "2.2.3",
     "reflect-metadata": "0.1.13",
     "rxjs": "7.5.4",

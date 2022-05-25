@@ -13,8 +13,11 @@ export class PlanetGenerator {
             const planetState: TerritoryState<PlanetState> = {
                 id: uuid(),
                 type: TerritoryType.PLANET,
+                name: PlanetNameGenerator.generate(),
+                artUrl: './resources/territory/planet/planet-art.png',
                 data: {
-                    name: PlanetNameGenerator.generate()
+                    water: Math.floor(BABYLON.Scalar.RandomRange(1,100)),
+                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(1,100))
                 }
             };
             planets.push(planetState);

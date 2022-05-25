@@ -1,14 +1,13 @@
 import {BehaviorSubject} from 'rxjs';
-import {UnitModel} from '../../../scene/space/model/unit/unit.model';
 
 export class SelectedUnitService {
-    public selectedUnit$: BehaviorSubject<UnitModel> = new BehaviorSubject<UnitModel>(null);
+    public selectedUnitId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-    public select(model: UnitModel): void {
-        this.selectedUnit$.next(model);
+    public select(id: string): void {
+        this.selectedUnitId$.next(id);
     }
 
     public deselect(): void {
-        this.selectedUnit$.next(null);
+        this.selectedUnitId$.next(null);
     }
 }
