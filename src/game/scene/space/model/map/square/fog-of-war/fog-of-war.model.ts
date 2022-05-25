@@ -110,7 +110,7 @@ export class FogOfWarModel {
 
     public destroy(): void {
         of(EMPTY).pipe(
-            delay(BABYLON.Scalar.RandomRange(1000, 1500)),
+            delay(Math.floor(BABYLON.Scalar.RandomRange(1000, 1500))),
             take(1),
             tap(() => {
                 this.particleSystem.updateFunction = (particles: BABYLON.Particle[]): void => {
