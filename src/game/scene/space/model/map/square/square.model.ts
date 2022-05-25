@@ -51,8 +51,7 @@ export class SquareModel {
     private listenOnFogOfWarChanged(): void {
         logic().fogOfWarService.removeFogOfWar$.pipe(
             filter((id: string) => this.state.id === id),
-            tap(() => this.fogOfWarModel.plane.dispose()),
-            tap(() => this.fogOfWarModel.emitter.dispose()),
+            tap(() => this.fogOfWarModel.destroy()),
             tap(() => {
                 this.fogOfWarModel = undefined;
             })
