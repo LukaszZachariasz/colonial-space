@@ -7,7 +7,7 @@ import {TerritoryState} from '../logic/store/territory/territory.state';
 import {UnitState} from '../logic/store/unit/unit.state';
 import {sceneManager} from 'engine';
 import {selectPlayerId} from '../logic/store/player/player.selectors';
-import {selectPlayerSquares} from '../logic/store/map/square/square.selectors';
+import {selectPlayerSquares, selectSquareByTerritoryId} from '../logic/store/map/square/square.selectors';
 import {selectTerritories} from '../logic/store/territory/territory.selectors';
 import {selectUnits} from '../logic/store/unit/unit.selectors';
 
@@ -17,7 +17,10 @@ export class GameBuilder {
         sceneManager().register(spaceScene);
         new MapModel(spaceScene.scene);
 
-        selectTerritories().forEach((territoryState: TerritoryState) => new PlanetModel(spaceScene.scene, territoryState));
+        selectTerritories()
+            .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)
+            .forEach((territoryState: TerritoryState) => new PlanetModel(spaceScene.scene, territoryState));
+
         selectUnits().forEach((unitState: UnitState) => new ScoutShipModel(spaceScene.scene, unitState));
 
         this.setCameraTargetToFirstTerritory(spaceScene);
