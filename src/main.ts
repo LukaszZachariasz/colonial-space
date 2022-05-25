@@ -6,8 +6,8 @@ let mainWindow: Electron.BrowserWindow;
 
 function createWindow(): void {
     mainWindow = new BrowserWindow({
-        height: 900,
-        width: 1600,
+        height: 1080,
+        width: 1920,
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,

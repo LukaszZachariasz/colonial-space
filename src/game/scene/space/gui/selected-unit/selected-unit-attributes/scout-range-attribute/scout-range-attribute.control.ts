@@ -6,11 +6,9 @@ import {TextControl} from '../../../shared/text/text.control';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 
 export class ScoutRangeAttributeControl extends Control {
-
     constructor(private unitState: UnitState) {
         super();
     }
-
 
     public render(): GUI.Control {
         return new AttributeControl(
