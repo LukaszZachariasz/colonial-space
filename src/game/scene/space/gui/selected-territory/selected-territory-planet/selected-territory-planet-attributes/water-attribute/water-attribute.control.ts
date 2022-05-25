@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
-import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {AttributeControl} from '../../../../shared/attribute/attribute.control';
 import {Control} from '../../../../../../../../engine/gui-manager/control';
 import {IconControl} from '../../../../shared/icon/icon.control';
+import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
+import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
 
 export class WaterAttributeControl extends Control {

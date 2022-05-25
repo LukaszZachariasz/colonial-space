@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../../engine/gui-manager/container';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {SunlightAttributeControl} from './sunlight-attribute/sunlight-attribute.control';
+import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {WaterAttributeControl} from './water-attribute/water-attribute.control';
 
 export class SelectedTerritoryPlanetAttributesContainer extends Container {
