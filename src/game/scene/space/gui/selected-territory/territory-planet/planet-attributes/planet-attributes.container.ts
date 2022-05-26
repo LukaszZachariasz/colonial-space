@@ -5,7 +5,7 @@ import {SunlightAttributeControl} from './sunlight-attribute/sunlight-attribute.
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {WaterAttributeControl} from './water-attribute/water-attribute.control';
 
-export class SelectedTerritoryPlanetAttributesContainer extends Container {
+export class PlanetAttributesContainer extends Container {
     public sunlightAttributeControl: GUI.Control;
     public waterAttributeControl: GUI.Control;
 

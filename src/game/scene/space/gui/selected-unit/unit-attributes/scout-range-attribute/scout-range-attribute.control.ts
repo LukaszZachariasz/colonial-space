@@ -13,7 +13,7 @@ export class ScoutRangeAttributeControl extends Control {
     public render(): GUI.Control {
         return new AttributeControl(
             new IconControl('binoculars'),
-            new TextControl(`This unit has ${this.unitState.scoutRange} scout range.`)
+            new TextControl(`This unit has ${this.unitState.scoutRange} scout range.`).render()
         ).render();
     }
 }

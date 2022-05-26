@@ -3,7 +3,7 @@ import {Control} from '../../../../../../../engine/gui-manager/control';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../shared/text/text.control';
 
-export class SelectedTerritoryTitleControl extends Control {
+export class TerritoryNameControl extends Control {
     public text: TextControl;
 
     constructor(private territoryState: TerritoryState) {

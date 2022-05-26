@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../engine/gui-manager/control';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
-export class SelectedTerritoryArtControl extends Control {
+export class TerritoryArtControl extends Control {
     public artImage: GUI.Image;
 
     constructor(private territoryState: TerritoryState) {

@@ -16,8 +16,8 @@ export class PlanetGenerator {
                 name: PlanetNameGenerator.generate(),
                 artUrl: './resources/territory/planet/planet-art.png',
                 data: {
-                    water: Math.floor(BABYLON.Scalar.RandomRange(1,100)),
-                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(1,100))
+                    water: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
+                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(40,60))
                 }
             };
             planets.push(planetState);

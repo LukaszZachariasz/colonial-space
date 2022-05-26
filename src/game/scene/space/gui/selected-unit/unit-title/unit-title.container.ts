@@ -1,12 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../engine/gui-manager/container';
 import {IconControl} from '../../shared/icon/icon.control';
-import {SelectedUnitNameControl} from './selected-unit-name/selected-unit-title.control';
+import {UnitNameControl} from './unit-name/unit-name.control';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
-export class SelectedUnitTitleContainer extends Container {
-    public backgroundImage: GUI.Image;
-
+export class UnitTitleContainer extends Container {
     constructor(private unitState: UnitState) {
         super();
     }
@@ -20,7 +18,7 @@ export class SelectedUnitTitleContainer extends Container {
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
         this.container.addControl(new IconControl('spyglass').render());
-        this.container.addControl(new SelectedUnitNameControl(this.unitState).render());
+        this.container.addControl(new UnitNameControl(this.unitState).render());
 
         return this.container;
     }

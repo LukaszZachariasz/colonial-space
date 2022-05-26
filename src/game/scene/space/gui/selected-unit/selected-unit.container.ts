@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../engine/gui-manager/container';
-import {SelectedUnitArtControl} from './selected-unit-art/selected-unit-art.control';
-import {SelectedUnitAttributesContainer} from './selected-unit-attributes/selected-unit-attributes.container';
-import {SelectedUnitTitleContainer} from './selected-unit-title/selected-unit-title.container';
+import {UnitArtControl} from './unit-art/unit-art.control';
+import {UnitAttributesContainer} from './unit-attributes/unit-attributes.container';
 import {UnitState} from '../../../../logic/store/unit/unit.state';
+import {UnitTitleContainer} from './unit-title/unit-title.container';
 import {logic} from '../../../../game';
 import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
@@ -25,9 +25,9 @@ export class SelectedUnitContainer extends Container {
         this.backgroundImage.width = '100%';
         this.backgroundImage.height = '100%';
         this.container.addControl(this.backgroundImage);
-        this.container.addControl(new SelectedUnitArtControl(this.unitState).render());
-        this.container.addControl(new SelectedUnitTitleContainer(this.unitState).render());
-        this.container.addControl(new SelectedUnitAttributesContainer(this.unitState).render());
+        this.container.addControl(new UnitArtControl(this.unitState).render());
+        this.container.addControl(new UnitTitleContainer(this.unitState).render());
+        this.container.addControl(new UnitAttributesContainer(this.unitState).render());
 
         return this.container;
     }

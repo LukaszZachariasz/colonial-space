@@ -3,7 +3,7 @@ import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
 import {MinimapContainer} from './minimap/minimap.container';
-import {SelectedTerritoryContainer} from './selected-territory/selected-territory.container';
+import {SelectedTerritoryStackPanel} from './selected-territory/selected-territory.stack-panel';
 import {SelectedUnitContainer} from './selected-unit/selected-unit.container';
 import {ToolbarContainer} from './toolbar/toolbar.container';
 import {filter, tap} from 'rxjs';
@@ -12,7 +12,7 @@ import {logic} from '../../../game';
 
 export class SpaceGui extends Gui {
     private selectedUnitContainer: SelectedUnitContainer;
-    private selectedTerritoryContainer: SelectedTerritoryContainer;
+    private selectedTerritoryContainer: SelectedTerritoryStackPanel;
     private dialogOverlayContainer: DialogOverlayContainer;
 
     constructor() {
@@ -31,9 +31,9 @@ export class SpaceGui extends Gui {
         ).subscribe();
 
         logic().selectedTerritoryService.selectedTerritoryId$.pipe(
-            tap(() => this.selectedTerritoryContainer?.container.dispose()),
+            tap(() => this.selectedTerritoryContainer?.stackPanel.dispose()),
             filter((id: string) => !!id),
-            tap(() => this.selectedTerritoryContainer = guiManager().render(new SelectedTerritoryContainer()))
+            tap(() => this.selectedTerritoryContainer = guiManager().render(new SelectedTerritoryStackPanel()))
         ).subscribe();
 
         logic().dialogService.open$.pipe(

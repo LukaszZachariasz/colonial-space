@@ -5,16 +5,19 @@ import {IconControl} from '../../../../shared/icon/icon.control';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
+import {logic} from '../../../../../../../game';
 
-export class WaterAttributeControl extends Control {
+export class SunlightAttributeControl extends Control {
     constructor(private planetState: TerritoryState<PlanetState>) {
         super();
     }
 
     public render(): GUI.Control {
         return new AttributeControl(
-            new IconControl('water-drop'),
-            new TextControl(`Water ${this.planetState.data.water}%`)
+            new IconControl('sun'),
+            new TextControl(`Sunlight ${this.planetState.data.sunlight}%
+            
+            It's provide ${logic().planetProductionService.getSunlightProduction(this.planetState.data.sunlight)} production.`).render()
         ).render();
     }
 }

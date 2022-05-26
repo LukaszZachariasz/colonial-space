@@ -3,7 +3,7 @@ import {Control} from '../../../../../../../engine/gui-manager/control';
 import {TextControl} from '../../../shared/text/text.control';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 
-export class SelectedUnitNameControl extends Control {
+export class UnitNameControl extends Control {
     public text: TextControl;
 
     constructor(private unitState: UnitState) {

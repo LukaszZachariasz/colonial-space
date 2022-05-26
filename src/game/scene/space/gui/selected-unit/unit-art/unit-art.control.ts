@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../engine/gui-manager/control';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
-export class SelectedUnitArtControl extends Control {
+export class UnitArtControl extends Control {
     public artImage: GUI.Image;
     
     constructor(private unitState: UnitState) {

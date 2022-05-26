@@ -23,7 +23,7 @@ export class MovementAttributeControl extends Control {
 
         this.attributeControl = new AttributeControl(
             new IconControl('move'),
-            this.textControl
+            this.textControl.render()
         );
 
         this.attributeControl.render();

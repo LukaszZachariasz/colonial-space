@@ -4,7 +4,7 @@ import {MovementAttributeControl} from './movement-attribute/movement-attribute.
 import {ScoutRangeAttributeControl} from './scout-range-attribute/scout-range-attribute.control';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
-export class SelectedUnitAttributesContainer extends Container {
+export class UnitAttributesContainer extends Container {
     public scoutRangeAttributeControl: GUI.Control;
     public movementAttributeControl: GUI.Control;
 
