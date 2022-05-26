@@ -21,7 +21,7 @@ export class PlanetBuildingStackPanel extends StackPanel {
         this.container = new GUI.Container('buildingContainer');
         this.container.height = '150px';
         this.container.width = '100%';
-        this.container.addControl(new PlanetFacilitiesContainer().render());
+        this.container.addControl(new PlanetFacilitiesContainer(this.planetState).render());
         this.container.addControl(new PlanetUnitsContainer().render());
         this.container.paddingTop = '20px';
 

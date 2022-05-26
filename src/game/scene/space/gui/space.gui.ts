@@ -1,4 +1,5 @@
 import * as GUI from 'babylonjs-gui';
+import {BuildingContainer} from './building/building.container';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
@@ -11,6 +12,7 @@ import {guiManager} from 'engine';
 import {logic} from '../../../game';
 
 export class SpaceGui extends Gui {
+    private buildingContainer: BuildingContainer;
     private selectedUnitContainer: SelectedUnitContainer;
     private selectedTerritoryContainer: SelectedTerritoryStackPanel;
     private dialogOverlayContainer: DialogOverlayContainer;
@@ -43,6 +45,12 @@ export class SpaceGui extends Gui {
 
         logic().dialogService.close$.pipe(
             tap(() => this.dialogOverlayContainer?.container.dispose())
+        ).subscribe();
+
+        logic().buildingService.open$.pipe(
+            tap(() => this.buildingContainer?.container.dispose()),
+            filter((id: string) => !!id),
+            tap(() => this.buildingContainer = guiManager().render(new BuildingContainer()))
         ).subscribe();
     }
 }

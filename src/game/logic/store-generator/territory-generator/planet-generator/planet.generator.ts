@@ -17,7 +17,43 @@ export class PlanetGenerator {
                 artUrl: './resources/territory/planet/planet-art.png',
                 data: {
                     water: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
-                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(40,60))
+                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
+                    building: {
+                        facilities: {
+                            id: uuid(),
+                            label: 'Facilities',
+                            currentBuildingObjectId: null,
+                            sectors: [
+                                {
+                                    name: 'Common',
+                                    objects: []
+                                },
+                                {
+                                    name: 'Science',
+                                    objects: []
+                                },
+                                {
+                                    name: 'Awareness',
+                                    objects: []
+                                }
+                            ]
+                        },
+                        units: {
+                            id: uuid(),
+                            label: 'Units',
+                            currentBuildingObjectId: null,
+                            sectors: [
+                                {
+                                    name: 'Utilities',
+                                    objects: []
+                                },
+                                {
+                                    name: 'Science',
+                                    objects: []
+                                }
+                            ]
+                        }
+                    }
                 }
             };
             planets.push(planetState);
