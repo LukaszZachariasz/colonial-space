@@ -24,7 +24,7 @@ export class PlanetFacilitiesContainer extends Container {
         this.name.textBlock.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
         this.container.onPointerDownObservable.add(() => {
-            logic().buildingService.open$.next(this.planetState.data.building['facilities'].id);
+            logic().buildingService.open(this.planetState.data.building['facilities']);
         });
 
         return this.container;

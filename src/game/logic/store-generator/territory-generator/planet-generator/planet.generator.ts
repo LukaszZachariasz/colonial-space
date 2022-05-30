@@ -26,15 +26,63 @@ export class PlanetGenerator {
                             sectors: [
                                 {
                                     name: 'Common',
-                                    objects: []
+                                    objects: [
+                                        {
+                                            name: 'Water silos',
+                                            id: uuid(),
+                                            production: 500
+                                        },
+                                        {
+                                            name: 'Sunlight generator',
+                                            id: uuid(),
+                                            production: 600
+                                        },
+                                        {
+                                            name: 'Colonization center',
+                                            id: uuid(),
+                                            production: 1500
+                                        },
+                                        {
+                                            name: 'Some other building',
+                                            id: uuid(),
+                                            production: 2200
+                                        },
+                                        {
+                                            name: 'Some other building',
+                                            id: uuid(),
+                                            production: 2200
+                                        },
+                                        {
+                                            name: 'Some other building',
+                                            id: uuid(),
+                                            production: 2200
+                                        }
+                                    ]
                                 },
                                 {
                                     name: 'Science',
-                                    objects: []
+                                    objects: [
+                                        {
+                                            name: 'Laboratory',
+                                            id: uuid(),
+                                            production: 5500
+                                        }
+                                    ]
                                 },
                                 {
                                     name: 'Awareness',
-                                    objects: []
+                                    objects: [
+                                        {
+                                            name: 'Telescope',
+                                            id: uuid(),
+                                            production: 500
+                                        },
+                                        {
+                                            name: 'Journey support',
+                                            id: uuid(),
+                                            production: 500
+                                        }
+                                    ]
                                 }
                             ]
                         },
