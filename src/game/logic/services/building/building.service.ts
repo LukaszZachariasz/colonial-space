@@ -13,13 +13,13 @@ import {store} from '../../store/store';
 @HasTourEffects()
 export class BuildingService {
     public startBuildingObject$: Subject<string> = new Subject<string>();
-    
+
     public startBuilding(buildingObjectId: string): void {
         store.dispatch(selectBuilding({
             buildingId: selectBuildingByBuildingObjectId(buildingObjectId).id,
             objectId: buildingObjectId
         }));
-        
+
         this.startBuildingObject$.next(buildingObjectId);
     }
 
@@ -36,7 +36,7 @@ export class BuildingService {
         name: 'start building processes',
         priority: TourEffectPriorityEnum.START_BUILDING_PROCESS
     })
-    private startBuildingProcesses(): any {
+    private startBuildingProcesses(): Observable<any>{
         return new Observable((subscriber: Subscriber<any>) => {
             selectTerritories().forEach((el: TerritoryState) => {
                 if (isTerritoryPlanet(el)) {

@@ -6,6 +6,7 @@ import {Control} from '../../../../../../../../../../engine/gui-manager/control'
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {logic} from '../../../../../../../../../game';
 import {
+    selectBuildingObjectById,
     selectIsCurrentBuildingByBuildingObjectId
 } from '../../../../../../../../../logic/store/building/building.selector';
 
@@ -31,14 +32,18 @@ export class BuildingObjectSelectControl extends Control {
         this.button.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 
         this.button.onPointerUpObservable.add(() => {
-            this.onClick();
+            if (!this.buildingObjectState.isBuilt) {
+                this.onClick();
+            }
         });
         
         this.startBuildingSubscription = merge(
             of(EMPTY),
-            logic().buildingService.startBuildingObject$
+            logic().buildingService.startBuildingObject$,
+            logic().tourService.completeTour$
         ).pipe(
             tap(() => this.isCurrentBuilding = selectIsCurrentBuildingByBuildingObjectId(this.buildingObjectState.id)),
+            tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
             tap(() => this.createText())
         ).subscribe();
 
@@ -62,8 +67,13 @@ export class BuildingObjectSelectControl extends Control {
             this.button.textBlock.text = this.stopBuildingLabel;
             this.button.textBlock.color = 'blue';
         } else {
-            this.button.textBlock.text = this.startBuildingLabel;
-            this.button.textBlock.color = 'red';
+            if (this.buildingObjectState.isBuilt) {
+                this.button.textBlock.text = 'Already built';
+                this.button.textBlock.color = 'grey';
+            } else {
+                this.button.textBlock.text = this.startBuildingLabel;
+                this.button.textBlock.color = 'red';
+            }
         }
     }
 }

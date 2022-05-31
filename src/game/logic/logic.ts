@@ -1,3 +1,4 @@
+import {BuildingHandlerService} from './services/building/handler/building-handler.service';
 import {BuildingService} from './services/building/building.service';
 import {DialogService} from './services/dialog/dialog.service';
 import {EnhancedStore} from '@reduxjs/toolkit';
@@ -30,4 +31,5 @@ export class Logic {
 
     public buildingService: BuildingService = new BuildingService();
     public selectedBuildingService: SelectedBuildingService = new SelectedBuildingService();
+    public buildingHandlerService: BuildingHandlerService = new BuildingHandlerService();
 }

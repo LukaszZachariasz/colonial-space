@@ -26,7 +26,8 @@ export class PlanetBuildingCurrentObjectContainer extends Container {
 
         this.currentBuildingObjectChangedSubscription = merge(
             of(EMPTY),
-            logic().buildingService.startBuildingObject$
+            logic().buildingService.startBuildingObject$,
+            logic().tourService.completeTour$
         ).pipe(
             tap(() => this.buildingState = selectBuildingById(this.planetState.data.buildingId)),
             tap(() => this.textControl.textBlock.text = 'Current: ' + this.buildingState.currentBuildingObjectId)

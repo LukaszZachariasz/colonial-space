@@ -1,5 +1,6 @@
-import {BuildingState} from '../../store/building/building.state';
 import {v4 as uuid} from 'uuid';
+import {BuildingObjectType} from '../../store/building/building-scope/building-object/building-object-type';
+import {BuildingState} from '../../store/building/building.state';
 
 export class BuildingGenerator {
     public generate(): BuildingState {
@@ -15,69 +16,31 @@ export class BuildingGenerator {
                     name: 'Common',
                     objects: [
                         {
-                            name: 'Water silos',
+                            name: 'Water filter',
+                            type: BuildingObjectType.WATER_FILTER,
                             id: uuid(),
                             artUrl: './resources/territory/planet/planet-art.png',
-                            production: 500
+                            production: 500,
+                            isBuilt: false
                         },
                         {
-                            name: 'Sunlight generator',
+                            name: 'Sunlight amplifier',
+                            type: BuildingObjectType.SUNLIGHT_AMPLIFIER,
                             id: uuid(),
                             artUrl: './resources/territory/planet/planet-art.png',
-                            production: 600
-                        },
-                        {
-                            name: 'Colonization center',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 1500
-                        },
-                        {
-                            name: 'Some other building',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 2200
-                        },
-                        {
-                            name: 'Some other building',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 2200
-                        },
-                        {
-                            name: 'Some other building',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 2200
+                            production: 600,
+                            isBuilt: false
                         }
                     ]
                 },
                 {
                     name: 'Science',
                     objects: [
-                        {
-                            name: 'Laboratory',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 5500
-                        }
                     ]
                 },
                 {
                     name: 'Awareness',
                     objects: [
-                        {
-                            name: 'Telescope',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 500
-                        },
-                        {
-                            name: 'Journey support',
-                            id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
-                            production: 500
-                        }
                     ]
                 },
             ]
