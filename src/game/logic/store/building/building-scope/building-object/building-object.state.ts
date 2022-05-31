@@ -5,6 +5,7 @@ export interface BuildingObjectState {
     type: BuildingObjectType;
     artUrl: string;
     name: string;
+    productionLeft: number;
     production: number;
     isBuilt: boolean;
 }

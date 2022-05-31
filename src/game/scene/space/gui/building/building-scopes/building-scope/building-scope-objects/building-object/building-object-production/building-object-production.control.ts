@@ -9,7 +9,7 @@ import {logic} from '../../../../../../../../../game';
 import {selectBuildingObjectById} from '../../../../../../../../../logic/store/building/building.selector';
 
 export class BuildingObjectProductionControl extends Control {
-    private textControl: TextControl = new TextControl(this.buildingObjectState.production.toString());
+    private textControl: TextControl = new TextControl(this.buildingObjectState.productionLeft.toString());
 
     private onEndTourSubscription: Subscription;
 
@@ -25,7 +25,7 @@ export class BuildingObjectProductionControl extends Control {
 
         this.onEndTourSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
-            tap(() => this.textControl.textBlock.text = this.buildingObjectState.production.toString())
+            tap(() => this.textControl.textBlock.text = this.buildingObjectState.productionLeft.toString())
         ).subscribe();
 
         this.textControl.textBlock.onDisposeObservable.add(() => {

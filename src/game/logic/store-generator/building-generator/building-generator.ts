@@ -10,7 +10,17 @@ export class BuildingGenerator {
             scopes: [
                 {
                     name: 'Units',
-                    objects: []
+                    objects: [
+                        {
+                            name: 'Scout ship',
+                            type: BuildingObjectType.SCOUT_SHIP,
+                            id: uuid(),
+                            artUrl: 'resources/unit/scout-ship/scout-ship-art.png',
+                            productionLeft: 400,
+                            production: 400,
+                            isBuilt: false
+                        }
+                    ]
                 },
                 {
                     name: 'Common',
@@ -20,6 +30,7 @@ export class BuildingGenerator {
                             type: BuildingObjectType.WATER_FILTER,
                             id: uuid(),
                             artUrl: './resources/territory/planet/planet-art.png',
+                            productionLeft: 500,
                             production: 500,
                             isBuilt: false
                         },
@@ -28,6 +39,7 @@ export class BuildingGenerator {
                             type: BuildingObjectType.SUNLIGHT_AMPLIFIER,
                             id: uuid(),
                             artUrl: './resources/territory/planet/planet-art.png',
+                            productionLeft: 600,
                             production: 600,
                             isBuilt: false
                         }

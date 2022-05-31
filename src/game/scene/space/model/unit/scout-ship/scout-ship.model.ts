@@ -4,7 +4,6 @@ import {UnitState} from '../../../../../logic/store/unit/unit.state';
 import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 
 export class ScoutShipModel extends UnitModel {
-    public artUrl = '';
     private actionManager: BABYLON.ActionManager;
 
     constructor(protected scene: BABYLON.Scene,

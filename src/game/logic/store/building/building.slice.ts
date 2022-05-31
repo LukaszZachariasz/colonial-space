@@ -30,10 +30,10 @@ export const buildingSlice = createSlice({
             const building = state.buildings.find((el: BuildingState) => el.id === action.payload.buildingId);
             if (building.currentBuildingObjectId) {
                 const currentBuildingObject: BuildingObjectState = building.scopes.map((el: BuildingScopeState) => el.objects).flat().find((el: BuildingObjectState) => el.id === building.currentBuildingObjectId);
-                currentBuildingObject.production -= action.payload.production;
-                if (currentBuildingObject.production < 0) {
+                currentBuildingObject.productionLeft -= action.payload.production;
+                if (currentBuildingObject.productionLeft < 0) {
                     building.currentBuildingObjectId = null;
-                    currentBuildingObject.production = 0;
+                    currentBuildingObject.productionLeft = 0;
                 }
             }
         },
@@ -42,6 +42,12 @@ export const buildingSlice = createSlice({
         }>) => {
             const buildingObject = state.buildings.map((el: BuildingState) => el.scopes).flat().map((el: BuildingScopeState) => el.objects).flat().find((el: BuildingObjectState) => el.id === action.payload.buildingObjectId);
             buildingObject.isBuilt = true;
+        },
+        setProductionToBeginning: (state: BuildingSliceState, action: PayloadAction<{
+            buildingObjectId: string
+        }>) => {
+            const buildingObject = state.buildings.map((el: BuildingState) => el.scopes).flat().map((el: BuildingScopeState) => el.objects).flat().find((el: BuildingObjectState) => el.id === action.payload.buildingObjectId);
+            buildingObject.productionLeft = buildingObject.production;
         }
     }
 });
@@ -50,5 +56,6 @@ export const {
     addBuilding,
     selectBuilding,
     build,
-    setIsBuiltTrue
+    setIsBuiltTrue,
+    setProductionToBeginning
 } = buildingSlice.actions;
