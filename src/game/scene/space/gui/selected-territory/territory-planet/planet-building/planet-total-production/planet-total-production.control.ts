@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {Subscription, tap} from 'rxjs';
 import {Control} from '../../../../../../../../engine/gui-manager/control';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
-import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
+import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
+import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
 export class PlanetTotalProductionControl extends Control {
     public textControl: TextControl = new TextControl('Production: ' + logic().planetProductionService.getTotalProduction(this.planetState.data));

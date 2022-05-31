@@ -1,6 +1,6 @@
-import {v4 as uuid} from 'uuid';
 import {BuildingObjectType} from '../../store/building/building-scope/building-object/building-object-type';
 import {BuildingState} from '../../store/building/building.state';
+import {v4 as uuid} from 'uuid';
 
 export class BuildingGenerator {
     public generate(): BuildingState {

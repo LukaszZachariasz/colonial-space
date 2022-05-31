@@ -1,6 +1,3 @@
-import {setIsBuiltTrue} from '../../../../store/building/building.slice';
-import {store} from '../../../../store/store';
-import {setTerritoryDataField} from '../../../../store/territory/territory.slice';
 import {AddTourEffect} from '../../../tour/tour-effect/add-tour-effect';
 import {BuildingObjectState} from '../../../../store/building/building-scope/building-object/building-object.state';
 import {BuildingObjectType} from '../../../../store/building/building-scope/building-object/building-object-type';
@@ -12,6 +9,9 @@ import {
     selectBuildingObjectsByProduction0AndNotBuiltAndType
 } from '../../../../store/building/building.selector';
 import {selectTerritoryByBuildingId} from '../../../../store/territory/territory.selectors';
+import {setIsBuiltTrue} from '../../../../store/building/building.slice';
+import {setTerritoryDataField} from '../../../../store/territory/territory.slice';
+import {store} from '../../../../store/store';
 
 @HasTourEffects()
 export class SunlightAmplifierHandlerService {

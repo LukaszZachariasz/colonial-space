@@ -1,12 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {tap} from 'rxjs';
 import {Container} from '../../../../../../../engine/gui-manager/container';
-import {logic} from '../../../../../../game';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {selectTerritoryById} from '../../../../../../logic/store/territory/territory.selectors';
 import {SunlightAttributeControl} from './sunlight-attribute/sunlight-attribute.control';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {WaterAttributeControl} from './water-attribute/water-attribute.control';
+import {logic} from '../../../../../../game';
+import {selectTerritoryById} from '../../../../../../logic/store/territory/territory.selectors';
+import {tap} from 'rxjs';
 
 export class PlanetAttributesContainer extends Container {
     public sunlightAttributeControl: GUI.Control;
