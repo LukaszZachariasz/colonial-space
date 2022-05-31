@@ -11,20 +11,22 @@ export function HasTourEffects(): (constructor: any) => any {
         const overrideConstructor: any = function (...args: any[]) {
             const instance = new original(...args);
 
-            let metadataKeys = Reflect.getMetadataKeys(instance);
-            metadataKeys = metadataKeys.filter((key: string) => key.includes(TOUR_EFFECT_METADATA_KEY));
-            metadataKeys.forEach((key: string) => {
-                const metadataValue = Reflect.getMetadata(key, instance);
+            setTimeout(() => {
+                let metadataKeys = Reflect.getMetadataKeys(instance);
+                metadataKeys = metadataKeys.filter((key: string) => key.includes(TOUR_EFFECT_METADATA_KEY));
+                metadataKeys.forEach((key: string) => {
+                    const metadataValue = Reflect.getMetadata(key, instance);
 
-                logic().tourService.addTourEffect(
-                    new TourEffect(
-                        metadataValue.priority,
-                        instance[metadataValue.fromTourFieldName],
-                        instance[metadataValue.toTourFieldName],
-                        metadataValue.effect.bind(instance)
-                    )
-                );
-            });
+                    logic().tourService.addTourEffect(
+                        new TourEffect(
+                            metadataValue.priority,
+                            instance[metadataValue.fromTourFieldName],
+                            instance[metadataValue.toTourFieldName],
+                            metadataValue.effect.bind(instance)
+                        )
+                    );
+                });
+            }, 0);
 
             return instance;
         };

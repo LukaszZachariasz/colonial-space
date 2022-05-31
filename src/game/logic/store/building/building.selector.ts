@@ -7,3 +7,4 @@ export const selectBuildings = (): BuildingState[] => store.getState().building.
 export const selectBuildingById = (id: string): BuildingState => selectBuildings().find((el: BuildingState) => el.id === id);
 export const selectBuildingByBuildingObjectId = (id: string): BuildingState => selectBuildings().find((el: BuildingState) => el.scopes.map((el: BuildingScopeState) => el.objects).flat().some((el: BuildingObjectState) => el.id === id));
 export const selectIsCurrentBuildingByBuildingObjectId = (id: string): boolean => selectBuildingByBuildingObjectId(id).currentBuildingObjectId === id;
+export const selectBuildingObjectById = (id: string): BuildingObjectState => selectBuildings().map((el: BuildingState) => el.scopes).flat().map((el: BuildingScopeState) => el.objects).flat().find((el: BuildingObjectState) => el.id === id);
