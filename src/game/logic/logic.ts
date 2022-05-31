@@ -1,3 +1,4 @@
+import {BuildingService} from './services/building/building.service';
 import {DialogService} from './services/dialog/dialog.service';
 import {EnhancedStore} from '@reduxjs/toolkit';
 import {FogOfWarService} from './services/fog-of-war/fog-of-war.service';
@@ -20,9 +21,13 @@ export class Logic {
 
     public refillGameService: RefillGameService = new RefillGameService();
     public fogOfWarService: FogOfWarService = new FogOfWarService();
+
     public selectedUnitService: SelectedUnitService = new SelectedUnitService();
     public unitMovementService: UnitMovementService = new UnitMovementService();
+
     public selectedTerritoryService: SelectedTerritoryService = new SelectedTerritoryService();
-    public selectedBuildingService: SelectedBuildingService = new SelectedBuildingService();
     public planetProductionService: PlanetProductionService = new PlanetProductionService();
+
+    public buildingService: BuildingService = new BuildingService();
+    public selectedBuildingService: SelectedBuildingService = new SelectedBuildingService();
 }

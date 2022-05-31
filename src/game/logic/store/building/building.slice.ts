@@ -13,10 +13,18 @@ export const buildingSlice = createSlice({
     reducers: {
         addBuilding: (state: BuildingSliceState, action: PayloadAction<BuildingState>) => {
             state.buildings.push(action.payload);
+        },
+        selectBuilding: (state: BuildingSliceState, action: PayloadAction<{
+            buildingId: string,
+            objectId: string
+        }>) => {
+            const building = state.buildings.find((el: BuildingState) => el.id === action.payload.buildingId);
+            building.currentBuildingObjectId = action.payload.objectId;
         }
     }
 });
 
 export const {
     addBuilding,
+    selectBuilding
 } = buildingSlice.actions;
