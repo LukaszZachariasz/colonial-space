@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {
     BuildingScopeSectorState
-} from '../../../../../../../logic/store/territory/building/building-scope-sector.state';
+} from '../../../../../../../logic/store/building/building-scope/building-sector/building-scope-sector.state';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
 import {TextControl} from '../../../../shared/text/text.control';
 

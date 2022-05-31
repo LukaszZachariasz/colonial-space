@@ -1,4 +1,4 @@
-import {BuildingScopeSectorState} from './building-scope-sector.state';
+import {BuildingScopeSectorState} from './building-sector/building-scope-sector.state';
 
 export interface BuildingScopeState {
     id: string;

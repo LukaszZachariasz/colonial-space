@@ -1,11 +1,14 @@
+import {BuildingGenerator} from './building-generator/building-generator';
 import {MapGenerator} from './map-generator/map.generator';
 import {PlayerGenerator} from './player-generator/player-generator';
 import {TerritoryGenerator} from './territory-generator/territory-generator';
 import {TerritoryState} from '../store/territory/territory.state';
 import {TourGenerator} from './tour-generator/tour-generator';
 import {UnitGenerator} from './unit-generator/unit-generator';
+import {addBuilding} from '../store/building/building.slice';
 import {addTerritory} from '../store/territory/territory.slice';
 import {addUnit} from '../store/unit/unit.slice';
+import {isTerritoryPlanet} from '../store/territory/planet/is-territory-planet';
 import {removeFogOfWar, setMap, setSquarePlayerId, setSquareTerritoryId, setSquareUnitId} from '../store/map/map.slice';
 import {selectPlayerId} from '../store/player/player.selectors';
 import {
@@ -22,6 +25,7 @@ export class StoreGenerator {
     private mapGenerator: MapGenerator = new MapGenerator();
     private playerGenerator: PlayerGenerator = new PlayerGenerator();
     private territoryGenerator: TerritoryGenerator = new TerritoryGenerator();
+    private buildingGenerator: BuildingGenerator = new BuildingGenerator();
     private tourGenerator: TourGenerator = new TourGenerator();
     private unitGenerator: UnitGenerator = new UnitGenerator();
 
@@ -31,6 +35,12 @@ export class StoreGenerator {
         store.dispatch(setTour(this.tourGenerator.generate()));
 
         this.territoryGenerator.generate().forEach((territoryState: TerritoryState) => {
+            if (isTerritoryPlanet(territoryState)) {
+                const buildingState = this.buildingGenerator.generate();
+                territoryState.data.buildingId = buildingState.id;
+                store.dispatch(addBuilding(buildingState));
+            }
+
             store.dispatch(addTerritory(territoryState));
             const randomSquare = selectRandomEmptySquare();
             store.dispatch(setSquareTerritoryId({

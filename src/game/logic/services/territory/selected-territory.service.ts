@@ -10,7 +10,7 @@ export class SelectedTerritoryService {
     }
 
     public deselect(): void {
-        logic().buildingService.close();
+        logic().selectedBuildingScopeService.deselect();
         this.selectedTerritoryId$.next(null);
     }
 }

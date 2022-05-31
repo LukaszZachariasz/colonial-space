@@ -5,9 +5,12 @@ import {PlanetTotalProductionControl} from './planet-total-production/planet-tot
 import {PlanetUnitsContainer} from './planet-units/planet-units.container';
 import {StackPanel} from '../../../../../../../engine/gui-manager/stack-panel';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
+import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
 
 export class PlanetBuildingStackPanel extends StackPanel {
     public container: GUI.Container;
+
+    public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
     constructor(private planetState: TerritoryState<PlanetState>) {
         super();
@@ -21,7 +24,7 @@ export class PlanetBuildingStackPanel extends StackPanel {
         this.container = new GUI.Container('buildingContainer');
         this.container.height = '150px';
         this.container.width = '100%';
-        this.container.addControl(new PlanetFacilitiesContainer(this.planetState).render());
+        this.container.addControl(new PlanetFacilitiesContainer(this.buildingState.scopes[0]).render()); // TODO: not [0]
         this.container.addControl(new PlanetUnitsContainer().render());
         this.container.paddingTop = '20px';
 

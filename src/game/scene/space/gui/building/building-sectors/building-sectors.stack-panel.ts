@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {BuildingScopeSectorState} from '../../../../../logic/store/territory/building/building-scope-sector.state';
-import {BuildingScopeState} from '../../../../../logic/store/territory/building/building-scope.state';
+import {BuildingScopeSectorState} from '../../../../../logic/store/building/building-scope/building-sector/building-scope-sector.state';
+import {BuildingScopeState} from '../../../../../logic/store/building/building-scope/building-scope.state';
 import {SectorContainer} from './sector/sector.container';
 import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
 

@@ -1,6 +1,5 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingContainer} from './building/building.container';
-import {BuildingScopeState} from '../../../logic/store/territory/building/building-scope.state';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
@@ -48,10 +47,10 @@ export class SpaceGui extends Gui {
             tap(() => this.dialogOverlayContainer?.container.dispose())
         ).subscribe();
 
-        logic().buildingService.openedBuildingScopeState$.pipe(
+        logic().selectedBuildingScopeService.selectedBuildingScopeId$.pipe(
             tap(() => this.buildingContainer?.container.dispose()),
-            filter((buildingScopeState: BuildingScopeState) => !!buildingScopeState),
-            tap((buildingScopeState: BuildingScopeState) => this.buildingContainer = guiManager().render(new BuildingContainer(buildingScopeState)))
+            filter((id: string) => !!id),
+            tap(() => this.buildingContainer = guiManager().render(new BuildingContainer()))
         ).subscribe();
     }
 }

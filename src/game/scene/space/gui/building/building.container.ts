@@ -1,15 +1,15 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingHeaderContainer} from './building-header/building-header.container';
-import {BuildingScopeState} from '../../../../logic/store/territory/building/building-scope.state';
+import {BuildingScopeState} from '../../../../logic/store/building/building-scope/building-scope.state';
 import {BuildingSectorsStackPanel} from './building-sectors/building-sectors.stack-panel';
 import {Container} from '../../../../../engine/gui-manager/container';
+import {logic} from '../../../../game';
+import {selectBuildingScopeById} from '../../../../logic/store/building/building.selector';
 
-export class BuildingContainer extends Container {
+export class BuildingContainer extends Container { // TODO: rename to BuildingScopeContainer
     public scrollViewer: GUI.ScrollViewer;
-    
-    constructor(private buildingScopeState: BuildingScopeState) {
-        super();
-    }
+
+    private buildingScopeState: BuildingScopeState = selectBuildingScopeById(logic().selectedBuildingScopeService.selectedBuildingScopeId$.value);
 
     public render(): GUI.Control {
         this.container = new GUI.Container('buildingContainer');

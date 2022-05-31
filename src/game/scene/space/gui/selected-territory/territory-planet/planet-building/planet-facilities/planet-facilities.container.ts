@@ -1,14 +1,13 @@
 import * as GUI from 'babylonjs-gui';
+import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
-import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
-import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 
 export class PlanetFacilitiesContainer extends Container {
     public name: TextControl = new TextControl('Facilities', {uppercase: true});
 
-    constructor(private planetState: TerritoryState<PlanetState>) {
+    constructor(private buildingScopeState: BuildingScopeState) {
         super();
     }
 
@@ -24,7 +23,7 @@ export class PlanetFacilitiesContainer extends Container {
         this.name.textBlock.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
         this.container.onPointerDownObservable.add(() => {
-            logic().buildingService.open(this.planetState.data.building['facilities']);
+            logic().selectedBuildingScopeService.select(this.buildingScopeState.id);
         });
 
         return this.container;
