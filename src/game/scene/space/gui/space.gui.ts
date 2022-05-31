@@ -47,7 +47,7 @@ export class SpaceGui extends Gui {
             tap(() => this.dialogOverlayContainer?.container.dispose())
         ).subscribe();
 
-        logic().selectedBuildingScopeService.selectedBuildingScopeId$.pipe(
+        logic().selectedBuildingService.selectedBuildingId$.pipe(
             tap(() => this.buildingContainer?.container.dispose()),
             filter((id: string) => !!id),
             tap(() => this.buildingContainer = guiManager().render(new BuildingContainer()))

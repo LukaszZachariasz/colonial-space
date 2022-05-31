@@ -1,19 +1,16 @@
 import * as GUI from 'babylonjs-gui';
-import {BuildingObjectState} from '../../../../../../../logic/store/building/building-scope/building-sector/building-object/building-object.state';
-import {
-    BuildingScopeSectorState
-} from '../../../../../../../logic/store/building/building-scope/building-sector/building-scope-sector.state';
+import {BuildingObjectContainer} from './building-object/building-object.container';
+import {BuildingObjectState} from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
+import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
-import {ObjectContainer} from './object/object.container';
 
-export class SectorObjectsContainer extends Container {
+export class BuildingScopeObjectsContainer extends Container {
     private scrollViewer: GUI.ScrollViewer;
     private stackPanel: GUI.StackPanel;
 
-    constructor(private sector: BuildingScopeSectorState) {
+    constructor(private buildingScope: BuildingScopeState) {
         super();
     }
-
 
     public render(): GUI.Control {
         this.container = new GUI.Container('sectorObjects');
@@ -30,8 +27,8 @@ export class SectorObjectsContainer extends Container {
 
         this.stackPanel = new GUI.StackPanel('stackPanel');
         this.stackPanel.isVertical = false;
-        this.sector.objects.forEach((object: BuildingObjectState) => {
-            this.stackPanel.addControl(new ObjectContainer(object).render());
+        this.buildingScope.objects.forEach((object: BuildingObjectState) => {
+            this.stackPanel.addControl(new BuildingObjectContainer(object).render());
         });
 
         this.scrollViewer.addControl(this.stackPanel);

@@ -1,12 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {BuildingScopeState} from '../../../../../logic/store/building/building-scope/building-scope.state';
+import {BuildingState} from '../../../../../logic/store/building/building.state';
 import {Container} from '../../../../../../engine/gui-manager/container';
 import {TextControl} from '../../shared/text/text.control';
 
 export class BuildingHeaderContainer extends Container {
-    public title = new TextControl(this.buildingScopeState.label, {uppercase: true});
+    public title = new TextControl('Building', {uppercase: true});
 
-    constructor(private buildingScopeState: BuildingScopeState) {
+    constructor(private buildingState: BuildingState) {
         super();
     }
     

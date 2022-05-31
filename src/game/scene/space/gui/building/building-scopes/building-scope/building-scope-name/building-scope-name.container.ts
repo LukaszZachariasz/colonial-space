@@ -1,14 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {
-    BuildingScopeSectorState
-} from '../../../../../../../logic/store/building/building-scope/building-sector/building-scope-sector.state';
+import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
 import {TextControl} from '../../../../shared/text/text.control';
 
-export class SectorNameContainer extends Container {
-    public text: TextControl = new TextControl(this.sector.name);
+export class BuildingScopeNameContainer extends Container {
+    public text: TextControl = new TextControl(this.scopeState.name);
 
-    constructor(private sector: BuildingScopeSectorState) {
+    constructor(private scopeState: BuildingScopeState) {
         super();
     }
 

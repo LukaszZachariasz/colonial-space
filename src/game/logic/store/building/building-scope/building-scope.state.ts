@@ -1,8 +1,6 @@
-import {BuildingScopeSectorState} from './building-sector/building-scope-sector.state';
+import {BuildingObjectState} from './building-object/building-object.state';
 
 export interface BuildingScopeState {
-    id: string;
-    label: string;
-    currentBuildingObjectId: string | null;
-    sectors: BuildingScopeSectorState[];
+    name: string;
+    objects: BuildingObjectState[];
 }

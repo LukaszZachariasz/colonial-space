@@ -5,89 +5,81 @@ export class BuildingGenerator {
     public generate(): BuildingState {
         return {
             id: uuid(),
+            currentBuildingObjectId: null,
             scopes: [
                 {
-                    id: uuid(),
-                    label: 'Facilities',
-                    currentBuildingObjectId: null,
-                    sectors: [
+                    name: 'Units',
+                    objects: []
+                },
+                {
+                    name: 'Common',
+                    objects: [
                         {
-                            name: 'Common',
-                            objects: [
-                                {
-                                    name: 'Water silos',
-                                    id: uuid(),
-                                    production: 500
-                                },
-                                {
-                                    name: 'Sunlight generator',
-                                    id: uuid(),
-                                    production: 600
-                                },
-                                {
-                                    name: 'Colonization center',
-                                    id: uuid(),
-                                    production: 1500
-                                },
-                                {
-                                    name: 'Some other building',
-                                    id: uuid(),
-                                    production: 2200
-                                },
-                                {
-                                    name: 'Some other building',
-                                    id: uuid(),
-                                    production: 2200
-                                },
-                                {
-                                    name: 'Some other building',
-                                    id: uuid(),
-                                    production: 2200
-                                }
-                            ]
+                            name: 'Water silos',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 500
                         },
                         {
-                            name: 'Science',
-                            objects: [
-                                {
-                                    name: 'Laboratory',
-                                    id: uuid(),
-                                    production: 5500
-                                }
-                            ]
+                            name: 'Sunlight generator',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 600
                         },
                         {
-                            name: 'Awareness',
-                            objects: [
-                                {
-                                    name: 'Telescope',
-                                    id: uuid(),
-                                    production: 500
-                                },
-                                {
-                                    name: 'Journey support',
-                                    id: uuid(),
-                                    production: 500
-                                }
-                            ]
+                            name: 'Colonization center',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 1500
+                        },
+                        {
+                            name: 'Some other building',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 2200
+                        },
+                        {
+                            name: 'Some other building',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 2200
+                        },
+                        {
+                            name: 'Some other building',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 2200
                         }
                     ]
                 },
                 {
-                    id: uuid(),
-                    label: 'Units',
-                    currentBuildingObjectId: null,
-                    sectors: [
+                    name: 'Science',
+                    objects: [
                         {
-                            name: 'Utilities',
-                            objects: []
-                        },
-                        {
-                            name: 'Science',
-                            objects: []
+                            name: 'Laboratory',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 5500
                         }
                     ]
-                }
+                },
+                {
+                    name: 'Awareness',
+                    objects: [
+                        {
+                            name: 'Telescope',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 500
+                        },
+                        {
+                            name: 'Journey support',
+                            id: uuid(),
+                            artUrl: './resources/territory/planet/planet-art.png',
+                            production: 500
+                        }
+                    ]
+                },
             ]
         };
     }
