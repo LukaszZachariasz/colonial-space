@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../../../logic/services/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../../logic/services/tour/tour-effect/has-tour-effects';
-import {Observable, Subscriber, filter, switchMap, take, tap} from 'rxjs';
+import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
 import {gameEngine} from '../../../../../../core/game-platform';
@@ -24,8 +24,10 @@ export class UnitMovement {
             tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),
         ).subscribe();
 
-        logic().unitMovementService.addedPlanMovement$.pipe(
-            filter((id: string) => this.id === id),
+        merge(
+            logic().unitMovementService.addedPlanMovement$.pipe(filter((id: string) => this.id === id)),
+            logic().tourService.completeTour$
+        ).pipe(
             tap(() => this.unitMovementPathModel.recalculate())
         ).subscribe();
 

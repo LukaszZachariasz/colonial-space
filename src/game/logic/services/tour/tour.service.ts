@@ -1,7 +1,6 @@
 import {Subject, tap} from 'rxjs';
 import {TourEffect} from './tour-effect/tour-effect';
 import {TourEffectService} from './tour-effect/tour-effect.service';
-import {logic} from '../../../game';
 import {nextTour} from '../../store/tour/tour.slice';
 import {store} from '../../store/store';
 
@@ -14,7 +13,6 @@ export class TourService {
 
     constructor() {
         this.tourEffectManager.completeTourEffects$.pipe(
-            tap(() => logic().refillGameService.refill()),
             tap(() => store.dispatch(nextTour())),
             tap(() => this.isRunningNextTour = false),
             tap(() => this.completeTour$.next())
