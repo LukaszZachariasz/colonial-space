@@ -26,7 +26,7 @@ export class TerritorySignModel {
             height: this.HEIGHT
         }, this.scene);
         this.signMesh.rotation.x = Math.PI;
-        this.signMesh.position.y = -5; // TODO: why -5 instead of 5?
+        this.signMesh.position.y = -8; // TODO: why -8 instead of 8?
         this.signMesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
 
         this.advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(this.signMesh, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);

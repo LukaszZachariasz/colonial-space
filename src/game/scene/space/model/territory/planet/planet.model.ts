@@ -17,7 +17,7 @@ export class PlanetModel extends TerritoryModel {
         super(scene, state);
 
         BABYLON.SceneLoader.ImportMesh('', 'resources/territory/planet/', 'planet_01.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
-            meshes[0].position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
+            meshes[0].position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
             this.transformMesh = meshes[0];
             this.actionMesh = meshes[0].getChildMeshes()[0];
 
