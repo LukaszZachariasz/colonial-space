@@ -28,7 +28,6 @@ export class PlanetModel extends TerritoryModel {
                 delay(1000),
                 tap(() => this.startTerritorySignShowAnimation())
             ).subscribe();
-
         });
     }
 
@@ -42,13 +41,12 @@ export class PlanetModel extends TerritoryModel {
         this.territorySignModel.signMesh.isVisible = false;
         this.territorySignModel.signMesh.visibility = 0;
 
-
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                this.actionMesh.enableEdgesRendering();
-                this.actionMesh.edgesWidth = 1.0;
-                this.actionMesh.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
+                this.actionMesh.overlayColor = new BABYLON.Color3(0.1, 1, 0.2);
+                this.actionMesh.overlayAlpha = 0.3;
+                this.actionMesh.renderOverlay = true;
             })
         );
 
@@ -60,7 +58,7 @@ export class PlanetModel extends TerritoryModel {
 
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                this.actionMesh.disableEdgesRendering();
+                this.actionMesh.renderOverlay = false;
             })
         );
         this.actionMesh.actionManager = this.actionManager;
