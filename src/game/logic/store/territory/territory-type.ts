@@ -1,3 +1,4 @@
 export enum TerritoryType {
-    PLANET = 'PLANET'
+    PLANET_GREEN = 'PLANET_GREEN',
+    PLANET_SAND = 'PLANET_SAND'
 }

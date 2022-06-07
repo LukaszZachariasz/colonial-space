@@ -1,13 +1,13 @@
 import * as BABYLON from 'babylonjs';
 import {EMPTY, delay, of, tap} from 'rxjs';
-import {SquareState} from '../../../../../logic/store/map/square/square.state';
-import {TerritoryModel} from '../territory.model';
-import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
-import {TerritoryType} from '../../../../../logic/store/territory/territory-type';
-import {selectSquareByTerritoryId} from '../../../../../logic/store/map/square/square.selectors';
+import {SquareState} from '../../../../../../logic/store/map/square/square.state';
+import {TerritoryModel} from '../../territory.model';
+import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
+import {TerritoryType} from '../../../../../../logic/store/territory/territory-type';
+import {selectSquareByTerritoryId} from '../../../../../../logic/store/map/square/square.selectors';
 
-export class PlanetModel extends TerritoryModel {
-    public type: TerritoryType = TerritoryType.PLANET;
+export class PlanetGreenModel extends TerritoryModel {
+    public type: TerritoryType = TerritoryType.PLANET_GREEN;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
 
     private actionManager: BABYLON.ActionManager;

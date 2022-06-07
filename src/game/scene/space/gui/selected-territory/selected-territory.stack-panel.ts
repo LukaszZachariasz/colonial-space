@@ -4,7 +4,7 @@ import {TerritoryArtControl} from './territory-art/territory-art.control';
 import {TerritoryPlanetStackPanel} from './territory-planet/territory-planet.stack-panel';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryTitleContainer} from './territory-title/territory-title.container';
-import {isTerritoryPlanet} from '../../../../logic/store/territory/planet/is-territory-planet';
+import {isPlanet} from '../../../../logic/store/territory/planet/is-planet';
 import {logic} from '../../../../game';
 import {selectTerritoryById} from '../../../../logic/store/territory/territory.selectors';
 
@@ -27,7 +27,7 @@ export class SelectedTerritoryStackPanel extends StackPanel {
         this.stackPanel.addControl(new TerritoryTitleContainer(this.territoryState).render());
         this.stackPanel.addControl(new TerritoryArtControl(this.territoryState).render());
 
-        if (isTerritoryPlanet(this.territoryState)) {
+        if (isPlanet(this.territoryState)) {
             this.stackPanel.addControl(new TerritoryPlanetStackPanel(this.territoryState).render());
         }
 

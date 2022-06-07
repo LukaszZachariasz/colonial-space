@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {MapModel} from '../scene/space/model/map/map.model';
-import {PlanetModel} from '../scene/space/model/territory/planet/planet.model';
+import {PlanetGreenModel} from '../scene/space/model/territory/planet/planet-green/planet-green.model';
 import {ScoutShipModel} from '../scene/space/model/unit/scout-ship/scout-ship.model';
 import {SpaceScene} from '../scene/space/space.scene';
 import {TerritoryState} from '../logic/store/territory/territory.state';
@@ -19,7 +19,7 @@ export class GameBuilder {
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)
-            .forEach((territoryState: TerritoryState) => new PlanetModel(spaceScene.scene, territoryState));
+            .forEach((territoryState: TerritoryState) => new PlanetGreenModel(spaceScene.scene, territoryState));
 
         selectUnits().forEach((unitState: UnitState) => new ScoutShipModel(spaceScene.scene, unitState));
 

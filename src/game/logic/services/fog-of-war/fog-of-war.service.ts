@@ -1,4 +1,4 @@
-import {PlanetModel} from '../../../scene/space/model/territory/planet/planet.model';
+import {PlanetGreenModel} from '../../../scene/space/model/territory/planet/planet-green/planet-green.model';
 import {SquareState} from '../../store/map/square/square.state';
 import {Subject, delay, filter, map, tap} from 'rxjs';
 import {sceneManager} from 'engine';
@@ -13,7 +13,7 @@ export class FogOfWarService {
             delay(10),
             map((squareId: string) => selectSquareById(squareId)),
             filter((square: SquareState) => !!square.territoryId),
-            tap((squareState: SquareState) => new PlanetModel(
+            tap((squareState: SquareState) => new PlanetGreenModel(
                 sceneManager().scene.scene,
                 selectTerritoryById(squareState.territoryId))
             )

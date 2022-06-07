@@ -4,7 +4,7 @@ import {Observable, Subject, Subscriber} from 'rxjs';
 import {TerritoryState} from '../../store/territory/territory.state';
 import {TourEffectPriorityEnum} from '../tour/tour-effect/tour-effect-priority.enum';
 import {build, selectBuilding} from '../../store/building/building.slice';
-import {isTerritoryPlanet} from '../../store/territory/planet/is-territory-planet';
+import {isPlanet} from '../../store/territory/planet/is-planet';
 import {logic} from '../../../game';
 import {selectBuildingByBuildingObjectId} from '../../store/building/building.selector';
 import {selectTerritories} from '../../store/territory/territory.selectors';
@@ -39,7 +39,7 @@ export class BuildingService {
     private startBuildingProcesses(): Observable<any>{
         return new Observable((subscriber: Subscriber<any>) => {
             selectTerritories().forEach((el: TerritoryState) => {
-                if (isTerritoryPlanet(el)) {
+                if (isPlanet(el)) {
                     store.dispatch(build({
                         buildingId: el.data.buildingId,
                         production: logic().planetProductionService.getTotalProduction(el.data)

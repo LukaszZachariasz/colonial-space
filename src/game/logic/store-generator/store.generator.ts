@@ -8,7 +8,7 @@ import {UnitGenerator} from './unit-generator/unit-generator';
 import {addBuilding} from '../store/building/building.slice';
 import {addTerritory} from '../store/territory/territory.slice';
 import {addUnit} from '../store/unit/unit.slice';
-import {isTerritoryPlanet} from '../store/territory/planet/is-territory-planet';
+import {isPlanet} from '../store/territory/planet/is-planet';
 import {removeFogOfWar, setMap, setSquarePlayerId, setSquareTerritoryId, setSquareUnitId} from '../store/map/map.slice';
 import {selectPlayerId} from '../store/player/player.selectors';
 import {
@@ -35,7 +35,7 @@ export class StoreGenerator {
         store.dispatch(setTour(this.tourGenerator.generate()));
 
         this.territoryGenerator.generate().forEach((territoryState: TerritoryState) => {
-            if (isTerritoryPlanet(territoryState)) {
+            if (isPlanet(territoryState)) {
                 const buildingState = this.buildingGenerator.generate();
                 territoryState.data.buildingId = buildingState.id;
                 store.dispatch(addBuilding(buildingState));
