@@ -15,8 +15,11 @@ export class PlanetSandGenerator {
             artUrl: './resources/territory/planet/planet-sand/planet-art.png',
             data: {
                 basicProduction: 0,
-                water: Math.floor(BABYLON.Scalar.RandomRange(10,20)),
-                sunlight: Math.floor(BABYLON.Scalar.RandomRange(70,90)),
+                isAnalysed: false,
+                analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(3, 6)),
+                isColonized: false,
+                water: Math.floor(BABYLON.Scalar.RandomRange(10, 20)),
+                sunlight: Math.floor(BABYLON.Scalar.RandomRange(70, 90)),
                 buildingId: null
             }
         };

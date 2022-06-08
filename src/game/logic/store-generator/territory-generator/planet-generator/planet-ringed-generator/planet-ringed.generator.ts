@@ -15,8 +15,11 @@ export class PlanetRingedGenerator {
             artUrl: './resources/territory/planet/planet-ringed/planet-art.png',
             data: {
                 basicProduction: 0,
-                water: Math.floor(BABYLON.Scalar.RandomRange(20,30)),
-                sunlight: Math.floor(BABYLON.Scalar.RandomRange(20,30)),
+                isAnalysed: false,
+                analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(10, 15)),
+                isColonized: false,
+                water: Math.floor(BABYLON.Scalar.RandomRange(20, 30)),
+                sunlight: Math.floor(BABYLON.Scalar.RandomRange(20, 30)),
                 buildingId: null
             }
         };

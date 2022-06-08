@@ -39,6 +39,9 @@ export class SunlightAttributeControl extends Control {
     }
 
     private generateTooltipContent(): string {
+        if (!this.planetState.data.isAnalysed) {
+            return 'Sunlight unknown. You need to analise planet firstly';
+        }
         return `Sunlight ${this.planetState.data.sunlight}%
             
             It's provide ${logic().planetProductionService.getSunlightProduction(this.planetState.data.sunlight)} production.`;

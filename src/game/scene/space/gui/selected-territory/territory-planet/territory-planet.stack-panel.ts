@@ -9,7 +9,7 @@ export class TerritoryPlanetStackPanel extends StackPanel {
     constructor(private planetState: TerritoryState<PlanetState>) {
         super();
     }
-    
+
     public render(): GUI.Container {
         this.stackPanel = new GUI.StackPanel('planetStackPanel');
         this.stackPanel.width = '100%';
@@ -17,7 +17,10 @@ export class TerritoryPlanetStackPanel extends StackPanel {
         this.stackPanel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 
         this.stackPanel.addControl(new PlanetAttributesContainer(this.planetState).render());
-        this.stackPanel.addControl(new PlanetBuildingStackPanel(this.planetState).render());
+
+        if (this.planetState.data.isColonized) {
+            this.stackPanel.addControl(new PlanetBuildingStackPanel(this.planetState).render());
+        }
 
         return this.stackPanel;
     }

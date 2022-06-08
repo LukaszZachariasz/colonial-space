@@ -39,6 +39,9 @@ export class WaterAttributeControl extends Control {
     }
 
     private generateTooltipContent(): string {
+        if (!this.planetState.data.isAnalysed) {
+            return 'Water unknown. You need to analise planet firstly';
+        }
         return `Water ${this.planetState.data.water}%. 
             
             It's provide ${logic().planetProductionService.getWaterProduction(this.planetState.data.water)} production.`;

@@ -15,6 +15,9 @@ export class PlanetMetalGenerator {
             artUrl: './resources/territory/planet/planet-metal/planet-art.png',
             data: {
                 basicProduction: 0,
+                isAnalysed: false,
+                analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(15, 25)),
+                isColonized: false,
                 water: 0,
                 sunlight: 10,
                 buildingId: null

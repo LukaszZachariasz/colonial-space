@@ -15,8 +15,11 @@ export class PlanetGreenGenerator {
             artUrl: './resources/territory/planet/planet-green/planet-art.png',
             data: {
                 basicProduction: 0,
-                water: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
-                sunlight: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
+                isAnalysed: false,
+                analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(3, 6)),
+                isColonized: false,
+                water: Math.floor(BABYLON.Scalar.RandomRange(40, 60)),
+                sunlight: Math.floor(BABYLON.Scalar.RandomRange(40, 60)),
                 buildingId: null
             }
         };
