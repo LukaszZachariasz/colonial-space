@@ -14,7 +14,7 @@ export class PlanetGenerator {
                 id: uuid(),
                 type: TerritoryType.PLANET_GREEN,
                 name: PlanetNameGenerator.generate(),
-                artUrl: './resources/territory/planet/planet-art.png',
+                artUrl: './resources/territory/planet/planet-green/planet-art.png',
                 data: {
                     basicProduction: 0,
                     water: Math.floor(BABYLON.Scalar.RandomRange(40,60)),

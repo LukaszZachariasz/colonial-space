@@ -29,7 +29,7 @@ export class BuildingGenerator {
                             name: 'Water filter',
                             type: BuildingObjectType.WATER_FILTER,
                             id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
+                            artUrl: './resources/territory/planet/planet-green/planet-art.png',
                             productionLeft: 500,
                             production: 500,
                             isBuilt: false
@@ -38,7 +38,7 @@ export class BuildingGenerator {
                             name: 'Sunlight amplifier',
                             type: BuildingObjectType.SUNLIGHT_AMPLIFIER,
                             id: uuid(),
-                            artUrl: './resources/territory/planet/planet-art.png',
+                            artUrl: './resources/territory/planet/planet-green/planet-art.png',
                             productionLeft: 600,
                             production: 600,
                             isBuilt: false

@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {MapModel} from '../scene/space/model/map/map.model';
-import {PlanetGreenModel} from '../scene/space/model/territory/planet/planet-green/planet-green.model';
 import {ScoutShipModel} from '../scene/space/model/unit/scout-ship/scout-ship.model';
 import {SpaceScene} from '../scene/space/space.scene';
+import {TerritoryFactory} from './territory-factory/territory-factory';
 import {TerritoryState} from '../logic/store/territory/territory.state';
 import {UnitState} from '../logic/store/unit/unit.state';
 import {sceneManager} from 'engine';
@@ -19,7 +19,7 @@ export class GameBuilder {
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)
-            .forEach((territoryState: TerritoryState) => new PlanetGreenModel(spaceScene.scene, territoryState));
+            .forEach((territoryState: TerritoryState) => TerritoryFactory.create(spaceScene.scene, territoryState));
 
         selectUnits().forEach((unitState: UnitState) => new ScoutShipModel(spaceScene.scene, unitState));
 

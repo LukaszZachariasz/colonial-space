@@ -5,8 +5,8 @@ import {TerritoryState} from '../../../../../../logic/store/territory/territory.
 import {TerritoryType} from '../../../../../../logic/store/territory/territory-type';
 import {selectSquareByTerritoryId} from '../../../../../../logic/store/map/square/square.selectors';
 
-export class PlanetGreenModel extends TerritoryModel {
-    public type: TerritoryType = TerritoryType.PLANET_GREEN;
+export class PlanetSandModel extends TerritoryModel {
+    public type: TerritoryType = TerritoryType.PLANET_SAND;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
 
     private actionManager: BABYLON.ActionManager;
@@ -15,10 +15,11 @@ export class PlanetGreenModel extends TerritoryModel {
                 public state: TerritoryState) {
         super(scene, state);
 
-        BABYLON.SceneLoader.ImportMesh('', 'resources/territory/planet/planet-green/', 'planet_01.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
+        BABYLON.SceneLoader.ImportMesh('', 'resources/territory/planet/planet-sand/', 'planet_01.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
             meshes[0].position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
             this.transformMesh = meshes[0];
             this.actionMesh = meshes[0].getChildMeshes()[0];
+            this.transformMesh.scaling.x = 2;
             this.afterModelLoaded();
         });
     }
