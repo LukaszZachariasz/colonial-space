@@ -9,7 +9,7 @@ import {TerritoryState} from '../../../../../../logic/store/territory/territory.
 import {logic} from '../../../../../../game';
 import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
 
-export class PlanetBuildingStackPanel extends Container {
+export class PlanetBuildingContainer extends Container {
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
     constructor(private planetState: TerritoryState<PlanetState>) {
