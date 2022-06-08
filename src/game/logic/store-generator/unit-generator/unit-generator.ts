@@ -3,7 +3,7 @@ import {UnitType} from '../../store/unit/unit-type';
 import {v4 as uuid} from 'uuid';
 
 export class UnitGenerator {
-    public generate(playerId: string): UnitState {
+    public static generate(playerId: string): UnitState {
         return {
             id: uuid(),
             name: 'Scout ship',

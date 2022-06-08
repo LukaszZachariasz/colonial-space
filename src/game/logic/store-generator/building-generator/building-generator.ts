@@ -3,7 +3,7 @@ import {BuildingState} from '../../store/building/building.state';
 import {v4 as uuid} from 'uuid';
 
 export class BuildingGenerator {
-    public generate(): BuildingState {
+    public static generate(): BuildingState {
         return {
             id: uuid(),
             currentBuildingObjectId: null,

@@ -14,7 +14,7 @@ import {setTerritoryDataField} from '../../../../store/territory/territory.slice
 import {store} from '../../../../store/store';
 
 @HasTourEffects()
-export class SunlightAmplifierHandlerService {
+export class SunlightAmplifierBuildingHandlerService {
     @AddTourEffect({
         name: 'after building process',
         priority: TourEffectPriorityEnum.AFTER_BUILDING_PROCESS

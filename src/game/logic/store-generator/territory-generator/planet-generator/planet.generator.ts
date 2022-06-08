@@ -1,29 +1,23 @@
-import {PlanetGreenState} from '../../../store/territory/planet/planet-green/planet-green.state';
-import {PlanetNameGenerator} from './planet-name/planet-name.generator';
+import {PlanetGreenGenerator} from './planet-green-generator/planet-green.generator';
+import {PlanetSandGenerator} from './planet-sand-generator/planet-sand.generator';
+import {PlanetState} from '../../../store/territory/planet/planet.state';
 import {TerritoryState} from '../../../store/territory/territory.state';
-import {TerritoryType} from '../../../store/territory/territory-type';
-import {v4 as uuid} from 'uuid';
 
 export class PlanetGenerator {
-    private static readonly Planets = 10;
+    private static readonly PlanetsGreen = 5;
+    private static readonly PlanetsSand = 5;
 
-    public generate(): TerritoryState<PlanetGreenState>[] {
-        const planets: TerritoryState<PlanetGreenState>[] = [];
-        for (let i = 0; i < PlanetGenerator.Planets; i++) {
-            const planetState: TerritoryState<PlanetGreenState> = {
-                id: uuid(),
-                type: TerritoryType.PLANET_GREEN,
-                name: PlanetNameGenerator.generate(),
-                artUrl: './resources/territory/planet/planet-green/planet-art.png',
-                data: {
-                    basicProduction: 0,
-                    water: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
-                    sunlight: Math.floor(BABYLON.Scalar.RandomRange(40,60)),
-                    buildingId: null
-                }
-            };
-            planets.push(planetState);
+    public static generate(): TerritoryState<PlanetState>[] {
+        const planets: TerritoryState<PlanetState>[] = [];
+
+        for (let i = 0; i < PlanetGenerator.PlanetsGreen; i++) {
+            planets.push(PlanetGreenGenerator.generate());
         }
+
+        for (let i = 0; i < PlanetGenerator.PlanetsSand; i++) {
+            planets.push(PlanetSandGenerator.generate());
+        }
+
         return planets;
     }
 }

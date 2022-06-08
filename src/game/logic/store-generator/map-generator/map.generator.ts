@@ -8,7 +8,7 @@ export class MapGenerator {
     public static readonly MapHeight = 15;
     public static readonly MapWidth = 20;
 
-    public generate(): MapState {
+    public static generate(): MapState {
         const map: MapState = {
             skyboxType: randomSpaceSkybox(),
             squares: []

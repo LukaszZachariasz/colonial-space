@@ -19,7 +19,6 @@ export class PlanetSandModel extends TerritoryModel {
             meshes[0].position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
             this.transformMesh = meshes[0];
             this.actionMesh = meshes[0].getChildMeshes()[0];
-            this.transformMesh.scaling.x = 2;
             this.afterModelLoaded();
         });
     }

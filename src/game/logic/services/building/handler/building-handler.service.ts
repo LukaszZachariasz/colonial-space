@@ -1,10 +1,10 @@
-import {ScoutShipHandlerService} from './units/scout-ship-handler.service';
-import {SunlightAmplifierHandlerService} from './common/sunlight-amplifier-handler.service';
-import {WaterFilterHandlerService} from './common/water-filter-handler.service';
+import {ScoutShipBuildingHandlerService} from './units/scout-ship-building-handler.service';
+import {SunlightAmplifierBuildingHandlerService} from './common/sunlight-amplifier-building-handler.service';
+import {WaterFilterBuildingHandlerService} from './common/water-filter-building-handler.service';
 
 export class BuildingHandlerService {
-    public scoutShipHandlerService: ScoutShipHandlerService = new ScoutShipHandlerService();
+    public scoutShipHandlerService: ScoutShipBuildingHandlerService = new ScoutShipBuildingHandlerService();
     
-    public sunlightAmplifierHandlerService: SunlightAmplifierHandlerService = new SunlightAmplifierHandlerService();
-    public waterFilterHandlerService: WaterFilterHandlerService = new WaterFilterHandlerService();
+    public sunlightAmplifierHandlerService: SunlightAmplifierBuildingHandlerService = new SunlightAmplifierBuildingHandlerService();
+    public waterFilterHandlerService: WaterFilterBuildingHandlerService = new WaterFilterBuildingHandlerService();
 }

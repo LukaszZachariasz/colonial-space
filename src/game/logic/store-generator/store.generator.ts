@@ -22,21 +22,14 @@ import {setTour} from '../store/tour/tour.slice';
 import {store} from '../store/store';
 
 export class StoreGenerator {
-    private mapGenerator: MapGenerator = new MapGenerator();
-    private playerGenerator: PlayerGenerator = new PlayerGenerator();
-    private territoryGenerator: TerritoryGenerator = new TerritoryGenerator();
-    private buildingGenerator: BuildingGenerator = new BuildingGenerator();
-    private tourGenerator: TourGenerator = new TourGenerator();
-    private unitGenerator: UnitGenerator = new UnitGenerator();
-
     public generate(): void {
-        store.dispatch(setMap(this.mapGenerator.generate()));
-        store.dispatch(setPlayer(this.playerGenerator.generate()));
-        store.dispatch(setTour(this.tourGenerator.generate()));
+        store.dispatch(setMap(MapGenerator.generate()));
+        store.dispatch(setPlayer(PlayerGenerator.generate()));
+        store.dispatch(setTour(TourGenerator.generate()));
 
-        this.territoryGenerator.generate().forEach((territoryState: TerritoryState) => {
+        TerritoryGenerator.generate().forEach((territoryState: TerritoryState) => {
             if (isPlanet(territoryState)) {
-                const buildingState = this.buildingGenerator.generate();
+                const buildingState = BuildingGenerator.generate();
                 territoryState.data.buildingId = buildingState.id;
                 store.dispatch(addBuilding(buildingState));
             }
@@ -61,7 +54,7 @@ export class StoreGenerator {
             range: 2
         }));
 
-        store.dispatch(addUnit(this.unitGenerator.generate(selectPlayerId())));
+        store.dispatch(addUnit(UnitGenerator.generate(selectPlayerId())));
         store.dispatch(setSquareUnitId({
             unitId: selectUnits()[0].id,
             squareId: selectSquaresWithTerritory()[0].id
