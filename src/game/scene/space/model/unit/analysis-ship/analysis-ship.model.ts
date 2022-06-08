@@ -16,7 +16,7 @@ export class AnalysisShipModel extends UnitModel {
             scene,
             (meshes: BABYLON.AbstractMesh[]) => {
                 this.transformMesh = meshes[0];
-                this.actionMesh = meshes[0].getChildMeshes()[0];
+                this.actionMesh = meshes[0].getChildMeshes().find(el => el.name.toLowerCase().includes('body'));
                 this.meshes = meshes;
                 this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
                 this.afterModelLoaded();

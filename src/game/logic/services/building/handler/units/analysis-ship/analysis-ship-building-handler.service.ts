@@ -2,11 +2,11 @@ import {AddTourEffect} from '../../../../tour/tour-effect/add-tour-effect';
 import {
     AnalysisShipGenerator
 } from '../../../../../store-generator/unit-generator/analysis-ship-generator/analysis-ship.generator';
+import {AnalysisShipModel} from '../../../../../../scene/space/model/unit/analysis-ship/analysis-ship.model';
 import {BuildingObjectState} from '../../../../../store/building/building-scope/building-object/building-object.state';
 import {BuildingObjectType} from '../../../../../store/building/building-scope/building-object/building-object-type';
 import {HasTourEffects} from '../../../../tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber} from 'rxjs';
-import {ScoutShipModel} from '../../../../../../scene/space/model/unit/scout-ship/scout-ship.model';
 import {TourEffectPriorityEnum} from '../../../../tour/tour-effect/tour-effect-priority.enum';
 import {addUnit} from '../../../../../store/unit/unit.slice';
 import {sceneManager} from 'engine';
@@ -41,7 +41,7 @@ export class AnalysisShipBuildingHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                new ScoutShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
+                new AnalysisShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id

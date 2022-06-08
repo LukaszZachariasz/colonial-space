@@ -4,9 +4,9 @@ import {BuildingObjectType} from '../../../../../store/building/building-scope/b
 import {
     ColonialShipGenerator
 } from '../../../../../store-generator/unit-generator/colonial-ship-generator/colonial-ship.generator';
+import {ColonialShipModel} from '../../../../../../scene/space/model/unit/colonial-ship/colonial-ship.model';
 import {HasTourEffects} from '../../../../tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber} from 'rxjs';
-import {ScoutShipModel} from '../../../../../../scene/space/model/unit/scout-ship/scout-ship.model';
 import {TourEffectPriorityEnum} from '../../../../tour/tour-effect/tour-effect-priority.enum';
 import {addUnit} from '../../../../../store/unit/unit.slice';
 import {sceneManager} from 'engine';
@@ -41,7 +41,7 @@ export class ColonialShipBuildingHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                new ScoutShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
+                new ColonialShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id
