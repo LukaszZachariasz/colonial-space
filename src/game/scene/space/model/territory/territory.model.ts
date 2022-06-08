@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {FadeInAnimation} from '../../animations/fade-in/fade-in.animation';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
@@ -20,9 +21,19 @@ export abstract class TerritoryModel {
         this.territorySignModel = new TerritorySignModel(this.scene, this.state);
         this.territorySignModel.signMesh.parent = this.transformMesh;
         this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
+
+        this.runEnterAnimation();
     }
 
     protected select(): void {
         logic().selectedTerritoryService.select(this.state.id);
+    }
+
+    private runEnterAnimation(): void {
+        this.actionMesh.parent.getChildMeshes().forEach((childMesh: BABYLON.AbstractMesh) => {
+            FadeInAnimation.run(childMesh);
+        });
+
+        FadeInAnimation.run(this.territorySignModel.signMesh, 1000);
     }
 }

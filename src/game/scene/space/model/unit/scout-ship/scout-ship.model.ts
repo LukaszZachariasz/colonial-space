@@ -18,7 +18,7 @@ export class ScoutShipModel extends UnitModel {
                 this.transformMesh = meshes[0];
                 this.actionMesh = meshes[0].getChildMeshes()[0];
                 this.meshes = meshes;
-                this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x, 5, selectSquareByUnitId(this.state.id).y);
+                this.transformMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
                 this.afterModelLoaded();
             });
     }
@@ -29,9 +29,9 @@ export class ScoutShipModel extends UnitModel {
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                this.actionMesh.overlayColor = new BABYLON.Color3(0.1, 1, 0.2);
-                this.actionMesh.overlayAlpha = 0.3;
-                this.actionMesh.renderOverlay = true;
+                this.actionMesh.enableEdgesRendering();
+                this.actionMesh.edgesWidth = 1.0;
+                this.actionMesh.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
             })
         );
 
@@ -43,7 +43,7 @@ export class ScoutShipModel extends UnitModel {
 
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                this.actionMesh.renderOverlay = false;
+                this.actionMesh.disableEdgesRendering();
             })
         );
         this.actionMesh.actionManager = this.actionManager;
