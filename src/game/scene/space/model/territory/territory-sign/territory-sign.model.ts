@@ -32,7 +32,7 @@ export class TerritorySignModel {
         this.advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(this.signMesh, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);
         this.advancedTexture.background = 'rgba(0, 0, 0, 0.2)';
 
-        this.icon = new IconControl('planet');
+        this.icon = new IconControl(this.territoryState.icon);
         this.icon.render();
         this.icon.icon.widthInPixels = this.GUI_SIZE * this.HEIGHT;
         this.icon.icon.heightInPixels = this.GUI_SIZE * this.HEIGHT;

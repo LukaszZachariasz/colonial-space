@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {AttributeControl} from '../../../../shared/attribute/attribute.control';
 import {Control} from '../../../../../../../../engine/gui-manager/control';
+import {GameIcon} from '../../../../shared/icon/game-icon';
 import {IconControl} from '../../../../shared/icon/icon.control';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
@@ -20,7 +21,7 @@ export class SunlightAttributeControl extends Control {
 
     public render(): GUI.Control {
         this.attributeControl = new AttributeControl(
-            new IconControl('sun'),
+            new IconControl(GameIcon.SUN),
             new TextControl(this.generateTooltipContent()).render()
         );
         this.attributeControl.render();

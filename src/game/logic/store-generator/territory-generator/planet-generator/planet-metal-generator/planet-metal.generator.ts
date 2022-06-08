@@ -1,3 +1,4 @@
+import {GameIcon} from '../../../../../scene/space/gui/shared/icon/game-icon';
 import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
 import {PlanetRingedState} from '../../../../store/territory/planet/planet-ringed/planet-ringed.state';
 import {TerritoryState} from '../../../../store/territory/territory.state';
@@ -9,6 +10,7 @@ export class PlanetMetalGenerator {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_METAL,
+            icon: GameIcon.PLANET,
             name: PlanetNameGenerator.generate(),
             artUrl: './resources/territory/planet/planet-metal/planet-art.png',
             data: {

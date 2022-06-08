@@ -24,3 +24,12 @@
 
 Insane skybox generator
 https://tools.wwwtyro.net/space-3d/index.html
+
+Game icons 
+https://game-icons.net/
+
+Planet name generator
+https://nerdburglars.net/namegenerator/planet-name-generator/
+
+Sun name generator
+https://nerdburglars.net/namegenerator/sun-name-generator/

@@ -1,3 +1,4 @@
+import {GameIcon} from '../../../../../scene/space/gui/shared/icon/game-icon';
 import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
 import {PlanetSandState} from '../../../../store/territory/planet/planet-sand/planet-sand.state';
 import {TerritoryState} from '../../../../store/territory/territory.state';
@@ -9,6 +10,7 @@ export class PlanetSandGenerator {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_SAND,
+            icon: GameIcon.PLANET,
             name: PlanetNameGenerator.generate(),
             artUrl: './resources/territory/planet/planet-sand/planet-art.png',
             data: {

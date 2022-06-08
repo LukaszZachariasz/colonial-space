@@ -17,7 +17,7 @@ export class TerritoryTitleContainer extends Container {
         this.container.top = '10px';
         this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
-        this.container.addControl(new IconControl('planet').render());
+        this.container.addControl(new IconControl(this.territoryState.icon).render());
         this.container.addControl(new TerritoryNameControl(this.territoryState).render());
 
         return this.container;

@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {AttributeControl} from '../../../shared/attribute/attribute.control';
 import {Control} from '../../../../../../../engine/gui-manager/control';
+import {GameIcon} from '../../../shared/icon/game-icon';
 import {IconControl} from '../../../shared/icon/icon.control';
 import {Subscription, filter, map, merge, tap} from 'rxjs';
 import {TextControl} from '../../../shared/text/text.control';
@@ -22,7 +23,7 @@ export class MovementAttributeControl extends Control {
         this.textControl = new TextControl(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
 
         this.attributeControl = new AttributeControl(
-            new IconControl('move'),
+            new IconControl(GameIcon.MOVE),
             this.textControl.render()
         );
 

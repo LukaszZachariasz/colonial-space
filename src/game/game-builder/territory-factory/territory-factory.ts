@@ -3,6 +3,7 @@ import {PlanetGreenModel} from '../../scene/space/model/territory/planet/planet-
 import {PlanetMetalModel} from '../../scene/space/model/territory/planet/planet-metal/planet-metal.model';
 import {PlanetRingedModel} from '../../scene/space/model/territory/planet/planet-ringed/planet-ringed.model';
 import {PlanetSandModel} from '../../scene/space/model/territory/planet/planet-sand/planet-sand.model';
+import {StarSolarModel} from '../../scene/space/model/territory/star/star-solar/star-solar.model';
 import {TerritoryModel} from '../../scene/space/model/territory/territory.model';
 import {TerritoryState} from '../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../logic/store/territory/territory-type';
@@ -18,6 +19,8 @@ export class TerritoryFactory {
                 return new PlanetRingedModel(scene, territoryState);
             case TerritoryType.PLANET_METAL:
                 return new PlanetMetalModel(scene, territoryState);
+            case TerritoryType.STAR_SOLAR:
+                return new StarSolarModel(scene, territoryState);
         }
     }
 }

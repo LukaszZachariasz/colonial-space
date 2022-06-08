@@ -1,3 +1,4 @@
+import {GameIcon} from '../../../../../scene/space/gui/shared/icon/game-icon';
 import {PlanetGreenState} from '../../../../store/territory/planet/planet-green/planet-green.state';
 import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
 import {TerritoryState} from '../../../../store/territory/territory.state';
@@ -9,6 +10,7 @@ export class PlanetGreenGenerator {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_GREEN,
+            icon: GameIcon.PLANET,
             name: PlanetNameGenerator.generate(),
             artUrl: './resources/territory/planet/planet-green/planet-art.png',
             data: {

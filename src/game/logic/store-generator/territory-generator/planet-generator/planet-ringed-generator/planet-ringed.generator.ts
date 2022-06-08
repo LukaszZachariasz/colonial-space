@@ -1,3 +1,4 @@
+import {GameIcon} from '../../../../../scene/space/gui/shared/icon/game-icon';
 import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
 import {PlanetRingedState} from '../../../../store/territory/planet/planet-ringed/planet-ringed.state';
 import {TerritoryState} from '../../../../store/territory/territory.state';
@@ -9,6 +10,7 @@ export class PlanetRingedGenerator {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_RINGED,
+            icon: GameIcon.PLANET,
             name: PlanetNameGenerator.generate(),
             artUrl: './resources/territory/planet/planet-ringed/planet-art.png',
             data: {

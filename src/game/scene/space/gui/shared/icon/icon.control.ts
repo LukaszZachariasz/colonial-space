@@ -1,15 +1,16 @@
 import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../engine/gui-manager/control';
+import {GameIcon} from './game-icon';
 
 export class IconControl extends Control {
     public icon: GUI.Image;
 
-    constructor(private name: string) {
+    constructor(private gameIcon: GameIcon) {
         super();
     }
 
     public render(): GUI.Control {
-        this.icon = new GUI.Image(this.name, `resources/gui/icons/${this.name}.svg`);
+        this.icon = new GUI.Image(this.gameIcon, `resources/gui/icons/${this.gameIcon}.svg`);
         this.icon.width = '50px';
         this.icon.height = '50px';
         this.icon.stretch = GUI.Image.STRETCH_FILL;
