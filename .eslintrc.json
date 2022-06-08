@@ -19,6 +19,7 @@
     "prefer-const": [
       "error"
     ],
+    "no-switch-case-fall-through": 0,
     "@typescript-eslint/typedef": [
       "error",
       {
