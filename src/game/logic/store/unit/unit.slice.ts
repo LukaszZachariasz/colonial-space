@@ -1,7 +1,8 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {UnitState} from './unit.state';
+import {analysisShipReducer} from './analysis-ship/analysis-ship.reducer';
 
-interface UnitSliceState {
+export interface UnitSliceState {
     units: UnitState[];
 }
 
@@ -39,7 +40,8 @@ export const unitSlice = createSlice({
                     unit.movementPointsLeft = unit.movementPoints;
                 }
             );
-        }
+        },
+        ...analysisShipReducer
     }
 });
 
@@ -48,5 +50,7 @@ export const {
     clearUnitPlanningMovement,
     addUnitPlanningMovement,
     moveUnit,
-    refillUnits
+    refillUnits,
+    startAnalyse,
+    stopAnalyse
 } = unitSlice.actions;

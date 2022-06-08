@@ -1,10 +1,11 @@
 import {GameIcon} from '../../../../scene/space/gui/shared/icon/game-icon';
+import {ScoutShipState} from '../../../store/unit/scout-ship/scout-ship.state';
 import {UnitState} from '../../../store/unit/unit.state';
 import {UnitType} from '../../../store/unit/unit-type';
 import {v4 as uuid} from 'uuid';
 
 export class ScoutShipGenerator {
-    public static generate(playerId: string): UnitState {
+    public static generate(playerId: string): UnitState<ScoutShipState> {
         return {
             id: uuid(),
             name: 'Scout ship',
@@ -16,7 +17,8 @@ export class ScoutShipGenerator {
             movementPoints: 2,
             movementPointsLeft: 2,
             movementPlanning: [],
-            scoutRange: 1
+            scoutRange: 1,
+            data: {}
         };
     }
 }

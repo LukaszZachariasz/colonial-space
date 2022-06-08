@@ -1,7 +1,7 @@
 import {GameIcon} from '../../../scene/space/gui/shared/icon/game-icon';
 import {UnitType} from './unit-type';
 
-export interface UnitState {
+export interface UnitState<T extends {} = any> {
     id: string;
     name: string;
     artUrl: string;
@@ -15,4 +15,6 @@ export interface UnitState {
     movementPointsLeft: number;
 
     scoutRange: number;
+
+    data: T;
 }

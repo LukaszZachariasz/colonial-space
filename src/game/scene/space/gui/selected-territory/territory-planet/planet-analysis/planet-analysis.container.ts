@@ -5,6 +5,8 @@ import {PlanetState} from '../../../../../../logic/store/territory/planet/planet
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 
 export class PlanetAnalysisContainer extends Container {
+    public buttonControl: ButtonControl;
+
     constructor(private planetState: TerritoryState<PlanetState>) {
         super();
     }
@@ -14,9 +16,11 @@ export class PlanetAnalysisContainer extends Container {
         this.container.height = '200px';
         this.container.width = '100%';
         this.container.paddingTop = '20px';
-        this.container.addControl(new ButtonControl('Start analysis', () => {
-            console.log('test');
-        }).render());
+
+        this.buttonControl = new ButtonControl('Start analysis', () => {
+        });
+
+        this.container.addControl(this.buttonControl.render());
 
         return this.container;
     }
