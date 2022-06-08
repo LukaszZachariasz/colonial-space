@@ -19,7 +19,7 @@ export abstract class UnitModel {
     }
 
     protected afterModelLoaded(): void {
-        this.unitSignModel = new UnitSignModel(this.scene);
+        this.unitSignModel = new UnitSignModel(this.scene, this.state);
         this.unitSignModel.signMesh.parent = this.transformMesh;
         this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
 

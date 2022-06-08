@@ -1,10 +1,10 @@
 import {BuildingGenerator} from './building-generator/building-generator';
 import {MapGenerator} from './map-generator/map.generator';
 import {PlayerGenerator} from './player-generator/player-generator';
+import {ScoutShipGenerator} from './unit-generator/scout-ship-generator/scout-ship.generator';
 import {TerritoryGenerator} from './territory-generator/territory-generator';
 import {TerritoryState} from '../store/territory/territory.state';
 import {TourGenerator} from './tour-generator/tour-generator';
-import {UnitGenerator} from './unit-generator/unit-generator';
 import {addBuilding} from '../store/building/building.slice';
 import {addTerritory} from '../store/territory/territory.slice';
 import {addUnit} from '../store/unit/unit.slice';
@@ -54,7 +54,7 @@ export class StoreGenerator {
             range: 2
         }));
 
-        store.dispatch(addUnit(UnitGenerator.generate(selectPlayerId())));
+        store.dispatch(addUnit(ScoutShipGenerator.generate(selectPlayerId())));
         store.dispatch(setSquareUnitId({
             unitId: selectUnits()[0].id,
             squareId: selectSquaresWithTerritory()[0].id

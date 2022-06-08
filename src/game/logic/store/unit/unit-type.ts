@@ -1,3 +1,5 @@
 export enum UnitType {
-    SCOUT = 'SCOUT'
+    SCOUT = 'SCOUT',
+    COLONIAL = 'COLONIAL',
+    ANALYSIS = 'ANALYSIS'
 }

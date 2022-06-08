@@ -1,6 +1,8 @@
 export enum BuildingObjectType {
     // Units
     SCOUT_SHIP = 'SCOUT_SHIP',
+    COLONIAL_SHIP = 'COLONIAL_SHIP',
+    ANALYSIS_SHIP = 'ANALYSIS_SHIP',
 
     // Common
     WATER_FILTER = 'WATER_FILTER',

@@ -19,6 +19,24 @@ export class BuildingGenerator {
                             productionLeft: 400,
                             production: 400,
                             isBuilt: false
+                        },
+                        {
+                            name: 'Colonial ship',
+                            type: BuildingObjectType.COLONIAL_SHIP,
+                            id: uuid(),
+                            artUrl: 'resources/unit/colonial-ship/colonial-ship-art.png',
+                            productionLeft: 600,
+                            production: 600,
+                            isBuilt: false
+                        },
+                        {
+                            name: 'Analysis ship',
+                            type: BuildingObjectType.ANALYSIS_SHIP,
+                            id: uuid(),
+                            artUrl: 'resources/unit/analysis-ship/analysis-ship-art.png',
+                            productionLeft: 1200,
+                            production: 1200,
+                            isBuilt: false
                         }
                     ]
                 },

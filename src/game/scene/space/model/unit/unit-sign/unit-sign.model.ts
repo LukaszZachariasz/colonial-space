@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GameIcon} from '../../../gui/shared/icon/game-icon';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {Subject} from 'rxjs';
+import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
 export class UnitSignModel {
     public signMesh: BABYLON.Mesh;
@@ -10,14 +10,15 @@ export class UnitSignModel {
 
     public clicked$ = new Subject<void>();
 
-    constructor(private scene: BABYLON.Scene) {
+    constructor(private scene: BABYLON.Scene,
+                private unitState: UnitState) {
         this.signMesh = BABYLON.Mesh.CreatePlane('sign', 2, this.scene);
         this.signMesh.rotation.x = Math.PI;
         this.signMesh.position.y = -5; // TODO: why -5 instead of 5?
         this.signMesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
 
         this.advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(this.signMesh);
-        const icon = new IconControl(GameIcon.SPYGLASS).render();
+        const icon = new IconControl(unitState.icon).render();
         icon.widthInPixels = 1024;
         icon.heightInPixels = 1024;
         this.advancedTexture.addControl(icon);
