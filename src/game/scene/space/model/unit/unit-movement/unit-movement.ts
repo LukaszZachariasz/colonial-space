@@ -28,6 +28,7 @@ export class UnitMovement {
             logic().unitMovementService.addedPlanMovement$.pipe(filter((id: string) => this.id === id)),
             logic().tourService.completeTour$
         ).pipe(
+            filter(() => !!this.unitMovementPathModel && !this.unitMovementPathModel.lines.isDisposed()),
             tap(() => this.unitMovementPathModel.recalculate())
         ).subscribe();
 
