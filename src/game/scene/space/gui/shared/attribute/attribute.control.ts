@@ -27,7 +27,7 @@ export class AttributeControl extends Control {
             if (!this.tooltipContainer) {
                 return;
             }
-            this.tooltipContainer.container.left = position.x + 10, + 'px';
+            this.tooltipContainer.container.left = position.x + 10 + 'px';
             this.tooltipContainer.container.top = position.y + 'px';
         });
 
