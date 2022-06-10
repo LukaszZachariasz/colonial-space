@@ -19,7 +19,9 @@ export class AnalysisShipGenerator {
             movementPlanning: [],
             scoutRange: 1,
             data: {
-                isAnalysing: false
+                isAnalysing: false,
+                analysisLeft: 5,
+                analysisPower: 1
             }
         };
     }

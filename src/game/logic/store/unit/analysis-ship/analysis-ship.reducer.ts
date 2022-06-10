@@ -12,4 +12,9 @@ export const analysisShipReducer = {
         const unit: UnitState<AnalysisShipState> = state.units.find((el: UnitState) => el.id === action.payload.id);
         unit.data.isAnalysing = false;
     },
+    reduceAnalysis: (state: UnitSliceState, action: PayloadAction<UnitState>): void => {
+        const unit: UnitState<AnalysisShipState> = state.units.find((el: UnitState) => el.id === action.payload.id);
+        unit.data.analysisLeft -= unit.data.analysisPower;
+        unit.data.analysisLeft = Math.max(0, unit.data.analysisLeft);
+    },
 };

@@ -52,5 +52,6 @@ export const {
     moveUnit,
     refillUnits,
     startAnalyse,
-    stopAnalyse
+    stopAnalyse,
+    reduceAnalysis
 } = unitSlice.actions;

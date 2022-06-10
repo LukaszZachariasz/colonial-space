@@ -6,9 +6,9 @@ import {refillUnits} from '../../store/unit/unit.slice';
 import {store} from '../../store/store';
 
 @HasTourEffects()
-export class RefillGameService {
+export class UnitService {
     @AddTourEffect({
-        name: 'refill game',
+        name: 'refill unit movement',
         priority: TourEffectPriorityEnum.REFILL_GAME_OBJECTS
     })
     public refill(): Observable<any> {
