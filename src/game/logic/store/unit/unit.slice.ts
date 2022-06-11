@@ -15,6 +15,9 @@ export const unitSlice = createSlice({
         addUnit: (state: UnitSliceState, action: PayloadAction<UnitState>) => {
             state.units.push(action.payload);
         },
+        removeUnit: (state: UnitSliceState, action: PayloadAction<string>) => {
+            state.units = state.units.filter((el: UnitState) => el.id != action.payload);
+        },
         clearUnitPlanningMovement: (state: UnitSliceState, action: PayloadAction<string>) => {
             state.units.find((el: UnitState) => el.id === action.payload).movementPlanning = [];
         },
@@ -47,6 +50,7 @@ export const unitSlice = createSlice({
 
 export const {
     addUnit,
+    removeUnit,
     clearUnitPlanningMovement,
     addUnitPlanningMovement,
     moveUnit,

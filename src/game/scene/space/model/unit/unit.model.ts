@@ -2,8 +2,8 @@ import * as BABYLON from 'babylonjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {UnitState} from '../../../../logic/store/unit/unit.state';
+import {filter, tap} from 'rxjs';
 import {logic} from '../../../../game';
-import {tap} from 'rxjs';
 
 export abstract class UnitModel {
     public unitMovement: UnitMovement;
@@ -24,6 +24,12 @@ export abstract class UnitModel {
         this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
 
         this.unitMovement = new UnitMovement(this.scene, this.state.id, this.transformMesh);
+
+        logic().unitService.removeUnitId$.pipe( // TODO: improve memory leak
+            filter((id: string) => this.state.id === id),
+            tap(() => this.transformMesh.dispose()),
+            tap(() => this.unitSignModel.signMesh.dispose())
+        ).subscribe();
     }
 
     protected select(): void {

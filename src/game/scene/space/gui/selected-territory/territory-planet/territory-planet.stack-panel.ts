@@ -4,12 +4,16 @@ import {PlanetAttributesContainer} from './planet-attributes/planet-attributes.c
 import {PlanetBuildingContainer} from './planet-building/planet-building.container';
 import {PlanetState} from '../../../../../logic/store/territory/planet/planet.state';
 import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/stack-panel';
+import {Subscription, filter, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
+import {logic} from '../../../../../game';
 
 export class TerritoryPlanetStackPanel extends StackPanel {
     public planetAttributesContainer: PlanetAttributesContainer;
     public planetAnalysisContainer: PlanetAnalysisContainer;
     public planetBuildingContainer: PlanetBuildingContainer;
+
+    private planetAnalysedSubscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
         super('planetStackPanel');
@@ -38,13 +42,20 @@ export class TerritoryPlanetStackPanel extends StackPanel {
         }
     }
 
+    public onRegisterListeners(): void {
+        this.planetAnalysedSubscription = logic().analysisService.analyzedPlanetCompleted$.pipe(
+            filter((id: string) => this.planetState.id === id),
+            tap(() => this.planetAnalysisContainer.control.dispose())
+        ).subscribe();
+    }
+
     public onApplyStyles(): void {
         this.control.width = '100%';
         this.control.height = '65%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
     }
 
-    public render(): GUI.Container {
-        return this.control;
+    public onDestroy(): void {
+        this.planetAnalysedSubscription?.unsubscribe();
     }
 }
