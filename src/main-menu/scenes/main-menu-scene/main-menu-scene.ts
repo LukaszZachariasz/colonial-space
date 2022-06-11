@@ -5,7 +5,6 @@ import {Scene} from '../../../engine/scene-manager/scene';
 import Vector3 = BABYLON.Vector3;
 import Color4 = BABYLON.Color4;
 
-
 export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneGui> {
     public static readonly SCENE_NAME = 'MainMenuScene';
     public name: string = MainMenuScene.SCENE_NAME;

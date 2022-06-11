@@ -24,10 +24,11 @@ export class SceneManager {
 
     public setScene(gameScene: Scene): void {
         if (this.scene) {
+            guiManager().disposeGui();
             this.scene.scene.detachControl();
         }
         this.scene = {...gameScene};
-        guiManager().reset();
+        guiManager().createGui();
 
         this.scene.scene.attachControl();
     }

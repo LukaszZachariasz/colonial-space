@@ -6,15 +6,19 @@ import {sceneManager} from 'engine';
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
 
-    public reset(): void {
+    public createGui(): void {
+        const currentScene = sceneManager().currentScene;
+        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
+        currentScene.gui.onCreate();
+        currentScene.gui.onRegisterListeners();
+    }
+
+    public disposeGui(): void {
         if (this.advancedDynamicTexture) {
             this.advancedDynamicTexture.dispose();
         }
-
         const currentScene = sceneManager().currentScene;
-
-        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-        currentScene.gui.render();
+        currentScene?.gui?.onDestroy();
     }
 
     public appendToRoot<T extends Control<GUI.Control>>(control: T): T {
