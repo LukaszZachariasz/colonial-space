@@ -31,6 +31,7 @@ export class TerritoryPlanetStackPanel extends StackPanel {
         this.addControlToStackPanel(this.planetAttributesContainer);
 
         if (this.planetAnalysisContainer) {
+            debugger;
             this.addControlToStackPanel(this.planetAnalysisContainer);
         }
         if (this.planetBuildingContainer) {

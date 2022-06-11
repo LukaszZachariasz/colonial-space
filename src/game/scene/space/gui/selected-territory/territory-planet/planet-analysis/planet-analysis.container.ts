@@ -24,9 +24,11 @@ export class PlanetAnalysisContainer extends Container {
         super.onCreate();
 
         this.startAnalysisButton = new ButtonControl('Start analysis', () => {
+            logic().analysisService.startAnalysis(this.analysisShip);
             this.setAnalysisStatus();
         });
         this.stopAnalysisButton = new ButtonControl('Stop analysis', () => {
+            logic().analysisService.stopAnalysis(this.analysisShip);
             this.setAnalysisStatus();
         });
     }
@@ -37,11 +39,7 @@ export class PlanetAnalysisContainer extends Container {
     }
 
     public onRegisterListeners(): void {
-        this.subscription = merge(
-            of(EMPTY),
-            logic().tourService.completeTour$
-        ).pipe(
-            tap(() => this.analysisShip = selectUnitByTerritoryId(this.planetState.id)),
+        this.subscription = logic().tourService.completeTour$.pipe(
             tap(() => this.setAnalysisStatus())
         ).subscribe();
     }
@@ -55,11 +53,21 @@ export class PlanetAnalysisContainer extends Container {
         this.stopAnalysisButton.control.isVisible = false;
     }
 
+    public onReady(): void {
+        this.setAnalysisStatus();
+    }
+
     public onDestroy(): void {
         this.subscription?.unsubscribe();
     }
 
+    private refreshData(): void {
+        this.analysisShip = selectUnitByTerritoryId(this.planetState.id);
+    }
+
     private setAnalysisStatus(): void {
+        this.refreshData();
+
         if (!this.analysisShip || this.analysisShip.type !== UnitType.ANALYSIS) {
             this.setDisableStatus();
         } else if (this.analysisShip.data.isAnalysing) {

@@ -22,7 +22,9 @@ export class UnitMovementService {
         }
         const unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
-        if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
+        if (unitState.movementBlocked) {
+            return;
+        } else if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
             this.moveUnit$.next(unitState.id);
         } else {
             this.createPlanMovement(unitState.id, squareId);

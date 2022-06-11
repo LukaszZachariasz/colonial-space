@@ -17,6 +17,7 @@ export class ScoutShipGenerator {
             movementPoints: 2,
             movementPointsLeft: 2,
             movementPlanning: [],
+            movementBlocked: false,
             scoutRange: 1,
             data: {}
         };

@@ -6,13 +6,21 @@ import {TourEffectPriorityEnum} from '../tour/tour-effect/tour-effect-priority.e
 import {UnitState} from '../../store/unit/unit.state';
 import {UnitType} from '../../store/unit/unit-type';
 import {analysePlanet} from '../../store/territory/territory.slice';
-import {reduceAnalysis} from '../../store/unit/unit.slice';
+import {reduceAnalysis, startAnalyse, stopAnalyse} from '../../store/unit/unit.slice';
 import {selectSquareByUnitId} from '../../store/map/square/square.selectors';
 import {selectUnitsByType} from '../../store/unit/unit.selectors';
 import {store} from '../../store/store';
 
 @HasTourEffects()
 export class AnalysisService {
+    public startAnalysis(analyseShip: UnitState<AnalysisShipState>): void {
+        store.dispatch(startAnalyse(analyseShip));
+    }
+
+    public stopAnalysis(analyseShip: UnitState<AnalysisShipState>): void {
+        store.dispatch(stopAnalyse(analyseShip));
+    }
+
     @AddTourEffect({
         name: 'start analysis processes',
         priority: TourEffectPriorityEnum.START_ANALYSIS_PROCESS
