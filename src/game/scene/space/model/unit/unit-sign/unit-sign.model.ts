@@ -1,13 +1,12 @@
 import * as BABYLON from 'babylonjs';
-import * as GUI from 'babylonjs-gui';
-import {IconControl} from '../../../gui/shared/icon/icon.control';
-import {Subject} from 'rxjs';
+import {Subject, tap} from 'rxjs';
+import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
+import {guiManager} from 'engine';
 
 export class UnitSignModel {
     public signMesh: BABYLON.Mesh;
-    public advancedTexture: GUI.AdvancedDynamicTexture;
-
+    public unitSignIconControl: UnitSignIconContainer;
     public clicked$ = new Subject<void>();
 
     constructor(private scene: BABYLON.Scene,
@@ -17,15 +16,11 @@ export class UnitSignModel {
         this.signMesh.position.y = -5; // TODO: why -5 instead of 5?
         this.signMesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
 
-        this.advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(this.signMesh);
-        const icon = new IconControl(unitState.icon); // TODO: Refactor to lifecycle
-        icon.create();
-        icon.control.widthInPixels = 1024;
-        icon.control.heightInPixels = 1024;
-        this.advancedTexture.addControl(icon.control);
+        this.unitSignIconControl = new UnitSignIconContainer(this.unitState);
+        this.unitSignIconControl.clicked$.pipe(
+            tap(() => this.clicked$.next())
+        ).subscribe();
 
-        icon.control.onPointerDownObservable.add(() => {
-            this.clicked$.next();
-        });
+        guiManager().createForMesh('UnitSignModel', this.signMesh, this.unitSignIconControl);
     }
 }
