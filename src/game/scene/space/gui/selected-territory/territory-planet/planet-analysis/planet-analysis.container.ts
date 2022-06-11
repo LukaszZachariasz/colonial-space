@@ -1,8 +1,8 @@
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {ButtonControl} from '../../../shared/button/button.control';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
-import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
+import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 import {UnitType} from '../../../../../../logic/store/unit/unit-type';
