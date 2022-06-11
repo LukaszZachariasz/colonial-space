@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
 export class TerritoryArtControl extends Control<GUI.Image> {

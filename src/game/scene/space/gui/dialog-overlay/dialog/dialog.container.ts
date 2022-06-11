@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/container';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 
 export class DialogContainer extends Container {
     constructor(private body: Control<GUI.Control>) {

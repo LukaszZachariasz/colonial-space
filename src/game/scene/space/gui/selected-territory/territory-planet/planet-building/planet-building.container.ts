@@ -1,4 +1,4 @@
-import {Container} from '../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {
     PlanetBuildingCurrentObjectContainer
 } from './planet-building-current-object/planet-building-current-object.container';

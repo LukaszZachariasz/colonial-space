@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
 import {UnitArtControl} from './unit-art/unit-art.control';
 import {UnitAttributesContainer} from './unit-attributes/unit-attributes.container';
 import {UnitState} from '../../../../logic/store/unit/unit.state';

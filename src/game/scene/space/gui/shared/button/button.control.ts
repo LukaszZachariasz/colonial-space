@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 
 export class ButtonControl extends Control<GUI.Button> {
     constructor(private text: string,

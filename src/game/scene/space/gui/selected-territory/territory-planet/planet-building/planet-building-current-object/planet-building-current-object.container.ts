@@ -1,4 +1,4 @@
-import {Container} from '../../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';

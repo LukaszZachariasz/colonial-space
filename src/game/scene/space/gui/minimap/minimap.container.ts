@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
 import {FromAboveCamera} from '../../camera/from-above-camera';
 import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.control';
 import {sceneManager} from 'engine';

@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/container';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {IconControl} from '../icon/icon.control';
 import {TooltipContainer} from '../tooltip/tooltip.container';
 import {guiManager} from 'engine';

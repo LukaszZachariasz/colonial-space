@@ -2,8 +2,8 @@ import * as GUI from 'babylonjs-gui';
 import {BuildingHeaderContainer} from './building-header/building-header.container';
 import {BuildingScopesStackPanel} from './building-scopes/building-scopes.stack-panel';
 import {BuildingState} from '../../../../logic/store/building/building.state';
-import {Container} from '../../../../../engine/gui-manager/container';
-import {ScrollViewer} from '../../../../../engine/gui-manager/scroll-viewer';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
+import {ScrollViewer} from '../../../../../engine/gui-manager/gui-elements/scroll-viewer';
 import {logic} from '../../../../game';
 import {selectBuildingById} from '../../../../logic/store/building/building.selector';
 

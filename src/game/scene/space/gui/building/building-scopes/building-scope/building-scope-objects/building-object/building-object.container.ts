@@ -3,7 +3,7 @@ import {BuildingObjectNameContainer} from './building-object-name/building-objec
 import {BuildingObjectProductionContainer} from './building-object-production/building-object-production.container';
 import {BuildingObjectSelectControl} from './building-object-select/building-object-select.control';
 import {BuildingObjectState} from '../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Container} from '../../../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../../../engine/gui-manager/gui-elements/container';
 
 export class BuildingObjectContainer extends Container {
     public buildingObjectNameContainer: BuildingObjectNameContainer;

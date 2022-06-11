@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {sceneManager} from 'engine';
 import {selectCurrentTour} from '../../../../../logic/store/tour/tour.selectors';
 

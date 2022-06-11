@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Container} from '../../../../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../../../../engine/gui-manager/gui-elements/container';
 import {Subscription, tap} from 'rxjs';
 import {TextControl} from '../../../../../../shared/text/text.control';
 import {logic} from '../../../../../../../../../game';

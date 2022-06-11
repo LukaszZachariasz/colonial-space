@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingState} from '../../../../../logic/store/building/building.state';
-import {Container} from '../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
 import {TextControl} from '../../shared/text/text.control';
 
 export class BuildingHeaderContainer extends Container {

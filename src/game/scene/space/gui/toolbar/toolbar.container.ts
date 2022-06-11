@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
 import {ToolbarBackgroundContainer} from './toolbar-background/toolbar-background.container';
 import {ToolbarTitleControl} from './toolbar-title/toolbar-title.control';
 

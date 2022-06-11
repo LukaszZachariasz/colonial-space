@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
 import {MovementAttributeContainer} from './movement-attribute/movement-attribute.container';
 import {ScoutRangeAttributeContainer} from './scout-range-attribute/scout-range-attribute.container';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';

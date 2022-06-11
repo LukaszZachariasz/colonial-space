@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {SunlightAttributeContainer} from './sunlight-attribute/sunlight-attribute.container';

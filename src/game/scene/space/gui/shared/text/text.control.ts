@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {TextOptions} from './text-options';
 
 export class TextControl extends Control<GUI.TextBlock> {

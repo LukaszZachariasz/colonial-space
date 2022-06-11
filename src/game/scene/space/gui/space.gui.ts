@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingContainer} from './building/building.container';
-import {Control} from '../../../../engine/gui-manager/control';
+import {Control} from '../../../../engine/gui-manager/gui-elements/control';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
-import {Gui} from '../../../../engine/gui-manager/gui';
+import {Gui} from '../../../../engine/gui-manager/gui-scene/gui';
 import {MinimapContainer} from './minimap/minimap.container';
 import {SelectedTerritoryStackPanel} from './selected-territory/selected-territory.stack-panel';
 import {SelectedUnitContainer} from './selected-unit/selected-unit.container';

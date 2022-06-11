@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {GameIcon} from './game-icon';
 
 export class IconControl extends Control<GUI.Image> {

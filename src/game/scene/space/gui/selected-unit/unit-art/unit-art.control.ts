@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
 export class UnitArtControl extends Control<GUI.Image> {

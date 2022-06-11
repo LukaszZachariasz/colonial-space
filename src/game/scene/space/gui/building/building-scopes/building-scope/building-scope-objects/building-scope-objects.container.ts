@@ -4,9 +4,9 @@ import {
     BuildingObjectState
 } from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
-import {Container} from '../../../../../../../../engine/gui-manager/container';
-import {ScrollViewer} from '../../../../../../../../engine/gui-manager/scroll-viewer';
-import {StackPanel} from '../../../../../../../../engine/gui-manager/stack-panel';
+import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
+import {ScrollViewer} from '../../../../../../../../engine/gui-manager/gui-elements/scroll-viewer';
+import {StackPanel} from '../../../../../../../../engine/gui-manager/gui-elements/stack-panel';
 
 export class BuildingScopeObjectsContainer extends Container {
     public buildingObjectContainers: BuildingObjectContainer[] = [];

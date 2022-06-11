@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {FromAboveCamera} from '../../../camera/from-above-camera';
 import {sceneManager} from 'engine';
 

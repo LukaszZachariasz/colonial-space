@@ -1,4 +1,4 @@
-import {Gui} from '../../../../engine/gui-manager/gui';
+import {Gui} from '../../../../engine/gui-manager/gui-scene/gui';
 import {TextControl} from '../../../../game/scene/space/gui/shared/text/text.control';
 
 export class LoadingGui extends Gui {

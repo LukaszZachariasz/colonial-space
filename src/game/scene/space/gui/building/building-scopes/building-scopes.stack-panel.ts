@@ -1,7 +1,7 @@
 import {BuildingScopeContainer} from './building-scope/building-scope.container';
 import {BuildingScopeState} from '../../../../../logic/store/building/building-scope/building-scope.state';
 import {BuildingState} from '../../../../../logic/store/building/building.state';
-import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
+import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/stack-panel';
 
 export class BuildingScopesStackPanel extends StackPanel {
     public buildingScopeContainers: BuildingScopeContainer[] = [];

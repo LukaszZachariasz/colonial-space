@@ -1,7 +1,7 @@
 import {BuildingScopeNameContainer} from './building-scope-name/building-scope-name.container';
 import {BuildingScopeObjectsContainer} from './building-scope-objects/building-scope-objects.container';
 import {BuildingScopeState} from '../../../../../../logic/store/building/building-scope/building-scope.state';
-import {Container} from '../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 
 export class BuildingScopeContainer extends Container {
     public buildingScopeNameContainer: BuildingScopeNameContainer;

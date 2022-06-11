@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
 import {IconControl} from '../../shared/icon/icon.control';
 import {TerritoryNameContainer} from './territory-name/territory-name.container';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';

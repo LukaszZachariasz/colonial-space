@@ -1,5 +1,5 @@
 import {ButtonControl} from '../../shared/button/button.control';
-import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
+import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/stack-panel';
 import {TextControl} from '../../shared/text/text.control';
 import {logic} from '../../../../../game';
 

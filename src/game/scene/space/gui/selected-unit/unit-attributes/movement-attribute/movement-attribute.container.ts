@@ -1,5 +1,5 @@
 import {AttributeContainer} from '../../../shared/attribute/attribute.container';
-import {Container} from '../../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {GameIcon} from '../../../shared/icon/game-icon';
 import {IconControl} from '../../../shared/icon/icon.control';
 import {Subscription, filter, map, merge, tap} from 'rxjs';

@@ -1,4 +1,4 @@
-import {Container} from '../../../../../../engine/gui-manager/container';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';

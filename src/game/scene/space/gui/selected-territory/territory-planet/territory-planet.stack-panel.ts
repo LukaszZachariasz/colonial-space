@@ -3,7 +3,7 @@ import {PlanetAnalysisContainer} from './planet-analysis/planet-analysis.contain
 import {PlanetAttributesContainer} from './planet-attributes/planet-attributes.container';
 import {PlanetBuildingContainer} from './planet-building/planet-building.container';
 import {PlanetState} from '../../../../../logic/store/territory/planet/planet.state';
-import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
+import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/stack-panel';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
 export class TerritoryPlanetStackPanel extends StackPanel {
