@@ -1,11 +1,10 @@
 import * as BABYLON from 'babylonjs';
-import * as GUI from 'babylonjs-gui';
-import {guiManager} from 'engine';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {Subject, tap} from 'rxjs';
+import {TerritorySignTitleContainer} from './territory-sign-title.container';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../gui/shared/text/text.control';
-import {TerritorySignTitleContainer} from './territory-sign-title.container';
+import {guiManager} from 'engine';
 
 export class TerritorySignModel {
     public signMesh: BABYLON.Mesh;
