@@ -13,7 +13,7 @@ export class UnitSignIconContainer extends Container {
 
     public onCreate(): void {
         super.onCreate();
-        this.iconControl = new IconControl(this.unitState.icon); // TODO: Refactor to lifecycle
+        this.iconControl = new IconControl(this.unitState.icon);
     }
     
     public onBuild(): void {
