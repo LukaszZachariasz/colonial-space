@@ -33,24 +33,24 @@ export class TerritorySignModel {
         this.advancedTexture.background = 'rgba(0, 0, 0, 0.2)';
 
         this.icon = new IconControl(this.territoryState.icon);
-        this.icon.render();
-        this.icon.icon.widthInPixels = this.GUI_SIZE * this.HEIGHT;
-        this.icon.icon.heightInPixels = this.GUI_SIZE * this.HEIGHT;
-        this.icon.icon.onPointerDownObservable.add(() => {
+        this.icon.create();
+        this.icon.control.widthInPixels = this.GUI_SIZE * this.HEIGHT;
+        this.icon.control.heightInPixels = this.GUI_SIZE * this.HEIGHT;
+        this.icon.control.onPointerDownObservable.add(() => {
             this.clicked$.next();
         });
 
         this.text = new TextControl(this.territoryState.name);
-        this.text.render();
-        this.text.textBlock.fontSize = this.GUI_SIZE + 'px';
-        this.text.textBlock.left = (this.GUI_SIZE * this.HEIGHT) + this.TEXT_PADDING + 'px';
-        this.text.textBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.text.textBlock.widthInPixels = (this.GUI_SIZE * this.WIDTH) - (this.GUI_SIZE * this.HEIGHT) - this.TEXT_PADDING;
-        this.text.textBlock.onPointerDownObservable.add(() => {
+        this.text.create();
+        this.text.control.fontSize = this.GUI_SIZE + 'px';
+        this.text.control.left = (this.GUI_SIZE * this.HEIGHT) + this.TEXT_PADDING + 'px';
+        this.text.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.text.control.widthInPixels = (this.GUI_SIZE * this.WIDTH) - (this.GUI_SIZE * this.HEIGHT) - this.TEXT_PADDING;
+        this.text.control.onPointerDownObservable.add(() => {
             this.clicked$.next();
         });
 
-        this.advancedTexture.addControl(this.icon.icon);
-        this.advancedTexture.addControl(this.text.textBlock);
+        this.advancedTexture.addControl(this.icon.control);
+        this.advancedTexture.addControl(this.text.control);
     }
 }

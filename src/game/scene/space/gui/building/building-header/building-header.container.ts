@@ -4,20 +4,26 @@ import {Container} from '../../../../../../engine/gui-manager/container';
 import {TextControl} from '../../shared/text/text.control';
 
 export class BuildingHeaderContainer extends Container {
-    public title = new TextControl('Building', {uppercase: true});
+    public title: TextControl;
 
     constructor(private buildingState: BuildingState) {
-        super();
+        super('header');
     }
-    
-    public render(): GUI.Control {
-        this.container = new GUI.Container('header');
-        this.container.height = '10%';
-        this.container.width = '100%';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.title.render();
-        this.title.textBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.container.addControl(this.title.textBlock);
-        return this.container;
+
+    public onCreate(): void {
+        super.onCreate();
+        this.title = new TextControl('Building', {uppercase: true});
+    }
+
+    public onBuild(): void {
+        this.addControlToContainer(this.title);
+    }
+
+    public onApplyStyles(): void {
+        this.control.height = '10%';
+        this.control.width = '100%';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+
+        this.title.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
     }
 }

@@ -1,39 +1,49 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingObjectContainer} from './building-object/building-object.container';
-import {BuildingObjectState} from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
+import {
+    BuildingObjectState
+} from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
+import {ScrollViewer} from '../../../../../../../../engine/gui-manager/scroll-viewer';
+import {StackPanel} from '../../../../../../../../engine/gui-manager/stack-panel';
 
 export class BuildingScopeObjectsContainer extends Container {
-    private scrollViewer: GUI.ScrollViewer;
-    private stackPanel: GUI.StackPanel;
+    public buildingObjectContainers: BuildingObjectContainer[] = [];
+
+    private scrollViewer: ScrollViewer;
+    private stackPanel: StackPanel;
 
     constructor(private buildingScope: BuildingScopeState) {
-        super();
+        super('sectorObjects');
     }
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('sectorObjects');
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.container.width = '95%';
-        this.container.height = '100%';
-        this.container.left = '5%';
-
-        this.scrollViewer = new GUI.ScrollViewer('scrollViewer');
-        this.scrollViewer.width = '100%';
-        this.scrollViewer.height = '100%';
-        this.scrollViewer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.scrollViewer.thickness = 0;
-
-        this.stackPanel = new GUI.StackPanel('stackPanel');
-        this.stackPanel.isVertical = false;
+    public onCreate(): void {
+        super.onCreate();
+        this.scrollViewer = new ScrollViewer('scrollViewer');
+        this.stackPanel = new StackPanel('stackPanel');
         this.buildingScope.objects.forEach((object: BuildingObjectState) => {
-            this.stackPanel.addControl(new BuildingObjectContainer(object).render());
+            this.buildingObjectContainers.push(new BuildingObjectContainer(object));
         });
+    }
 
-        this.scrollViewer.addControl(this.stackPanel);
-        this.container.addControl(this.scrollViewer);
+    public onBuild(): void {
+        this.addControlToContainer(this.scrollViewer);
+        this.scrollViewer.addControlToScrollViewer(this.stackPanel);
+        this.buildingObjectContainers.forEach((buildingObjectContainer: BuildingObjectContainer) => this.stackPanel.addControlToStackPanel(buildingObjectContainer));
+    }
 
-        return this.container;
+    public onApplyStyles(): void {
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.control.width = '95%';
+        this.control.height = '100%';
+        this.control.left = '5%';
+
+        this.scrollViewer.control.width = '100%';
+        this.scrollViewer.control.height = '100%';
+        this.scrollViewer.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.scrollViewer.control.thickness = 0;
+
+        this.stackPanel.control.isVertical = false;
     }
 }

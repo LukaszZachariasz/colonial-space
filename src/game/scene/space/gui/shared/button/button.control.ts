@@ -1,24 +1,26 @@
 import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../engine/gui-manager/control';
 
-export class ButtonControl extends Control {
-    public button: GUI.Button = GUI.Button.CreateSimpleButton(this.text, this.text);
-
+export class ButtonControl extends Control<GUI.Button> {
     constructor(private text: string,
                 private onClick: () => void) {
         super();
     }
 
-    public render(): GUI.Control {
-        this.button.width = '100px';
-        this.button.height = '50px';
-        this.button.background = 'rgba(0, 0, 0, 0.3)';
-        this.button.color = 'white';
-        this.button.fontFamily = 'JuiceRegular';
-        this.button.fontSize = '12px';
+    public onCreate(): void {
+        this.control = GUI.Button.CreateSimpleButton(this.text, this.text);
+    }
 
-        this.button.onPointerClickObservable.add(this.onClick);
+    public onRegisterListeners(): void {
+        this.control.onPointerClickObservable.add(this.onClick);
+    }
 
-        return this.button;
+    public onApplyStyles(): void {
+        this.control.width = '100px';
+        this.control.height = '50px';
+        this.control.background = 'rgba(0, 0, 0, 0.3)';
+        this.control.color = 'white';
+        this.control.fontFamily = 'JuiceRegular';
+        this.control.fontSize = '12px';
     }
 }

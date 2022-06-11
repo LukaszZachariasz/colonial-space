@@ -1,40 +1,51 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../../engine/gui-manager/container';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {SunlightAttributeControl} from './sunlight-attribute/sunlight-attribute.control';
+import {Subscription, tap} from 'rxjs';
+import {SunlightAttributeContainer} from './sunlight-attribute/sunlight-attribute.container';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
-import {WaterAttributeControl} from './water-attribute/water-attribute.control';
+import {WaterAttributeContainer} from './water-attribute/water-attribute.container';
 import {logic} from '../../../../../../game';
 import {selectTerritoryById} from '../../../../../../logic/store/territory/territory.selectors';
-import {tap} from 'rxjs';
 
 export class PlanetAttributesContainer extends Container {
-    public sunlightAttributeControl: GUI.Control;
-    public waterAttributeControl: GUI.Control;
+    public sunlightAttributeContainer: SunlightAttributeContainer;
+    public waterAttributeContainer: WaterAttributeContainer;
+
+    private subscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super();
+        super('attributes');
     }
 
-    public render(): GUI.Container {
-        this.container = new GUI.Container('attributes');
-        this.container.width = '100%';
-        this.container.height = '50px';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    public onCreate(): void {
+        super.onCreate();
+        this.sunlightAttributeContainer = new SunlightAttributeContainer(this.planetState);
+        this.waterAttributeContainer = new WaterAttributeContainer(this.planetState);
+    }
 
-        logic().tourService.completeTour$.pipe(
+    public onBuild(): void {
+        this.addControlToContainer(this.sunlightAttributeContainer);
+        this.addControlToContainer(this.waterAttributeContainer);
+    }
+
+    public onRegisterListeners(): void {
+        this.subscription = logic().tourService.completeTour$.pipe(
             tap(() => {
                 this.planetState = selectTerritoryById(this.planetState.id);
             })
         ).subscribe();
+    }
 
-        this.sunlightAttributeControl = new SunlightAttributeControl(this.planetState).render();
-        this.container.addControl(this.sunlightAttributeControl);
+    public onApplyStyles(): void {
+        this.control.width = '100%';
+        this.control.height = '50px';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
-        this.waterAttributeControl = new WaterAttributeControl(this.planetState).render();
-        this.waterAttributeControl.left = '70px';
-        this.container.addControl(this.waterAttributeControl);
+        this.waterAttributeContainer.control.left = '70px';
+    }
 
-        return this.container;
+    public onDestroy(): void {
+        this.subscription?.unsubscribe();
     }
 }

@@ -18,12 +18,13 @@ export class UnitSignModel {
         this.signMesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
 
         this.advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(this.signMesh);
-        const icon = new IconControl(unitState.icon).render();
-        icon.widthInPixels = 1024;
-        icon.heightInPixels = 1024;
-        this.advancedTexture.addControl(icon);
+        const icon = new IconControl(unitState.icon); // TODO: Refactor to lifecycle
+        icon.create();
+        icon.control.widthInPixels = 1024;
+        icon.control.heightInPixels = 1024;
+        this.advancedTexture.addControl(icon.control);
 
-        icon.onPointerDownObservable.add(() => {
+        icon.control.onPointerDownObservable.add(() => {
             this.clicked$.next();
         });
     }

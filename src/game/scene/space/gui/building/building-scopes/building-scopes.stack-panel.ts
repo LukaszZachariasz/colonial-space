@@ -1,19 +1,23 @@
-import * as GUI from 'babylonjs-gui';
 import {BuildingScopeContainer} from './building-scope/building-scope.container';
 import {BuildingScopeState} from '../../../../../logic/store/building/building-scope/building-scope.state';
 import {BuildingState} from '../../../../../logic/store/building/building.state';
 import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
 
 export class BuildingScopesStackPanel extends StackPanel {
+    public buildingScopeContainers: BuildingScopeContainer[] = [];
+
     constructor(private buildingState: BuildingState) {
-        super();
+        super('sectorsStackPanel');
     }
 
-    public render(): GUI.Control {
-        this.stackPanel = new GUI.StackPanel('sectorsStackPanel');
+    public onCreate(): void {
+        super.onCreate();
         this.buildingState.scopes.forEach((scope: BuildingScopeState) => {
-            this.stackPanel.addControl(new BuildingScopeContainer(scope).render());
+            this.buildingScopeContainers.push(new BuildingScopeContainer(scope));
         });
-        return this.stackPanel;
+    }
+
+    public onBuild(): void {
+        this.buildingScopeContainers.forEach((buildingScopeContainer: BuildingScopeContainer) => this.addControlToStackPanel(buildingScopeContainer));
     }
 }

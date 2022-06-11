@@ -1,6 +1,5 @@
-import * as GUI from 'babylonjs-gui';
-import {AttributeControl} from '../../../shared/attribute/attribute.control';
-import {Control} from '../../../../../../../engine/gui-manager/control';
+import {AttributeContainer} from '../../../shared/attribute/attribute.container';
+import {Container} from '../../../../../../../engine/gui-manager/container';
 import {GameIcon} from '../../../shared/icon/game-icon';
 import {IconControl} from '../../../shared/icon/icon.control';
 import {Subscription, filter, map, merge, tap} from 'rxjs';
@@ -9,26 +8,27 @@ import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 import {logic} from '../../../../../../game';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
-export class MovementAttributeControl extends Control {
-    public attributeControl: AttributeControl;
+export class MovementAttributeContainer extends Container {
+    public attributeControl: AttributeContainer;
     public textControl: TextControl;
 
     private refreshUnitPointsSubscription: Subscription;
 
     constructor(private unitState: UnitState) {
-        super();
+        super('movementAttribute');
     }
 
-    public render(): GUI.Control {
+    public onCreate(): void {
+        super.onCreate();
         this.textControl = new TextControl(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
+        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.MOVE), this.textControl);
+    }
 
-        this.attributeControl = new AttributeControl(
-            new IconControl(GameIcon.MOVE),
-            this.textControl.render()
-        );
+    public onBuild(): void {
+        this.addControlToContainer(this.attributeControl);
+    }
 
-        this.attributeControl.render();
-
+    public onRegisterListeners(): void {
         this.refreshUnitPointsSubscription = merge(
             logic().tourService.completeTour$,
             logic().unitMovementService.moveUnit$.pipe(
@@ -36,13 +36,17 @@ export class MovementAttributeControl extends Control {
             )
         ).pipe(
             map(() => selectUnitById(this.unitState.id)),
-            tap((state: UnitState) => this.textControl.textBlock.text = `This unit has ${state.movementPointsLeft} / ${state.movementPoints} movement.`)
+            tap((state: UnitState) => {
+                this.textControl.text = `This unit has ${state.movementPointsLeft} / ${state.movementPoints} movement.`;
+            })
         ).subscribe();
+    }
 
-        this.attributeControl.iconControl.icon.onDisposeObservable.add(() => {
-            this.refreshUnitPointsSubscription?.unsubscribe();
-        });
+    public onApplyStyles(): void {
+        this.control.left = '70px';
+    }
 
-        return this.attributeControl.iconControl.icon;
+    public onDestroy(): void {
+        this.refreshUnitPointsSubscription?.unsubscribe();
     }
 }

@@ -3,26 +3,27 @@ import {Control} from '../../../../../../engine/gui-manager/control';
 import {FromAboveCamera} from '../../../camera/from-above-camera';
 import {sceneManager} from 'engine';
 
-export class MinimapIndicatorControl extends Control {
-    public indicator: GUI.Rectangle;
-
+export class MinimapIndicatorControl extends Control<GUI.Rectangle> {
     public widthInPercentage = 0;
     public heightInPercentage = 0;
 
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
 
-    public render(): GUI.Control {
-        this.indicator = new GUI.Rectangle('minimapIndicator');
-        this.indicator.width = '30%';
-        this.indicator.height = '20%';
-        this.indicator.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.indicator.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    public onCreate(): void {
+        this.control = new GUI.Rectangle('minimapIndicator');
+    }
 
+    public onRegisterListeners(): void {
         sceneManager().currentBabylonScene.registerBeforeRender(() => {
             this.calculatePosition();
         });
+    }
 
-        return this.indicator;
+    public onApplyStyles(): void {
+        this.control.width = '30%';
+        this.control.height = '20%';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
     }
 
     private calculatePosition(): void {
@@ -32,10 +33,10 @@ export class MinimapIndicatorControl extends Control {
         height = (height * this.camera.radius) / this.camera.upperRadiusLimit;
         this.widthInPercentage = width;
         this.heightInPercentage = height;
-        this.indicator.width = this.widthInPercentage + '%';
-        this.indicator.height = this.heightInPercentage + '%';
+        this.control.width = this.widthInPercentage + '%';
+        this.control.height = this.heightInPercentage + '%';
 
-        this.indicator.left = this.camera.getXPositionPercentage() * (1 - (this.widthInPercentage / 100)) + '%';
-        this.indicator.top = this.camera.getZPositionPercentage() * (1 - (this.heightInPercentage / 100)) + '%';
+        this.control.left = this.camera.getXPositionPercentage() * (1 - (this.widthInPercentage / 100)) + '%';
+        this.control.top = this.camera.getZPositionPercentage() * (1 - (this.heightInPercentage / 100)) + '%';
     }
 }

@@ -1,20 +1,27 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../engine/gui-manager/container';
+import {Control} from '../../../../../engine/gui-manager/control';
 import {DialogContainer} from './dialog/dialog.container';
 
 export class DialogOverlayContainer extends Container {
-    constructor(private body: GUI.Control) {
-        super();
+    public dialogContainer: DialogContainer;
+
+    constructor(private body: Control<GUI.Control>) {
+        super('dialogOverlay');
     }
-    
-    public render(): GUI.Control {
-        this.container = new GUI.Container('dialogOverlay');
-        this.container.width = '100%';
-        this.container.height = '100%';
-        this.container.isPointerBlocker = true;
 
-        this.container.addControl(new DialogContainer(this.body).render());
+    public onCreate(): void {
+        super.onCreate();
+        this.dialogContainer = new DialogContainer(this.body);
+    }
 
-        return this.container;
+    public onBuild(): void {
+        this.addControlToContainer(this.dialogContainer);
+    }
+
+    public onApplyStyles(): void {
+        this.control.width = '100%';
+        this.control.height = '100%';
+        this.control.isPointerBlocker = true;
     }
 }

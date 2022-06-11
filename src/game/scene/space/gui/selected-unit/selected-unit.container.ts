@@ -9,26 +9,40 @@ import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
 export class SelectedUnitContainer extends Container {
     public backgroundImage: GUI.Image;
+    public unitArtControl: UnitArtControl;
+    public unitTitleContainer: UnitTitleContainer;
+    public unitAttributesContainer: UnitAttributesContainer;
     public unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('selectedUnitContainer');
-        this.container.width = '25%';
-        this.container.height = '40%';
-        this.container.left = '30px';
-        this.container.top = '-50px';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.container.isPointerBlocker = true;
+    constructor() {
+        super('selectedUnitContainer');
+    }
 
+    public onCreate(): void {
+        super.onCreate();
         this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
+        this.unitArtControl = new UnitArtControl(this.unitState);
+        this.unitTitleContainer = new UnitTitleContainer(this.unitState);
+        this.unitAttributesContainer = new UnitAttributesContainer(this.unitState);
+    }
+
+    public onBuild(): void {
+        this.addControlToContainer(this.backgroundImage);
+        this.addControlToContainer(this.unitArtControl);
+        this.addControlToContainer(this.unitTitleContainer);
+        this.addControlToContainer(this.unitAttributesContainer);
+    }
+
+    public onApplyStyles(): void {
+        this.control.width = '25%';
+        this.control.height = '40%';
+        this.control.left = '30px';
+        this.control.top = '-50px';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.control.isPointerBlocker = true;
+
         this.backgroundImage.width = '100%';
         this.backgroundImage.height = '100%';
-        this.container.addControl(this.backgroundImage);
-        this.container.addControl(new UnitArtControl(this.unitState).render());
-        this.container.addControl(new UnitTitleContainer(this.unitState).render());
-        this.container.addControl(new UnitAttributesContainer(this.unitState).render());
-
-        return this.container;
     }
 }

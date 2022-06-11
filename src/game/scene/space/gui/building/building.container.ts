@@ -3,34 +3,45 @@ import {BuildingHeaderContainer} from './building-header/building-header.contain
 import {BuildingScopesStackPanel} from './building-scopes/building-scopes.stack-panel';
 import {BuildingState} from '../../../../logic/store/building/building.state';
 import {Container} from '../../../../../engine/gui-manager/container';
+import {ScrollViewer} from '../../../../../engine/gui-manager/scroll-viewer';
 import {logic} from '../../../../game';
 import {selectBuildingById} from '../../../../logic/store/building/building.selector';
 
 export class BuildingContainer extends Container {
-    public scrollViewer: GUI.ScrollViewer;
+    public scrollViewer: ScrollViewer;
+    public buildingHeaderContainer: BuildingHeaderContainer;
+    public buildingScopesStackPanel: BuildingScopesStackPanel;
 
     private buildingState: BuildingState = selectBuildingById(logic().selectedBuildingService.selectedBuildingId$.value);
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('buildingContainer');
-        this.container.background = 'rgba(0, 0, 0, 0.4)';
-        this.container.width = '60%';
-        this.container.height = '65%';
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.container.isPointerBlocker = true;
+    constructor() {
+        super('buildingContainer');
+    }
 
-        this.container.addControl(new BuildingHeaderContainer(this.buildingState).render());
+    public onCreate(): void {
+        super.onCreate();
+        this.scrollViewer = new ScrollViewer('sectorsScrollViewer');
+        this.buildingHeaderContainer = new BuildingHeaderContainer(this.buildingState);
+        this.buildingScopesStackPanel = new BuildingScopesStackPanel(this.buildingState);
+    }
 
-        this.scrollViewer = new GUI.ScrollViewer('sectorsScrollViewer');
-        this.scrollViewer.width = '100%';
-        this.scrollViewer.top = '10%';
-        this.scrollViewer.height = '90%';
-        this.scrollViewer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.scrollViewer.addControl(new BuildingScopesStackPanel(this.buildingState).render());
-        this.scrollViewer.thickness = 0;
+    public onBuild(): void {
+        this.addControlToContainer(this.scrollViewer);
+        this.addControlToContainer(this.buildingHeaderContainer);
+        this.scrollViewer.addControlToScrollViewer(this.buildingScopesStackPanel);
+    }
 
-        this.container.addControl(this.scrollViewer);
+    public onApplyStyles(): void {
+        this.control.background = 'rgba(0, 0, 0, 0.4)';
+        this.control.width = '60%';
+        this.control.height = '65%';
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.control.isPointerBlocker = true;
 
-        return this.container;
+        this.scrollViewer.control.width = '100%';
+        this.scrollViewer.control.top = '10%';
+        this.scrollViewer.control.height = '90%';
+        this.scrollViewer.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.scrollViewer.control.thickness = 0;
     }
 }

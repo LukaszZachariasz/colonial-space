@@ -10,30 +10,40 @@ export class MinimapContainer extends Container {
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
     private width = 20;
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('minimap');
-        this.container.width = this.width + '%';
-        this.container.height = (this.width / this.camera.getProportion()) + '%';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.container.background = 'black';
-        this.container.alpha = 0.4;
+    constructor() {
+        super('minimap');
+    }
 
+    public onCreate(): void {
+        super.onCreate();
         this.minimapIndicatorControl = new MinimapIndicatorControl();
-        this.container.addControl(this.minimapIndicatorControl.render());
+    }
 
-        this.container.isPointerBlocker = true;
-        this.container.onPointerDownObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
+    public onBuild(): void {
+        this.addControlToContainer(this.minimapIndicatorControl);
+    }
+
+    public onRegisterListeners(): void {
+        this.control.onPointerDownObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
             this.moveCamera(eventData, eventState);
-            this.container.onPointerMoveObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
+            this.control.onPointerMoveObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
                 this.moveCamera(eventData, eventState);
             });
         });
-        this.container.onPointerUpObservable.add(() => {
-            this.container.onPointerMoveObservable.clear();
-        });
 
-        return this.container;
+        this.control.onPointerUpObservable.add(() => {
+            this.control.onPointerMoveObservable.clear();
+        });
+    }
+
+    public onApplyStyles(): void {
+        this.control.width = this.width + '%';
+        this.control.height = (this.width / this.camera.getProportion()) + '%';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.control.background = 'black';
+        this.control.alpha = 0.4;
+        this.control.isPointerBlocker = true;
     }
 
     private moveCamera(eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState): void {

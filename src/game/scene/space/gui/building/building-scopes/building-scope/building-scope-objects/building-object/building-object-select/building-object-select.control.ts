@@ -10,9 +10,7 @@ import {
     selectIsCurrentBuildingByBuildingObjectId
 } from '../../../../../../../../../logic/store/building/building.selector';
 
-export class BuildingObjectSelectControl extends Control {
-    public button: GUI.Button;
-
+export class BuildingObjectSelectControl extends Control<GUI.Button> {
     private readonly startBuildingLabel = 'Start building';
     private readonly stopBuildingLabel = 'Stop building';
 
@@ -23,20 +21,17 @@ export class BuildingObjectSelectControl extends Control {
         super();
     }
 
-    public render(): GUI.Control {
-        this.button = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
-        this.button.width = '100%';
-        this.button.height = '30px';
-        this.button.color = 'red';
-        this.button.background = 'black';
-        this.button.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+    public onCreate(): void {
+        this.control = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
+    }
 
-        this.button.onPointerUpObservable.add(() => {
+    public onRegisterListeners(): void {
+        this.control.onPointerUpObservable.add(() => {
             if (!this.buildingObjectState.isBuilt) {
                 this.onClick();
             }
         });
-        
+
         this.startBuildingSubscription = merge(
             of(EMPTY),
             logic().buildingService.startBuildingObject$,
@@ -46,12 +41,18 @@ export class BuildingObjectSelectControl extends Control {
             tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
             tap(() => this.createText())
         ).subscribe();
+    }
 
-        this.button.onDisposeObservable.add(() => {
-            this.startBuildingSubscription?.unsubscribe();
-        });
+    public onApplyStyles(): void {
+        this.control.width = '100%';
+        this.control.height = '30px';
+        this.control.color = 'red';
+        this.control.background = 'black';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+    }
 
-        return this.button;
+    public onDestroy(): void {
+        this.startBuildingSubscription?.unsubscribe();
     }
 
     private onClick(): void {
@@ -64,15 +65,15 @@ export class BuildingObjectSelectControl extends Control {
 
     private createText(): void {
         if (this.isCurrentBuilding) {
-            this.button.textBlock.text = this.stopBuildingLabel;
-            this.button.textBlock.color = 'blue';
+            this.control.textBlock.text = this.stopBuildingLabel;
+            this.control.textBlock.color = 'blue';
         } else {
             if (this.buildingObjectState.isBuilt) {
-                this.button.textBlock.text = 'Already built';
-                this.button.textBlock.color = 'grey';
+                this.control.textBlock.text = 'Already built';
+                this.control.textBlock.color = 'grey';
             } else {
-                this.button.textBlock.text = this.startBuildingLabel;
-                this.button.textBlock.color = 'red';
+                this.control.textBlock.text = this.startBuildingLabel;
+                this.control.textBlock.color = 'red';
             }
         }
     }

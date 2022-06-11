@@ -6,7 +6,6 @@ import {MainMenuOptionsBtn} from './menu-buttons/main-menu-options-btn';
 import {gameEngine} from '../../../../core/game-platform';
 import {tap} from 'rxjs';
 
-
 export class MainMenuSceneGui extends Gui {
     private mainMenuBeginBtn = new MainMenuBeginBtn();
     private mainMenuLoadBtn = new MainMenuLoadBtn();
@@ -22,9 +21,9 @@ export class MainMenuSceneGui extends Gui {
     }
 
     public render(): void {
-        this.guiManager.render(this.mainMenuBeginBtn);
-        this.guiManager.render(this.mainMenuLoadBtn);
-        this.guiManager.render(this.mainMenuOptionsBtn);
-        this.guiManager.render(this.mainMenuLeaveBtn);
+        this.guiManager.appendToRoot(this.mainMenuBeginBtn);
+        this.guiManager.appendToRoot(this.mainMenuLoadBtn);
+        this.guiManager.appendToRoot(this.mainMenuOptionsBtn);
+        this.guiManager.appendToRoot(this.mainMenuLeaveBtn);
     }
 }

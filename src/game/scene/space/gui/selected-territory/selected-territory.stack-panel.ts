@@ -10,27 +10,45 @@ import {selectTerritoryById} from '../../../../logic/store/territory/territory.s
 
 export class SelectedTerritoryStackPanel extends StackPanel {
     public backgroundImage: GUI.Image;
+    public territoryTitleContainer: TerritoryTitleContainer;
+    public territoryArtControl: TerritoryArtControl;
+    public territoryPlanetStackPanel: TerritoryPlanetStackPanel;
+
     public territoryState: TerritoryState = selectTerritoryById(logic().selectedTerritoryService.selectedTerritoryId$.value);
 
-    public render(): GUI.Control {
-        this.stackPanel = new GUI.StackPanel('selectedTerritoryStackPanel');
-        this.stackPanel.width = '25%';
-        this.stackPanel.height = '65%';
-        this.stackPanel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.stackPanel.isPointerBlocker = true;
+    constructor() {
+        super('selectedTerritoryStackPanel');
+    }
+
+    public onCreate(): void {
+        super.onCreate();
 
         this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
-        this.backgroundImage.width = '100%';
-        this.backgroundImage.height = '100%';
-        this.stackPanel.addControl(this.backgroundImage);
-
-        this.stackPanel.addControl(new TerritoryTitleContainer(this.territoryState).render());
-        this.stackPanel.addControl(new TerritoryArtControl(this.territoryState).render());
+        this.territoryTitleContainer = new TerritoryTitleContainer(this.territoryState);
+        this.territoryArtControl = new TerritoryArtControl(this.territoryState);
 
         if (isPlanet(this.territoryState)) {
-            this.stackPanel.addControl(new TerritoryPlanetStackPanel(this.territoryState).render());
+            this.territoryPlanetStackPanel = new TerritoryPlanetStackPanel(this.territoryState);
         }
+    }
 
-        return this.stackPanel;
+    public onBuild(): void {
+        this.addControlToStackPanel(this.backgroundImage);
+        this.addControlToStackPanel(this.territoryTitleContainer);
+        this.addControlToStackPanel(this.territoryArtControl);
+
+        if (this.territoryPlanetStackPanel) {
+            this.addControlToStackPanel(this.territoryPlanetStackPanel);
+        }
+    }
+
+    public onApplyStyles(): void {
+        this.control.width = '25%';
+        this.control.height = '65%';
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.control.isPointerBlocker = true;
+
+/*        this.backgroundImage.width = '100%';
+        this.backgroundImage.height = '100%';*/
     }
 }

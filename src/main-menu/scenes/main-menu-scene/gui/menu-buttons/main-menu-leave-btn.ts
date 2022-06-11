@@ -8,35 +8,31 @@ export class MainMenuLeaveBtn extends AbstractMenuBtn {
         super();
     }
 
-    public render(): GUI.Control {
-        this.create();
-        this.registerChanges();
-        return this.btn;
+    public onCreate(): void {
+        this.control = GUI.Button.CreateImageOnlyButton(this.BTN_NAME, 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg');
     }
 
-    public create(): void {
-        this.btn = GUI.Button.CreateImageOnlyButton(this.BTN_NAME, 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg');
+    public onApplyStyles(): void {
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 
-        this.btn.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.btn.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-
-        this.btn.paddingLeftInPixels = 20;
-        this.btn.color = 'transparent';
-        this.btn.heightInPixels = 60;
-        this.btn.widthInPixels = 500;
-        this.btn.leftInPixels = 40;
-        this.btn.topInPixels = -50;
+        this.control.paddingLeftInPixels = 20;
+        this.control.color = 'transparent';
+        this.control.heightInPixels = 60;
+        this.control.widthInPixels = 500;
+        this.control.leftInPixels = 40;
+        this.control.topInPixels = -50;
     }
 
-    private registerChanges(): void {
-        this.btn.onPointerClickObservable.add(() => this.onClick$.next());
+    public onRegisterListeners(): void {
+        this.control.onPointerClickObservable.add(() => this.onClick$.next());
 
-        this.btn.onPointerEnterObservable.add(() => {
-            this.btn.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-hover.svg';
+        this.control.onPointerEnterObservable.add(() => {
+            this.control.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-hover.svg';
         });
 
-        this.btn.onPointerOutObservable.add(() => {
-            this.btn.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg';
+        this.control.onPointerOutObservable.add(() => {
+            this.control.image.source = 'resources/gui/main-menu/buttons/mm-leave-btn-idle.svg';
         });
     }
 }

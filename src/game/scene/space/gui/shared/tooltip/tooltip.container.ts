@@ -1,20 +1,23 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../engine/gui-manager/container';
+import {Control} from '../../../../../../engine/gui-manager/control';
 
 export class TooltipContainer extends Container {
-    constructor(private tooltipContent: GUI.Control) {
-        super();
+    constructor(private tooltipContent: Control<GUI.Control>) {
+        super('tooltipContainer');
     }
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('tooltip');
-        this.container.background = 'rgba(0, 0, 0, 0.3)';
-        this.tooltipContent.setPaddingInPixels(10, 10, 10, 10);
-        this.container.addControl(this.tooltipContent);
-        this.container.adaptHeightToChildren = true;
-        this.container.adaptWidthToChildren = true;
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.container.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        return this.container;
+    public onBuild(): void {
+        this.addControlToContainer(this.tooltipContent);
+    }
+
+    public onApplyStyles(): void {
+        this.control.background = 'rgba(0, 0, 0, 0.3)';
+        this.control.adaptHeightToChildren = true;
+        this.control.adaptWidthToChildren = true;
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+
+        this.tooltipContent.control.setPaddingInPixels(10, 10, 10, 10);
     }
 }

@@ -5,21 +5,27 @@ import {ToolbarTitleControl} from './toolbar-title/toolbar-title.control';
 
 export class ToolbarContainer extends Container {
     public toolbarBackground: ToolbarBackgroundContainer;
-    public toolbarTitleGuiObject: ToolbarTitleControl;
+    public toolbarTitle: ToolbarTitleControl;
 
     public static TOOLBAR_OPACITY = 0.4;
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('toolbar');
-        this.container.height = '130px';
-        this.container.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    constructor() {
+        super('toolbar');
+    }
 
-        this.toolbarBackground = new ToolbarBackgroundContainer();
-        this.toolbarTitleGuiObject = new ToolbarTitleControl();
+    public onCreate(): void {
+        super.onCreate();
+        this.toolbarBackground = new ToolbarBackgroundContainer('toolbarBackground');
+        this.toolbarTitle = new ToolbarTitleControl();
+    }
 
-        this.container.addControl(this.toolbarBackground.render());
-        this.container.addControl(this.toolbarTitleGuiObject.render());
+    public onBuild(): void {
+        this.addControlToContainer(this.toolbarBackground);
+        this.addControlToContainer(this.toolbarTitle);
+    }
 
-        return this.container;
+    public onApplyStyles(): void {
+        this.control.height = '130px';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
     }
 }

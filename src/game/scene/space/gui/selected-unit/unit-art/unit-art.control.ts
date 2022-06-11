@@ -2,20 +2,19 @@ import * as GUI from 'babylonjs-gui';
 import {Control} from '../../../../../../engine/gui-manager/control';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
-export class UnitArtControl extends Control {
-    public artImage: GUI.Image;
-    
+export class UnitArtControl extends Control<GUI.Image> {
     constructor(private unitState: UnitState) {
         super();
     }
 
-    public render(): GUI.Control {
-        this.artImage = new GUI.Image('art', this.unitState.artUrl);
-        this.artImage.width = '100%';
-        this.artImage.height = '70%';
-        this.artImage.top = '10px';
-        this.artImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    public onCreate(): void {
+        this.control = new GUI.Image('art', this.unitState.artUrl);
+    }
 
-        return this.artImage;
-    }    
+    public onApplyStyles(): void {
+        this.control.width = '100%';
+        this.control.height = '70%';
+        this.control.top = '10px';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    }
 }

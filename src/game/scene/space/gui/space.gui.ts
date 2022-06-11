@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingContainer} from './building/building.container';
+import {Control} from '../../../../engine/gui-manager/control';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
 import {Gui} from '../../../../engine/gui-manager/gui';
@@ -22,35 +23,35 @@ export class SpaceGui extends Gui {
     }
 
     public render(): void {
-        this.guiManager.render(new ToolbarContainer());
-        this.guiManager.render(new CurrentTourContainer());
-        this.guiManager.render(new MinimapContainer());
+        this.guiManager.appendToRoot(new ToolbarContainer());
+        this.guiManager.appendToRoot(new CurrentTourContainer());
+        this.guiManager.appendToRoot(new MinimapContainer());
 
         logic().selectedUnitService.selectedUnitId$.pipe(
-            tap(() => this.selectedUnitContainer?.container.dispose()),
+            tap(() => this.selectedUnitContainer?.control.dispose()),
             filter((id: string) => !!id),
-            tap(() => this.selectedUnitContainer = guiManager().render(new SelectedUnitContainer())),
+            tap(() => this.selectedUnitContainer = guiManager().appendToRoot(new SelectedUnitContainer())),
         ).subscribe();
 
         logic().selectedTerritoryService.selectedTerritoryId$.pipe(
-            tap(() => this.selectedTerritoryContainer?.stackPanel.dispose()),
+            tap(() => this.selectedTerritoryContainer?.control.dispose()),
             filter((id: string) => !!id),
-            tap(() => this.selectedTerritoryContainer = guiManager().render(new SelectedTerritoryStackPanel()))
+            tap(() => this.selectedTerritoryContainer = guiManager().appendToRoot(new SelectedTerritoryStackPanel()))
         ).subscribe();
 
         logic().dialogService.open$.pipe(
-            tap(() => this.dialogOverlayContainer?.container.dispose()),
-            tap((body: GUI.Control) => this.dialogOverlayContainer = guiManager().render(new DialogOverlayContainer(body)))
+            tap(() => this.dialogOverlayContainer?.control.dispose()),
+            tap((body: Control<GUI.Control>) => this.dialogOverlayContainer = guiManager().appendToRoot(new DialogOverlayContainer(body)))
         ).subscribe();
 
         logic().dialogService.close$.pipe(
-            tap(() => this.dialogOverlayContainer?.container.dispose())
+            tap(() => this.dialogOverlayContainer?.control.dispose())
         ).subscribe();
 
         logic().selectedBuildingService.selectedBuildingId$.pipe(
-            tap(() => this.buildingContainer?.container.dispose()),
+            tap(() => this.buildingContainer?.control.dispose()),
             filter((id: string) => !!id),
-            tap(() => this.buildingContainer = guiManager().render(new BuildingContainer()))
+            tap(() => this.buildingContainer = guiManager().appendToRoot(new BuildingContainer()))
         ).subscribe();
     }
 }

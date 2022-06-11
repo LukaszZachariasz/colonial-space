@@ -7,26 +7,44 @@ import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
 export class TerritoryPlanetStackPanel extends StackPanel {
+    public planetAttributesContainer: PlanetAttributesContainer;
+    public planetAnalysisContainer: PlanetAnalysisContainer;
+    public planetBuildingContainer: PlanetBuildingContainer;
+
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super();
+        super('planetStackPanel');
+    }
+
+    public onCreate(): void {
+        super.onCreate();
+        this.planetAttributesContainer = new PlanetAttributesContainer(this.planetState);
+
+        if (!this.planetState.data.isAnalysed) {
+            this.planetAnalysisContainer = new PlanetAnalysisContainer(this.planetState);
+        }
+        if (this.planetState.data.isColonized) {
+            this.planetBuildingContainer = new PlanetBuildingContainer(this.planetState);
+        }
+    }
+
+    public onBuild(): void {
+        this.addControlToStackPanel(this.planetAttributesContainer);
+
+        if (this.planetAnalysisContainer) {
+            this.addControlToStackPanel(this.planetAnalysisContainer);
+        }
+        if (this.planetBuildingContainer) {
+            this.addControlToStackPanel(this.planetBuildingContainer);
+        }
+    }
+
+    public onApplyStyles(): void {
+        this.control.width = '100%';
+        this.control.height = '65%';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
     }
 
     public render(): GUI.Container {
-        this.stackPanel = new GUI.StackPanel('planetStackPanel');
-        this.stackPanel.width = '100%';
-        this.stackPanel.height = '65%';
-        this.stackPanel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-
-        this.stackPanel.addControl(new PlanetAttributesContainer(this.planetState).render());
-
-        if (!this.planetState.data.isAnalysed) {
-            this.stackPanel.addControl(new PlanetAnalysisContainer(this.planetState).render());
-        }
-
-        if (this.planetState.data.isColonized) {
-            this.stackPanel.addControl(new PlanetBuildingContainer(this.planetState).render());
-        }
-
-        return this.stackPanel;
+        return this.control;
     }
 }

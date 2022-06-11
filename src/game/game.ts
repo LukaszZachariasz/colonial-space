@@ -27,7 +27,7 @@ export class Game {
             filter((isLoading: boolean) => isLoading === false),
             take(1),
             tap(() => sceneManager().navigateToScene(SpaceScene.SCENE_NAME)),
-            tap(() => logic().dialogService.open$.next(new WelcomeStackPanel().render()))
+            tap(() => logic().dialogService.open$.next(new WelcomeStackPanel()))
         ).subscribe();
     }
 }

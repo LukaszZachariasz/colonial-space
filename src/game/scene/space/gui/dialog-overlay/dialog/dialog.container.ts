@@ -1,19 +1,19 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../engine/gui-manager/container';
+import {Control} from '../../../../../../engine/gui-manager/control';
 
 export class DialogContainer extends Container {
-    constructor(private body: GUI.Control) {
-        super();
+    constructor(private body: Control<GUI.Control>) {
+        super('dialog');
     }
 
-    public render(): GUI.Control {
-        this.container = new GUI.Container('dialog');
-        this.container.width = '30%';
-        this.container.adaptHeightToChildren = true;
-        this.container.background = 'rgba(0, 0, 0, 0.6)';
+    public onBuild(): void {
+        this.addControlToContainer(this.body);
+    }
 
-        this.container.addControl(this.body);
-
-        return this.container;
+    public onApplyStyles(): void {
+        this.control.width = '30%';
+        this.control.adaptHeightToChildren = true;
+        this.control.background = 'rgba(0, 0, 0, 0.6)';
     }
 }

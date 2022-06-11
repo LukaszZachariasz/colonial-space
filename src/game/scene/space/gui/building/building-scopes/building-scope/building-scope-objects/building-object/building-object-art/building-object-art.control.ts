@@ -4,20 +4,19 @@ import {
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {Control} from '../../../../../../../../../../engine/gui-manager/control';
 
-export class BuildingObjectArtControl extends Control {
-    public artImage: GUI.Image;
-
+export class BuildingObjectArtControl extends Control<GUI.Image> {
     constructor(private buildingObjectState: BuildingObjectState) {
         super();
     }
 
-    public render(): GUI.Control {
-        this.artImage = new GUI.Image('art', this.buildingObjectState.artUrl);
-        this.artImage.width = '70px';
-        this.artImage.height = '70px';
-        this.artImage.top = '10%';
-        this.artImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+    public onCreate(): void {
+        this.control = new GUI.Image('art', this.buildingObjectState.artUrl);
+    }
 
-        return this.artImage;
+    public onApplyStyles(): void {
+        this.control.width = '70px';
+        this.control.height = '70px';
+        this.control.top = '10%';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
     }
 }

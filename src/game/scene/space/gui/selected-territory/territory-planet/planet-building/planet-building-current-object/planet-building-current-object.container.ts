@@ -1,4 +1,3 @@
-import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../../../engine/gui-manager/container';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
@@ -16,27 +15,30 @@ export class PlanetBuildingCurrentObjectContainer extends Container {
     private currentBuildingObjectChangedSubscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super();
+        super('currentObjectContainer');
     }
-    
-    public render(): GUI.Control {
-        this.container = new GUI.Container('currentObjectContainer');
-        this.textControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
-        this.container.addControl(this.textControl.render());
 
+    public onCreate(): void {
+        super.onCreate();
+        this.textControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
+    }
+
+    public onBuild(): void {
+        this.addControlToContainer(this.textControl);
+    }
+
+    public onRegisterListeners(): void {
         this.currentBuildingObjectChangedSubscription = merge(
             of(EMPTY),
             logic().buildingService.startBuildingObject$,
             logic().tourService.completeTour$
         ).pipe(
             tap(() => this.buildingState = selectBuildingById(this.planetState.data.buildingId)),
-            tap(() => this.textControl.textBlock.text = 'Current: ' + this.buildingState.currentBuildingObjectId)
+            tap(() => this.textControl.control.text = 'Current: ' + this.buildingState.currentBuildingObjectId)
         ).subscribe();
+    }
 
-        this.container.onDisposeObservable.add(() => {
-            this.currentBuildingObjectChangedSubscription?.unsubscribe();
-        });
-
-        return this.container;
+    public onDestroy(): void {
+        this.currentBuildingObjectChangedSubscription?.unsubscribe();
     }
 }

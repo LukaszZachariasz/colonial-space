@@ -1,4 +1,3 @@
-import * as GUI from 'babylonjs-gui';
 import {ButtonControl} from '../../shared/button/button.control';
 import {StackPanel} from '../../../../../../engine/gui-manager/stack-panel';
 import {TextControl} from '../../shared/text/text.control';
@@ -10,24 +9,31 @@ export class WelcomeStackPanel extends StackPanel {
     public body: TextControl;
     public close: ButtonControl;
 
-    public render(): GUI.Control {
-        this.stackPanel = new GUI.StackPanel('welcome');
+    constructor() {
+        super('welcome');
+    }
 
+    public onCreate(): void {
+        super.onCreate();
         this.title = new TextControl('Welcome', {uppercase: true});
-        this.title.textBlock.setPaddingInPixels(10, 10, 10, 10);
-        this.stackPanel.addControl(this.title.render());
-
         this.body = new TextControl('Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium amet architecto assumenda, at consequuntur culpa debitis dolore, eaque enim et illo in incidunt ipsum magnam minima natus odio officiis praesentium quae, quibusdam quo quod sapiente temporibus vero. Blanditiis debitis error ex excepturi in incidunt maxime necessitatibus quo quod suscipit.');
-        this.body.textBlock.setPaddingInPixels(10, 10, 10, 10);
-        this.body.textBlock.textWrapping = true;
-        this.stackPanel.addControl(this.body.render());
-        
         this.close = new ButtonControl('Ok', () => {
             logic().dialogService.close$.next();
         });
-        this.close.button.setPaddingInPixels(10, 10, 10, 10);
-        this.stackPanel.addControl(this.close.render());
+    }
 
-        return this.stackPanel;
+    public onBuild(): void {
+        this.addControlToStackPanel(this.title);
+        this.addControlToStackPanel(this.body);
+        this.addControlToStackPanel(this.close);
+    }
+
+    public onApplyStyles(): void {
+        this.title.control.setPaddingInPixels(10, 10, 10, 10);
+
+        this.body.control.setPaddingInPixels(10, 10, 10, 10);
+        this.body.control.textWrapping = true;
+
+        this.close.control.setPaddingInPixels(10, 10, 10, 10);
     }
 }

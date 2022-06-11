@@ -3,6 +3,6 @@ import {TextControl} from '../../../../game/scene/space/gui/shared/text/text.con
 
 export class LoadingGui extends Gui {
     public render(): void {
-        this.guiManager.render(new TextControl('Loading...'));
+        this.guiManager.appendToRoot(new TextControl('Loading...'));
     }
 }

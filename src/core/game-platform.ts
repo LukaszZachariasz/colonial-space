@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import {BuildWatcher} from './build-watcher/build-watcher';
 import {Debug} from './debug/debug';
 import {Engine} from 'engine';
@@ -10,6 +11,7 @@ export class GamePlatform {
   public loadingManager: LoadingManager = new LoadingManager();
 
   public startEngine(engine: Engine, canvas: HTMLCanvasElement): void {
+    BABYLON.Logger.LogLevels = BABYLON.Logger.ErrorLogLevel,
     this.engine = engine;
     this.engine.initialize(canvas);
 

@@ -16,12 +16,9 @@ export class GuiManager {
         currentScene.gui.render();
     }
 
-    public render<T extends Control>(gameObjectGui: T, container?: GUI.Container): T {
-        if (container) {
-            container.addControl(gameObjectGui.render());
-        } else {
-            this.advancedDynamicTexture.addControl(gameObjectGui.render());
-        }
+    public appendToRoot<T extends Control<GUI.Control>>(gameObjectGui: T): T {
+        gameObjectGui.create();
+        this.advancedDynamicTexture.addControl(gameObjectGui.control);
         return gameObjectGui;
     }
 }

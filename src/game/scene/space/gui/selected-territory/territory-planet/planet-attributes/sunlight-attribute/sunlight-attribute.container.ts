@@ -1,6 +1,5 @@
-import * as GUI from 'babylonjs-gui';
-import {AttributeControl} from '../../../../shared/attribute/attribute.control';
-import {Control} from '../../../../../../../../engine/gui-manager/control';
+import {AttributeContainer} from '../../../../shared/attribute/attribute.container';
+import {Container} from '../../../../../../../../engine/gui-manager/container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
 import {IconControl} from '../../../../shared/icon/icon.control';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
@@ -10,32 +9,33 @@ import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
-export class SunlightAttributeControl extends Control {
-    public attributeControl: AttributeControl;
+export class SunlightAttributeContainer extends Container {
+    public attributeControl: AttributeContainer;
 
     private refreshAfterTourEndSubscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super();
+        super('sunlightAttribute');
     }
 
-    public render(): GUI.Control {
-        this.attributeControl = new AttributeControl(
-            new IconControl(GameIcon.SUN),
-            new TextControl(this.generateTooltipContent()).render()
-        );
-        this.attributeControl.render();
+    public onCreate(): void {
+        super.onCreate();
+        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.SUN), new TextControl(this.generateTooltipContent()));
+    }
 
+    public onBuild(): void {
+        this.addControlToContainer(this.attributeControl);
+    }
+
+    public onRegisterListeners(): void {
         this.refreshAfterTourEndSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
-            tap(() => (this.attributeControl.tooltipContent as GUI.TextBlock).text = this.generateTooltipContent())
+            tap(() => (this.attributeControl.tooltipContent as TextControl).text = this.generateTooltipContent())
         ).subscribe();
+    }
 
-        this.attributeControl.iconControl.icon.onDisposeObservable.add(() => {
-            this.refreshAfterTourEndSubscription?.unsubscribe();
-        });
-
-        return this.attributeControl.iconControl.icon;
+    public onDestroy(): void {
+        this.refreshAfterTourEndSubscription?.unsubscribe();
     }
 
     private generateTooltipContent(): string {
