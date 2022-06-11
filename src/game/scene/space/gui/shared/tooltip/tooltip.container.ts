@@ -2,6 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../engine/gui-manager/container';
 import {Control} from '../../../../../../engine/gui-manager/control';
 
+// TODO: improve that class (look at implementations of tooltip)
 export class TooltipContainer extends Container {
     constructor(private tooltipContent: Control<GUI.Control>) {
         super('tooltipContainer');
