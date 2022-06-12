@@ -5,7 +5,6 @@ import {Scene} from '../../../engine/scene-manager/scene';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceSkybox} from './model/skybox/space/space.skybox';
 import {modelManager} from 'engine';
-import {selectMapSkybox} from '../../logic/store/map/tour.selectors';
 
 export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
     public static readonly SCENE_NAME = 'SpaceScene';
@@ -14,8 +13,8 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
     constructor() {
         super(true);
         this.setUpCamera();
-        this.setUpSkybox();
         this.setUpGui();
+        modelManager().addModel(new SpaceSkybox(this.scene));
         modelManager().addModel(new GalaxyDustModel(this.scene)); // todo: get rid of it?
 
         const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);
@@ -27,10 +26,6 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> {
     private setUpCamera(): void {
         this.camera = new FromAboveCamera('FromAboveCamera', -Math.PI / 2, 0.5, 20, new BABYLON.Vector3(20, 0, -30), this.scene);
         this.camera.attachControl();
-    }
-
-    private setUpSkybox(): void {
-        new SpaceSkybox(this.scene, selectMapSkybox());
     }
 
     private setUpGui(): void {

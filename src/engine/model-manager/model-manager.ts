@@ -6,7 +6,7 @@ import {ParticleSystemModel} from './model-elements/particle-system-model';
 import {SimpleModel} from './model-elements/simple-model';
 
 export class ModelManager {
-    public addModel(model: Model<ModelElement>): Model<ModelElement> {
+    public addModel<T extends Model<ModelElement>>(model: T): T {
         if (model instanceof ImportModel) {
             model.onImport()
                 .then((result: BABYLON.ISceneLoaderAsyncResult) => model.setImportResult(result))

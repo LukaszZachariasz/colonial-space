@@ -7,20 +7,21 @@ import {StarSolarModel} from '../../scene/space/model/territory/star/star-solar/
 import {TerritoryModel} from '../../scene/space/model/territory/territory.model';
 import {TerritoryState} from '../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../logic/store/territory/territory-type';
+import {modelManager} from 'engine';
 
 export class TerritoryFactory {
     public static create(scene: BABYLON.Scene, territoryState: TerritoryState): TerritoryModel {
         switch (territoryState.type) {
             case TerritoryType.PLANET_GREEN:
-                return new PlanetGreenModel(scene, territoryState);
+                return modelManager().addModel(new PlanetGreenModel(scene, territoryState));
             case TerritoryType.PLANET_SAND:
-                return new PlanetSandModel(scene, territoryState);
+                return modelManager().addModel(new PlanetSandModel(scene, territoryState));
             case TerritoryType.PLANET_RINGED:
-                return new PlanetRingedModel(scene, territoryState);
+                return modelManager().addModel(new PlanetRingedModel(scene, territoryState));
             case TerritoryType.PLANET_METAL:
-                return new PlanetMetalModel(scene, territoryState);
+                return modelManager().addModel(new PlanetMetalModel(scene, territoryState));
             case TerritoryType.STAR_SOLAR:
-                return new StarSolarModel(scene, territoryState);
+                return modelManager().addModel(new StarSolarModel(scene, territoryState));
         }
     }
 }

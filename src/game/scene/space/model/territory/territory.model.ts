@@ -5,6 +5,7 @@ import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
 import {logic} from '../../../../game';
+import {modelManager} from 'engine';
 import {tap} from 'rxjs';
 
 export abstract class TerritoryModel extends ImportModel {
@@ -19,10 +20,7 @@ export abstract class TerritoryModel extends ImportModel {
     }
 
     public onReady(): void {
-        this.territorySignModel = new TerritorySignModel(this.scene, this.state);
-        this.territorySignModel.signMesh.parent = this.mesh;
-        this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
-
+        this.createTerritorySignModel();
         this.runEnterAnimation();
     }
 
@@ -30,11 +28,17 @@ export abstract class TerritoryModel extends ImportModel {
         logic().selectedTerritoryService.select(this.state.id);
     }
 
+    private createTerritorySignModel(): void {
+        this.territorySignModel = modelManager().addModel(new TerritorySignModel(this.scene, this.state));
+        this.territorySignModel.mesh.parent = this.mesh;
+        this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
+    }
+
     private runEnterAnimation(): void {
         this.actionMesh.parent.getChildMeshes().forEach((childMesh: BABYLON.AbstractMesh) => {
             FadeInAnimation.run(childMesh);
         });
 
-        FadeInAnimation.run(this.territorySignModel.signMesh, 1000);
+        FadeInAnimation.run(this.territorySignModel.mesh, 1000);
     }
 }

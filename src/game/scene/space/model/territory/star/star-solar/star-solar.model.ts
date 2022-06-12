@@ -14,17 +14,22 @@ export class StarSolarModel extends TerritoryModel {
     constructor(public scene: BABYLON.Scene,
                 public state: TerritoryState) {
         super(scene, state);
-
-        BABYLON.SceneLoader.ImportMesh('', 'resources/territory/star/star-solar/', 'star_01.glb', scene, (meshes: BABYLON.AbstractMesh[]) => {
-            meshes[0].position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
-            this.transformMesh = meshes[0];
-            this.actionMesh = meshes[0].getChildMeshes()[0];
-            this.afterModelLoaded();
-        });
     }
 
-    public afterModelLoaded(): void {
-        super.afterModelLoaded();
+
+    public onImport(): Promise<BABYLON.ISceneLoaderAsyncResult> {
+        return BABYLON.SceneLoader.ImportMeshAsync(
+            '',
+            'resources/territory/star/star-solar/',
+            'star_01.glb',
+            this.scene
+        );
+    }
+
+    public onReady(): void {
+        this.mesh.position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
+        this.actionMesh = this.mesh.getChildMeshes()[0];
+        super.onReady();
 
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(
