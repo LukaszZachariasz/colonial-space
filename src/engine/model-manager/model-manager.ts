@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import {ImportModel} from './model-elements/import-model';
 import {Model} from './model-elements/model';
 import {ModelElement} from './model-element';
@@ -5,9 +6,10 @@ import {ParticleSystemModel} from './model-elements/particle-system-model';
 import {SimpleModel} from './model-elements/simple-model';
 
 export class ModelManager {
-    public addModel<T extends Model<ModelElement>>(model: T): T {
+    public addModel(model: Model<ModelElement>): Model<ModelElement> {
         if (model instanceof ImportModel) {
             model.onImport()
+                .then((result: BABYLON.ISceneLoaderAsyncResult) => model.setImportResult(result))
                 .then(() => this.createLifecycle(model));
         } else if (model instanceof SimpleModel || model instanceof ParticleSystemModel) {
             model.onCreate();
