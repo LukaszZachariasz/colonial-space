@@ -1,25 +1,13 @@
 import * as BABYLON from 'babylonjs';
 import {EMPTY, delay, of, take, tap} from 'rxjs';
+import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
+import {ParticleSystemModel} from '../../../../../../../engine/model-manager/model-elements/particle-system-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
 import {logic} from '../../../../../../game';
 
-export interface FogOfWarParticlesConfig {
-    minSize: number;
-    maxSize: number;
-    updateSpeed: number;
-    angleSpeed: number;
-    minHeight: number;
-    maxHeight: number;
-    color1: BABYLON.Color4;
-    color2: BABYLON.Color4;
-}
-
-export class FogOfWarModel {
-    public plane: BABYLON.Mesh;
-    public emitter: BABYLON.Mesh;
-
-    private particleSystem: BABYLON.ParticleSystem;
+export class FogOfWarModel extends ParticleSystemModel {
+    public material: BABYLON.StandardMaterial;
 
     public shouldUpdate = true;
 
@@ -34,25 +22,26 @@ export class FogOfWarModel {
         color2: new BABYLON.Color4(.2, .1, .9, .3)
     };
 
-    private readonly material: BABYLON.StandardMaterial;
-
-
     constructor(private scene: BABYLON.Scene,
                 private state: SquareState) {
-        this.plane = BABYLON.MeshBuilder.CreatePlane('FogOfWar', {
+        super();
+    }
+
+    public onCreate(): void {
+        this.mesh = BABYLON.MeshBuilder.CreatePlane('FogOfWar', {
             width: SquareModel.SquareEdgeSize,
             height: SquareModel.SquareEdgeSize
         }, this.scene);
-        this.plane.position.y = 1;
+        this.mesh.position.y = 1;
 
         this.material = new BABYLON.StandardMaterial('SquarePolygonMaterial', this.scene);
         this.material.alpha = 0;
-        this.plane.material = this.material;
+        this.mesh.material = this.material;
 
-        this.emitter = this.plane;
+        this.emitter = this.mesh;
 
         const actionManager: BABYLON.ActionManager = new BABYLON.ActionManager(this.scene);
-        this.plane.actionManager = actionManager;
+        this.mesh.actionManager = actionManager;
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {

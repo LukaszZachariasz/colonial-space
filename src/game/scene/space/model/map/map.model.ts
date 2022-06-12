@@ -1,20 +1,23 @@
 import * as BABYLON from 'babylonjs';
+import {SimpleModel} from '../../../../../engine/model-manager/model-elements/simple-model';
 import {SquareModel} from './square/square.model';
 import {SquareState} from '../../../../logic/store/map/square/square.state';
+import {modelManager} from 'engine';
 import {selectSquares} from '../../../../logic/store/map/square/square.selectors';
 
-export class MapModel {
-    public mapNode: BABYLON.TransformNode;
+export class MapModel extends SimpleModel<BABYLON.TransformNode> {
+    public squareModels: SquareModel[] = [];
 
     constructor(private scene: BABYLON.Scene) {
-        this.mapNode = new BABYLON.TransformNode('Map', this.scene);
-        this.createSquares();
+        super();
     }
 
-    private createSquares(): void {
+    public onCreate(): void {
+        this.mesh = new BABYLON.TransformNode('Map', this.scene);
         selectSquares().flat().forEach((squareState: SquareState) => {
-            const square = new SquareModel(this.scene, squareState);
-            square.squareNode.parent = this.mapNode;
+            this.squareModels.push(modelManager().addModel(new SquareModel(this.scene, squareState)));
         });
+
+        this.squareModels.forEach((el: SquareModel) => el.mesh.parent = this.mesh);
     }
 }

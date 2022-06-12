@@ -5,7 +5,7 @@ import {TerritoryFactory} from './territory-factory/territory-factory';
 import {TerritoryState} from '../logic/store/territory/territory.state';
 import {UnitFactory} from './unit-factory/unit-factory';
 import {UnitState} from '../logic/store/unit/unit.state';
-import {sceneManager} from 'engine';
+import {modelManager, sceneManager} from 'engine';
 import {selectPlayerId} from '../logic/store/player/player.selectors';
 import {selectPlayerSquares, selectSquareByTerritoryId} from '../logic/store/map/square/square.selectors';
 import {selectTerritories} from '../logic/store/territory/territory.selectors';
@@ -15,7 +15,7 @@ export class GameBuilder {
     public build(): void {
         const spaceScene = new SpaceScene();
         sceneManager().register(spaceScene);
-        new MapModel(spaceScene.scene);
+        modelManager().addModel(new MapModel(spaceScene.scene));
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)

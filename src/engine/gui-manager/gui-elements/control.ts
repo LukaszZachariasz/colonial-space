@@ -3,17 +3,6 @@ import * as GUI from 'babylonjs-gui';
 export abstract class Control<T extends GUI.Control> {
     public control: T;
 
-    public create(): void {
-        this.onCreate();
-        this.onBuild();
-        this.onRegisterListeners();
-        this.control.onDisposeObservable.add(() => {
-            this.onDestroy();
-        });
-        this.onApplyStyles();
-        this.onReady();
-    }
-
     /**
      * This hook is mandatory. Here you should initialize control.
      */

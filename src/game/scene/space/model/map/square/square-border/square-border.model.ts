@@ -1,18 +1,21 @@
 import * as BABYLON from 'babylonjs';
+import {SimpleModel} from '../../../../../../../engine/model-manager/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {selectPlayerColor} from '../../../../../../logic/store/player/player.selectors';
 
-export class SquareBorderModel {
-    public lines: BABYLON.LinesMesh;
-
+export class SquareBorderModel extends SimpleModel<BABYLON.LinesMesh>{
     constructor(private scene: BABYLON.Scene) {
-        this.lines = BABYLON.MeshBuilder.CreateLines('SquareBorder', {points: this.generateSquarePolygon()}, this.scene);
-        this.lines.alpha = 0.05;
+        super();
+    }
+
+    public onCreate(): void {
+        this.mesh = BABYLON.MeshBuilder.CreateLines('SquareBorder', {points: this.generateSquarePolygon()}, this.scene);
+        this.mesh.alpha = 0.05;
     }
 
     public setPlayer(): void {
-        this.lines.color = BABYLON.Color3.FromHexString(selectPlayerColor());
-        this.lines.alpha = 1;
+        this.mesh.color = BABYLON.Color3.FromHexString(selectPlayerColor());
+        this.mesh.alpha = 1;
     }
 
     private generateSquarePolygon(): BABYLON.Vector3[] {

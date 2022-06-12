@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {Control} from './control';
+import {guiManager} from 'engine';
 
 export class ScrollViewer extends Control<GUI.ScrollViewer> {
     constructor(private name: string) {
@@ -14,7 +15,7 @@ export class ScrollViewer extends Control<GUI.ScrollViewer> {
         if (control instanceof GUI.Control) {
             this.control.addControl(control);
         } else {
-            control.create();
+            guiManager().createLifecycle(control);
             this.control.addControl(control.control);
         }
     }

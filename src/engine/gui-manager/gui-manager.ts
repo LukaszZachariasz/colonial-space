@@ -22,7 +22,7 @@ export class GuiManager {
     }
 
     public appendToRoot<T extends Control<GUI.Control>>(control: T): T {
-        control.create();
+        this.createLifecycle(control);
         this.advancedDynamicTexture.addControl(control.control);
         return control;
     }
@@ -30,8 +30,19 @@ export class GuiManager {
     public createForMesh<T extends Control<GUI.Control>>(name: string, mesh: BABYLON.Mesh, control: T, width?: number, height?: number): GUI.AdvancedDynamicTexture {
         const advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateForMesh(mesh, width, height);
         advancedDynamicTexture.name = name;
-        control.create();
+        this.createLifecycle(control);
         advancedDynamicTexture.addControl(control.control);
         return advancedDynamicTexture;
+    }
+
+    public createLifecycle<T extends Control<GUI.Control>>(control: T): void {
+        control.onCreate();
+        control.onBuild();
+        control.onRegisterListeners();
+        control.control.onDisposeObservable.add(() => {
+            control.onDestroy();
+        });
+        control.onApplyStyles();
+        control.onReady();
     }
 }
