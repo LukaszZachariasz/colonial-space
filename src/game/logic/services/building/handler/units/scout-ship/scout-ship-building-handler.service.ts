@@ -9,7 +9,7 @@ import {
 import {ScoutShipModel} from '../../../../../../scene/space/model/unit/scout-ship/scout-ship.model';
 import {TourEffectPriorityEnum} from '../../../../tour/tour-effect/tour-effect-priority.enum';
 import {addUnit} from '../../../../../store/unit/unit.slice';
-import {sceneManager} from 'engine';
+import {modelManager, sceneManager} from 'engine';
 import {
     selectBuildingByBuildingObjectId,
     selectBuildingObjectsByProduction0AndNotBuiltAndType
@@ -41,7 +41,7 @@ export class ScoutShipBuildingHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                new ScoutShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
+                modelManager().addModel(new ScoutShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id)));
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id

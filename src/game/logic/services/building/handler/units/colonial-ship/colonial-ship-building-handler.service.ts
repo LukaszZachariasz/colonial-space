@@ -9,7 +9,7 @@ import {HasTourEffects} from '../../../../tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber} from 'rxjs';
 import {TourEffectPriorityEnum} from '../../../../tour/tour-effect/tour-effect-priority.enum';
 import {addUnit} from '../../../../../store/unit/unit.slice';
-import {sceneManager} from 'engine';
+import {modelManager, sceneManager} from 'engine';
 import {
     selectBuildingByBuildingObjectId,
     selectBuildingObjectsByProduction0AndNotBuiltAndType
@@ -41,7 +41,7 @@ export class ColonialShipBuildingHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                new ColonialShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id));
+                modelManager().addModel(new ColonialShipModel(sceneManager().currentBabylonScene, selectUnitById(unit.id)));
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id
