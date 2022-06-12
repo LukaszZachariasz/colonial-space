@@ -4,8 +4,7 @@ import {SimpleModel} from '../../../../../../engine/model-manager/model-elements
 import {SquareBorderModel} from './square-border/square-border.model';
 import {SquareState} from '../../../../../logic/store/map/square/square.state';
 import {SquareSurfaceModel} from './square-surface/square-surface.model';
-import {filter, tap} from 'rxjs';
-import {logic} from '../../../../../game';
+import {Subscription, tap} from 'rxjs';
 import {modelManager} from 'engine';
 
 export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
@@ -14,6 +13,8 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
     private fogOfWarModel: FogOfWarModel;
     private squareBorderModel: SquareBorderModel;
     private squareSurfaceModel: SquareSurfaceModel;
+
+    private fogOfWarRemovedSubscription: Subscription;
 
     constructor(private scene: BABYLON.Scene,
                 private state: SquareState) {
@@ -30,13 +31,17 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
         }
         this.createSquareBorderModel();
         this.createSquareSurfaceModel();
-        this.listenOnFogOfWarChanged();
     }
 
     private createFogOfWarModel(): void {
         this.fogOfWarModel = modelManager().addModel(new FogOfWarModel(this.scene, this.state));
         this.fogOfWarModel.mesh.parent = this.mesh;
         this.fogOfWarModel.emitter.parent = this.mesh;
+        this.fogOfWarRemovedSubscription = this.fogOfWarModel.destroyed$.pipe(
+            tap(() => {
+                this.fogOfWarModel = undefined;
+            })
+        ).subscribe();
     }
 
     private createSquareBorderModel(): void {
@@ -52,13 +57,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 
-    private listenOnFogOfWarChanged(): void {
-        logic().fogOfWarService.removeFogOfWar$.pipe(
-            filter((id: string) => this.state.id === id),
-            tap(() => this.fogOfWarModel.destroy()),
-            tap(() => {
-                this.fogOfWarModel = undefined;
-            })
-        ).subscribe();
+    public onDestroy(): void {
+        this.fogOfWarRemovedSubscription?.unsubscribe();
     }
 }

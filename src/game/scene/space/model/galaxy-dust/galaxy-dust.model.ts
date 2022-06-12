@@ -1,39 +1,46 @@
 import * as BABYLON from 'babylonjs';
+import {ParticleSystemModel} from '../../../../../engine/model-manager/model-elements/particle-system-model';
 
-export class GalaxyDustModel {
+export class GalaxyDustModel extends ParticleSystemModel {
+    public particleEmitterType: BABYLON.SphereParticleEmitter;
+
     constructor(private scene: BABYLON.Scene) {
-        const starsEmitter = new BABYLON.SphereParticleEmitter();
-        starsEmitter.radius = 10;
-        starsEmitter.radiusRange = 10;
+        super();
+    }
 
-        const stars = BABYLON.Mesh.CreateBox('emitter', 0.01, this.scene);
-        const starsParticles = new BABYLON.ParticleSystem('starsParticles', 50000, this.scene);
+    public onCreate(): void {
+        this.particleEmitterType = new BABYLON.SphereParticleEmitter();
+        this.particleEmitterType.radius = 10;
+        this.particleEmitterType.radiusRange = 10;
 
-        starsParticles.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', this.scene);
-        starsParticles.emitter = stars;
-        starsParticles.particleEmitterType = starsEmitter;
-        starsParticles.color1 = new BABYLON.Color4(0.898, 0.737, 0.718, 1.0);
-        starsParticles.color2 = new BABYLON.Color4(0.584, 0.831, 0.894, 1.0);
+        this.mesh = BABYLON.Mesh.CreateBox('emitter', 0.01, this.scene);
+        this.particleSystem = new BABYLON.ParticleSystem('starsParticles', 50000, this.scene);
 
-        starsParticles.minSize = 0.15;
-        starsParticles.maxSize = 0.3;
+        this.particleSystem.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', this.scene);
+        this.particleSystem.emitter = this.mesh;
+        this.particleSystem.particleEmitterType = this.particleEmitterType;
+        this.particleSystem.color1 = new BABYLON.Color4(0.898, 0.737, 0.718, 1.0);
+        this.particleSystem.color2 = new BABYLON.Color4(0.584, 0.831, 0.894, 1.0);
 
-        starsParticles.minLifeTime = 999999;
-        starsParticles.maxLifeTime = 999999;
+        this.particleSystem.minSize = 0.15;
+        this.particleSystem.maxSize = 0.3;
 
-        starsParticles.minEmitPower = 0.0;
-        starsParticles.maxEmitPower = 0.0;
-        starsParticles.minAngularSpeed = 11.1;
-        starsParticles.maxAngularSpeed = 11.1;
+        this.particleSystem.minLifeTime = 999999;
+        this.particleSystem.maxLifeTime = 999999;
 
-        starsParticles.manualEmitCount = 500;
+        this.particleSystem.minEmitPower = 0.0;
+        this.particleSystem.maxEmitPower = 0.0;
+        this.particleSystem.minAngularSpeed = 11.1;
+        this.particleSystem.maxAngularSpeed = 11.1;
 
-        starsParticles.updateSpeed = 2;
-        starsParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
-        starsParticles.gravity = new BABYLON.Vector3(0, 0, 0);
+        this.particleSystem.manualEmitCount = 500;
 
-        starsParticles.isBillboardBased = false;
+        this.particleSystem.updateSpeed = 2;
+        this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
+        this.particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
 
-        starsParticles.start();
+        this.particleSystem.isBillboardBased = false;
+
+        this.particleSystem.start();
     }
 }

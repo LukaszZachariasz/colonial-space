@@ -1,15 +1,15 @@
 import * as BABYLON from 'babylonjs';
-import {EMPTY, delay, of, take, tap} from 'rxjs';
+import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {ParticleSystemModel} from '../../../../../../../engine/model-manager/model-elements/particle-system-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
 import {logic} from '../../../../../../game';
+import {modelManager} from 'engine';
 
 export class FogOfWarModel extends ParticleSystemModel {
     public material: BABYLON.StandardMaterial;
-
-    public shouldUpdate = true;
+    public destroyed$: Subject<void> = new Subject<void>();
 
     private fogConfig: FogOfWarParticlesConfig = {
         minSize: 5,
@@ -21,6 +21,8 @@ export class FogOfWarModel extends ParticleSystemModel {
         color1: new BABYLON.Color4(.8, .1, .8, .3),
         color2: new BABYLON.Color4(.2, .1, .9, .3)
     };
+
+    private removeFogOfWarSubscription: Subscription;
 
     constructor(private scene: BABYLON.Scene,
                 private state: SquareState) {
@@ -43,6 +45,8 @@ export class FogOfWarModel extends ParticleSystemModel {
         const actionManager: BABYLON.ActionManager = new BABYLON.ActionManager(this.scene);
         this.mesh.actionManager = actionManager;
 
+        this.createNewSystem(this.fogConfig);
+
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
                 logic().selectedUnitService.deselect();
@@ -50,14 +54,16 @@ export class FogOfWarModel extends ParticleSystemModel {
             })
         );
 
-        this.createNewSystem(this.fogConfig);
-
-
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
                 logic().unitMovementService.handleMovement(this.state.id);
             })
         );
+
+        this.removeFogOfWarSubscription = logic().fogOfWarService.removeFogOfWar$.pipe(
+            filter((id: string) => this.state.id === id),
+            tap(() => this.destroy()),
+        ).subscribe();
     }
 
     private createNewSystem(config: FogOfWarParticlesConfig): void {
@@ -97,7 +103,7 @@ export class FogOfWarModel extends ParticleSystemModel {
         this.particleSystem.start();
     }
 
-    public destroy(): void {
+    private destroy(): void {
         of(EMPTY).pipe(
             delay(Math.floor(BABYLON.Scalar.RandomRange(1000, 1500))),
             take(1),
@@ -114,7 +120,14 @@ export class FogOfWarModel extends ParticleSystemModel {
                         p.position.z += BABYLON.Scalar.RandomRange(0.05, 0.4) * BABYLON.Scalar.RandomRange(-1, 1);
                     });
                 };
-            })
+            }),
+            delay(1500),
+            tap(() => modelManager().removeModel(this))
         ).subscribe();
+    }
+
+    public onDestroy(): void {
+        this.destroyed$.next();
+        this.removeFogOfWarSubscription?.unsubscribe();
     }
 }
