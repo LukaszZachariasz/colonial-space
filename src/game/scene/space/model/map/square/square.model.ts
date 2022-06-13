@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
 import {SimpleModel} from '../../../../../../engine/model-manager/model-elements/simple-model';
 import {SquareBorderModel} from './square-border/square-border.model';
@@ -7,7 +8,7 @@ import {SquareSurfaceModel} from './square-surface/square-surface.model';
 import {Subscription, tap} from 'rxjs';
 import {modelManager} from 'engine';
 
-export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
+export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements OnDestroy {
     public static readonly SquareEdgeSize = 10;
 
     private fogOfWarModel: FogOfWarModel;
@@ -57,7 +58,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> {
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.fogOfWarRemovedSubscription?.unsubscribe();
     }
 }

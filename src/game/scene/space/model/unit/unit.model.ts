@@ -1,4 +1,6 @@
 import * as BABYLON from 'babylonjs';
+import {OnDestroy} from '../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../engine/lifecycle/on-ready/on-ready';
 import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
 import {Subscription, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
@@ -7,7 +9,7 @@ import {UnitState} from '../../../../logic/store/unit/unit.state';
 import {logic} from '../../../../game';
 import {modelManager} from 'engine';
 
-export abstract class UnitModel extends ImportModel {
+export abstract class UnitModel extends ImportModel implements OnReady, OnDestroy {
     public unitMovement: UnitMovement;
     public unitSignModel: UnitSignModel;
     public actionMesh: BABYLON.AbstractMesh;
@@ -20,11 +22,11 @@ export abstract class UnitModel extends ImportModel {
         super();
     }
 
-    public onReady(): void {
+    public gameOnReady(): void {
         this.createUnitSignModel();
         this.unitMovement = new UnitMovement(this.scene, this.state.id, this.mesh);
 
-        this.removeUnitSubscription = logic().unitService.removeUnitId$.pipe( // TODO: improve memory leak
+        this.removeUnitSubscription = logic().unitService.removeUnitId$.pipe(
             filter((id: string) => this.state.id === id),
             tap(() => this.mesh.dispose()),
             tap(() => this.unitSignModel.mesh.dispose())
@@ -41,7 +43,7 @@ export abstract class UnitModel extends ImportModel {
         logic().selectedUnitService.select(this.state.id);
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.unitSignModelClickedSubscription?.unsubscribe();
         this.removeUnitSubscription?.unsubscribe();
     }

@@ -1,6 +1,8 @@
+import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {ButtonControl} from '../../../shared/button/button.control';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
@@ -9,7 +11,7 @@ import {UnitType} from '../../../../../../logic/store/unit/unit-type';
 import {logic} from '../../../../../../game';
 import {selectUnitByTerritoryId} from '../../../../../../logic/store/unit/unit.selectors';
 
-export class PlanetAnalysisContainer extends Container {
+export class PlanetAnalysisContainer extends Container implements OnReady, OnDestroy {
     public startAnalysisButton: ButtonControl;
     public stopAnalysisButton: ButtonControl;
 
@@ -53,11 +55,11 @@ export class PlanetAnalysisContainer extends Container {
         this.stopAnalysisButton.control.isVisible = false;
     }
 
-    public onReady(): void {
+    public gameOnReady(): void {
         this.setAnalysisStatus();
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.subscription?.unsubscribe();
     }
 

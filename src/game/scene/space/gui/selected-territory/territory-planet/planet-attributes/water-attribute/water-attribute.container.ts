@@ -2,6 +2,7 @@ import {AttributeContainer} from '../../../../shared/attribute/attribute.contain
 import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
 import {IconControl} from '../../../../shared/icon/icon.control';
+import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
@@ -9,7 +10,7 @@ import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
-export class WaterAttributeContainer extends Container {
+export class WaterAttributeContainer extends Container implements OnDestroy {
     public attributeControl: AttributeContainer;
 
     private refreshAfterTourEndSubscription: Subscription;
@@ -34,7 +35,7 @@ export class WaterAttributeContainer extends Container {
         ).subscribe();
     }
     
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.refreshAfterTourEndSubscription?.unsubscribe();
     }
 

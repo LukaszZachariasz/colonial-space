@@ -3,12 +3,13 @@ import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {Container} from '../../../../../../../../../../engine/gui-manager/gui-elements/container';
+import {OnDestroy} from '../../../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {Subscription, tap} from 'rxjs';
 import {TextControl} from '../../../../../../shared/text/text.control';
 import {logic} from '../../../../../../../../../game';
 import {selectBuildingObjectById} from '../../../../../../../../../logic/store/building/building.selector';
 
-export class BuildingObjectProductionContainer extends Container {
+export class BuildingObjectProductionContainer extends Container implements OnDestroy {
     private textControl: TextControl;
 
     private onEndTourSubscription: Subscription;
@@ -39,7 +40,7 @@ export class BuildingObjectProductionContainer extends Container {
         this.textControl.control.left = '-5%';
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.onEndTourSubscription?.unsubscribe();
     }
 }

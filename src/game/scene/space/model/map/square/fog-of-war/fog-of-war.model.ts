@@ -1,5 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {ParticleSystemModel} from '../../../../../../../engine/model-manager/model-elements/particle-system-model';
 import {SquareModel} from '../square.model';
@@ -7,7 +8,7 @@ import {SquareState} from '../../../../../../logic/store/map/square/square.state
 import {logic} from '../../../../../../game';
 import {modelManager} from 'engine';
 
-export class FogOfWarModel extends ParticleSystemModel {
+export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
     public material: BABYLON.StandardMaterial;
     public destroyed$: Subject<void> = new Subject<void>();
 
@@ -126,7 +127,7 @@ export class FogOfWarModel extends ParticleSystemModel {
         ).subscribe();
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.destroyed$.next();
         this.removeFogOfWarSubscription?.unsubscribe();
     }

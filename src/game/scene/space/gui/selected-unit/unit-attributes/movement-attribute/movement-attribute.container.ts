@@ -1,3 +1,4 @@
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {AttributeContainer} from '../../../shared/attribute/attribute.container';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {GameIcon} from '../../../shared/icon/game-icon';
@@ -8,7 +9,7 @@ import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 import {logic} from '../../../../../../game';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
-export class MovementAttributeContainer extends Container {
+export class MovementAttributeContainer extends Container implements OnDestroy {
     public attributeControl: AttributeContainer;
     public textControl: TextControl;
 
@@ -46,7 +47,7 @@ export class MovementAttributeContainer extends Container {
         this.control.left = '70px';
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.refreshUnitPointsSubscription?.unsubscribe();
     }
 }

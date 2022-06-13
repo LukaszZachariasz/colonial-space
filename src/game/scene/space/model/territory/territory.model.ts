@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../animations/fade-in/fade-in.animation';
 import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
+import {OnReady} from '../../../../../engine/lifecycle/on-ready/on-ready';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../logic/store/territory/territory-type';
@@ -8,7 +9,7 @@ import {logic} from '../../../../game';
 import {modelManager} from 'engine';
 import {tap} from 'rxjs';
 
-export abstract class TerritoryModel extends ImportModel {
+export abstract class TerritoryModel extends ImportModel implements OnReady {
     public abstract type: TerritoryType;
 
     public actionMesh: BABYLON.AbstractMesh;
@@ -19,7 +20,7 @@ export abstract class TerritoryModel extends ImportModel {
         super();
     }
 
-    public onReady(): void {
+    public gameOnReady(): void {
         this.createTerritorySignModel();
         this.runEnterAnimation();
     }

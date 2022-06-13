@@ -1,3 +1,4 @@
+import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {AttributeContainer} from '../../../../shared/attribute/attribute.container';
 import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
@@ -9,7 +10,7 @@ import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
-export class SunlightAttributeContainer extends Container {
+export class SunlightAttributeContainer extends Container implements OnDestroy {
     public attributeControl: AttributeContainer;
 
     private refreshAfterTourEndSubscription: Subscription;
@@ -34,7 +35,7 @@ export class SunlightAttributeContainer extends Container {
         ).subscribe();
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.refreshAfterTourEndSubscription?.unsubscribe();
     }
 

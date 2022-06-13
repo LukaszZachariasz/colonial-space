@@ -1,5 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
+import {isOnDestroy} from '../lifecycle/on-destroy/is-on-destroy';
+import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
 import {Control} from './gui-elements/control';
 import {sceneManager} from 'engine';
 
@@ -39,10 +41,14 @@ export class GuiManager {
         control.onCreate();
         control.onBuild();
         control.onRegisterListeners();
-        control.control.onDisposeObservable.add(() => {
-            control.onDestroy();
-        });
+        if (isOnDestroy(control)) {
+            control.control.onDisposeObservable.add(() => {
+                control.gameOnDestroy();
+            });
+        }
         control.onApplyStyles();
-        control.onReady();
+        if (isOnReady(control)) {
+            control.gameOnReady();
+        }
     }
 }

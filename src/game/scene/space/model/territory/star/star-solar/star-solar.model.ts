@@ -1,11 +1,12 @@
 import * as BABYLON from 'babylonjs';
+import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
 import {TerritoryModel} from '../../territory.model';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../../../logic/store/territory/territory-type';
 import {selectSquareByTerritoryId} from '../../../../../../logic/store/map/square/square.selectors';
 
-export class StarSolarModel extends TerritoryModel {
+export class StarSolarModel extends TerritoryModel implements OnReady {
     public type: TerritoryType = TerritoryType.STAR_SOLAR;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
 
@@ -26,10 +27,10 @@ export class StarSolarModel extends TerritoryModel {
         );
     }
 
-    public onReady(): void {
+    public gameOnReady(): void {
         this.mesh.position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
         this.actionMesh = this.mesh.getChildMeshes()[0];
-        super.onReady();
+        super.gameOnReady();
 
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(

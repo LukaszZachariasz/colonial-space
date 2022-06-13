@@ -25,16 +25,4 @@ export abstract class Control<T extends GUI.Control> {
      */
     public onApplyStyles(): void {
     }
-
-    /**
-     * This hook allows you to react after control is ready.
-     */
-    public onReady(): void {
-    }
-
-    /**
-     * On this hook you can define post destroy actions.
-     */
-    public onDestroy(): void {
-    }
 }

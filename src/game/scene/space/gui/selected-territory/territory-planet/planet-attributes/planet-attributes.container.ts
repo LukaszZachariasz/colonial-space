@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {SunlightAttributeContainer} from './sunlight-attribute/sunlight-attribute.container';
@@ -8,7 +9,7 @@ import {WaterAttributeContainer} from './water-attribute/water-attribute.contain
 import {logic} from '../../../../../../game';
 import {selectTerritoryById} from '../../../../../../logic/store/territory/territory.selectors';
 
-export class PlanetAttributesContainer extends Container {
+export class PlanetAttributesContainer extends Container implements OnDestroy {
     public sunlightAttributeContainer: SunlightAttributeContainer;
     public waterAttributeContainer: WaterAttributeContainer;
 
@@ -45,7 +46,7 @@ export class PlanetAttributesContainer extends Container {
         this.waterAttributeContainer.control.left = '70px';
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.subscription?.unsubscribe();
     }
 }

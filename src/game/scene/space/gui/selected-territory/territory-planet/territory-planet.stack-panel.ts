@@ -1,4 +1,5 @@
 import * as GUI from 'babylonjs-gui';
+import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetAnalysisContainer} from './planet-analysis/planet-analysis.container';
 import {PlanetAttributesContainer} from './planet-attributes/planet-attributes.container';
 import {PlanetBuildingContainer} from './planet-building/planet-building.container';
@@ -8,7 +9,7 @@ import {Subscription, filter, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 import {logic} from '../../../../../game';
 
-export class TerritoryPlanetStackPanel extends StackPanel {
+export class TerritoryPlanetStackPanel extends StackPanel implements OnDestroy {
     public planetAttributesContainer: PlanetAttributesContainer;
     public planetAnalysisContainer: PlanetAnalysisContainer;
     public planetBuildingContainer: PlanetBuildingContainer;
@@ -55,7 +56,7 @@ export class TerritoryPlanetStackPanel extends StackPanel {
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.planetAnalysedSubscription?.unsubscribe();
     }
 }

@@ -4,6 +4,8 @@ import {Model} from './model-elements/model';
 import {ModelElement} from './model-element';
 import {ParticleSystemModel} from './model-elements/particle-system-model';
 import {SimpleModel} from './model-elements/simple-model';
+import {isOnDestroy} from '../lifecycle/on-destroy/is-on-destroy';
+import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
 
 export class ModelManager {
     public addModel<T extends Model<ModelElement>>(model: T): T {
@@ -24,9 +26,14 @@ export class ModelManager {
     }
 
     private createLifecycle(model: Model<ModelElement>): void {
-        model.mesh.onDisposeObservable.add(() => {
-            model.onDestroy();
-        });
-        model.onReady();
+        if (isOnDestroy(model)) {
+            model.mesh.onDisposeObservable.add(() => {
+                model.gameOnDestroy();
+            });
+        }
+
+        if (isOnReady(model)) {
+            model.gameOnReady();
+        }
     }
 }

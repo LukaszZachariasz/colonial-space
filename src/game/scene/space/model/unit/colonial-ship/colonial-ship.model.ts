@@ -1,9 +1,10 @@
 import * as BABYLON from 'babylonjs';
+import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
 import {UnitModel} from '../unit.model';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 
-export class ColonialShipModel extends UnitModel {
+export class ColonialShipModel extends UnitModel implements OnReady {
     private actionManager: BABYLON.ActionManager;
 
     constructor(protected scene: BABYLON.Scene,
@@ -19,11 +20,11 @@ export class ColonialShipModel extends UnitModel {
             this.scene);
     }
 
-    public onReady(): void {
+    public gameOnReady(): void {
         this.actionMesh = this.meshes[0].getChildMeshes()[0];
         this.mesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
 
-        super.onReady();
+        super.gameOnReady();
 
         this.actionManager = new BABYLON.ActionManager(this.scene);
         this.actionManager.registerAction(

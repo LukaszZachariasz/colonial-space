@@ -3,10 +3,11 @@ import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
 import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
 import {IconControl} from '../icon/icon.control';
+import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {TooltipContainer} from '../tooltip/tooltip.container';
 import {guiManager} from 'engine';
 
-export class AttributeContainer extends Container {
+export class AttributeContainer extends Container implements OnDestroy {
     public tooltipContainer: TooltipContainer;
     public isVisible = false;
 
@@ -42,7 +43,7 @@ export class AttributeContainer extends Container {
         });
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.tooltipContainer?.control.dispose();
     }
 }

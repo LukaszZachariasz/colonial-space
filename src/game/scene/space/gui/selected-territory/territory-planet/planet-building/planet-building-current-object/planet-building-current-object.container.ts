@@ -1,5 +1,6 @@
 import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
+import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
@@ -8,7 +9,7 @@ import {
     selectBuildingById
 } from '../../../../../../../logic/store/building/building.selector';
 
-export class PlanetBuildingCurrentObjectContainer extends Container {
+export class PlanetBuildingCurrentObjectContainer extends Container implements OnDestroy {
     public textControl: TextControl;
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
@@ -38,7 +39,7 @@ export class PlanetBuildingCurrentObjectContainer extends Container {
         ).subscribe();
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.currentBuildingObjectChangedSubscription?.unsubscribe();
     }
 }

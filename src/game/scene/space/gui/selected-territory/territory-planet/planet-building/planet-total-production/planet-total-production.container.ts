@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
 import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
+import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
@@ -7,7 +8,7 @@ import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
-export class PlanetTotalProductionContainer extends Container {
+export class PlanetTotalProductionContainer extends Container implements OnDestroy {
     public textControl: TextControl;
 
     private endOfTourSubscription: Subscription;
@@ -36,7 +37,7 @@ export class PlanetTotalProductionContainer extends Container {
         this.textControl.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
     }
 
-    public onDestroy(): void {
+    public gameOnDestroy(): void {
         this.endOfTourSubscription?.unsubscribe();
     }
 }
