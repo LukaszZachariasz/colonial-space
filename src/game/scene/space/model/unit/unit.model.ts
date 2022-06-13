@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
 import {OnDestroy} from '../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../engine/lifecycle/on-ready/on-ready';
-import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
 import {Subscription, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitSignModel} from './unit-sign/unit-sign.model';

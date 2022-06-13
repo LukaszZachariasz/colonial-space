@@ -1,8 +1,8 @@
-import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {AttributeContainer} from '../../../shared/attribute/attribute.container';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {GameIcon} from '../../../shared/icon/game-icon';
 import {IconControl} from '../../../shared/icon/icon.control';
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {Subscription, filter, map, merge, tap} from 'rxjs';
 import {TextControl} from '../../../shared/text/text.control';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';

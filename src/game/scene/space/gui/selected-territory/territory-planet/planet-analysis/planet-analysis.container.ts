@@ -1,8 +1,8 @@
-import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {ButtonControl} from '../../../shared/button/button.control';
 import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';

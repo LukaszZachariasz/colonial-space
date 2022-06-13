@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
+import {Control} from './gui-elements/control';
 import {isOnDestroy} from '../lifecycle/on-destroy/is-on-destroy';
 import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
-import {Control} from './gui-elements/control';
 import {sceneManager} from 'engine';
 
 export class GuiManager {

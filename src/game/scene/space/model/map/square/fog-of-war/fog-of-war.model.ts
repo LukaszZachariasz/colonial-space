@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
-import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
+import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {ParticleSystemModel} from '../../../../../../../engine/model-manager/model-elements/particle-system-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';

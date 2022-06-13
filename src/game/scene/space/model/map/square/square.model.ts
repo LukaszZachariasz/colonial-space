@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
+import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {SimpleModel} from '../../../../../../engine/model-manager/model-elements/simple-model';
 import {SquareBorderModel} from './square-border/square-border.model';
 import {SquareState} from '../../../../../logic/store/map/square/square.state';
