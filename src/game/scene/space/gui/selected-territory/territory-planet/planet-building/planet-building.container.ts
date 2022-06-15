@@ -2,14 +2,14 @@ import {Container} from '../../../../../../../engine/gui-manager/gui-elements/el
 import {ControlEvent} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {logic} from '../../../../../../game';
-import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
-import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {
     PlanetBuildingCurrentObjectContainer
 } from './planet-building-current-object/planet-building-current-object.container';
+import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {PlanetTotalProductionContainer} from './planet-total-production/planet-total-production.container';
+import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
+import {logic} from '../../../../../../game';
+import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
 export class PlanetBuildingContainer extends Container {

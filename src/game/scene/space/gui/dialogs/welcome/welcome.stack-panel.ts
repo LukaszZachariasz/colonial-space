@@ -1,5 +1,5 @@
-import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {ButtonControl} from '../../shared/button/button.control';
+import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
 import {TextControl} from '../../shared/text/text.control';
 import {logic} from '../../../../../game';

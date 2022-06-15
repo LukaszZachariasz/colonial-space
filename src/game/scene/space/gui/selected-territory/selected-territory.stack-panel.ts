@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {StackPanel} from '../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
+import {StackPanel} from '../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
 import {TerritoryArtControl} from './territory-art/territory-art.control';
 import {TerritoryPlanetStackPanel} from './territory-planet/territory-planet.stack-panel';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';

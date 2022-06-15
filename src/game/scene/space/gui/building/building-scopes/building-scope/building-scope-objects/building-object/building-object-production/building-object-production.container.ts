@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiElement} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {OnReady} from '../../../../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {Container} from '../../../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiElement} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {Subscription, tap} from 'rxjs';
 import {TextControl} from '../../../../../../shared/text/text.control';
 import {logic} from '../../../../../../../../../game';

@@ -1,15 +1,14 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {ScrollViewerGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/scroll-viewer/scroll-viewer-gui';
-import {StackPanelGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel-gui';
 import {BuildingObjectContainer} from './building-object/building-object.container';
 import {
     BuildingObjectState
 } from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
-import {ScrollViewer} from '../../../../../../../../engine/gui-manager/gui-elements/elements/scroll-viewer/scroll-viewer';
+import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
+import {ScrollViewerGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/scroll-viewer/scroll-viewer-gui';
 import {StackPanel} from '../../../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
+import {StackPanelGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel-gui';
 
 @GuiElement()
 export class BuildingScopeObjectsContainer extends Container {
