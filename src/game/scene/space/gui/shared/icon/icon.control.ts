@@ -1,7 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
 import {GameIcon} from './game-icon';
+import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 
+@GuiElement()
 export class IconControl extends Control<GUI.Image> {
     constructor(private gameIcon: GameIcon) {
         super();
@@ -9,9 +11,6 @@ export class IconControl extends Control<GUI.Image> {
 
     public onCreate(): void {
         this.control = new GUI.Image(this.gameIcon, `resources/gui/icons/${this.gameIcon}.svg`);
-    }
-
-    public onApplyStyles(): void {
         this.control.width = '50px';
         this.control.height = '50px';
         this.control.stretch = GUI.Image.STRETCH_FILL;

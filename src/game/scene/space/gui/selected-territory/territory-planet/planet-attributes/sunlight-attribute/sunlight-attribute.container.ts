@@ -1,8 +1,11 @@
+import * as GUI from 'babylonjs-gui';
 import {AttributeContainer} from '../../../../shared/attribute/attribute.container';
-import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
+import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../../shared/icon/icon.control';
 import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
@@ -10,7 +13,8 @@ import {TextControl} from '../../../../shared/text/text.control';
 import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
-export class SunlightAttributeContainer extends Container implements OnDestroy {
+@GuiElement()
+export class SunlightAttributeContainer extends Container implements OnReady, OnDestroy {
     public attributeControl: AttributeContainer;
 
     private refreshAfterTourEndSubscription: Subscription;
@@ -21,22 +25,19 @@ export class SunlightAttributeContainer extends Container implements OnDestroy {
 
     public onCreate(): void {
         super.onCreate();
-        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.SUN), new TextControl(this.generateTooltipContent()));
-    }
+        this.control.adaptHeightToChildren = true;
+        this.control.adaptWidthToChildren = true;
+        this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 
-    public onBuild(): void {
+        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.SUN), new TextControl(this.generateTooltipContent()));
         this.addControlToContainer(this.attributeControl);
     }
 
-    public onRegisterListeners(): void {
+    public gameOnReady(): void {
         this.refreshAfterTourEndSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
-            tap(() => (this.attributeControl.tooltipContent as TextControl).text = this.generateTooltipContent())
+            tap(() => (this.attributeControl.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())
         ).subscribe();
-    }
-
-    public gameOnDestroy(): void {
-        this.refreshAfterTourEndSubscription?.unsubscribe();
     }
 
     private generateTooltipContent(): string {
@@ -46,5 +47,9 @@ export class SunlightAttributeContainer extends Container implements OnDestroy {
         return `Sunlight ${this.planetState.data.sunlight}%
             
             It's provide ${logic().planetProductionService.getSunlightProduction(this.planetState.data.sunlight)} production.`;
+    }
+
+    public gameOnDestroy(): void {
+        this.refreshAfterTourEndSubscription?.unsubscribe();
     }
 }

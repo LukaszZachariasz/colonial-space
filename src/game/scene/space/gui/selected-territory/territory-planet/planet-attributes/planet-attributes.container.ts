@@ -1,6 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {SunlightAttributeContainer} from './sunlight-attribute/sunlight-attribute.container';
@@ -9,7 +11,8 @@ import {WaterAttributeContainer} from './water-attribute/water-attribute.contain
 import {logic} from '../../../../../../game';
 import {selectTerritoryById} from '../../../../../../logic/store/territory/territory.selectors';
 
-export class PlanetAttributesContainer extends Container implements OnDestroy {
+@GuiElement()
+export class PlanetAttributesContainer extends Container implements OnReady, OnDestroy {
     public sunlightAttributeContainer: SunlightAttributeContainer;
     public waterAttributeContainer: WaterAttributeContainer;
 
@@ -21,29 +24,24 @@ export class PlanetAttributesContainer extends Container implements OnDestroy {
 
     public onCreate(): void {
         super.onCreate();
-        this.sunlightAttributeContainer = new SunlightAttributeContainer(this.planetState);
-        this.waterAttributeContainer = new WaterAttributeContainer(this.planetState);
-    }
+        this.control.width = '100%';
+        this.control.height = '50px';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
-    public onBuild(): void {
+        this.sunlightAttributeContainer = new SunlightAttributeContainer(this.planetState);
         this.addControlToContainer(this.sunlightAttributeContainer);
+
+        this.waterAttributeContainer = new WaterAttributeContainer(this.planetState);
+        this.waterAttributeContainer.control.left = '70px';
         this.addControlToContainer(this.waterAttributeContainer);
     }
 
-    public onRegisterListeners(): void {
+    public gameOnReady(): void {
         this.subscription = logic().tourService.completeTour$.pipe(
             tap(() => {
                 this.planetState = selectTerritoryById(this.planetState.id);
             })
         ).subscribe();
-    }
-
-    public onApplyStyles(): void {
-        this.control.width = '100%';
-        this.control.height = '50px';
-        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-
-        this.waterAttributeContainer.control.left = '70px';
     }
 
     public gameOnDestroy(): void {

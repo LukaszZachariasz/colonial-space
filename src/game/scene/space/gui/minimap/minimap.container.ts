@@ -1,12 +1,17 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
+import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {FromAboveCamera} from '../../camera/from-above-camera';
+import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.control';
 import {sceneManager} from 'engine';
 
+@GuiElement()
 export class MinimapContainer extends Container {
     public minimapIndicatorControl: MinimapIndicatorControl;
-    
+
+    private isActiveMoving = false;
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
     private width = 20;
 
@@ -16,27 +21,6 @@ export class MinimapContainer extends Container {
 
     public onCreate(): void {
         super.onCreate();
-        this.minimapIndicatorControl = new MinimapIndicatorControl();
-    }
-
-    public onBuild(): void {
-        this.addControlToContainer(this.minimapIndicatorControl);
-    }
-
-    public onRegisterListeners(): void {
-        this.control.onPointerDownObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
-            this.moveCamera(eventData, eventState);
-            this.control.onPointerMoveObservable.add((eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState) => {
-                this.moveCamera(eventData, eventState);
-            });
-        });
-
-        this.control.onPointerUpObservable.add(() => {
-            this.control.onPointerMoveObservable.clear();
-        });
-    }
-
-    public onApplyStyles(): void {
         this.control.width = this.width + '%';
         this.control.height = (this.width / this.camera.getProportion()) + '%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
@@ -44,6 +28,27 @@ export class MinimapContainer extends Container {
         this.control.background = 'black';
         this.control.alpha = 0.4;
         this.control.isPointerBlocker = true;
+
+        this.minimapIndicatorControl = new MinimapIndicatorControl();
+        this.addControlToContainer(this.minimapIndicatorControl);
+    }
+
+    @ControlEventListener(ControlEvent.ON_POINTER_DOWN)
+    public onPointerDown(eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState): void {
+        this.moveCamera(eventData, eventState);
+        this.isActiveMoving = true;
+    }
+
+    @ControlEventListener(ControlEvent.ON_POINTER_MOVE)
+    public onPointerMove(eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState): void {
+        if (this.isActiveMoving) {
+            this.moveCamera(eventData, eventState);
+        }
+    }
+
+    @ControlEventListener(ControlEvent.ON_POINTER_UP)
+    public onPointerUp(): void {
+        this.isActiveMoving = false;
     }
 
     private moveCamera(eventData: GUI.Vector2WithInfo, eventState: BABYLON.EventState): void {

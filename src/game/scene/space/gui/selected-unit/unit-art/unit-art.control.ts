@@ -1,7 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
+@GuiElement()
 export class UnitArtControl extends Control<GUI.Image> {
     constructor(private unitState: UnitState) {
         super();
@@ -9,9 +11,6 @@ export class UnitArtControl extends Control<GUI.Image> {
 
     public onCreate(): void {
         this.control = new GUI.Image('art', this.unitState.artUrl);
-    }
-
-    public onApplyStyles(): void {
         this.control.width = '100%';
         this.control.height = '70%';
         this.control.top = '10px';

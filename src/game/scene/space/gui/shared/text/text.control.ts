@@ -1,7 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/control';
+import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {TextOptions} from './text-options';
 
+@GuiElement()
 export class TextControl extends Control<GUI.TextBlock> {
     constructor(public text: string,
                 public options?: TextOptions) {
@@ -10,9 +12,6 @@ export class TextControl extends Control<GUI.TextBlock> {
 
     public onCreate(): void {
         this.control = new GUI.TextBlock(this.text, this.text);
-    }
-
-    public onApplyStyles(): void {
         this.control.resizeToFit = true;
         this.control.fontFamily = 'JuiceRegular';
         this.control.fontSize = '12px';

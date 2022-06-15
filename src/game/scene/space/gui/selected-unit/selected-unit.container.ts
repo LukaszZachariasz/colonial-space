@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {UnitArtControl} from './unit-art/unit-art.control';
 import {UnitAttributesContainer} from './unit-attributes/unit-attributes.container';
 import {UnitState} from '../../../../logic/store/unit/unit.state';
@@ -7,6 +8,7 @@ import {UnitTitleContainer} from './unit-title/unit-title.container';
 import {logic} from '../../../../game';
 import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
+@GuiElement()
 export class SelectedUnitContainer extends Container {
     public backgroundImage: GUI.Image;
     public unitArtControl: UnitArtControl;
@@ -20,20 +22,6 @@ export class SelectedUnitContainer extends Container {
 
     public onCreate(): void {
         super.onCreate();
-        this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
-        this.unitArtControl = new UnitArtControl(this.unitState);
-        this.unitTitleContainer = new UnitTitleContainer(this.unitState);
-        this.unitAttributesContainer = new UnitAttributesContainer(this.unitState);
-    }
-
-    public onBuild(): void {
-        this.addControlToContainer(this.backgroundImage);
-        this.addControlToContainer(this.unitArtControl);
-        this.addControlToContainer(this.unitTitleContainer);
-        this.addControlToContainer(this.unitAttributesContainer);
-    }
-
-    public onApplyStyles(): void {
         this.control.width = '25%';
         this.control.height = '40%';
         this.control.left = '30px';
@@ -42,7 +30,18 @@ export class SelectedUnitContainer extends Container {
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.isPointerBlocker = true;
 
+        this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
         this.backgroundImage.width = '100%';
         this.backgroundImage.height = '100%';
+        this.addControlToContainer(this.backgroundImage);
+
+        this.unitArtControl = new UnitArtControl(this.unitState);
+        this.addControlToContainer(this.unitArtControl);
+
+        this.unitTitleContainer = new UnitTitleContainer(this.unitState);
+        this.addControlToContainer(this.unitTitleContainer);
+
+        this.unitAttributesContainer = new UnitAttributesContainer(this.unitState);
+        this.addControlToContainer(this.unitAttributesContainer);
     }
 }

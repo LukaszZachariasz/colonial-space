@@ -1,6 +1,8 @@
-import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
+import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../../logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../../logic/store/territory/territory.state';
 import {TextControl} from '../../../../shared/text/text.control';
@@ -9,7 +11,8 @@ import {
     selectBuildingById
 } from '../../../../../../../logic/store/building/building.selector';
 
-export class PlanetBuildingCurrentObjectContainer extends Container implements OnDestroy {
+@GuiElement()
+export class PlanetBuildingCurrentObjectContainer extends Container implements OnReady, OnDestroy {
     public textControl: TextControl;
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
@@ -21,14 +24,12 @@ export class PlanetBuildingCurrentObjectContainer extends Container implements O
 
     public onCreate(): void {
         super.onCreate();
-        this.textControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
-    }
 
-    public onBuild(): void {
+        this.textControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
         this.addControlToContainer(this.textControl);
     }
 
-    public onRegisterListeners(): void {
+    public gameOnReady(): void {
         this.currentBuildingObjectChangedSubscription = merge(
             of(EMPTY),
             logic().buildingService.startBuildingObject$,

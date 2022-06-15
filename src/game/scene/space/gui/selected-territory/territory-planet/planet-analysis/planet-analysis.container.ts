@@ -1,6 +1,7 @@
+import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {ButtonControl} from '../../../shared/button/button.control';
-import {Container} from '../../../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
@@ -11,6 +12,7 @@ import {UnitType} from '../../../../../../logic/store/unit/unit-type';
 import {logic} from '../../../../../../game';
 import {selectUnitByTerritoryId} from '../../../../../../logic/store/unit/unit.selectors';
 
+@GuiElement()
 export class PlanetAnalysisContainer extends Container implements OnReady, OnDestroy {
     public startAnalysisButton: ButtonControl;
     public stopAnalysisButton: ButtonControl;
@@ -24,38 +26,30 @@ export class PlanetAnalysisContainer extends Container implements OnReady, OnDes
 
     public onCreate(): void {
         super.onCreate();
+        this.control.height = '200px';
+        this.control.width = '100%';
+        this.control.paddingTop = '20px';
 
         this.startAnalysisButton = new ButtonControl('Start analysis', () => {
             logic().analysisService.startAnalysis(this.analysisShip);
             this.setAnalysisStatus();
         });
+        this.startAnalysisButton.control.isVisible = false;
+        this.addControlToContainer(this.startAnalysisButton);
+
         this.stopAnalysisButton = new ButtonControl('Stop analysis', () => {
             logic().analysisService.stopAnalysis(this.analysisShip);
             this.setAnalysisStatus();
         });
-    }
-
-    public onBuild(): void {
-        this.addControlToContainer(this.startAnalysisButton);
+        this.stopAnalysisButton.control.isVisible = false;
         this.addControlToContainer(this.stopAnalysisButton);
     }
 
-    public onRegisterListeners(): void {
+    public gameOnReady(): void {
         this.subscription = logic().tourService.completeTour$.pipe(
             tap(() => this.setAnalysisStatus())
         ).subscribe();
-    }
 
-    public onApplyStyles(): void {
-        this.control.height = '200px';
-        this.control.width = '100%';
-        this.control.paddingTop = '20px';
-
-        this.startAnalysisButton.control.isVisible = false;
-        this.stopAnalysisButton.control.isVisible = false;
-    }
-
-    public gameOnReady(): void {
         this.setAnalysisStatus();
     }
 

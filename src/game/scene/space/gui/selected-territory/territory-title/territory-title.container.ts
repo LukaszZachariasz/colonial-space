@@ -1,9 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/container';
+import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../shared/icon/icon.control';
 import {TerritoryNameContainer} from './territory-name/territory-name.container';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
+@GuiElement()
 export class TerritoryTitleContainer extends Container {
     public iconControl: IconControl;
     public territoryNameControl: TerritoryNameContainer;
@@ -14,20 +16,16 @@ export class TerritoryTitleContainer extends Container {
 
     public onCreate(): void {
         super.onCreate();
-        this.iconControl = new IconControl(this.territoryState.icon);
-        this.territoryNameControl = new TerritoryNameContainer(this.territoryState);
-    }
-
-    public onBuild(): void {
-        this.addControlToContainer(this.iconControl);
-        this.addControlToContainer(this.territoryNameControl);
-    }
-
-    public onApplyStyles(): void {
         this.control.width = '100%';
         this.control.height = '50px';
         this.control.left = '10px';
         this.control.top = '10px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+
+        this.iconControl = new IconControl(this.territoryState.icon);
+        this.addControlToContainer(this.iconControl);
+
+        this.territoryNameControl = new TerritoryNameContainer(this.territoryState);
+        this.addControlToContainer(this.territoryNameControl);
     }
 }

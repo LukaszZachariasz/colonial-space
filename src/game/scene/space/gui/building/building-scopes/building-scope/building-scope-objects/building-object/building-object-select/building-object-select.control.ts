@@ -2,16 +2,23 @@ import * as GUI from 'babylonjs-gui';
 import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Control} from '../../../../../../../../../../engine/gui-manager/gui-elements/control';
+import {Control} from '../../../../../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {ControlEvent} from '../../../../../../../../../../engine/gui-manager/gui-elements/events/control-event';
+import {
+    ControlEventListener
+} from '../../../../../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
+import {GuiElement} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {logic} from '../../../../../../../../../game';
 import {
     selectBuildingObjectById,
     selectIsCurrentBuildingByBuildingObjectId
 } from '../../../../../../../../../logic/store/building/building.selector';
 
-export class BuildingObjectSelectControl extends Control<GUI.Button> implements OnDestroy {
+@GuiElement()
+export class BuildingObjectSelectControl extends Control<GUI.Button> implements OnReady, OnDestroy {
     private readonly startBuildingLabel = 'Start building';
     private readonly stopBuildingLabel = 'Stop building';
 
@@ -24,15 +31,21 @@ export class BuildingObjectSelectControl extends Control<GUI.Button> implements 
 
     public onCreate(): void {
         this.control = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
+        this.control.width = '100%';
+        this.control.height = '30px';
+        this.control.color = 'red';
+        this.control.background = 'black';
+        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
     }
 
-    public onRegisterListeners(): void {
-        this.control.onPointerUpObservable.add(() => {
-            if (!this.buildingObjectState.isBuilt) {
-                this.onClick();
-            }
-        });
+    @ControlEventListener(ControlEvent.ON_POINTER_UP)
+    public onSelect(): void {
+        if (!this.buildingObjectState.isBuilt) {
+            this.onClick();
+        }
+    }
 
+    public gameOnReady(): void {
         this.startBuildingSubscription = merge(
             of(EMPTY),
             logic().buildingService.startBuildingObject$,
@@ -42,14 +55,6 @@ export class BuildingObjectSelectControl extends Control<GUI.Button> implements 
             tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
             tap(() => this.createText())
         ).subscribe();
-    }
-
-    public onApplyStyles(): void {
-        this.control.width = '100%';
-        this.control.height = '30px';
-        this.control.color = 'red';
-        this.control.background = 'black';
-        this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
     }
 
     private onClick(): void {

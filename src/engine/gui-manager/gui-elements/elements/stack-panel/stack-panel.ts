@@ -1,8 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from './control';
-import {guiManager} from 'engine';
+import {Control} from '../control';
 
-export class StackPanel extends Control<GUI.StackPanel> {
+export abstract class StackPanel extends Control<GUI.StackPanel> {
     constructor(private name: string) {
         super();
     }
@@ -15,7 +14,6 @@ export class StackPanel extends Control<GUI.StackPanel> {
         if (control instanceof GUI.Control) {
             this.control.addControl(control);
         } else {
-            guiManager().createLifecycle(control);
             this.control.addControl(control.control);
         }
     }
