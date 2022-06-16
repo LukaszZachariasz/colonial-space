@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {AppendControl} from '../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
+import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {TextControl} from '../../../shared/text/text.control';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';

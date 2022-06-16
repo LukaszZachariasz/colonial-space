@@ -25,7 +25,7 @@ export function GuiElement(): any {
                 if (isOnReady(this)) {
                     this.gameOnReady();
                 }
-            };
+            }
         };
     };
 }

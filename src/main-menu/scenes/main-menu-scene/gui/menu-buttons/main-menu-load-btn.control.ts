@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
-import {Subject} from 'rxjs';
-import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
+import {Subject} from 'rxjs';
 
 @GuiElement()
 export class MainMenuLoadBtnControl implements GuiControl<GUI.Button>, AfterCreated {
