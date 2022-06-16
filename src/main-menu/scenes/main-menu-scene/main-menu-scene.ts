@@ -2,6 +2,9 @@ import * as BABYLON from 'babylonjs';
 import {AbstractMesh} from 'babylonjs/Meshes/abstractMesh';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
 import {Scene} from '../../../engine/scene-manager/scene';
+import {SpaceSkybox} from '../../../game/scene/space/model/skybox/space/space.skybox';
+import {SpaceSkyboxConst} from '../../../game/scene/space/model/skybox/space/space-skybox.const';
+import {modelManager} from 'engine';
 import Vector3 = BABYLON.Vector3;
 import Color4 = BABYLON.Color4;
 
@@ -12,6 +15,7 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
     constructor() {
         super(false);
         this.initMainMenuSceneGui();
+        modelManager().addModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
         this.initSceneContent();
         this.initMainMenuCamera();
         this.initMainMenuScenePostEffects();
