@@ -8,17 +8,14 @@ import {
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
 import {GuiControl} from '../../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {ScrollViewerGui} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/scroll-viewer/scroll-viewer-gui';
-import {StackPanel} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel';
-import {StackPanelGui} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel-gui';
 
 @GuiElement()
 export class BuildingScopeObjectsContainer implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('sectorObjects');
     public buildingObjectContainers: BuildingObjectContainer[] = [];
 
-    @AppendControl() private scrollViewer: ScrollViewerGui = new ScrollViewerGui('scrollViewer');
-    private stackPanel: StackPanel = new StackPanelGui('stackPanel');
+    @AppendControl() private scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('scrollViewer');
+    private stackPanel: GUI.StackPanel = new GUI.StackPanel('stackPanel');
 
     constructor(private buildingScope: BuildingScopeState) {
     }
@@ -29,18 +26,18 @@ export class BuildingScopeObjectsContainer implements GuiControl<GUI.Container>,
         this.control.height = '100%';
         this.control.left = '5%';
 
-        this.scrollViewer.control.width = '100%';
-        this.scrollViewer.control.height = '100%';
-        this.scrollViewer.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.scrollViewer.control.thickness = 0;
+        this.scrollViewer.width = '100%';
+        this.scrollViewer.height = '100%';
+        this.scrollViewer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.scrollViewer.thickness = 0;
 
-        this.stackPanel.control.isVertical = false;
+        this.stackPanel.isVertical = false;
 
         this.buildingScope.objects.forEach((object: BuildingObjectState) => {
             this.buildingObjectContainers.push(new BuildingObjectContainer(object));
         });
 
-        this.scrollViewer.addControlToScrollViewer(this.stackPanel);
-        this.buildingObjectContainers.forEach((buildingObjectContainer: BuildingObjectContainer) => this.stackPanel.addControlToStackPanel(buildingObjectContainer));
+        this.scrollViewer.addControl(this.stackPanel);
+        this.buildingObjectContainers.forEach((buildingObjectContainer: BuildingObjectContainer) => this.stackPanel.addControl(buildingObjectContainer.control));
     }
 }

@@ -36,7 +36,9 @@ function appendControls(instance: any): void {
     metadataKeys.forEach((key: string) => {
         const metadataValue = Reflect.getMetadata(key, instance);
         metadataValue.appends.forEach((property: string) => {
-            addControlToContainer(instance, instance[property]);
+            if (instance[property]) {
+                addControlToContainer(instance, instance[property]);
+            }
         });
     });
 }
