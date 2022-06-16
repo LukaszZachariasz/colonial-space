@@ -1,19 +1,17 @@
 import * as GUI from 'babylonjs-gui';
-import {AbstractMenuBtn} from './abstract-menu-btn';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
+import {Subject} from 'rxjs';
 
 @GuiElement()
-export class MainMenuBeginBtn extends AbstractMenuBtn {
-    private readonly BTN_NAME = 'MainMenuBeginBtn';
+export class MainMenuBeginBtnControl implements GuiControl<GUI.Button>, AfterCreated {
+    public control = GUI.Button.CreateImageOnlyButton('MainMenuBeginBtnControl', 'resources/gui/main-menu/buttons/mm-begin-btn-idle.svg');
+    public onClick$ = new Subject<void>();
 
-    constructor() {
-        super();
-    }
-
-    public onCreate(): void {
-        this.control = GUI.Button.CreateImageOnlyButton(this.BTN_NAME, 'resources/gui/main-menu/buttons/mm-begin-btn-idle.svg');
+    public gameAfterCreated(): void {
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.control.paddingLeftInPixels = 20;

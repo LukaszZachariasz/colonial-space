@@ -1,6 +1,7 @@
+import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {ButtonControl} from '../../../shared/button/button.control';
-import {Container} from '../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -13,7 +14,7 @@ import {logic} from '../../../../../../game';
 import {selectUnitByTerritoryId} from '../../../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class PlanetAnalysisContainer extends Container implements OnReady, OnDestroy {
+export class PlanetAnalysisContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
     public startAnalysisButton: ButtonControl;
     public stopAnalysisButton: ButtonControl;
 
@@ -24,8 +25,7 @@ export class PlanetAnalysisContainer extends Container implements OnReady, OnDes
         super('analysis');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.height = '200px';
         this.control.width = '100%';
         this.control.paddingTop = '20px';

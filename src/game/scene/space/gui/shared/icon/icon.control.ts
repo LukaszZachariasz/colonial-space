@@ -1,16 +1,17 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {GameIcon} from './game-icon';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 
 @GuiElement()
-export class IconControl extends Control<GUI.Image> {
+export class IconControl implements GuiControl<GUI.Image>, AfterCreated {
+    public control = new GUI.Image(this.gameIcon, `resources/gui/icons/${this.gameIcon}.svg`);
+    
     constructor(private gameIcon: GameIcon) {
-        super();
     }
 
-    public onCreate(): void {
-        this.control = new GUI.Image(this.gameIcon, `resources/gui/icons/${this.gameIcon}.svg`);
+    public gameAfterCreated(): void {
         this.control.width = '50px';
         this.control.height = '50px';
         this.control.stretch = GUI.Image.STRETCH_FILL;

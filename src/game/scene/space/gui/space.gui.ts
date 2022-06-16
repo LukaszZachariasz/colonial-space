@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingContainer} from './building/building.container';
-import {Control} from '../../../../engine/gui-manager/gui-elements/elements/control';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayContainer} from './dialog-overlay/dialog-overlay.container';
 import {Gui} from '../../../../engine/gui-manager/gui-scene/gui';
+import {GuiControl} from '../../../../engine/gui-manager/gui-elements/gui-control';
 import {MinimapContainer} from './minimap/minimap.container';
 import {SelectedTerritoryStackPanel} from './selected-territory/selected-territory.stack-panel';
 import {SelectedUnitContainer} from './selected-unit/selected-unit.container';
@@ -49,7 +49,7 @@ export class SpaceGui extends Gui {
 
         this.dialogServiceOpenedSubscription = logic().dialogService.open$.pipe(
             tap(() => this.dialogOverlayContainer?.control.dispose()),
-            tap((body: Control<GUI.Control>) => this.dialogOverlayContainer = guiManager().appendToRoot(new DialogOverlayContainer(body)))
+            tap((body: GuiControl<GUI.Control>) => this.dialogOverlayContainer = guiManager().appendToRoot(new DialogOverlayContainer(body)))
         ).subscribe();
 
         this.dialogServiceClosedSubscription = logic().dialogService.close$.pipe(

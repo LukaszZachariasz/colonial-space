@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
 import {AttributeContainer} from '../../../../shared/attribute/attribute.container';
-import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../../shared/icon/icon.control';
@@ -14,7 +15,7 @@ import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class WaterAttributeContainer extends Container implements OnReady, OnDestroy {
+export class WaterAttributeContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
     public attributeControl: AttributeContainer;
 
     private refreshAfterTourEndSubscription: Subscription;
@@ -23,8 +24,7 @@ export class WaterAttributeContainer extends Container implements OnReady, OnDes
         super('waterAttribute');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;

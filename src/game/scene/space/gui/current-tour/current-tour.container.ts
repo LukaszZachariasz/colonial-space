@@ -1,11 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {CurrentTourControl} from './current-tour/current-tour.control';
+import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {NextTourControl} from './next-tour/next-tour.control';
 
 @GuiElement()
-export class CurrentTourContainer extends Container {
+export class CurrentTourContainer extends GuiContainer implements AfterCreated {
     public nextTourControl: NextTourControl;
     public currentTourControl: CurrentTourControl;
 
@@ -13,8 +14,7 @@ export class CurrentTourContainer extends Container {
         super('currentTourBar');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '200px';
         this.control.height = '150px';
         this.control.top = '-60px';

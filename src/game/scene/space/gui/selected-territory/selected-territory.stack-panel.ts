@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
-import {StackPanel} from '../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
+import {StackPanel} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel';
 import {TerritoryArtControl} from './territory-art/territory-art.control';
 import {TerritoryPlanetStackPanel} from './territory-planet/territory-planet.stack-panel';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
@@ -10,7 +11,7 @@ import {logic} from '../../../../game';
 import {selectTerritoryById} from '../../../../logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class SelectedTerritoryStackPanel extends StackPanel {
+export class SelectedTerritoryStackPanel extends StackPanel implements AfterCreated {
     public backgroundImage: GUI.Image;
     public territoryTitleContainer: TerritoryTitleContainer;
     public territoryArtControl: TerritoryArtControl;
@@ -22,8 +23,7 @@ export class SelectedTerritoryStackPanel extends StackPanel {
         super('selectedTerritoryStackPanel');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '25%';
         this.control.height = '65%';
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;

@@ -1,6 +1,7 @@
-import {Container} from '../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {
     PlanetBuildingCurrentObjectContainer
@@ -12,7 +13,7 @@ import {logic} from '../../../../../../game';
 import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
-export class PlanetBuildingContainer extends Container {
+export class PlanetBuildingContainer extends GuiContainer implements AfterCreated {
     public planetTotalProductionControl: PlanetTotalProductionContainer;
     public planetBuildingCurrentObjectContainer: PlanetBuildingCurrentObjectContainer;
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
@@ -21,8 +22,7 @@ export class PlanetBuildingContainer extends Container {
         super('buildingContainer');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.height = '200px';
         this.control.width = '100%';
         this.control.paddingTop = '20px';

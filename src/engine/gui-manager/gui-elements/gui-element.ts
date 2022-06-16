@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listener';
-import {Control} from './elements/control';
+import {GuiControl} from './gui-control';
+import {isAfterCreated} from '../../lifecycle/after-created/is-after-created';
 import {isOnDestroy} from '../../lifecycle/on-destroy/is-on-destroy';
 import {isOnReady} from '../../lifecycle/on-ready/is-on-ready';
 
@@ -9,9 +10,11 @@ export function GuiElement(): any {
         const original = constructor;
 
         const overrideConstructor: any = function (...args: any[]) {
-            const instance = new original(...args) as Control<GUI.Control>;
+            const instance = new original(...args) as GuiControl<GUI.Control>;
 
-            instance.onCreate();
+            if (isAfterCreated(instance)) {
+                instance.gameAfterCreated();
+            }
             registerControlEventListeners(instance);
             if (isOnDestroy(instance)) {
                 instance.control.onDisposeObservable.add(() => {
@@ -31,7 +34,7 @@ export function GuiElement(): any {
 }
 
 
-function registerControlEventListeners(instance: Control<GUI.Control>): void {
+function registerControlEventListeners(instance: GuiControl<GUI.Control>): void {
     let metadataKeys = Reflect.getMetadataKeys(instance);
     metadataKeys = metadataKeys.filter((key: string) => key.includes(CONTROL_EVENT_LISTENER_METADATA_KEY));
     metadataKeys.forEach((key: string) => {

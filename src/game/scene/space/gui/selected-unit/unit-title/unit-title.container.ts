@@ -1,12 +1,13 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
+import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../shared/icon/icon.control';
 import {UnitNameContainer} from './unit-name/unit-name.container';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
 @GuiElement()
-export class UnitTitleContainer extends Container {
+export class UnitTitleContainer extends GuiContainer implements AfterCreated {
     public iconControl: IconControl;
     public unitNameContainer: UnitNameContainer;
 
@@ -14,8 +15,7 @@ export class UnitTitleContainer extends Container {
         super('title');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '100%';
         this.control.height = '50px';
         this.control.left = '10px';

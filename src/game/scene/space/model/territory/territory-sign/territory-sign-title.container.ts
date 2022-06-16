@@ -1,7 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {Subject} from 'rxjs';
@@ -9,7 +10,7 @@ import {TerritoryState} from '../../../../../logic/store/territory/territory.sta
 import {TextControl} from '../../../gui/shared/text/text.control';
 
 @GuiElement()
-export class TerritorySignTitleContainer extends Container {
+export class TerritorySignTitleContainer extends GuiContainer implements AfterCreated {
     public text: TextControl;
     public icon: IconControl;
     public clicked$ = new Subject<void>();
@@ -23,8 +24,7 @@ export class TerritorySignTitleContainer extends Container {
         super('TerritorySignTitle');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.widthInPixels = this.GUI_SIZE * this.WIDTH;
         this.control.heightInPixels = this.GUI_SIZE * this.HEIGHT;
         this.control.background = 'rgba(0, 0, 0, 0.2)';

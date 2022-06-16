@@ -1,19 +1,19 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
-import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {TextControl} from '../../../../shared/text/text.control';
 
 @GuiElement()
-export class BuildingScopeNameContainer extends Container {
+export class BuildingScopeNameContainer extends GuiContainer implements AfterCreated {
     public text: TextControl = new TextControl(this.scopeState.name);
 
     constructor(private scopeState: BuildingScopeState) {
         super('sectorNameContainer');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.text = new TextControl(this.scopeState.name);
 
         this.control.width = '5%';

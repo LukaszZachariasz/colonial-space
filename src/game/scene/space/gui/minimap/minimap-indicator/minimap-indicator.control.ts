@@ -1,19 +1,20 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
 import {FromAboveCamera} from '../../../camera/from-above-camera';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
 import {sceneManager} from 'engine';
 
 @GuiElement()
-export class MinimapIndicatorControl extends Control<GUI.Rectangle> implements OnReady {
+export class MinimapIndicatorControl implements GuiControl<GUI.Rectangle>, OnReady {
+    public control = new GUI.Rectangle('minimapIndicator');
+
     public widthInPercentage = 0;
     public heightInPercentage = 0;
 
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
 
-    public onCreate(): void {
-        this.control = new GUI.Rectangle('minimapIndicator');
+    public gameAfterCreated(): void {
         this.control.width = '30%';
         this.control.height = '20%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;

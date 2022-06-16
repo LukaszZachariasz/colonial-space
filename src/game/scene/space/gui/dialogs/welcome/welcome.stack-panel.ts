@@ -1,12 +1,13 @@
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {ButtonControl} from '../../shared/button/button.control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
+import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel';
 import {TextControl} from '../../shared/text/text.control';
 import {logic} from '../../../../../game';
 
 // TODO: create something more generic?
 @GuiElement()
-export class WelcomeStackPanel extends StackPanel {
+export class WelcomeStackPanel extends StackPanel implements AfterCreated {
     public title: TextControl;
     public body: TextControl;
     public close: ButtonControl;
@@ -15,9 +16,7 @@ export class WelcomeStackPanel extends StackPanel {
         super('welcome');
     }
 
-    public onCreate(): void {
-        super.onCreate();
-
+    public gameAfterCreated(): void {
         this.title = new TextControl('Welcome', {uppercase: true});
         this.title.control.setPaddingInPixels(10, 10, 10, 10);
         this.addControlToStackPanel(this.title);

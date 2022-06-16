@@ -1,13 +1,14 @@
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../gui/shared/icon/icon.control';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
 @GuiElement()
-export class UnitSignIconContainer extends Container {
+export class UnitSignIconContainer extends GuiContainer implements AfterCreated {
     public iconControl: IconControl;
     public clicked$ = new Subject<void>();
 
@@ -15,8 +16,7 @@ export class UnitSignIconContainer extends Container {
         super('unitSignIcon');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.widthInPixels = 1024;
         this.control.heightInPixels = 1024;
 

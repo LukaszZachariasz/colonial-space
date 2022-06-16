@@ -1,13 +1,14 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../../../../engine/lifecycle/after-created/after-created';
 import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Control} from '../../../../../../../../../../engine/gui-manager/gui-elements/elements/control';
 import {ControlEvent} from '../../../../../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {
     ControlEventListener
 } from '../../../../../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
+import {GuiControl} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -18,19 +19,18 @@ import {
 } from '../../../../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
-export class BuildingObjectSelectControl extends Control<GUI.Button> implements OnReady, OnDestroy {
-    private readonly startBuildingLabel = 'Start building';
-    private readonly stopBuildingLabel = 'Stop building';
+export class BuildingObjectSelectControl implements GuiControl<GUI.Button>, AfterCreated, OnReady, OnDestroy {
+    public readonly startBuildingLabel = 'Start building';
+    public readonly stopBuildingLabel = 'Stop building';
+    public control = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
 
     private isCurrentBuilding: boolean;
     private startBuildingSubscription: Subscription;
 
     constructor(private buildingObjectState: BuildingObjectState) {
-        super();
     }
 
-    public onCreate(): void {
-        this.control = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
+    public gameAfterCreated(): void {
         this.control.width = '100%';
         this.control.height = '30px';
         this.control.color = 'red';

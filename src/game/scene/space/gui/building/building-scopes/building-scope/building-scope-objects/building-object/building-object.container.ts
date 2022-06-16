@@ -1,3 +1,4 @@
+import {AfterCreated} from '../../../../../../../../../engine/lifecycle/after-created/after-created';
 import {BuildingObjectArtControl} from './building-object-art/building-object-art.control';
 import {BuildingObjectNameContainer} from './building-object-name/building-object-name.container';
 import {BuildingObjectProductionContainer} from './building-object-production/building-object-production.container';
@@ -5,11 +6,11 @@ import {BuildingObjectSelectControl} from './building-object-select/building-obj
 import {
     BuildingObjectState
 } from '../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Container} from '../../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 
 @GuiElement()
-export class BuildingObjectContainer extends Container {
+export class BuildingObjectContainer extends GuiContainer implements AfterCreated {
     public buildingObjectNameContainer: BuildingObjectNameContainer;
     public buildingObjectProductionContainer: BuildingObjectProductionContainer;
     public buildingObjectArtControl: BuildingObjectArtControl;
@@ -19,8 +20,7 @@ export class BuildingObjectContainer extends Container {
         super('object');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '200px';
         this.control.height = '100%';
         this.control.background = 'rgba(255, 0, 0, 0.3)';

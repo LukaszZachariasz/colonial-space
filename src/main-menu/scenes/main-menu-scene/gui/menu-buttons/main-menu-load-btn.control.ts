@@ -1,19 +1,17 @@
 import * as GUI from 'babylonjs-gui';
-import {AbstractMenuBtn} from './abstract-menu-btn';
+import {Subject} from 'rxjs';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 
 @GuiElement()
-export class MainMenuOptionsBtn extends AbstractMenuBtn {
-    private readonly BTN_NAME = 'MainMenuOptionsBtn';
+export class MainMenuLoadBtnControl implements GuiControl<GUI.Button>, AfterCreated {
+    public control = GUI.Button.CreateImageOnlyButton('MainMenuLoadBtnControl', 'resources/gui/main-menu/buttons/mm-load-btn-idle.svg');
+    public onClick$ = new Subject<void>();
 
-    constructor() {
-        super();
-    }
-
-    public onCreate(): void {
-        this.control = GUI.Button.CreateImageOnlyButton(this.BTN_NAME, 'resources/gui/main-menu/buttons/mm-options-btn-idle.svg');
+    public gameAfterCreated(): void {
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.control.paddingLeftInPixels = 20;
@@ -21,7 +19,7 @@ export class MainMenuOptionsBtn extends AbstractMenuBtn {
         this.control.heightInPixels = 60;
         this.control.widthInPixels = 500;
         this.control.leftInPixels = 40;
-        this.control.topInPixels = -130;
+        this.control.topInPixels = -210;
     }
 
     @ControlEventListener(ControlEvent.ON_POINTER_CLICK)
@@ -31,11 +29,11 @@ export class MainMenuOptionsBtn extends AbstractMenuBtn {
 
     @ControlEventListener(ControlEvent.ON_POINTER_ENTER)
     public onPointerEnter(): void {
-        this.control.image.source = 'resources/gui/main-menu/buttons/mm-options-btn-hover.svg';
+        this.control.image.source = 'resources/gui/main-menu/buttons/mm-load-btn-hover.svg';
     }
 
     @ControlEventListener(ControlEvent.ON_POINTER_OUT)
     public onPointerOut(): void {
-        this.control.image.source = 'resources/gui/main-menu/buttons/mm-options-btn-idle.svg';
+        this.control.image.source = 'resources/gui/main-menu/buttons/mm-load-btn-idle.svg';
     }
 }

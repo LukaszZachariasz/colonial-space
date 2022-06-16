@@ -1,17 +1,18 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {TextOptions} from './text-options';
 
 @GuiElement()
-export class TextControl extends Control<GUI.TextBlock> {
+export class TextControl implements GuiControl<GUI.TextBlock>, AfterCreated {
+    public control = new GUI.TextBlock(this.text, this.text);
+
     constructor(public text: string,
                 public options?: TextOptions) {
-        super();
     }
 
-    public onCreate(): void {
-        this.control = new GUI.TextBlock(this.text, this.text);
+    public gameAfterCreated(): void {
         this.control.resizeToFit = true;
         this.control.fontFamily = 'JuiceRegular';
         this.control.fontSize = '12px';

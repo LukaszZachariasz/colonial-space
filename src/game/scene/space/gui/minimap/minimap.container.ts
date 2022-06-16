@@ -1,14 +1,15 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {FromAboveCamera} from '../../camera/from-above-camera';
+import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.control';
 import {sceneManager} from 'engine';
 
 @GuiElement()
-export class MinimapContainer extends Container {
+export class MinimapContainer extends GuiContainer implements AfterCreated {
     public minimapIndicatorControl: MinimapIndicatorControl;
 
     private isActiveMoving = false;
@@ -19,8 +20,7 @@ export class MinimapContainer extends Container {
         super('minimap');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = this.width + '%';
         this.control.height = (this.width / this.camera.getProportion()) + '%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;

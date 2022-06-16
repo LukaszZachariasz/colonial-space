@@ -1,11 +1,12 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
+import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {ToolbarBackgroundContainer} from './toolbar-background/toolbar-background.container';
 import {ToolbarTitleControl} from './toolbar-title/toolbar-title.control';
 
 @GuiElement()
-export class ToolbarContainer extends Container {
+export class ToolbarContainer extends GuiContainer implements AfterCreated {
     public toolbarBackground: ToolbarBackgroundContainer;
     public toolbarTitle: ToolbarTitleControl;
 
@@ -13,8 +14,7 @@ export class ToolbarContainer extends Container {
         super('toolbar');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.height = '130px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
 

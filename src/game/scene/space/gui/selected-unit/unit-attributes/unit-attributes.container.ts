@@ -1,12 +1,13 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
+import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {MovementAttributeContainer} from './movement-attribute/movement-attribute.container';
 import {ScoutRangeAttributeContainer} from './scout-range-attribute/scout-range-attribute.container';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
 @GuiElement()
-export class UnitAttributesContainer extends Container {
+export class UnitAttributesContainer extends GuiContainer implements AfterCreated {
     public scoutRangeAttributeControl: ScoutRangeAttributeContainer;
     public movementAttributeControl: MovementAttributeContainer;
 
@@ -14,8 +15,7 @@ export class UnitAttributesContainer extends Container {
         super('attributes');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.left = '10px';
         this.control.top = '-10px';
         this.control.height = '50px';

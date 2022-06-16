@@ -1,17 +1,18 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
 import {BuildingObjectContainer} from './building-object/building-object.container';
 import {
     BuildingObjectState
 } from '../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingScopeState} from '../../../../../../../logic/store/building/building-scope/building-scope.state';
-import {Container} from '../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {ScrollViewerGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/scroll-viewer/scroll-viewer-gui';
-import {StackPanel} from '../../../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
-import {StackPanelGui} from '../../../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel-gui';
+import {ScrollViewerGui} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/scroll-viewer/scroll-viewer-gui';
+import {StackPanel} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel';
+import {StackPanelGui} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel-gui';
 
 @GuiElement()
-export class BuildingScopeObjectsContainer extends Container {
+export class BuildingScopeObjectsContainer extends GuiContainer implements AfterCreated {
     public buildingObjectContainers: BuildingObjectContainer[] = [];
 
     private scrollViewer: ScrollViewerGui;
@@ -21,8 +22,7 @@ export class BuildingScopeObjectsContainer extends Container {
         super('sectorObjects');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.width = '95%';
         this.control.height = '100%';

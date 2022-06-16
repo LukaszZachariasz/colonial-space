@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {AttributeContainer} from '../../../shared/attribute/attribute.container';
-import {Container} from '../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GameIcon} from '../../../shared/icon/game-icon';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../shared/icon/icon.control';
@@ -13,7 +14,7 @@ import {logic} from '../../../../../../game';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class MovementAttributeContainer extends Container implements OnReady, OnDestroy {
+export class MovementAttributeContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
     public attributeControl: AttributeContainer;
     public textControl: TextControl;
 
@@ -23,8 +24,7 @@ export class MovementAttributeContainer extends Container implements OnReady, On
         super('movementAttribute');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.left = '70px';
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;

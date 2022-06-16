@@ -1,3 +1,4 @@
+// TODO: convert to lifecycles
 export abstract class Gui {
     /**
      * This hook is mandatory. Here you should initialize gui.

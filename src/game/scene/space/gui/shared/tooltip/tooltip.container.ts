@@ -1,18 +1,18 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../../engine/gui-manager/gui-elements/elements/container/container';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
+import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 
 // TODO: improve that class (look at implementations of tooltip)
 @GuiElement()
-export class TooltipContainer extends Container implements OnDestroy {
-    constructor(private tooltipContent: Control<GUI.Control>) {
+export class TooltipContainer extends GuiContainer implements AfterCreated, OnDestroy {
+    constructor(private tooltipContent: GuiControl<GUI.Control>) {
         super('tooltipContainer');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.background = 'rgba(0, 0, 0, 0.3)';
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;

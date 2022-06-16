@@ -1,4 +1,5 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -6,13 +7,13 @@ import {PlanetAnalysisContainer} from './planet-analysis/planet-analysis.contain
 import {PlanetAttributesContainer} from './planet-attributes/planet-attributes.container';
 import {PlanetBuildingContainer} from './planet-building/planet-building.container';
 import {PlanetState} from '../../../../../logic/store/territory/planet/planet.state';
-import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/elements/stack-panel/stack-panel';
+import {StackPanel} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/stack-panel/stack-panel';
 import {Subscription, filter, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 import {logic} from '../../../../../game';
 
 @GuiElement()
-export class TerritoryPlanetStackPanel extends StackPanel implements OnReady, OnDestroy {
+export class TerritoryPlanetStackPanel extends StackPanel implements AfterCreated, OnReady, OnDestroy {
     public planetAttributesContainer: PlanetAttributesContainer;
     public planetAnalysisContainer: PlanetAnalysisContainer;
     public planetBuildingContainer: PlanetBuildingContainer;
@@ -23,8 +24,7 @@ export class TerritoryPlanetStackPanel extends StackPanel implements OnReady, On
         super('planetStackPanel');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '100%';
         this.control.height = '65%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;

@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {Container} from '../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
+import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {UnitArtControl} from './unit-art/unit-art.control';
 import {UnitAttributesContainer} from './unit-attributes/unit-attributes.container';
@@ -9,7 +10,7 @@ import {logic} from '../../../../game';
 import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class SelectedUnitContainer extends Container {
+export class SelectedUnitContainer extends GuiContainer implements AfterCreated {
     public backgroundImage: GUI.Image;
     public unitArtControl: UnitArtControl;
     public unitTitleContainer: UnitTitleContainer;
@@ -20,8 +21,7 @@ export class SelectedUnitContainer extends Container {
         super('selectedUnitContainer');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.control.width = '25%';
         this.control.height = '40%';
         this.control.left = '30px';

@@ -1,18 +1,19 @@
 import * as GUI from 'babylonjs-gui';
-import {Control} from '../../../../../../engine/gui-manager/gui-elements/elements/control';
+import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
 import {ControlEvent} from '../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 
 @GuiElement()
-export class ButtonControl extends Control<GUI.Button> {
+export class ButtonControl implements GuiControl<GUI.Button>, AfterCreated {
+    public control = GUI.Button.CreateSimpleButton(this.text, this.text);
+    
     constructor(private text: string,
                 private onClick: (eventData?: GUI.Vector2WithInfo, eventState?: BABYLON.EventState) => void) {
-        super();
     }
 
-    public onCreate(): void {
-        this.control = GUI.Button.CreateSimpleButton(this.text, this.text);
+    public gameAfterCreated(): void {
         this.control.width = '100px';
         this.control.height = '50px';
         this.control.background = 'rgba(0, 0, 0, 0.3)';

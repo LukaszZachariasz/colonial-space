@@ -1,8 +1,9 @@
 import * as GUI from 'babylonjs-gui';
+import {AfterCreated} from '../../../../../../../../../../engine/lifecycle/after-created/after-created';
 import {
     BuildingObjectState
 } from '../../../../../../../../../logic/store/building/building-scope/building-object/building-object.state';
-import {Container} from '../../../../../../../../../../engine/gui-manager/gui-elements/elements/container/container';
+import {GuiContainer} from '../../../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiElement} from '../../../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -12,7 +13,7 @@ import {logic} from '../../../../../../../../../game';
 import {selectBuildingObjectById} from '../../../../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
-export class BuildingObjectProductionContainer extends Container implements OnReady, OnDestroy {
+export class BuildingObjectProductionContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
     private textControl: TextControl;
 
     private onEndTourSubscription: Subscription;
@@ -21,8 +22,7 @@ export class BuildingObjectProductionContainer extends Container implements OnRe
         super('buildingObjectProduction');
     }
 
-    public onCreate(): void {
-        super.onCreate();
+    public gameAfterCreated(): void {
         this.textControl = new TextControl(this.buildingObjectState.productionLeft.toString());
         this.textControl.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.textControl.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
