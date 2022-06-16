@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
-import {AppendControl} from '../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
+import {AppendGuiControl} from '../../../../../../engine/gui-manager/gui-elements/append-gui-control/append-gui-control';
 import {ControlEvent} from '../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
-import {IconControl} from '../../../gui/shared/icon/icon.control';
+import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 
@@ -14,7 +14,7 @@ export class UnitSignIconContainer implements GuiControl<GUI.Container>, AfterCr
     public control: GUI.Container = new GUI.Container('unitSignIcon');
     public clicked$ = new Subject<void>();
     
-    @AppendControl() public iconControl: IconControl = new IconControl(this.unitState.icon);
+    @AppendGuiControl() public iconControl: IconGuiElement = new IconGuiElement(this.unitState.icon);
 
     constructor(private unitState: UnitState) {
     }

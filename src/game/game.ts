@@ -3,7 +3,7 @@ import {LoadingScene} from '../loading/scenes/loading-scene/loading.scene';
 import {Logic} from './logic/logic';
 import {SpaceScene} from './scene/space/space.scene';
 import {StoreGenerator} from './logic/store-generator/store.generator';
-import {WelcomeStackPanel} from './scene/space/gui/dialogs/welcome/welcome.stack-panel';
+import {WelcomeGuiElement} from './scene/space/gui/dialogs/welcome/welcome.gui-element';
 import {filter, take, tap} from 'rxjs';
 import {game, sceneManager} from 'engine';
 import {gamePlatform} from '../core/game-platform';
@@ -27,7 +27,7 @@ export class Game {
             filter((isLoading: boolean) => isLoading === false),
             take(1),
             tap(() => sceneManager().navigateToScene(SpaceScene.SCENE_NAME)),
-            tap(() => logic().dialogService.open$.next(new WelcomeStackPanel()))
+            tap(() => logic().dialogService.open$.next(new WelcomeGuiElement()))
         ).subscribe();
     }
 }

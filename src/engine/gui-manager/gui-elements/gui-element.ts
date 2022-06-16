@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {APPEND_CONTROL_METADATA_KEY} from './append-control/append-control';
+import {APPEND_CONTROL_METADATA_KEY} from './append-gui-control/append-gui-control';
+import {AppendGuiControlConfig} from './append-gui-control/append-gui-control-config';
 import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listener';
 import {GuiControl} from './gui-control';
 import {isAfterCreated} from '../../lifecycle/after-created/is-after-created';
@@ -35,9 +36,26 @@ function appendControls(instance: any): void {
     metadataKeys = metadataKeys.filter((key: string) => key.includes(APPEND_CONTROL_METADATA_KEY));
     metadataKeys.forEach((key: string) => {
         const metadataValue = Reflect.getMetadata(key, instance);
-        metadataValue.appends.forEach((property: string) => {
-            if (instance[property]) {
-                addControlToContainer(instance, instance[property]);
+        metadataValue.appends.sort((a: AppendGuiControlConfig, b: AppendGuiControlConfig) => {
+            if (a.order === undefined) {
+                return 1;
+            }
+            return a.order > b.order;
+        }).forEach((append: AppendGuiControlConfig & {
+            property: string
+        }) => {
+            if (instance[append.property]) {
+                let target = instance;
+                if (append.parent) {
+                    target = (instance as any)[append.parent];
+                }
+                if (Array.isArray(instance[append.property])) {
+                    instance[append.property].forEach((el: any) => {
+                        addControlToContainer(target, el);
+                    });
+                } else {
+                    addControlToContainer(target, instance[append.property]);
+                }
             }
         });
     });
@@ -54,10 +72,18 @@ function registerControlEventListeners(instance: any): void {
     });
 }
 
-function addControlToContainer(container: GuiControl<GUI.Control>, control: GuiControl<GUI.Control> | GUI.Control): void {
-    if (control instanceof GUI.Control) {
-        (container.control as any).addControl(control);
+function addControlToContainer(container: GuiControl<GUI.Control> | GUI.Control, control: GuiControl<GUI.Control> | GUI.Control): void {
+    if (container instanceof GUI.Control) {
+        if (control instanceof GUI.Control) {
+            (container as any).addControl(control);
+        } else {
+            (container as any).addControl(control.control);
+        }
     } else {
-        (container.control as any).addControl(control.control);
+        if (control instanceof GUI.Control) {
+            (container.control as any).addControl(control);
+        } else {
+            (container.control as any).addControl(control.control);
+        }
     }
 }

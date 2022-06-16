@@ -1,17 +1,17 @@
 import * as BABYLON from 'babylonjs';
-import {IconControl} from '../../../gui/shared/icon/icon.control';
+import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
 import {SimpleModel} from '../../../../../../engine/model-manager/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
 import {TerritorySignTitleContainer} from './territory-sign-title.container';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
-import {TextControl} from '../../../gui/shared/text/text.control';
+import {TextGuiElement} from '../../../gui/shared/text/text.gui-element';
 import {guiManager} from 'engine';
 
 export class TerritorySignModel extends SimpleModel<BABYLON.Mesh> {
     public territorySignTitleContainer: TerritorySignTitleContainer;
 
-    public icon: IconControl;
-    public text: TextControl;
+    public icon: IconGuiElement;
+    public text: TextGuiElement;
 
     public clicked$ = new Subject<void>();
 
