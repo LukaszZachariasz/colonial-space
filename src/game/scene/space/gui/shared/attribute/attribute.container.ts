@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {ControlEvent} from '../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
-import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../icon/icon.control';
@@ -12,18 +12,20 @@ import {TooltipContainer} from '../tooltip/tooltip.container';
 import {guiManager} from 'engine';
 
 @GuiElement()
-export class AttributeContainer extends GuiContainer implements AfterCreated, OnDestroy {
+export class AttributeContainer implements GuiControl<GUI.Container>, AfterCreated, OnDestroy {
+    public control = new GUI.Container('attribute');
+
+    @AppendControl() public iconControl: IconControl;
     public tooltipContainer: TooltipContainer;
 
-    constructor(public iconControl: IconControl,
+    constructor(iconControl: IconControl,
                 public tooltipContent: GuiControl<GUI.Control>) {
-        super('attribute');
+        this.iconControl = iconControl;
     }
 
     public gameAfterCreated(): void {
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;
-        this.addControlToContainer(this.iconControl);
     }
 
     @ControlEventListener(ControlEvent.ON_POINTER_ENTER)

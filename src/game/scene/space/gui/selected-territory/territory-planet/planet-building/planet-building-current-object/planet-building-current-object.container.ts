@@ -1,6 +1,7 @@
-import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
+import * as GUI from 'babylonjs-gui';
+import {AppendControl} from '../../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiContainer} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -13,19 +14,15 @@ import {
 } from '../../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
-export class PlanetBuildingCurrentObjectContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
-    public textControl: TextControl;
+export class PlanetBuildingCurrentObjectContainer implements GuiControl<GUI.Container>, OnReady, OnDestroy {
+    public control: GUI.Container = new GUI.Container('currentObjectContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
+
+    @AppendControl() public textControl: TextControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
 
     private currentBuildingObjectChangedSubscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super('currentObjectContainer');
-    }
-
-    public gameAfterCreated(): void {
-        this.textControl = new TextControl('Current: ' + this.buildingState.currentBuildingObjectId);
-        this.addControlToContainer(this.textControl);
     }
 
     public gameOnReady(): void {

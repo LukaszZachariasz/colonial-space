@@ -1,18 +1,20 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
-import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {AppendControl} from '../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../shared/icon/icon.control';
 import {TerritoryNameContainer} from './territory-name/territory-name.container';
 import {TerritoryState} from '../../../../../logic/store/territory/territory.state';
 
 @GuiElement()
-export class TerritoryTitleContainer extends GuiContainer implements AfterCreated {
-    public iconControl: IconControl;
-    public territoryNameControl: TerritoryNameContainer;
+export class TerritoryTitleContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('title');
+    
+    @AppendControl() public iconControl: IconControl = new IconControl(this.territoryState.icon);
+    @AppendControl() public territoryNameControl: TerritoryNameContainer = new TerritoryNameContainer(this.territoryState);
 
     constructor(private territoryState: TerritoryState) {
-        super('title');
     }
 
     public gameAfterCreated(): void {
@@ -21,11 +23,5 @@ export class TerritoryTitleContainer extends GuiContainer implements AfterCreate
         this.control.left = '10px';
         this.control.top = '10px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-
-        this.iconControl = new IconControl(this.territoryState.icon);
-        this.addControlToContainer(this.iconControl);
-
-        this.territoryNameControl = new TerritoryNameContainer(this.territoryState);
-        this.addControlToContainer(this.territoryNameControl);
     }
 }

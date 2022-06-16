@@ -1,8 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {AttributeContainer} from '../../../../shared/attribute/attribute.container';
-import {GuiContainer} from '../../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GameIcon} from '../../../../shared/icon/game-icon';
+import {GuiControl} from '../../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../../shared/icon/icon.control';
 import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
@@ -15,22 +16,20 @@ import {logic} from '../../../../../../../game';
 import {selectTerritoryById} from '../../../../../../../logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class WaterAttributeContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
-    public attributeControl: AttributeContainer;
+export class WaterAttributeContainer implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
+    public control: GUI.Container = new GUI.Container('waterAttribute');
+
+    @AppendControl() public attributeControl: AttributeContainer = new AttributeContainer(new IconControl(GameIcon.WATER_DROP), new TextControl(this.generateTooltipContent()));
 
     private refreshAfterTourEndSubscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super('waterAttribute');
     }
 
     public gameAfterCreated(): void {
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-
-        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.WATER_DROP), new TextControl(this.generateTooltipContent()));
-        this.addControlToContainer(this.attributeControl);
     }
 
     public gameOnReady(): void {

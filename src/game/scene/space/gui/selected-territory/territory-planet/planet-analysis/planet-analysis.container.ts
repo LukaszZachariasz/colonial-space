@@ -1,7 +1,9 @@
+import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
+import {AppendControl} from '../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {ButtonControl} from '../../../shared/button/button.control';
-import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
@@ -14,15 +16,22 @@ import {logic} from '../../../../../../game';
 import {selectUnitByTerritoryId} from '../../../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class PlanetAnalysisContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
-    public startAnalysisButton: ButtonControl;
-    public stopAnalysisButton: ButtonControl;
+export class PlanetAnalysisContainer implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
+    public control: GUI.Container = new GUI.Container('analysis');
+
+    @AppendControl() public startAnalysisButton: ButtonControl = new ButtonControl('Start analysis', () => {
+        logic().analysisService.startAnalysis(this.analysisShip);
+        this.setAnalysisStatus();
+    });
+    @AppendControl() public stopAnalysisButton: ButtonControl = new ButtonControl('Stop analysis', () => {
+        logic().analysisService.stopAnalysis(this.analysisShip);
+        this.setAnalysisStatus();
+    });
 
     private analysisShip: UnitState<AnalysisShipState>;
     private subscription: Subscription;
 
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super('analysis');
     }
 
     public gameAfterCreated(): void {
@@ -30,19 +39,8 @@ export class PlanetAnalysisContainer extends GuiContainer implements AfterCreate
         this.control.width = '100%';
         this.control.paddingTop = '20px';
 
-        this.startAnalysisButton = new ButtonControl('Start analysis', () => {
-            logic().analysisService.startAnalysis(this.analysisShip);
-            this.setAnalysisStatus();
-        });
         this.startAnalysisButton.control.isVisible = false;
-        this.addControlToContainer(this.startAnalysisButton);
-
-        this.stopAnalysisButton = new ButtonControl('Stop analysis', () => {
-            logic().analysisService.stopAnalysis(this.analysisShip);
-            this.setAnalysisStatus();
-        });
         this.stopAnalysisButton.control.isVisible = false;
-        this.addControlToContainer(this.stopAnalysisButton);
     }
 
     public gameOnReady(): void {

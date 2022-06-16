@@ -1,10 +1,12 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
-import {GuiContainer} from '../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-element';
 
 @GuiElement()
-export class ToolbarBackgroundContainer extends GuiContainer implements AfterCreated {
+export class ToolbarBackgroundContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('toolbarBackgroundContainer');
+    
     public gameAfterCreated(): void {
         this.control.width = '90%';
         this.control.height = '50px';

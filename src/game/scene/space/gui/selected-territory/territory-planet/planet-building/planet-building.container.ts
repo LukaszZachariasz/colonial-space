@@ -1,7 +1,9 @@
+import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {ControlEvent} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
-import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {
     PlanetBuildingCurrentObjectContainer
@@ -13,13 +15,14 @@ import {logic} from '../../../../../../game';
 import {selectBuildingById} from '../../../../../../logic/store/building/building.selector';
 
 @GuiElement()
-export class PlanetBuildingContainer extends GuiContainer implements AfterCreated {
-    public planetTotalProductionControl: PlanetTotalProductionContainer;
-    public planetBuildingCurrentObjectContainer: PlanetBuildingCurrentObjectContainer;
+export class PlanetBuildingContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('buildingContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
+    @AppendControl() public planetTotalProductionControl: PlanetTotalProductionContainer = new PlanetTotalProductionContainer(this.planetState);
+    @AppendControl() public planetBuildingCurrentObjectContainer: PlanetBuildingCurrentObjectContainer = new PlanetBuildingCurrentObjectContainer(this.planetState);
+
     constructor(private planetState: TerritoryState<PlanetState>) {
-        super('buildingContainer');
     }
 
     public gameAfterCreated(): void {
@@ -27,12 +30,6 @@ export class PlanetBuildingContainer extends GuiContainer implements AfterCreate
         this.control.width = '100%';
         this.control.paddingTop = '20px';
         this.control.background = 'rgba(0, 0, 0, 0.6)';
-
-        this.planetTotalProductionControl = new PlanetTotalProductionContainer(this.planetState);
-        this.addControlToContainer(this.planetTotalProductionControl);
-
-        this.planetBuildingCurrentObjectContainer = new PlanetBuildingCurrentObjectContainer(this.planetState);
-        this.addControlToContainer(this.planetBuildingCurrentObjectContainer);
     }
 
     @ControlEventListener(ControlEvent.ON_POINTER_DOWN)

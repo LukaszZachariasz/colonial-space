@@ -1,24 +1,23 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {ControlEvent} from '../../../../../engine/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../../engine/gui-manager/gui-elements/events/control-event-listener';
 import {FromAboveCamera} from '../../camera/from-above-camera';
-import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {MinimapIndicatorControl} from './minimap-indicator/minimap-indicator.control';
 import {sceneManager} from 'engine';
 
 @GuiElement()
-export class MinimapContainer extends GuiContainer implements AfterCreated {
-    public minimapIndicatorControl: MinimapIndicatorControl;
+export class MinimapContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('minimap');
+    
+    @AppendControl() public minimapIndicatorControl: MinimapIndicatorControl = new MinimapIndicatorControl();
 
     private isActiveMoving = false;
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
     private width = 20;
-
-    constructor() {
-        super('minimap');
-    }
 
     public gameAfterCreated(): void {
         this.control.width = this.width + '%';
@@ -28,9 +27,6 @@ export class MinimapContainer extends GuiContainer implements AfterCreated {
         this.control.background = 'black';
         this.control.alpha = 0.4;
         this.control.isPointerBlocker = true;
-
-        this.minimapIndicatorControl = new MinimapIndicatorControl();
-        this.addControlToContainer(this.minimapIndicatorControl);
     }
 
     @ControlEventListener(ControlEvent.ON_POINTER_DOWN)

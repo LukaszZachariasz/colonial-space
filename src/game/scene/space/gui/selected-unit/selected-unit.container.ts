@@ -1,6 +1,7 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
-import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {AppendControl} from '../../../../../engine/gui-manager/gui-elements/append-control/append-control';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {UnitArtControl} from './unit-art/unit-art.control';
 import {UnitAttributesContainer} from './unit-attributes/unit-attributes.container';
@@ -10,16 +11,15 @@ import {logic} from '../../../../game';
 import {selectUnitById} from '../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class SelectedUnitContainer extends GuiContainer implements AfterCreated {
-    public backgroundImage: GUI.Image;
-    public unitArtControl: UnitArtControl;
-    public unitTitleContainer: UnitTitleContainer;
-    public unitAttributesContainer: UnitAttributesContainer;
+export class SelectedUnitContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('selectedUnitContainer');
+    
     public unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
-    constructor() {
-        super('selectedUnitContainer');
-    }
+    @AppendControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
+    @AppendControl() public unitArtControl: UnitArtControl = new UnitArtControl(this.unitState);
+    @AppendControl() public unitTitleContainer: UnitTitleContainer = new UnitTitleContainer(this.unitState);
+    @AppendControl() public unitAttributesContainer: UnitAttributesContainer = new UnitAttributesContainer(this.unitState);
 
     public gameAfterCreated(): void {
         this.control.width = '25%';
@@ -30,18 +30,7 @@ export class SelectedUnitContainer extends GuiContainer implements AfterCreated 
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.isPointerBlocker = true;
 
-        this.backgroundImage = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
         this.backgroundImage.width = '100%';
         this.backgroundImage.height = '100%';
-        this.addControlToContainer(this.backgroundImage);
-
-        this.unitArtControl = new UnitArtControl(this.unitState);
-        this.addControlToContainer(this.unitArtControl);
-
-        this.unitTitleContainer = new UnitTitleContainer(this.unitState);
-        this.addControlToContainer(this.unitTitleContainer);
-
-        this.unitAttributesContainer = new UnitAttributesContainer(this.unitState);
-        this.addControlToContainer(this.unitAttributesContainer);
     }
 }

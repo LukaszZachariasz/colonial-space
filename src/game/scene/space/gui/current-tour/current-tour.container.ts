@@ -1,18 +1,17 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {CurrentTourControl} from './current-tour/current-tour.control';
-import {GuiContainer} from '../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
+import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {NextTourControl} from './next-tour/next-tour.control';
 
 @GuiElement()
-export class CurrentTourContainer extends GuiContainer implements AfterCreated {
-    public nextTourControl: NextTourControl;
-    public currentTourControl: CurrentTourControl;
-
-    constructor() {
-        super('currentTourBar');
-    }
+export class CurrentTourContainer implements GuiControl<GUI.Container>, AfterCreated {
+    public control: GUI.Container = new GUI.Container('currentTourBar');
+    
+    @AppendControl() public nextTourControl: NextTourControl = new NextTourControl();
+    @AppendControl() public currentTourControl: CurrentTourControl = new CurrentTourControl();
 
     public gameAfterCreated(): void {
         this.control.width = '200px';
@@ -20,11 +19,5 @@ export class CurrentTourContainer extends GuiContainer implements AfterCreated {
         this.control.top = '-60px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-
-        this.nextTourControl = new NextTourControl();
-        this.addControlToContainer(this.nextTourControl);
-
-        this.currentTourControl = new CurrentTourControl();
-        this.addControlToContainer(this.currentTourControl);
     }
 }

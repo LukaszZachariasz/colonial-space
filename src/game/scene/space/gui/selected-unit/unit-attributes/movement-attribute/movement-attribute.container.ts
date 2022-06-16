@@ -1,8 +1,9 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
+import {AppendControl} from '../../../../../../../engine/gui-manager/gui-elements/append-control/append-control';
 import {AttributeContainer} from '../../../shared/attribute/attribute.container';
-import {GuiContainer} from '../../../../../../../engine/gui-manager/gui-elements/advanced-controls/gui-container/gui-container';
 import {GameIcon} from '../../../shared/icon/game-icon';
+import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {IconControl} from '../../../shared/icon/icon.control';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
@@ -14,14 +15,15 @@ import {logic} from '../../../../../../game';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class MovementAttributeContainer extends GuiContainer implements AfterCreated, OnReady, OnDestroy {
-    public attributeControl: AttributeContainer;
-    public textControl: TextControl;
+export class MovementAttributeContainer implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
+    public control: GUI.Container = new GUI.Container('movementAttribute');
+    
+    public textControl: TextControl = new TextControl(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
+    @AppendControl() public attributeControl: AttributeContainer = new AttributeContainer(new IconControl(GameIcon.MOVE), this.textControl);
 
     private refreshUnitPointsSubscription: Subscription;
 
     constructor(private unitState: UnitState) {
-        super('movementAttribute');
     }
 
     public gameAfterCreated(): void {
@@ -29,11 +31,6 @@ export class MovementAttributeContainer extends GuiContainer implements AfterCre
         this.control.adaptHeightToChildren = true;
         this.control.adaptWidthToChildren = true;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-
-        this.textControl = new TextControl(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
-
-        this.attributeControl = new AttributeContainer(new IconControl(GameIcon.MOVE), this.textControl);
-        this.addControlToContainer(this.attributeControl);
     }
 
     public gameOnReady(): void {
