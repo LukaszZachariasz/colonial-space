@@ -14,12 +14,11 @@ export class BuildingGuiElement implements GuiControl<GUI.Container>, AfterCreat
     public control: GUI.Container = new GUI.Container('buildingContainer');
     public buildingState: BuildingState = selectBuildingById(logic().selectedBuildingService.selectedBuildingId$.value);
 
-    @AppendGuiControl() public buildingHeaderGuiElement: BuildingHeaderGuiElement = new BuildingHeaderGuiElement(this.buildingState);
+    @AppendGuiControl() public buildingHeader: BuildingHeaderGuiElement = new BuildingHeaderGuiElement(this.buildingState);
     @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('sectorsScrollViewer');
     @AppendGuiControl({
         parent: 'scrollViewer'
-    })
-    public buildingScopesGuiElement: BuildingScopesGuiElement = new BuildingScopesGuiElement(this.buildingState);
+    }) public buildingScopes: BuildingScopesGuiElement = new BuildingScopesGuiElement(this.buildingState);
 
     constructor() {
     }

@@ -18,7 +18,7 @@ export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Con
     public control: GUI.Container = new GUI.Container('currentObjectContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
-    @AppendGuiControl() public textControl: TextGuiElement = new TextGuiElement('Current: ' + this.buildingState.currentBuildingObjectId);
+    @AppendGuiControl() public text: TextGuiElement = new TextGuiElement('Current: ' + this.buildingState.currentBuildingObjectId);
 
     private currentBuildingObjectChangedSubscription: Subscription;
 
@@ -32,7 +32,7 @@ export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Con
             logic().tourService.completeTour$
         ).pipe(
             tap(() => this.buildingState = selectBuildingById(this.planetState.data.buildingId)),
-            tap(() => this.textControl.control.text = 'Current: ' + this.buildingState.currentBuildingObjectId)
+            tap(() => this.text.control.text = 'Current: ' + this.buildingState.currentBuildingObjectId)
         ).subscribe();
     }
 

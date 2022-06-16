@@ -11,8 +11,8 @@ import {UnitState} from '../../../../../logic/store/unit/unit.state';
 export class UnitTitleGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('title');
     
-    @AppendGuiControl() public iconControl: IconGuiElement = new IconGuiElement(this.unitState.icon);
-    @AppendGuiControl() public unitNameContainer: UnitNameGuiElement = new UnitNameGuiElement(this.unitState);
+    @AppendGuiControl() public icon: IconGuiElement = new IconGuiElement(this.unitState.icon);
+    @AppendGuiControl() public unitName: UnitNameGuiElement = new UnitNameGuiElement(this.unitState);
 
     constructor(private unitState: UnitState) {
     }

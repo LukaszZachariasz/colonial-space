@@ -17,9 +17,9 @@ export class SelectedUnitGuiElement implements GuiControl<GUI.Container>, AfterC
     public unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
     @AppendGuiControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
-    @AppendGuiControl() public unitArtGuiElement: UnitArtGuiElement = new UnitArtGuiElement(this.unitState);
-    @AppendGuiControl() public unitTitleGuiElement: UnitTitleGuiElement = new UnitTitleGuiElement(this.unitState);
-    @AppendGuiControl() public unitAttributesGuiElement: UnitAttributesGuiElement = new UnitAttributesGuiElement(this.unitState);
+    @AppendGuiControl() public unitArt: UnitArtGuiElement = new UnitArtGuiElement(this.unitState);
+    @AppendGuiControl() public unitTitle: UnitTitleGuiElement = new UnitTitleGuiElement(this.unitState);
+    @AppendGuiControl() public unitAttributes: UnitAttributesGuiElement = new UnitAttributesGuiElement(this.unitState);
 
     public gameAfterCreated(): void {
         this.control.width = '25%';

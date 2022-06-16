@@ -13,7 +13,7 @@ import {sceneManager} from 'engine';
 export class MinimapGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('minimap');
     
-    @AppendGuiControl() public minimapIndicatorGuiElement: MinimapIndicatorGuiElement = new MinimapIndicatorGuiElement();
+    @AppendGuiControl() public minimapIndicator: MinimapIndicatorGuiElement = new MinimapIndicatorGuiElement();
 
     private isActiveMoving = false;
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
@@ -53,8 +53,8 @@ export class MinimapGuiElement implements GuiControl<GUI.Container>, AfterCreate
         let xPercentage = (relativeX * 100) / eventState.currentTarget._currentMeasure.width;
         let yPercentage = (relativeY * 100) / eventState.currentTarget._currentMeasure.height;
 
-        xPercentage = xPercentage * (100 + this.minimapIndicatorGuiElement.widthInPercentage) / 100;
-        xPercentage -= this.minimapIndicatorGuiElement.widthInPercentage / 2;
+        xPercentage = xPercentage * (100 + this.minimapIndicator.widthInPercentage) / 100;
+        xPercentage -= this.minimapIndicator.widthInPercentage / 2;
         if (xPercentage < 0) {
             xPercentage = 0;
         }
@@ -62,8 +62,8 @@ export class MinimapGuiElement implements GuiControl<GUI.Container>, AfterCreate
             xPercentage = 100;
         }
 
-        yPercentage = yPercentage * (100 + this.minimapIndicatorGuiElement.heightInPercentage) / 100;
-        yPercentage -= this.minimapIndicatorGuiElement.heightInPercentage / 2;
+        yPercentage = yPercentage * (100 + this.minimapIndicator.heightInPercentage) / 100;
+        yPercentage -= this.minimapIndicator.heightInPercentage / 2;
         if (yPercentage < 0) {
             yPercentage = 0;
         }

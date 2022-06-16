@@ -17,9 +17,9 @@ import {logic} from '../../../../../game';
 export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, AfterCreated, OnReady, OnDestroy {
     public control: GUI.StackPanel = new GUI.StackPanel('planetStackPanel');
 
-    @AppendGuiControl() public planetAttributesGuiElement: PlanetAttributesGuiElement = new PlanetAttributesGuiElement(this.planetState);
-    @AppendGuiControl() public planetAnalysisGuiElement: PlanetAnalysisGuiElement;
-    @AppendGuiControl() public planetBuildingGuiElement: PlanetBuildingGuiElement;
+    @AppendGuiControl() public planetAttributes: PlanetAttributesGuiElement = new PlanetAttributesGuiElement(this.planetState);
+    @AppendGuiControl() public planetAnalysis: PlanetAnalysisGuiElement;
+    @AppendGuiControl() public planetBuilding: PlanetBuildingGuiElement;
 
     private planetAnalysedSubscription: Subscription;
 
@@ -32,17 +32,17 @@ export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, Af
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 
         if (!this.planetState.data.isAnalysed) {
-            this.planetAnalysisGuiElement = new PlanetAnalysisGuiElement(this.planetState);
+            this.planetAnalysis = new PlanetAnalysisGuiElement(this.planetState);
         }
         if (this.planetState.data.isColonized) {
-            this.planetBuildingGuiElement = new PlanetBuildingGuiElement(this.planetState);
+            this.planetBuilding = new PlanetBuildingGuiElement(this.planetState);
         }
     }
 
     public gameOnReady(): void {
         this.planetAnalysedSubscription = logic().analysisService.analyzedPlanetCompleted$.pipe(
             filter((id: string) => this.planetState.id === id),
-            tap(() => this.planetAnalysisGuiElement.control.dispose())
+            tap(() => this.planetAnalysis.control.dispose())
         ).subscribe();
     }
 

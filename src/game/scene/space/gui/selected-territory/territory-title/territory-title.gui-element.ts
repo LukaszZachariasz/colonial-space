@@ -11,8 +11,8 @@ import {TerritoryState} from '../../../../../logic/store/territory/territory.sta
 export class TerritoryTitleGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('title');
     
-    @AppendGuiControl() public iconControl: IconGuiElement = new IconGuiElement(this.territoryState.icon);
-    @AppendGuiControl() public territoryNameGuiElement: TerritoryNameGuiElement = new TerritoryNameGuiElement(this.territoryState);
+    @AppendGuiControl() public icon: IconGuiElement = new IconGuiElement(this.territoryState.icon);
+    @AppendGuiControl() public territoryName: TerritoryNameGuiElement = new TerritoryNameGuiElement(this.territoryState);
 
     constructor(private territoryState: TerritoryState) {
     }

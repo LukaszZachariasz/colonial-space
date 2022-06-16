@@ -19,7 +19,10 @@ export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, A
     public control: GUI.Container = new GUI.Container('movementAttribute');
     
     public textControl: TextGuiElement = new TextGuiElement(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
-    @AppendGuiControl() public attributeControl: AttributeGuiElement = new AttributeGuiElement(new IconGuiElement(GameIcon.MOVE), this.textControl);
+    @AppendGuiControl() public attribute: AttributeGuiElement = new AttributeGuiElement(
+        new IconGuiElement(GameIcon.MOVE),
+        this.textControl
+    );
 
     private refreshUnitPointsSubscription: Subscription;
 

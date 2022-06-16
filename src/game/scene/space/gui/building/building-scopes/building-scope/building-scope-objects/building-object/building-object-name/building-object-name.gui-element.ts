@@ -14,14 +14,14 @@ import {TextGuiElement} from '../../../../../../shared/text/text.gui-element';
 export class BuildingObjectNameGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('buildingObjectName');
     
-    @AppendGuiControl() private textControl: TextGuiElement = new TextGuiElement(this.buildingObjectState.name.toString());
+    @AppendGuiControl() private text: TextGuiElement = new TextGuiElement(this.buildingObjectState.name.toString());
 
     constructor(private buildingObjectState: BuildingObjectState) {
     }
 
     public gameAfterCreated(): void {
-        this.textControl.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.textControl.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.textControl.control.left = '5%';
+        this.text.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.text.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.text.control.left = '5%';
     }
 }

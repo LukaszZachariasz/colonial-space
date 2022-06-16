@@ -16,7 +16,7 @@ export class AttributeGuiElement implements GuiControl<GUI.Container>, AfterCrea
     public control = new GUI.Container('attribute');
 
     @AppendGuiControl() public iconControl: IconGuiElement;
-    public tooltipContainer: TooltipGuiElement;
+    public tooltip: TooltipGuiElement;
 
     constructor(iconControl: IconGuiElement,
                 public tooltipContent: GuiControl<GUI.Control>) {
@@ -30,27 +30,27 @@ export class AttributeGuiElement implements GuiControl<GUI.Container>, AfterCrea
 
     @ControlEventListener(ControlEvent.ON_POINTER_ENTER)
     public showTooltip(control: any, eventState: BABYLON.EventState): void {
-        this.tooltipContainer = new TooltipGuiElement(this.tooltipContent);
-        this.tooltipContainer.control.left = eventState.userInfo.localPosition.x + 10 + 'px';
-        this.tooltipContainer.control.top = eventState.userInfo.localPosition.y + 'px';
-        guiManager().appendToRoot(this.tooltipContainer);
+        this.tooltip = new TooltipGuiElement(this.tooltipContent);
+        this.tooltip.control.left = eventState.userInfo.localPosition.x + 10 + 'px';
+        this.tooltip.control.top = eventState.userInfo.localPosition.y + 'px';
+        guiManager().appendToRoot(this.tooltip);
     }
     
     @ControlEventListener(ControlEvent.ON_POINTER_MOVE)
     public setTooltipPosition(position: BABYLON.Vector2): void {
-        if (!this.tooltipContainer) {
+        if (!this.tooltip) {
             return;
         }
-        this.tooltipContainer.control.left = position.x + 10 + 'px';
-        this.tooltipContainer.control.top = position.y + 'px';
+        this.tooltip.control.left = position.x + 10 + 'px';
+        this.tooltip.control.top = position.y + 'px';
     }
     
     @ControlEventListener(ControlEvent.ON_POINTER_OUT)
     public removeTooltip(): void {
-        this.tooltipContainer.control.dispose();
+        this.tooltip.control.dispose();
     }
 
     public gameOnDestroy(): void {
-        this.tooltipContainer?.control.dispose();
+        this.tooltip?.control.dispose();
     }
 }

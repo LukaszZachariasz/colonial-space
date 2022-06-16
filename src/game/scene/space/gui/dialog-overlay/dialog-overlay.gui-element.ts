@@ -9,7 +9,7 @@ import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-ele
 export class DialogOverlayGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('dialogOverlay');
 
-    @AppendGuiControl() public dialogGuiElement: DialogGuiElement = new DialogGuiElement(this.body);
+    @AppendGuiControl() public dialog: DialogGuiElement = new DialogGuiElement(this.body);
 
     constructor(private body: GuiControl<GUI.Control>) {
     }

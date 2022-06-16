@@ -19,7 +19,10 @@ import {selectTerritoryById} from '../../../../../../../logic/store/territory/te
 export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
     public control: GUI.Container = new GUI.Container('waterAttribute');
 
-    @AppendGuiControl() public attributeControl: AttributeGuiElement = new AttributeGuiElement(new IconGuiElement(GameIcon.WATER_DROP), new TextGuiElement(this.generateTooltipContent()));
+    @AppendGuiControl() public attribute: AttributeGuiElement = new AttributeGuiElement(
+        new IconGuiElement(GameIcon.WATER_DROP),
+        new TextGuiElement(this.generateTooltipContent())
+    );
 
     private refreshAfterTourEndSubscription: Subscription;
 
@@ -35,7 +38,7 @@ export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, Afte
     public gameOnReady(): void {
         this.refreshAfterTourEndSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
-            tap(() => (this.attributeControl.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())
+            tap(() => (this.attribute.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())
         ).subscribe();
     }
 

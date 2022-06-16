@@ -19,7 +19,7 @@ import {selectBuildingObjectById} from '../../../../../../../../../logic/store/b
 export class BuildingObjectProductionGuiElement implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
     public control = new GUI.Container('buildingObjectProduction');
 
-    @AppendGuiControl() private textControl: TextGuiElement = new TextGuiElement(this.buildingObjectState.productionLeft.toString());
+    @AppendGuiControl() private text: TextGuiElement = new TextGuiElement(this.buildingObjectState.productionLeft.toString());
 
     private onEndTourSubscription: Subscription;
 
@@ -27,15 +27,15 @@ export class BuildingObjectProductionGuiElement implements GuiControl<GUI.Contai
     }
 
     public gameAfterCreated(): void {
-        this.textControl.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.textControl.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.textControl.control.left = '-5%';
+        this.text.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.text.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.text.control.left = '-5%';
     }
 
     public gameOnReady(): void {
         this.onEndTourSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
-            tap(() => this.textControl.control.text = this.buildingObjectState.productionLeft.toString())
+            tap(() => this.text.control.text = this.buildingObjectState.productionLeft.toString())
         ).subscribe();
     }
 

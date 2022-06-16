@@ -17,9 +17,9 @@ export class SelectedTerritoryGuiElement implements GuiControl<GUI.StackPanel>, 
     public territoryState: TerritoryState = selectTerritoryById(logic().selectedTerritoryService.selectedTerritoryId$.value);
 
     @AppendGuiControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
-    @AppendGuiControl() public territoryTitleGuiElement: TerritoryTitleGuiElement = new TerritoryTitleGuiElement(this.territoryState);
-    @AppendGuiControl() public territoryArtGuiElement: TerritoryArtGuiElement = new TerritoryArtGuiElement(this.territoryState);
-    @AppendGuiControl() public territoryPlanetGuiElement: TerritoryPlanetGuiElement;
+    @AppendGuiControl() public territoryTitle: TerritoryTitleGuiElement = new TerritoryTitleGuiElement(this.territoryState);
+    @AppendGuiControl() public territoryArt: TerritoryArtGuiElement = new TerritoryArtGuiElement(this.territoryState);
+    @AppendGuiControl() public territoryPlanet: TerritoryPlanetGuiElement;
 
     public gameAfterCreated(): void {
         this.control.width = '25%';
@@ -28,7 +28,7 @@ export class SelectedTerritoryGuiElement implements GuiControl<GUI.StackPanel>, 
         this.control.isPointerBlocker = true;
 
         if (isPlanet(this.territoryState)) {
-            this.territoryPlanetGuiElement = new TerritoryPlanetGuiElement(this.territoryState);
+            this.territoryPlanet = new TerritoryPlanetGuiElement(this.territoryState);
         }
     }
 }

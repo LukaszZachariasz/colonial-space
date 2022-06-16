@@ -13,14 +13,14 @@ import {GuiElement} from '../../../../../../engine/gui-manager/gui-elements/gui-
 export class BuildingScopesGuiElement implements GuiControl<GUI.StackPanel>, AfterCreated {
     public control: GUI.StackPanel = new GUI.StackPanel('sectorsStackPanel');
 
-    @AppendGuiControl() public buildingScopeGuiElements: BuildingScopeGuiElement[] = [];
+    @AppendGuiControl() public buildingScope: BuildingScopeGuiElement[] = [];
 
     constructor(private buildingState: BuildingState) {
     }
 
     public gameAfterCreated(): void {
         this.buildingState.scopes.forEach((scope: BuildingScopeState) => {
-            this.buildingScopeGuiElements.push(new BuildingScopeGuiElement(scope));
+            this.buildingScope.push(new BuildingScopeGuiElement(scope));
         });
     }
 }

@@ -15,10 +15,10 @@ import {GuiElement} from '../../../../../../../../../engine/gui-manager/gui-elem
 export class BuildingObjectGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('object');
 
-    @AppendGuiControl() public buildingObjectNameGuiElement: BuildingObjectNameGuiElement = new BuildingObjectNameGuiElement(this.object);
-    @AppendGuiControl() public buildingObjectProductionGuiElement: BuildingObjectProductionGuiElement = new BuildingObjectProductionGuiElement(this.object);
-    @AppendGuiControl() public buildingObjectArtGuiElement: BuildingObjectArtGuiElement = new BuildingObjectArtGuiElement(this.object);
-    @AppendGuiControl() public buildingObjectSelectGuiElement: BuildingObjectSelectGuiElement = new BuildingObjectSelectGuiElement(this.object);
+    @AppendGuiControl() public buildingObjectName: BuildingObjectNameGuiElement = new BuildingObjectNameGuiElement(this.object);
+    @AppendGuiControl() public buildingObjectProduction: BuildingObjectProductionGuiElement = new BuildingObjectProductionGuiElement(this.object);
+    @AppendGuiControl() public buildingObjectArt: BuildingObjectArtGuiElement = new BuildingObjectArtGuiElement(this.object);
+    @AppendGuiControl() public buildingObjectSelect: BuildingObjectSelectGuiElement = new BuildingObjectSelectGuiElement(this.object);
 
     constructor(private object: BuildingObjectState) {
     }

@@ -11,8 +11,8 @@ import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/g
 export class BuildingScopeGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('sector');
 
-    @AppendGuiControl() public buildingScopeNameContainer: BuildingScopeNameGuiElement = new BuildingScopeNameGuiElement(this.scopeState);
-    @AppendGuiControl() public buildingScopeObjectsContainer: BuildingScopeObjectsGuiElement = new BuildingScopeObjectsGuiElement(this.scopeState);
+    @AppendGuiControl() public buildingScopeName: BuildingScopeNameGuiElement = new BuildingScopeNameGuiElement(this.scopeState);
+    @AppendGuiControl() public buildingScopeObjects: BuildingScopeObjectsGuiElement = new BuildingScopeObjectsGuiElement(this.scopeState);
 
     constructor(private scopeState: BuildingScopeState) {
     }

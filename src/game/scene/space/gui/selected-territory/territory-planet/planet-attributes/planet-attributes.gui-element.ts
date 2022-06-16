@@ -17,8 +17,8 @@ import {selectTerritoryById} from '../../../../../../logic/store/territory/terri
 export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
     public control: GUI.Container = new GUI.Container('attributes');
     
-    @AppendGuiControl() public sunlightAttributeGuiElement: SunlightAttributeGuiElement = new SunlightAttributeGuiElement(this.planetState);
-    @AppendGuiControl() public waterAttributeGuiElement: WaterAttributeGuiElement = new WaterAttributeGuiElement(this.planetState);
+    @AppendGuiControl() public sunlightAttribute: SunlightAttributeGuiElement = new SunlightAttributeGuiElement(this.planetState);
+    @AppendGuiControl() public waterAttribute: WaterAttributeGuiElement = new WaterAttributeGuiElement(this.planetState);
 
     private subscription: Subscription;
 
@@ -29,7 +29,7 @@ export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, Af
         this.control.width = '100%';
         this.control.height = '50px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.waterAttributeGuiElement.control.left = '70px';
+        this.waterAttribute.control.left = '70px';
     }
 
     public gameOnReady(): void {

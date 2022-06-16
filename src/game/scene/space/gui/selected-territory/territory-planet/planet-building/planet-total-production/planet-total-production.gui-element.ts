@@ -1,6 +1,8 @@
 import * as GUI from 'babylonjs-gui';
 import {AfterCreated} from '../../../../../../../../engine/lifecycle/after-created/after-created';
-import {AppendGuiControl} from '../../../../../../../../engine/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {
+    AppendGuiControl
+} from '../../../../../../../../engine/gui-manager/gui-elements/append-gui-control/append-gui-control';
 import {GuiControl} from '../../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../../engine/lifecycle/on-destroy/on-destroy';
@@ -15,7 +17,8 @@ import {selectTerritoryById} from '../../../../../../../logic/store/territory/te
 @GuiElement()
 export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container>, AfterCreated, OnReady, OnDestroy {
     public control: GUI.Container = new GUI.Container('planetTotalProduction');
-    @AppendGuiControl() public textControl: TextGuiElement = new TextGuiElement('Production: ' + logic().planetProductionService.getTotalProduction(this.planetState.data));
+
+    @AppendGuiControl() public text: TextGuiElement = new TextGuiElement('Production: ' + logic().planetProductionService.getTotalProduction(this.planetState.data));
 
     private endOfTourSubscription: Subscription;
 
@@ -23,13 +26,13 @@ export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container
     }
 
     public gameAfterCreated(): void {
-        this.textControl.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.text.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
     }
 
     public gameOnReady(): void {
         this.endOfTourSubscription = logic().tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
-            tap(() => this.textControl.control.text = 'Production: ' + logic().planetProductionService.getTotalProduction(this.planetState.data))
+            tap(() => this.text.control.text = 'Production: ' + logic().planetProductionService.getTotalProduction(this.planetState.data))
         ).subscribe();
     }
 

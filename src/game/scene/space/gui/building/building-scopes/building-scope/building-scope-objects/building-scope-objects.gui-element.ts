@@ -15,15 +15,13 @@ import {GuiElement} from '../../../../../../../../engine/gui-manager/gui-element
 export class BuildingScopeObjectsGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('sectorObjects');
 
-    @AppendGuiControl() private scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('scrollViewer');
+    @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('scrollViewer');
     @AppendGuiControl({
         parent: 'scrollViewer'
-    })
-    private stackPanel: GUI.StackPanel = new GUI.StackPanel('stackPanel');
+    }) public stackPanel: GUI.StackPanel = new GUI.StackPanel('stackPanel');
     @AppendGuiControl({
         parent: 'stackPanel'
-    })
-    public buildingObjectGuiElements: BuildingObjectGuiElement[] = [];
+    }) public buildingObject: BuildingObjectGuiElement[] = [];
 
     constructor(private buildingScope: BuildingScopeState) {
     }
@@ -42,7 +40,7 @@ export class BuildingScopeObjectsGuiElement implements GuiControl<GUI.Container>
         this.stackPanel.isVertical = false;
 
         this.buildingScope.objects.forEach((object: BuildingObjectState) => {
-            this.buildingObjectGuiElements.push(new BuildingObjectGuiElement(object));
+            this.buildingObject.push(new BuildingObjectGuiElement(object));
         });
     }
 }

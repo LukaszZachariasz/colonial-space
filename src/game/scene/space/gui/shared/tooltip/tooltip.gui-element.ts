@@ -10,10 +10,10 @@ import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destro
 export class TooltipGuiElement implements GuiControl<GUI.Container>, AfterCreated, OnDestroy {
     public control: GUI.Container = new GUI.Container('tooltipContainer');
 
-    @AppendGuiControl() private tooltipContent: GuiControl<GUI.Control>;
+    @AppendGuiControl() private content: GuiControl<GUI.Control>;
 
-    constructor(tooltipContent: GuiControl<GUI.Control>) {
-        this.tooltipContent = tooltipContent;
+    constructor(content: GuiControl<GUI.Control>) {
+        this.content = content;
     }
 
     public gameAfterCreated(): void {
@@ -22,10 +22,10 @@ export class TooltipGuiElement implements GuiControl<GUI.Container>, AfterCreate
         this.control.adaptWidthToChildren = true;
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.tooltipContent.control.setPaddingInPixels(10, 10, 10, 10);
+        this.content.control.setPaddingInPixels(10, 10, 10, 10);
     }
 
     public gameOnDestroy(): void {
-        this.tooltipContent.control.dispose();
+        this.content.control.dispose();
     }
 }

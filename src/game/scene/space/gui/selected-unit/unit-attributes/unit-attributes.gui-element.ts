@@ -11,8 +11,8 @@ import {UnitState} from '../../../../../logic/store/unit/unit.state';
 export class UnitAttributesGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('attributes');
     
-    @AppendGuiControl() public scoutRangeAttributeGuiElement: ScoutRangeAttributeGuiElement = new ScoutRangeAttributeGuiElement(this.unitState);
-    @AppendGuiControl() public movementAttributeGuiElement: MovementAttributeGuiElement = new MovementAttributeGuiElement(this.unitState);
+    @AppendGuiControl() public scoutRangeAttribute: ScoutRangeAttributeGuiElement = new ScoutRangeAttributeGuiElement(this.unitState);
+    @AppendGuiControl() public movementAttribute: MovementAttributeGuiElement = new MovementAttributeGuiElement(this.unitState);
 
     constructor(private unitState: UnitState) {
     }

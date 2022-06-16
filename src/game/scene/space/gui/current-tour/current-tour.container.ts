@@ -9,9 +9,9 @@ import {NextTourGuiElement} from './next-tour/next-tour.gui-element';
 @GuiElement()
 export class CurrentTourContainer implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('currentTourBar');
-    
-    @AppendGuiControl() public nextTourGuiElement: NextTourGuiElement = new NextTourGuiElement();
-    @AppendGuiControl() public currentTourLabelGuiElement: CurrentTourLabelGuiElement = new CurrentTourLabelGuiElement();
+
+    @AppendGuiControl() public currentTourLabel: CurrentTourLabelGuiElement = new CurrentTourLabelGuiElement();
+    @AppendGuiControl() public nextTour: NextTourGuiElement = new NextTourGuiElement();
 
     public gameAfterCreated(): void {
         this.control.width = '200px';

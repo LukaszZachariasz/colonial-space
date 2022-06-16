@@ -13,7 +13,7 @@ import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 export class ScoutRangeAttributeGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('scoutRangeAttribute');
     
-    @AppendGuiControl() public attributeControl: AttributeGuiElement = new AttributeGuiElement(
+    @AppendGuiControl() public attribute: AttributeGuiElement = new AttributeGuiElement(
         new IconGuiElement(GameIcon.BINOCULARS),
         new TextGuiElement(`This unit has ${this.unitState.scoutRange} scout range.`)
     );

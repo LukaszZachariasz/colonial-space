@@ -19,8 +19,8 @@ export class PlanetBuildingGuiElement implements GuiControl<GUI.Container>, Afte
     public control: GUI.Container = new GUI.Container('buildingContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
-    @AppendGuiControl() public planetTotalProductionGuiElement: PlanetTotalProductionGuiElement = new PlanetTotalProductionGuiElement(this.planetState);
-    @AppendGuiControl() public planetBuildingCurrentObjectGuiElement: PlanetBuildingCurrentObjectGuiElement = new PlanetBuildingCurrentObjectGuiElement(this.planetState);
+    @AppendGuiControl() public planetTotalProduction: PlanetTotalProductionGuiElement = new PlanetTotalProductionGuiElement(this.planetState);
+    @AppendGuiControl() public planetBuildingCurrentObject: PlanetBuildingCurrentObjectGuiElement = new PlanetBuildingCurrentObjectGuiElement(this.planetState);
 
     constructor(private planetState: TerritoryState<PlanetState>) {
     }

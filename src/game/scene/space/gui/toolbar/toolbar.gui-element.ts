@@ -10,8 +10,8 @@ import {ToolbarTitleGuiElement} from './toolbar-title/toolbar-title.gui-element'
 export class ToolbarGuiElement implements GuiControl<GUI.Container>, AfterCreated {
     public control: GUI.Container = new GUI.Container('toolbar');
 
-    @AppendGuiControl() public toolbarBackgroundGuiElement: ToolbarBackgroundGuiElement = new ToolbarBackgroundGuiElement();
-    @AppendGuiControl() public toolbarTitleGuiElement: ToolbarTitleGuiElement = new ToolbarTitleGuiElement();
+    @AppendGuiControl() public toolbarBackground: ToolbarBackgroundGuiElement = new ToolbarBackgroundGuiElement();
+    @AppendGuiControl() public toolbarTitle: ToolbarTitleGuiElement = new ToolbarTitleGuiElement();
 
     public gameAfterCreated(): void {
         this.control.height = '130px';
