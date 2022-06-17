@@ -1,7 +1,5 @@
 import {GameBuilder} from './game-builder/game-builder';
-import {LoadingScene} from '../loading/scenes/loading-scene/loading.scene';
 import {Logic} from './logic/logic';
-import {SpaceScene} from './scene/space/space.scene';
 import {StoreGenerator} from './logic/store-generator/store.generator';
 import {WelcomeGuiElement} from './scene/space/gui/dialogs/welcome/welcome.gui-element';
 import {filter, take, tap} from 'rxjs';
@@ -15,7 +13,7 @@ export class Game {
     public gameBuilder: GameBuilder = new GameBuilder();
     
     public generate(): void {
-        sceneManager().navigateToScene(LoadingScene.SCENE_NAME);
+        sceneManager().navigateToScene('LoadingScene');
         this.logic = new Logic();
         this.logic.storeGenerator.generate();
     }
@@ -26,7 +24,7 @@ export class Game {
         gamePlatform().loadingManager.isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
-            tap(() => sceneManager().navigateToScene(SpaceScene.SCENE_NAME)),
+            tap(() => sceneManager().navigateToScene('SpaceScene')),
             tap(() => logic().dialogService.open$.next(new WelcomeGuiElement()))
         ).subscribe();
     }

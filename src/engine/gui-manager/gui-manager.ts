@@ -12,13 +12,8 @@ export class GuiManager {
     public createGui(): void {
         const currentScene = sceneManager().currentScene;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-
-        if (isAfterCreated(currentScene.gui)) {
-            currentScene.gui.gameAfterCreated();
-        }
-        if (isOnReady(currentScene.gui)) {
-            currentScene.gui.gameOnReady();
-        }
+        isAfterCreated(currentScene.gui) && currentScene.gui.gameAfterCreated();
+        isOnReady(currentScene.gui) && currentScene.gui.gameOnReady();
     }
 
     public disposeGui(): void {
@@ -26,9 +21,7 @@ export class GuiManager {
             this.advancedDynamicTexture.dispose();
         }
         const currentScene = sceneManager().currentScene;
-        if (isOnDestroy(currentScene?.gui)) {
-            currentScene.gui.gameOnDestroy();
-        }
+        isOnDestroy(currentScene?.gui) && currentScene.gui.gameOnDestroy();
     }
 
     public appendToRoot<T extends GuiControl<GUI.Control>>(control: T): T {

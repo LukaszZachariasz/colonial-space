@@ -5,12 +5,13 @@ import {MainMenuLeaveBtnControl} from './menu-buttons/main-menu-leave-btn.contro
 import {MainMenuLoadBtnControl} from './menu-buttons/main-menu-load-btn.control';
 import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.control';
 import {OnDestroy} from '../../../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../../../engine/lifecycle/on-ready/on-ready';
 import {Subscription, tap} from 'rxjs';
 import {gameEngine} from '../../../../core/game-platform';
 import {guiManager} from 'engine';
 
 @GuiScene()
-export class MainMenuSceneGui implements AfterCreated, OnDestroy {
+export class MainMenuSceneGui implements AfterCreated, OnReady, OnDestroy {
     private mainMenuBeginBtnControl = new MainMenuBeginBtnControl();
     private mainMenuLoadBtnControl = new MainMenuLoadBtnControl();
     private mainMenuOptionsBtnControl = new MainMenuOptionsBtnControl();
@@ -18,17 +19,17 @@ export class MainMenuSceneGui implements AfterCreated, OnDestroy {
 
     private mainMenuBeginBtnClicked: Subscription;
 
-    constructor() {
-        this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnControl.onClick$.pipe(
-            tap(() => gameEngine().newGame())
-        ).subscribe();
-    }
-
     public gameAfterCreated(): void {
         guiManager().appendToRoot(this.mainMenuBeginBtnControl);
         guiManager().appendToRoot(this.mainMenuLoadBtnControl);
         guiManager().appendToRoot(this.mainMenuOptionsBtnControl);
         guiManager().appendToRoot(this.mainMenuLeaveBtnControl);
+    }
+
+    public gameOnReady(): void {
+        this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnControl.onClick$.pipe(
+            tap(() => gameEngine().newGame())
+        ).subscribe();
     }
 
     public gameOnDestroy(): void {

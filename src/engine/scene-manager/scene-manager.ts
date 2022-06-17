@@ -1,6 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {Scene} from './scene';
 import {guiManager} from 'engine';
+import {isAfterCreated} from '../lifecycle/after-created/is-after-created';
+import {isOnDestroy} from '../lifecycle/on-destroy/is-on-destroy';
+import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
 
 export class SceneManager {
     public scene: Scene;
@@ -24,10 +27,13 @@ export class SceneManager {
 
     public setScene(gameScene: Scene): void {
         if (this.scene) {
+            isOnDestroy(this.scene) && this.scene.gameOnDestroy();
             guiManager().disposeGui();
             this.scene.scene.detachControl();
         }
-        this.scene = {...gameScene};
+        this.scene = gameScene;
+        isAfterCreated(this.scene) && this.scene.gameAfterCreated();
+        isOnReady(this.scene) && this.scene.gameOnReady();
         guiManager().createGui();
 
         this.scene.scene.attachControl();
@@ -41,7 +47,7 @@ export class SceneManager {
         const scene = this.allScenes.find((el: Scene) => el.name === name);
 
         if (!scene) {
-           throw new Error('Scene not found, are you sure scene is registered?');
+            throw new Error('Scene not found, are you sure scene is registered?');
         }
 
         return scene;
