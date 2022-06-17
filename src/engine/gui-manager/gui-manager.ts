@@ -1,6 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {GuiControl} from './gui-elements/gui-control';
+import {isAfterCreated} from '../lifecycle/after-created/is-after-created';
+import {isOnDestroy} from '../lifecycle/on-destroy/is-on-destroy';
+import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
 import {sceneManager} from 'engine';
 
 export class GuiManager {
@@ -10,8 +13,12 @@ export class GuiManager {
         const currentScene = sceneManager().currentScene;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
 
-        currentScene.gui.onCreate();
-        currentScene.gui.onRegisterListeners();
+        if (isAfterCreated(currentScene.gui)) {
+            currentScene.gui.gameAfterCreated();
+        }
+        if (isOnReady(currentScene.gui)) {
+            currentScene.gui.gameOnReady();
+        }
     }
 
     public disposeGui(): void {
@@ -19,7 +26,9 @@ export class GuiManager {
             this.advancedDynamicTexture.dispose();
         }
         const currentScene = sceneManager().currentScene;
-        currentScene?.gui?.onDestroy();
+        if (isOnDestroy(currentScene?.gui)) {
+            currentScene.gui.gameOnDestroy();
+        }
     }
 
     public appendToRoot<T extends GuiControl<GUI.Control>>(control: T): T {
