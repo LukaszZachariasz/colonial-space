@@ -9,14 +9,14 @@ import {sceneManager} from 'engine';
 export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
 
-    public createGui(): void {
+    public createGuiScene(): void {
         const currentScene = sceneManager().currentScene;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
         isAfterCreated(currentScene.gui) && currentScene.gui.gameAfterCreated();
         isOnReady(currentScene.gui) && currentScene.gui.gameOnReady();
     }
 
-    public disposeGui(): void {
+    public disposeGuiScene(): void {
         if (this.advancedDynamicTexture) {
             this.advancedDynamicTexture.dispose();
         }

@@ -28,13 +28,13 @@ export class SceneManager {
     public setScene(gameScene: Scene): void {
         if (this.scene) {
             isOnDestroy(this.scene) && this.scene.gameOnDestroy();
-            guiManager().disposeGui();
+            guiManager().disposeGuiScene();
             this.scene.scene.detachControl();
         }
         this.scene = gameScene;
         isAfterCreated(this.scene) && this.scene.gameAfterCreated();
         isOnReady(this.scene) && this.scene.gameOnReady();
-        guiManager().createGui();
+        guiManager().createGuiScene();
 
         this.scene.scene.attachControl();
     }
