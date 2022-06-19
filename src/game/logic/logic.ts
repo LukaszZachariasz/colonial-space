@@ -1,6 +1,7 @@
 import {AnalysisService} from './services/anaylsis/analysis.service';
 import {BuildingHandlerService} from './services/building/handler/building-handler.service';
 import {BuildingService} from './services/building/building.service';
+import {ColonizationService} from './services/colonization/colonization.service';
 import {DialogService} from './services/dialog/dialog.service';
 import {EnhancedStore} from '@reduxjs/toolkit';
 import {FogOfWarService} from './services/fog-of-war/fog-of-war.service';
@@ -31,6 +32,7 @@ export class Logic {
     public planetProductionService: PlanetProductionService = new PlanetProductionService();
 
     public analysisService: AnalysisService = new AnalysisService();
+    public colonizationService: ColonizationService = new ColonizationService();
 
     public buildingService: BuildingService = new BuildingService();
     public selectedBuildingService: SelectedBuildingService = new SelectedBuildingService();

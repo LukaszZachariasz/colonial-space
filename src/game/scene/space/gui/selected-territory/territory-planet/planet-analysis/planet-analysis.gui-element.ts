@@ -3,12 +3,12 @@ import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/
 import {AnalysisShipState} from '../../../../../../logic/store/unit/analysis-ship/analysis-ship.state';
 import {AppendGuiControl} from '../../../../../../../engine/gui-manager/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../../shared/button/button.gui-element';
+import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {GuiControl} from '../../../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/gui-element';
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {UnitState} from '../../../../../../logic/store/unit/unit.state';
 import {UnitType} from '../../../../../../logic/store/unit/unit-type';
@@ -44,15 +44,12 @@ export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, Afte
     }
 
     public gameOnReady(): void {
-        this.subscription = logic().tourService.completeTour$.pipe(
+        this.subscription = merge(
+            of(EMPTY),
+            logic().tourService.completeTour$
+        ) .pipe(
             tap(() => this.setAnalysisStatus())
         ).subscribe();
-
-        this.setAnalysisStatus();
-    }
-
-    public gameOnDestroy(): void {
-        this.subscription?.unsubscribe();
     }
 
     private refreshData(): void {
@@ -85,5 +82,9 @@ export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, Afte
     private setDisableStatus(): void {
         this.showStartAnalysisButton();
         this.startAnalysisButton.control.isEnabled = false;
+    }
+
+    public gameOnDestroy(): void {
+        this.subscription?.unsubscribe();
     }
 }
