@@ -8,6 +8,7 @@ import {isOnReady} from '../lifecycle/on-ready/is-on-ready';
 export class SceneManager {
     public scene: Scene;
     public allScenes: Scene[] = [];
+    public preloadingScenes: Set<Scene> = new Set();
 
     public get currentScene(): Scene {
         return this.scene;
@@ -21,8 +22,10 @@ export class SceneManager {
         return this.scene.camera;
     }
 
-    public register(gameScene: Scene): void {
+    public register<T extends Scene>(gameScene: T): T {
+        isAfterCreated(gameScene) && gameScene.gameAfterCreated();
         this.allScenes.push(gameScene);
+        return gameScene;
     }
 
     public setScene(gameScene: Scene): void {
@@ -32,7 +35,6 @@ export class SceneManager {
             this.scene.scene.detachControl();
         }
         this.scene = gameScene;
-        isAfterCreated(this.scene) && this.scene.gameAfterCreated();
         isOnReady(this.scene) && this.scene.gameOnReady();
         guiManager().createGuiScene();
 

@@ -1,13 +1,13 @@
-import {AfterCreated} from '../../../../engine/lifecycle/after-created/after-created';
-import {GuiScene} from '../../../../engine/gui-manager/gui-scene/gui-scene';
+import {AfterCreated} from '../../engine/lifecycle/after-created/after-created';
+import {GuiScene} from '../../engine/gui-manager/gui-scene/gui-scene';
 import {MainMenuBeginBtnControl} from './menu-buttons/main-menu-begin-btn.control';
 import {MainMenuLeaveBtnControl} from './menu-buttons/main-menu-leave-btn.control';
 import {MainMenuLoadBtnControl} from './menu-buttons/main-menu-load-btn.control';
 import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.control';
-import {OnDestroy} from '../../../../engine/lifecycle/on-destroy/on-destroy';
-import {OnReady} from '../../../../engine/lifecycle/on-ready/on-ready';
+import {OnDestroy} from '../../engine/lifecycle/on-destroy/on-destroy';
+import {OnReady} from '../../engine/lifecycle/on-ready/on-ready';
 import {Subscription, tap} from 'rxjs';
-import {gameEngine} from '../../../../core/game-platform';
+import {gameEngine} from '../../core/game-platform';
 import {guiManager} from 'engine';
 
 @GuiScene()

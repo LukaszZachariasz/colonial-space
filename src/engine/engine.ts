@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {Game} from '../game/game';
 import {GuiManager} from './gui-manager/gui-manager';
-import {Loading} from '../loading/loading';
-import {MainMenu} from '../main-menu/main-menu';
+import {LoadingScene} from '../loading/loading.scene';
+import {MainMenuScene} from '../main-menu/main-menu-scene';
 import {ModelManager} from './model-manager/model-manager';
 import {SceneManager} from './scene-manager/scene-manager';
 import {gameEngine} from '../core/game-platform';
@@ -15,8 +15,9 @@ export class Engine {
     public guiManager: GuiManager;
     public modelManager: ModelManager;
     public game: Game;
-    public mainMenu: MainMenu;
-    public loading: Loading;
+
+    public loadingScene: LoadingScene;
+    public mainMenuScene: MainMenuScene;
 
     public initialize(canvas: HTMLCanvasElement): void {
         this.canvas = canvas;
@@ -26,11 +27,9 @@ export class Engine {
         this.guiManager = new GuiManager();
         this.modelManager = new ModelManager();
 
-        this.loading = new Loading();
-        this.loading.register();
-
-        this.mainMenu = new MainMenu();
-        this.mainMenu.start();
+        this.loadingScene = sceneManager().register(new LoadingScene());
+        this.mainMenuScene = sceneManager().register(new MainMenuScene());
+        sceneManager().navigateToScene('MainMenuScene');
 
         this.engine.runRenderLoop(() => {
             this.sceneManager?.scene.scene.render();

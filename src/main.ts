@@ -1,7 +1,6 @@
 import {BrowserWindow, app, ipcMain} from 'electron';
 const electronLocalShortcut = require('electron-localshortcut');
 
-
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow(): void {
@@ -12,7 +11,8 @@ function createWindow(): void {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
-        }
+        },
+        show: false
     });
 
     mainWindow.loadFile('index.html');
@@ -48,9 +48,11 @@ app.on('activate', () => {
     }
 });
 
-
 ipcMain.on('re-render', () => {
     mainWindow.loadFile('index.html');
 });
 
+ipcMain.on('game-engine-ready', () => {
+    mainWindow.show();
+});
 

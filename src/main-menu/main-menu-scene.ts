@@ -1,17 +1,18 @@
 import * as BABYLON from 'babylonjs';
 import {AbstractMesh} from 'babylonjs/Meshes/abstractMesh';
-import {AfterCreated} from '../../../engine/lifecycle/after-created/after-created';
-import {GameScene} from '../../../engine/scene-manager/game-scene';
+import {AfterCreated} from '../engine/lifecycle/after-created/after-created';
+import {GameScene} from '../engine/scene-manager/game-scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
-import {Scene} from '../../../engine/scene-manager/scene';
-import {SpaceSkybox} from '../../../game/scene/space/model/skybox/space/space.skybox';
-import {SpaceSkyboxConst} from '../../../game/scene/space/model/skybox/space/space-skybox.const';
+import {Scene} from '../engine/scene-manager/scene';
+import {SpaceSkybox} from '../game/scene/space/model/skybox/space/space.skybox';
+import {SpaceSkyboxConst} from '../game/scene/space/model/skybox/space/space-skybox.const';
 import {modelManager} from 'engine';
 import Vector3 = BABYLON.Vector3;
 import Color4 = BABYLON.Color4;
 
 @GameScene({
-    name: 'MainMenuScene'
+    name: 'MainMenuScene',
+    preload: true
 })
 export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneGui> implements AfterCreated {
     public camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera('MainMenuCamera', 5.5, 1, 2, Vector3.Zero(), this.scene);

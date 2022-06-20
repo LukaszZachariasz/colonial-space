@@ -11,7 +11,7 @@ export class GamePlatform {
   public loadingManager: LoadingManager = new LoadingManager();
 
   public startEngine(engine: Engine, canvas: HTMLCanvasElement): void {
-    BABYLON.Logger.LogLevels = BABYLON.Logger.ErrorLogLevel,
+    BABYLON.Logger.LogLevels = BABYLON.Logger.ErrorLogLevel;
     this.engine = engine;
     this.engine.initialize(canvas);
 
