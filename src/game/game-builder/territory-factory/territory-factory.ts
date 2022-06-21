@@ -1,4 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import {
+    AsteroidVolcanicModel
+} from '../../scene/space/model/territory/asteroid/asteroid-volcanic/asteroid-volcanic.model';
 import {BlackHoleModel} from '../../scene/space/model/territory/black-hole/black-hole.model';
 import {PlanetGreenModel} from '../../scene/space/model/territory/planet/planet-green/planet-green.model';
 import {PlanetMetalModel} from '../../scene/space/model/territory/planet/planet-metal/planet-metal.model';
@@ -28,6 +31,8 @@ export class TerritoryFactory {
                 return modelManager().addModel(new BlackHoleModel(scene, territoryState));
             case TerritoryType.SATELLITE_MOON:
                 return modelManager().addModel(new SatelliteMoonModel(scene, territoryState));
+            case TerritoryType.ASTEROID_VOLCANIC:
+                return modelManager().addModel(new AsteroidVolcanicModel(scene, territoryState));
         }
     }
 }

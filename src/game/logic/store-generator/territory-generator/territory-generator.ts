@@ -1,3 +1,4 @@
+import {AsteroidGenerator} from './asteroid-generator/asteroid.generator';
 import {BlackHoleGenerator} from './black-hole-generator/black-hole.generator';
 import {PlanetGenerator} from './planet-generator/planet.generator';
 import {SatelliteGenerator} from './satellite-generator/satellite.generator';
@@ -10,6 +11,7 @@ export class TerritoryGenerator {
             ...PlanetGenerator.generate(),
             ...StarGenerator.generate(),
             ...SatelliteGenerator.generate(),
+            ...AsteroidGenerator.generate(),
             ...BlackHoleGenerator.generate()
         ];
     }
