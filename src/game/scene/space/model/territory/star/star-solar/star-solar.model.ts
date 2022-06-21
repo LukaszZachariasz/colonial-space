@@ -17,7 +17,6 @@ export class StarSolarModel extends TerritoryModel implements OnReady {
         super(scene, state);
     }
 
-
     public onImport(): Promise<BABYLON.ISceneLoaderAsyncResult> {
         return BABYLON.SceneLoader.ImportMeshAsync(
             '',

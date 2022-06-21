@@ -42,6 +42,19 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         return (this.maxRight - this.maxLeft) / (this.maxTop - this.maxBottom);
     }
 
+    public lookAtAnimation(point: BABYLON.Vector3): BABYLON.Animatable {
+        return BABYLON.Animation.CreateAndStartAnimation(
+            'LookAtAnim',
+            this,
+            'target',
+            60,
+            this.target.equals(point) ? 1 : 60,
+            this.target,
+            point,
+            BABYLON.Animation.ANIMATIONTYPE_FLOAT
+        );
+    }
+
     public getXPositionPercentage(): number {
         return (this.target.x - this.maxLeft) / (this.maxRight - this.maxLeft) * 100;
     }

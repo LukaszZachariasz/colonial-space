@@ -14,7 +14,6 @@ export function GameScene(gameSceneConfig: GameSceneConfig): any {
                     this.scene.onReadyObservable.add(() => {
                         sceneManager().preloadingScenes.delete(this as any);
                         if (sceneManager().preloadingScenes.size === 0) {
-                            console.log('test');
                             ipcRenderer.send('game-engine-ready');
                         }
                     });
