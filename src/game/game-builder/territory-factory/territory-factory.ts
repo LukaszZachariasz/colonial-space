@@ -1,7 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import {modelManager} from 'engine';
-import {TerritoryType} from '../../logic/store/territory/territory-type';
-import {TerritoryState} from '../../logic/store/territory/territory.state';
 import {BlackHoleModel} from '../../scene/space/model/territory/black-hole/black-hole.model';
 import {PlanetGreenModel} from '../../scene/space/model/territory/planet/planet-green/planet-green.model';
 import {PlanetMetalModel} from '../../scene/space/model/territory/planet/planet-metal/planet-metal.model';
@@ -10,6 +7,9 @@ import {PlanetSandModel} from '../../scene/space/model/territory/planet/planet-s
 import {SatelliteMoonModel} from '../../scene/space/model/territory/satellite/satellite-moon/satellite-moon.model';
 import {StarSolarModel} from '../../scene/space/model/territory/star/star-solar/star-solar.model';
 import {TerritoryModel} from '../../scene/space/model/territory/territory.model';
+import {TerritoryState} from '../../logic/store/territory/territory.state';
+import {TerritoryType} from '../../logic/store/territory/territory-type';
+import {modelManager} from 'engine';
 
 export class TerritoryFactory {
     public static create(scene: BABYLON.Scene, territoryState: TerritoryState): TerritoryModel {
