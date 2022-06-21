@@ -31,3 +31,6 @@ https://nerdburglars.net/namegenerator/planet-name-generator/
 
 Sun name generator
 https://nerdburglars.net/namegenerator/sun-name-generator/
+
+Satellite name generator
+https://www.fantasynamegenerators.com/satellite-names.php

@@ -1,0 +1,22 @@
+export const SatelliteNameConst: string[] = [
+    'Hutton',
+    'Dalton F-20',
+    'Quimby QA-1',
+    'Kraepelin',
+    'Carson',
+    'Plutoni PZ-718',
+    'Toka BM-6',
+    'Dünya RWT-6',
+    'Tsuki HRY-85',
+    'Dobropan',
+    'Ronald FI-364',
+    'Emile Z-7',
+    'Ray CYD-82',
+    'Von Liebig QF-630',
+    'Noether',
+    'Ausrėnė BHF-08',
+    'Ersetu FMY-13',
+    'Kralomoc RPU-98',
+    'Kasei',
+    'Mercuio'
+];
