@@ -10,7 +10,7 @@ import {
 } from '../../../../store/building/building.selector';
 import {selectTerritoryByBuildingId} from '../../../../store/territory/territory.selectors';
 import {setIsBuiltTrue} from '../../../../store/building/building.slice';
-import {setTerritoryDataField} from '../../../../store/territory/territory.slice';
+import {setWaterPercentage} from '../../../../store/territory/territory.slice';
 import {store} from '../../../../store/store';
 
 @HasTourEffects()
@@ -28,10 +28,9 @@ export class WaterFilterBuildingHandlerService {
                 if (newWater > 100) {
                     newWater = 100;
                 }
-                store.dispatch(setTerritoryDataField({
-                   territoryId: planet.id,
-                   field: 'water',
-                   value: newWater
+                store.dispatch(setWaterPercentage({
+                    territoryId: planet.id,
+                    value: newWater
                 }));
 
                 store.dispatch(setIsBuiltTrue({

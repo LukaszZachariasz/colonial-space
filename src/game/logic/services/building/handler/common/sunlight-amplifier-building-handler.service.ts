@@ -10,7 +10,7 @@ import {
 } from '../../../../store/building/building.selector';
 import {selectTerritoryByBuildingId} from '../../../../store/territory/territory.selectors';
 import {setIsBuiltTrue} from '../../../../store/building/building.slice';
-import {setTerritoryDataField} from '../../../../store/territory/territory.slice';
+import {setSunlightPercentage} from '../../../../store/territory/territory.slice';
 import {store} from '../../../../store/store';
 
 @HasTourEffects()
@@ -28,9 +28,9 @@ export class SunlightAmplifierBuildingHandlerService {
                 if (newSunlight > 100) {
                     newSunlight = 100;
                 }
-                store.dispatch(setTerritoryDataField({
+
+                store.dispatch(setSunlightPercentage({
                     territoryId: planet.id,
-                    field: 'sunlight',
                     value: newSunlight
                 }));
 
