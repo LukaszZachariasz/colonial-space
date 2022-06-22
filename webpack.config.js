@@ -5,71 +5,75 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const exec = require('child_process').exec;
 
-module.exports = {
-    mode: 'development',
-    entry: {
-        main: './src/main.ts',
-        renderer: './src/renderer.ts',
-    },
-    target: 'electron-main',
-    module: {
-        rules: [
+module.exports = (env) => {
+    process.env.PROFILE = env.profile || 'prod';
+
+    return {
+        mode: 'development',
+        entry: {
+            main: './src/main.ts',
+            renderer: './src/renderer.ts',
+        },
+        target: 'electron-main',
+        module: {
+            rules: [
+                {
+                    test: /\.ts?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
+                },
+                {
+                    test: /\.js$/,
+                    enforce: 'pre',
+                    use: ['source-map-loader'],
+                }
+            ],
+        },
+        resolve: {
+            plugins: [new TsconfigPathsPlugin()],
+            extensions: ['.ts', '.js'],
+        },
+        plugins: [
+            new CleanWebpackPlugin(),
+            new HtmlWebpackPlugin({
+                template: './src/index.html',
+                chunks: [
+                    'renderer'
+                ]
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: './src/index.css',
+                        to: './index.css'
+                    },
+                    {
+                        from: './assets',
+                        to: './assets'
+                    },
+                    {
+                        from: './resources',
+                        to: './resources'
+                    }
+                ]
+            }),
             {
-                test: /\.ts?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.js$/,
-                enforce: 'pre',
-                use: ['source-map-loader'],
+                apply: compiler => {
+                    let run = false;
+                    compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
+                        if (run === false) {
+                            exec('electron ./dist/main.js');
+                            run = true;
+                        }
+                    });
+                }
             }
         ],
-    },
-    resolve: {
-        plugins: [new TsconfigPathsPlugin()],
-        extensions: ['.ts', '.js'],
-    },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            chunks: [
-                'renderer'
-            ]
-        }),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: './src/index.css',
-                    to: './index.css'
-                },
-                {
-                    from: './assets',
-                    to: './assets'
-                },
-                {
-                    from: './resources',
-                    to: './resources'
-                }
-            ]
-        }),
-        {
-            apply: compiler => {
-                let run = false;
-                compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
-                    if (run === false) {
-                        exec('electron ./dist/main.js');
-                        run = true;
-                    }
-                });
-            }
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name].js'
         }
-    ],
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
-    }
+    };
 };
 
 

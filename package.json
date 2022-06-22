@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "start": "webpack --watch",
+    "start": "npm run start:dev",
+    "start:dev": "webpack --watch --env profile=dev",
+    "start:prod": "webpack --watch",
     "lint": "eslint . --ext .ts"
   },
   "author": "",

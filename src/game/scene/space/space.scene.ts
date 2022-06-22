@@ -19,7 +19,7 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> implements Afte
     public gameAfterCreated(): void {
         this.camera.attachControl();
         modelManager().addModel(new SpaceSkybox(this.scene));
-        modelManager().addModel(new GalaxyDustModel(this.scene)); // todo: get rid of it?
+        modelManager().addModel(new GalaxyDustModel(this.scene));
 
         const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);
         light.intensity = 0.1;
