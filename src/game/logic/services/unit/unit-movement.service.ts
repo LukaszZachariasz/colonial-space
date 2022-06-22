@@ -66,6 +66,7 @@ export class UnitMovementService {
             allowDiagonal: true
         })
             .findPath(startSquare.x, startSquare.y, finalSquare.x, finalSquare.y, grid)
+            .slice(1)
             .forEach(([x, y]: [number, number]) => {
                 store.dispatch(addUnitPlanningMovement({
                     id: unitId,
@@ -90,7 +91,7 @@ export class UnitMovementService {
         }
 
         for (let i = 0; i < movementPoints; i++) {
-            if (i != 0 && !this.isWalkable(selectSquareById(unit.movementPlanning[i]))) {
+            if (i !== 0 && !this.isWalkable(selectSquareById(unit.movementPlanning[i]))) {
                 store.dispatch(clearUnitPlanningMovement(unitId));
                 return;
             }
