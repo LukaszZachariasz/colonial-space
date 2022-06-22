@@ -22,6 +22,7 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
         this.material.backFaceCulling = false;
         this.material.reflectionTexture = new BABYLON.CubeTexture(`resources/skybox/space/${this.type}/`, this.scene);
         this.material.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        this.material.reflectionTexture.level = 1.5;
         this.material.diffuseColor = new BABYLON.Color3(0, 0, 0);
         this.material.specularColor = new BABYLON.Color3(0, 0, 0);
         this.material.alphaCutOff = 0.5;

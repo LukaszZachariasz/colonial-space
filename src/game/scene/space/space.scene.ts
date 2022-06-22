@@ -7,6 +7,7 @@ import {Scene} from '../../../engine/scene-manager/scene';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceSkybox} from './model/skybox/space/space.skybox';
 import {modelManager} from 'engine';
+import {selectMapSkybox} from '../../logic/store/map/tour.selectors';
 
 @GameScene({
     name: 'SpaceScene',
@@ -18,7 +19,7 @@ export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> implements Afte
 
     public gameAfterCreated(): void {
         this.camera.attachControl();
-        modelManager().addModel(new SpaceSkybox(this.scene));
+        modelManager().addModel(new SpaceSkybox(this.scene, selectMapSkybox()));
         modelManager().addModel(new GalaxyDustModel(this.scene));
 
         const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);

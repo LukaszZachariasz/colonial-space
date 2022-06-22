@@ -1,9 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {AddTourBlocker} from '../../../tour/tour-blocker/add-tour-blocker';
 import {AddTourEffect} from '../../../tour/tour-effect/add-tour-effect';
-import {
-    AnalysisShipGenerator
-} from '../../../../store-generator/unit-generator/analysis-ship-generator/analysis-ship.generator';
 import {BuildingObjectState} from '../../../../store/building/building-scope/building-object/building-object.state';
 import {BuildingObjectType} from '../../../../store/building/building-scope/building-object/building-object-type';
 import {FromAboveCamera} from '../../../../../scene/space/camera/from-above-camera';
@@ -16,6 +13,7 @@ import {UnitModel} from '../../../../../scene/space/model/unit/unit.model';
 import {
     UnitOnSquareWarningGuiElement
 } from '../../../../../scene/space/gui/dialogs/complete-building/unit-on-square-warning.gui-element';
+import {UnitState} from '../../../../store/unit/unit.state';
 import {addUnit} from '../../../../store/unit/unit.slice';
 import {logic} from '../../../../../game';
 import {modelManager, sceneManager} from 'engine';
@@ -23,7 +21,6 @@ import {
     selectBuildingByBuildingObjectId,
     selectBuildingObjectsByProduction0AndNotBuiltAndType, selectBuildingObjectsByType
 } from '../../../../store/building/building.selector';
-import {selectPlayerId} from '../../../../store/player/player.selectors';
 import {selectSquareByTerritoryId, selectSquareByUnitId} from '../../../../store/map/square/square.selectors';
 import {selectTerritoryByBuildingId} from '../../../../store/territory/territory.selectors';
 import {selectUnitByTerritoryId} from '../../../../store/unit/unit.selectors';
@@ -32,6 +29,7 @@ import {setSquareUnitId} from '../../../../store/map/map.slice';
 import {store} from '../../../../store/store';
 
 export abstract class UnitHandlerService {
+    public abstract createUnitState(): UnitState;
     public abstract createModel(id: string): UnitModel;
 
     protected constructor(private type: BuildingObjectType) {
@@ -47,7 +45,7 @@ export abstract class UnitHandlerService {
             buildingObjects.forEach((object: BuildingObjectState) => {
                 const planet = selectTerritoryByBuildingId(selectBuildingByBuildingObjectId(object.id).id);
 
-                const unit = AnalysisShipGenerator.generate(selectPlayerId());
+                const unit = this.createUnitState();
 
                 store.dispatch(addUnit(unit));
                 store.dispatch(setSquareUnitId({
