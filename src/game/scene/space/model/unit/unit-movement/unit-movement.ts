@@ -104,6 +104,12 @@ export class UnitMovement {
     }
 
     private lerpUnitRotate(): void {
+        if (this.position === undefined) {
+            gameEngine().sceneManager.currentScene.scene.unregisterBeforeRender(this.unitRotate);
+            this.unitRotationSubscriber.next();
+            this.unitRotationSubscriber.complete();
+            return;
+        }
         const tempQuat = BABYLON.Quaternion.Identity();
         const slerpAmount = .1;
         tempQuat.copyFrom(this.transformMesh.rotationQuaternion);
