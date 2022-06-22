@@ -4,7 +4,7 @@ import {Debug} from './debug/debug';
 import {Engine} from 'engine';
 import {LoadingManager} from './loading-manager/loading-manager';
 
-@BuildWatcher(process.env.PROFILE === 'prod')
+@BuildWatcher(process.env.PROFILE !== 'prod')
 export class GamePlatform {
   public engine: Engine;
   public debug: Debug = new Debug();
