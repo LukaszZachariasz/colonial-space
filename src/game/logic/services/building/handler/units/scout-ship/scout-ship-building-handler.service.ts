@@ -16,7 +16,7 @@ import {selectUnitById} from '../../../../../store/unit/unit.selectors';
 @HasTourEffects()
 export class ScoutShipBuildingHandlerService extends UnitHandlerService {
     constructor() {
-        super(BuildingObjectType.COLONIAL_SHIP);
+        super(BuildingObjectType.SCOUT_SHIP);
     }
     
     public createModel(id: string): UnitModel {
