@@ -1,13 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {MapGenerator} from '../../store-generator/map-generator/map.generator';
-import {SquareState} from '../../store/map/square/square.state';
 import {Subject} from 'rxjs';
-import {UnitState} from '../../store/unit/unit.state';
-import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
-import {isAsteroid} from '../../store/territory/asteroid/is-asteroid';
-import {isBlackHole} from '../../store/territory/black-hole/is-black-hole';
-import {isStar} from '../../store/territory/star/is-star';
 import {logic} from '../../../game';
+import {MapGenerator} from '../../store-generator/map-generator/map.generator';
 import {removeFogOfWar, setSquareUnitId} from '../../store/map/map.slice';
 import {
     selectSquareArrayPosition,
@@ -16,9 +10,15 @@ import {
     selectSquareByUnitId,
     selectSquares
 } from '../../store/map/square/square.selectors';
+import {SquareState} from '../../store/map/square/square.state';
+import {store} from '../../store/store';
+import {isAsteroid} from '../../store/territory/asteroid/is-asteroid';
+import {isBlackHole} from '../../store/territory/black-hole/is-black-hole';
+import {isStar} from '../../store/territory/star/is-star';
 import {selectTerritoryById} from '../../store/territory/territory.selectors';
 import {selectUnitById} from '../../store/unit/unit.selectors';
-import {store} from '../../store/store';
+import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
+import {UnitState} from '../../store/unit/unit.state';
 
 const PathFinding = require('pathfinding');
 
@@ -50,23 +50,26 @@ export class UnitMovementService {
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
         store.dispatch(clearUnitPlanningMovement(unitId));
 
-        const grid = new PathFinding.Grid(MapGenerator.MapHeight, MapGenerator.MapWidth);
+        const grid = new PathFinding.Grid(MapGenerator.MapWidth, MapGenerator.MapHeight);
 
         selectSquares()
             .forEach((squareRow: SquareState[], i: number) => {
                 squareRow.forEach((square: SquareState, j: number) => {
-                    grid.setWalkableAt(i, j, this.isWalkable(square));
+                    grid.setWalkableAt(j, i, this.isWalkable(square));
                 });
             });
 
         const startSquare: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
         const finalSquare: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
 
+        console.log(startSquare, finalSquare);
+
         new PathFinding.AStarFinder({
             allowDiagonal: true
         })
             .findPath(startSquare.x, startSquare.y, finalSquare.x, finalSquare.y, grid)
             .forEach(([x, y]: [number, number]) => {
+                console.log(x, y);
                 store.dispatch(addUnitPlanningMovement({
                     id: unitId,
                     plannedMovementId: selectSquareByArrayPosition(new BABYLON.Vector2(x, y)).id
