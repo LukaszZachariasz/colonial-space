@@ -1,7 +1,13 @@
 import * as BABYLON from 'babylonjs';
-import {Subject} from 'rxjs';
-import {logic} from '../../../game';
 import {MapGenerator} from '../../store-generator/map-generator/map.generator';
+import {SquareState} from '../../store/map/square/square.state';
+import {Subject} from 'rxjs';
+import {UnitState} from '../../store/unit/unit.state';
+import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
+import {isAsteroid} from '../../store/territory/asteroid/is-asteroid';
+import {isBlackHole} from '../../store/territory/black-hole/is-black-hole';
+import {isStar} from '../../store/territory/star/is-star';
+import {logic} from '../../../game';
 import {removeFogOfWar, setSquareUnitId} from '../../store/map/map.slice';
 import {
     selectSquareArrayPosition,
@@ -10,15 +16,9 @@ import {
     selectSquareByUnitId,
     selectSquares
 } from '../../store/map/square/square.selectors';
-import {SquareState} from '../../store/map/square/square.state';
-import {store} from '../../store/store';
-import {isAsteroid} from '../../store/territory/asteroid/is-asteroid';
-import {isBlackHole} from '../../store/territory/black-hole/is-black-hole';
-import {isStar} from '../../store/territory/star/is-star';
 import {selectTerritoryById} from '../../store/territory/territory.selectors';
 import {selectUnitById} from '../../store/unit/unit.selectors';
-import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
-import {UnitState} from '../../store/unit/unit.state';
+import {store} from '../../store/store';
 
 const PathFinding = require('pathfinding');
 
@@ -61,8 +61,6 @@ export class UnitMovementService {
 
         const startSquare: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
         const finalSquare: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
-
-        console.log(startSquare, finalSquare);
 
         new PathFinding.AStarFinder({
             allowDiagonal: true
