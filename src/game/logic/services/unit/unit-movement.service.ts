@@ -1,16 +1,26 @@
 import * as BABYLON from 'babylonjs';
+import {MapGenerator} from '../../store-generator/map-generator/map.generator';
+import {SquareState} from '../../store/map/square/square.state';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../store/unit/unit.state';
 import {addUnitPlanningMovement, clearUnitPlanningMovement, moveUnit} from '../../store/unit/unit.slice';
+import {isAsteroid} from '../../store/territory/asteroid/is-asteroid';
+import {isBlackHole} from '../../store/territory/black-hole/is-black-hole';
+import {isStar} from '../../store/territory/star/is-star';
 import {logic} from '../../../game';
 import {removeFogOfWar, setSquareUnitId} from '../../store/map/map.slice';
 import {
     selectSquareArrayPosition,
     selectSquareByArrayPosition,
-    selectSquareById, selectSquareByUnitId
+    selectSquareById,
+    selectSquareByUnitId,
+    selectSquares
 } from '../../store/map/square/square.selectors';
+import {selectTerritoryById} from '../../store/territory/territory.selectors';
 import {selectUnitById} from '../../store/unit/unit.selectors';
 import {store} from '../../store/store';
+
+const PF = require('pathfinding');
 
 export class UnitMovementService {
     public addedPlanMovement$ = new Subject<string>();
@@ -32,25 +42,40 @@ export class UnitMovementService {
     }
 
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
-        const destination: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
-        let currentDimensions: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
-
         store.dispatch(clearUnitPlanningMovement(unitId));
 
-        while (destination.x !== currentDimensions.x || destination.y !== currentDimensions.y) {
-            currentDimensions = new BABYLON.Vector2(
-                destination.x === currentDimensions.x ? currentDimensions.x :
-                    destination.x > currentDimensions.x ? currentDimensions.x + 1 : currentDimensions.x - 1,
+        const grid = new PF.Grid(MapGenerator.MapHeight, MapGenerator.MapWidth);
 
-                destination.y === currentDimensions.y ? currentDimensions.y :
-                    destination.y > currentDimensions.y ? currentDimensions.y + 1 : currentDimensions.y - 1
-            );
+        selectSquares()
+            .forEach((row: SquareState[], i: number) => {
+                row.forEach((el: SquareState, j: number) => {
+                    let isWalkable = true;
+                    const territory = selectTerritoryById(el.territoryId);
 
-            store.dispatch(addUnitPlanningMovement({
-                id: unitId,
-                plannedMovementId: selectSquareByArrayPosition(currentDimensions).id
-            }));
-        }
+                    territory && isAsteroid(territory) && (isWalkable = false);
+                    territory && isStar(territory) && (isWalkable = false);
+                    territory && isBlackHole(territory) && (isWalkable = false);
+                    el.unitId && (isWalkable = false);
+
+                    grid.setWalkableAt(j, i, isWalkable);
+                });
+            });
+
+
+        const startSquare: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
+        const finalSquare: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
+
+        new PF.AStarFinder({
+            allowDiagonal: true
+        })
+            .findPath(startSquare.x, startSquare.y, finalSquare.x, finalSquare.y, grid)
+            .forEach(([x, y]: [number, number]) => {
+                store.dispatch(addUnitPlanningMovement({
+                    id: unitId,
+                    plannedMovementId: selectSquareByArrayPosition(new BABYLON.Vector2(x, y)).id
+                }));
+            });
+
         this.addedPlanMovement$.next(unitId);
     }
 

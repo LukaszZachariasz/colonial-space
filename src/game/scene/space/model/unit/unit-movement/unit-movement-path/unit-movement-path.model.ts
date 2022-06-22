@@ -1,5 +1,9 @@
 import * as BABYLON from 'babylonjs';
-import {selectSquareById, selectSquareByUnitId} from '../../../../../../logic/store/map/square/square.selectors';
+import {SquareState} from '../../../../../../logic/store/map/square/square.state';
+import {
+    selectSquareById,
+    selectSquareByUnitId
+} from '../../../../../../logic/store/map/square/square.selectors';
 import {selectUnitById} from '../../../../../../logic/store/unit/unit.selectors';
 
 export class UnitMovementPathModel {
@@ -40,8 +44,10 @@ export class UnitMovementPathModel {
     }
 
     private createPlannedMovementPoints(): void {
+        const startSquare: SquareState = selectSquareByUnitId(this.id);
+
         this.plannedMovementPoints = [];
-        this.plannedMovementPoints.push(new BABYLON.Vector3(selectSquareByUnitId(this.id).x, 0, selectSquareByUnitId(this.id).y));
+        this.plannedMovementPoints.push(new BABYLON.Vector3(startSquare.x, 0, startSquare.y));
         selectUnitById(this.id).movementPlanning.forEach((squareId: string) => {
             this.plannedMovementPoints.push(
                 new BABYLON.Vector3(selectSquareById(squareId).x, 0, selectSquareById(squareId).y)
