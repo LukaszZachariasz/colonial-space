@@ -1,10 +1,16 @@
 import * as BABYLON from 'babylonjs';
-import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
+import {GameObjectFromFile} from '../../../../../logic/game-object/game-object';
+import {ImportModelAbstract} from '../../../../../../engine/model-manager/model-elements/import-model';
 import {UnitModel} from '../unit.model';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
 
-export class ScoutShipModel extends UnitModel implements OnReady {
+@GameObjectFromFile({
+    name: 'ScoutShipModel',
+    meshUrl: 'resources/unit/scout-ship/',
+    meshName: 'scout_ship_01.glb'
+})
+export class ScoutShipModel extends UnitModel implements ImportModelAbstract {
     private actionManager: BABYLON.ActionManager;
 
     constructor(protected scene: BABYLON.Scene,
@@ -13,16 +19,12 @@ export class ScoutShipModel extends UnitModel implements OnReady {
     }
 
     public onImport(): Promise<BABYLON.ISceneLoaderAsyncResult> {
-        return BABYLON.SceneLoader.ImportMeshAsync(
-            '',
-            'resources/unit/scout-ship/',
-            'scout_ship_01.glb',
-            this.scene);
+        throw new Error('Method not implemented.');
     }
 
-    public gameOnReady(): void {
+    public gameAfterCreated(): void {
         this.actionMesh = this.meshes[0].getChildMeshes()[0];
-        this.mesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
+        this.meshes[0].position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
 
         super.gameOnReady();
 
@@ -47,5 +49,9 @@ export class ScoutShipModel extends UnitModel implements OnReady {
             })
         );
         this.actionMesh.actionManager = this.actionManager;
+    }
+
+    public gameOnReady(): void {
+
     }
 }

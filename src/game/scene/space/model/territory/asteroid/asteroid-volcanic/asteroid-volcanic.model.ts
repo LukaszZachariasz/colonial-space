@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {GameObjectFromFile} from '../../../../../../logic/game-object/game-object';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
 import {TerritoryModel} from '../../territory.model';
@@ -6,6 +7,12 @@ import {TerritoryState} from '../../../../../../logic/store/territory/territory.
 import {TerritoryType} from '../../../../../../logic/store/territory/territory-type';
 import {selectSquareByTerritoryId} from '../../../../../../logic/store/map/square/square.selectors';
 
+
+@GameObjectFromFile({
+    name: 'AsteroidVolcanicModel',
+    meshUrl: 'resources/territory/asteroid/asteroid-volcanic/',
+    meshName: 'asteroid_01.glb'
+})
 export class AsteroidVolcanicModel extends TerritoryModel implements OnReady {
     public type: TerritoryType = TerritoryType.ASTEROID_VOLCANIC;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
@@ -15,15 +22,6 @@ export class AsteroidVolcanicModel extends TerritoryModel implements OnReady {
     constructor(public scene: BABYLON.Scene,
                 public state: TerritoryState) {
         super(scene, state);
-    }
-
-    public onImport(): Promise<BABYLON.ISceneLoaderAsyncResult> {
-        return BABYLON.SceneLoader.ImportMeshAsync(
-            '',
-            'resources/territory/asteroid/asteroid-volcanic/',
-            'asteroid_01.glb',
-            this.scene
-        );
     }
 
     public gameOnReady(): void {

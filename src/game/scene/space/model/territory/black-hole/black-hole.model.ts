@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {GameObjectFromFile} from '../../../../../logic/game-object/game-object';
 import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
 import {SquareState} from '../../../../../logic/store/map/square/square.state';
 import {TerritoryModel} from '../territory.model';
@@ -6,6 +7,11 @@ import {TerritoryState} from '../../../../../logic/store/territory/territory.sta
 import {TerritoryType} from '../../../../../logic/store/territory/territory-type';
 import {selectSquareByTerritoryId} from '../../../../../logic/store/map/square/square.selectors';
 
+@GameObjectFromFile({
+    name: 'BlackHoleModel',
+    meshUrl: 'resources/territory/black-hole/',
+    meshName: 'black-hole_01.glb'
+})
 export class BlackHoleModel extends TerritoryModel implements OnReady {
     public type: TerritoryType = TerritoryType.BLACK_HOLE;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
@@ -15,15 +21,6 @@ export class BlackHoleModel extends TerritoryModel implements OnReady {
     constructor(public scene: BABYLON.Scene,
                 public state: TerritoryState) {
         super(scene, state);
-    }
-
-    public onImport(): Promise<BABYLON.ISceneLoaderAsyncResult> {
-        return BABYLON.SceneLoader.ImportMeshAsync(
-            '',
-            'resources/territory/black-hole/',
-            'black-hole_01.glb',
-            this.scene
-        );
     }
 
     public gameOnReady(): void {

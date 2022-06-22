@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
+import {ImportModelAbstract} from '../../../../../engine/model-manager/model-elements/import-model';
 import {OnDestroy} from '../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../engine/lifecycle/on-ready/on-ready';
 import {Subscription, filter, tap} from 'rxjs';
@@ -9,7 +9,7 @@ import {UnitState} from '../../../../logic/store/unit/unit.state';
 import {logic} from '../../../../game';
 import {modelManager} from 'engine';
 
-export abstract class UnitModel extends ImportModel implements OnReady, OnDestroy {
+export abstract class UnitModel extends ImportModelAbstract implements OnReady, OnDestroy {
     public unitMovement: UnitMovement;
     public unitSignModel: UnitSignModel;
     public actionMesh: BABYLON.AbstractMesh;
@@ -24,7 +24,7 @@ export abstract class UnitModel extends ImportModel implements OnReady, OnDestro
 
     public gameOnReady(): void {
         this.createUnitSignModel();
-        this.unitMovement = new UnitMovement(this.scene, this.state.id, this.mesh);
+        this.unitMovement = new UnitMovement(this.scene, this.state.id, this.meshes[0]);
 
         this.removeUnitSubscription = logic().unitService.removeUnitId$.pipe(
             filter((id: string) => this.state.id === id),
