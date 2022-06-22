@@ -10,6 +10,7 @@ export class ModelManager {
     public addModel<T extends Model<ModelElement>>(model: T): T {
         if (model instanceof ImportModelAbstract) {
 
+            console.log('xd');
         } else if (model instanceof SimpleModel || model instanceof ParticleSystemModel) {
             model.onCreate();
             this.createLifecycle(model);
