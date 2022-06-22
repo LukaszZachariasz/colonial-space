@@ -13,7 +13,7 @@ export interface UnitState<T extends {} = any> {
     movementPoints: number;
     movementPlanning: string[];
     movementPointsLeft: number;
-    movementBlocked: boolean;
+    isWorking: boolean;
 
     scoutRange: number;
 
