@@ -47,20 +47,11 @@ export class UnitMovementService {
         const grid = new PathFinding.Grid(MapGenerator.MapHeight, MapGenerator.MapWidth);
 
         selectSquares()
-            .forEach((row: SquareState[], i: number) => {
-                row.forEach((el: SquareState, j: number) => {
-                    const territory = selectTerritoryById(el.territoryId);
-                    let isWalkable = true;
-
-                    territory && isAsteroid(territory) && (isWalkable = false);
-                    territory && isStar(territory) && (isWalkable = false);
-                    territory && isBlackHole(territory) && (isWalkable = false);
-                    el.unitId && (isWalkable = false);
-
-                    grid.setWalkableAt(i, j, isWalkable);
+            .forEach((squareRow: SquareState[], i: number) => {
+                squareRow.forEach((square: SquareState, j: number) => {
+                    grid.setWalkableAt(i, j, this.isWalkable(square));
                 });
             });
-
 
         const startSquare: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
         const finalSquare: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
@@ -84,18 +75,23 @@ export class UnitMovementService {
         if (!unit.movementPlanning.length || !unit.movementPointsLeft) {
             return undefined;
         }
-        const movement = Math.min(unit.movementPlanning.length, unit.movementPointsLeft);
-        const plannedId = unit.movementPlanning[movement - 1];
+        const movementPoints = Math.min(unit.movementPlanning.length, unit.movementPointsLeft);
+        const squarePlannedId = unit.movementPlanning[movementPoints - 1];
 
-        for (let i = 0; i < movement; i++) {
+        if (!this.isWalkable(selectSquareById(squarePlannedId))) {
+            store.dispatch(clearUnitPlanningMovement(unitId));
+            return undefined;
+        }
+
+        for (let i = 0; i < movementPoints; i++) {
             this.scoutTerritory(unit.movementPlanning[i], unit.scoutRange);
         }
 
         store.dispatch(setSquareUnitId({unitId: null, squareId: selectSquareByUnitId(unitId).id}));
-        store.dispatch(moveUnit({id: unitId, amount: movement}));
-        store.dispatch(setSquareUnitId({unitId: unitId, squareId: plannedId}));
+        store.dispatch(moveUnit({id: unitId, amount: movementPoints}));
+        store.dispatch(setSquareUnitId({unitId: unitId, squareId: squarePlannedId}));
 
-        const destinationSquare = selectSquareById(plannedId);
+        const destinationSquare = selectSquareById(squarePlannedId);
         return new BABYLON.Vector2(destinationSquare.x, destinationSquare.y);
     }
 
@@ -107,5 +103,17 @@ export class UnitMovementService {
             },
             range: range
         }));
+    }
+
+    private isWalkable(square: SquareState): boolean {
+        const territory = selectTerritoryById(square.territoryId);
+        let isWalkable = true;
+
+        territory && isAsteroid(territory) && (isWalkable = false);
+        territory && isStar(territory) && (isWalkable = false);
+        territory && isBlackHole(territory) && (isWalkable = false);
+        square.unitId && (isWalkable = false);
+
+        return isWalkable;
     }
 }
