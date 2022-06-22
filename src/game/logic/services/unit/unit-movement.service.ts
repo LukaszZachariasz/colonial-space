@@ -20,7 +20,7 @@ import {selectTerritoryById} from '../../store/territory/territory.selectors';
 import {selectUnitById} from '../../store/unit/unit.selectors';
 import {store} from '../../store/store';
 
-const PF = require('pathfinding');
+const PathFinding = require('pathfinding');
 
 export class UnitMovementService {
     public addedPlanMovement$ = new Subject<string>();
@@ -44,20 +44,20 @@ export class UnitMovementService {
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
         store.dispatch(clearUnitPlanningMovement(unitId));
 
-        const grid = new PF.Grid(MapGenerator.MapHeight, MapGenerator.MapWidth);
+        const grid = new PathFinding.Grid(MapGenerator.MapHeight, MapGenerator.MapWidth);
 
         selectSquares()
             .forEach((row: SquareState[], i: number) => {
                 row.forEach((el: SquareState, j: number) => {
-                    let isWalkable = true;
                     const territory = selectTerritoryById(el.territoryId);
+                    let isWalkable = true;
 
                     territory && isAsteroid(territory) && (isWalkable = false);
                     territory && isStar(territory) && (isWalkable = false);
                     territory && isBlackHole(territory) && (isWalkable = false);
                     el.unitId && (isWalkable = false);
 
-                    grid.setWalkableAt(j, i, isWalkable);
+                    grid.setWalkableAt(i, j, isWalkable);
                 });
             });
 
@@ -65,7 +65,7 @@ export class UnitMovementService {
         const startSquare: BABYLON.Vector2 = selectSquareArrayPosition(selectSquareByUnitId(unitId).id);
         const finalSquare: BABYLON.Vector2 = selectSquareArrayPosition(destinationSquareId);
 
-        new PF.AStarFinder({
+        new PathFinding.AStarFinder({
             allowDiagonal: true
         })
             .findPath(startSquare.x, startSquare.y, finalSquare.x, finalSquare.y, grid)
