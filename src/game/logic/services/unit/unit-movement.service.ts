@@ -67,7 +67,6 @@ export class UnitMovementService {
         })
             .findPath(startSquare.x, startSquare.y, finalSquare.x, finalSquare.y, grid)
             .forEach(([x, y]: [number, number]) => {
-                console.log(x, y);
                 store.dispatch(addUnitPlanningMovement({
                     id: unitId,
                     plannedMovementId: selectSquareByArrayPosition(new BABYLON.Vector2(x, y)).id
