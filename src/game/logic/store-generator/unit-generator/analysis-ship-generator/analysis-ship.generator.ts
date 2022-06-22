@@ -17,7 +17,7 @@ export class AnalysisShipGenerator {
             movementPoints: 1,
             movementPointsLeft: 1,
             movementPlanning: [],
-            movementBlocked: false,
+            isWorking: false,
             scoutRange: 1,
             data: {
                 isAnalysing: false,

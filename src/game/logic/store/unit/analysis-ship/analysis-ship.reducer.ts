@@ -8,12 +8,12 @@ export const analysisShipReducer = {
         const unit: UnitState<AnalysisShipState> = state.units.find((el: UnitState) => el.id === action.payload.id);
         unit.data.isAnalysing = true;
         unit.movementPlanning = [];
-        unit.movementBlocked = true;
+        unit.isWorking = true;
     },
     stopAnalyse: (state: UnitSliceState, action: PayloadAction<UnitState>): void => {
         const unit: UnitState<AnalysisShipState> = state.units.find((el: UnitState) => el.id === action.payload.id);
         unit.data.isAnalysing = false;
-        unit.movementBlocked = false;
+        unit.isWorking = false;
     },
     reduceAnalysis: (state: UnitSliceState, action: PayloadAction<UnitState>): void => {
         const unit: UnitState<AnalysisShipState> = state.units.find((el: UnitState) => el.id === action.payload.id);

@@ -32,7 +32,13 @@ export class UnitMovementService {
         }
         const unitState: UnitState = selectUnitById(logic().selectedUnitService.selectedUnitId$.value);
 
-        if (unitState.movementBlocked) {
+        if (!this.isWalkable(selectSquareById(squareId))) {
+            store.dispatch(clearUnitPlanningMovement(unitState.id));
+            this.addedPlanMovement$.next(unitState.id);
+            return;
+        }
+
+        if (unitState.isWorking) {
             return;
         } else if (unitState.movementPointsLeft && unitState.movementPlanning[unitState.movementPlanning.length - 1] === squareId) {
             this.moveUnit$.next(unitState.id);
@@ -84,6 +90,11 @@ export class UnitMovementService {
         }
 
         for (let i = 0; i < movementPoints; i++) {
+            if (i != 0 && !this.isWalkable(selectSquareById(unit.movementPlanning[i]))) {
+                store.dispatch(clearUnitPlanningMovement(unitId));
+                return;
+            }
+
             this.scoutTerritory(unit.movementPlanning[i], unit.scoutRange);
         }
 
@@ -106,14 +117,15 @@ export class UnitMovementService {
     }
 
     private isWalkable(square: SquareState): boolean {
-        const territory = selectTerritoryById(square.territoryId);
         let isWalkable = true;
 
-        territory && isAsteroid(territory) && (isWalkable = false);
-        territory && isStar(territory) && (isWalkable = false);
-        territory && isBlackHole(territory) && (isWalkable = false);
-        square.unitId && (isWalkable = false);
-
+        if (!square.fogOfWar) {
+            const territory = selectTerritoryById(square.territoryId);
+            territory && isAsteroid(territory) && (isWalkable = false);
+            territory && isStar(territory) && (isWalkable = false);
+            territory && isBlackHole(territory) && (isWalkable = false);
+            square.unitId && (isWalkable = false);
+        }
         return isWalkable;
     }
 }

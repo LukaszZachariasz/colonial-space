@@ -17,7 +17,7 @@ export class ColonialShipGenerator {
             movementPoints: 1,
             movementPointsLeft: 1,
             movementPlanning: [],
-            movementBlocked: false,
+            isWorking: false,
             scoutRange: 1,
             data: {}
         };
