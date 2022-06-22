@@ -13,11 +13,11 @@ export class GalaxyDustModel extends ParticleSystemModel {
         this.particleSystem.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', this.scene);
 
         this.particleSystem.addColorGradient(0, new BABYLON.Color4(0.5, 0.5, 0.5, 0));
-        this.particleSystem.addColorGradient(0.2, new BABYLON.Color4(0.5, 0.5, 0.5, 0.4));
-        this.particleSystem.addColorGradient(0.3, new BABYLON.Color4(0.5, 0.5, 0.5, 0.5));
-        this.particleSystem.addColorGradient(0.5, new BABYLON.Color4(0.5, 0.5, 0.5, 0.7));
-        this.particleSystem.addColorGradient(0.7, new BABYLON.Color4(0.5, 0.5, 0.5, 0.4));
-        this.particleSystem.addColorGradient(0.9, new BABYLON.Color4(0.5, 0.5, 0.5, 0.2));
+        this.particleSystem.addColorGradient(0.2, new BABYLON.Color4(0.5, 0.5, 0.5, 0.5));
+        this.particleSystem.addColorGradient(0.3, new BABYLON.Color4(0.5, 0.5, 0.5, 1));
+        this.particleSystem.addColorGradient(0.5, new BABYLON.Color4(0.5, 0.5, 0.5, 1));
+        this.particleSystem.addColorGradient(0.7, new BABYLON.Color4(0.5, 0.5, 0.5, 1));
+        this.particleSystem.addColorGradient(0.9, new BABYLON.Color4(0.5, 0.5, 0.5, 0.3));
         this.particleSystem.addColorGradient(1, new BABYLON.Color4(0.5, 0.5, 0.5, 0));
 
         this.particleSystem.minSize = 0.1;
@@ -26,7 +26,7 @@ export class GalaxyDustModel extends ParticleSystemModel {
         this.particleSystem.minLifeTime = 3;
         this.particleSystem.maxLifeTime = 5;
 
-        this.particleSystem.emitRate = 400;
+        this.particleSystem.emitRate = 1600;
 
         this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
         this.particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
