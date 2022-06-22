@@ -1,6 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {planetReducer} from './planet/planet.reducer';
 import {TerritoryState} from './territory.state';
+import {planetReducer} from './planet/planet.reducer';
 
 export interface TerritorySliceState {
     territories: TerritoryState[];
