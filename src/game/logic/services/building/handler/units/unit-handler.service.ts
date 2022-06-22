@@ -54,8 +54,6 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                this;
-                debugger;
                 modelManager().addModel(this.createModel(unit.id));
 
                 store.dispatch(setProductionToBeginning({
