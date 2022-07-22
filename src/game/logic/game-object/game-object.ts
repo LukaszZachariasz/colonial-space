@@ -26,17 +26,9 @@ export function GameObjectFromFile(definition: GameObjectDefinition): any {
                                 this[key] = result[key];
                             });
                     })
-                    .then(() => isAfterCreated(this) && this.gameAfterCreated());
-
-                if (isOnDestroy(this)) {
-                    this.mesh.onDisposeObservable.add(() => {
-                        this.gameOnDestroy();
-                    });
-                }
-
-                if (isOnReady(this)) {
-                    this.gameOnReady();
-                }
+                    .then(() => isAfterCreated(this) && this.gameAfterCreated())
+                    .then(() => isOnDestroy(this) && this.gameOnDestroy())
+                    .then(() => isOnReady(this) && this.gameOnReady());
             }
         };
     };
