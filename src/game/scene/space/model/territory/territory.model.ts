@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../animations/fade-in/fade-in.animation';
-import {ImportModel} from '../../../../../engine/model-manager/model-elements/import-model';
+import {ImportModelAbstract} from '../../../../../engine/model-manager/model-elements/import-model';
 import {OnReady} from '../../../../../engine/lifecycle/on-ready/on-ready';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../../logic/store/territory/territory.state';
@@ -9,7 +9,7 @@ import {logic} from '../../../../game';
 import {modelManager} from 'engine';
 import {tap} from 'rxjs';
 
-export abstract class TerritoryModel extends ImportModel implements OnReady {
+export abstract class TerritoryModel extends ImportModelAbstract implements OnReady {
     public abstract type: TerritoryType;
 
     public actionMesh: BABYLON.AbstractMesh;
@@ -31,7 +31,7 @@ export abstract class TerritoryModel extends ImportModel implements OnReady {
 
     private createTerritorySignModel(): void {
         this.territorySignModel = modelManager().addModel(new TerritorySignModel(this.scene, this.state));
-        this.territorySignModel.mesh.parent = this.mesh;
+        this.territorySignModel.mesh.parent = this.primaryMesh;
         this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }
 
