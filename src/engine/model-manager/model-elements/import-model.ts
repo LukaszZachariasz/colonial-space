@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 
 
 export abstract class ImportModelAbstract {
-    private _mesh: BABYLON.AbstractMesh;
+    private _primaryMesh: BABYLON.AbstractMesh;
     private _animationGroups: BABYLON.AnimationGroup[];
     private _geometries: BABYLON.Geometry[];
     private _lights: BABYLON.Light[];
@@ -11,12 +11,12 @@ export abstract class ImportModelAbstract {
     private _skeletons: BABYLON.Skeleton[];
     private _transformNodes: BABYLON.TransformNode[];
 
-    public get mesh(): BABYLON.AbstractMesh {
-        return this._mesh;
+    public get primaryMesh(): BABYLON.AbstractMesh {
+        return this._primaryMesh;
     }
 
-    public set mesh(value: BABYLON.AbstractMesh) {
-        this._mesh = value;
+    public set primaryMesh(value: BABYLON.AbstractMesh) {
+        this._primaryMesh = value;
     }
 
     public get animationGroups(): BABYLON.AnimationGroup[] {

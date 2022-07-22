@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {AfterCreated} from '../../../../../../../engine/lifecycle/after-created/after-created';
 import {GameObjectFromFile} from '../../../../../../logic/game-object/game-object';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {SquareState} from '../../../../../../logic/store/map/square/square.state';
@@ -13,42 +14,20 @@ import {selectSquareByTerritoryId} from '../../../../../../logic/store/map/squar
     meshUrl: 'resources/territory/asteroid/asteroid-volcanic/',
     meshName: 'asteroid_01.glb'
 })
-export class AsteroidVolcanicModel extends TerritoryModel implements OnReady {
+export class AsteroidVolcanicModel extends TerritoryModel implements OnReady, AfterCreated {
     public type: TerritoryType = TerritoryType.ASTEROID_VOLCANIC;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
-
-    private actionManager: BABYLON.ActionManager;
 
     constructor(public scene: BABYLON.Scene,
                 public state: TerritoryState) {
         super(scene, state);
     }
 
+    public gameAfterCreated(): void {
+        this.primaryMesh.position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
+    }
+
     public gameOnReady(): void {
-        this.mesh.position = new BABYLON.Vector3(this.square.x, 5, this.square.y);
-        this.actionMesh = this.mesh.getChildMeshes()[0];
         super.gameOnReady();
-
-        this.actionManager = new BABYLON.ActionManager(this.scene);
-        this.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                this.actionMesh.overlayColor = new BABYLON.Color3(0.1, 1, 0.2);
-                this.actionMesh.overlayAlpha = 0.3;
-                this.actionMesh.renderOverlay = true;
-            })
-        );
-
-        this.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                this.select();
-            })
-        );
-
-        this.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                this.actionMesh.renderOverlay = false;
-            })
-        );
-        this.actionMesh.actionManager = this.actionManager;
     }
 }
