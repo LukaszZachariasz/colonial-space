@@ -1,8 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {AfterCreated} from '../../../../../../engine/lifecycle/after-created/after-created';
-import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
-import {ImportModelAbstract} from '../../../../../../engine/model-manager/model-elements/import-model';
 import {GameObjectFromFile} from '../../../../../logic/game-object/game-object';
+import {OnReady} from '../../../../../../engine/lifecycle/on-ready/on-ready';
 import {UnitModel} from '../unit.model';
 import {UnitState} from '../../../../../logic/store/unit/unit.state';
 import {selectSquareByUnitId} from '../../../../../logic/store/map/square/square.selectors';
