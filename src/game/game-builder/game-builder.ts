@@ -15,7 +15,7 @@ export class GameBuilder {
     public build(): void {
         const spaceScene = new SpaceScene();
         sceneManager().register(spaceScene);
-        modelManager().addModel(new MapModel(spaceScene.scene));
+        modelManager().addSimpleModel(new MapModel(spaceScene.scene));
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)

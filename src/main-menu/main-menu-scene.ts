@@ -20,7 +20,7 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
 
     public gameAfterCreated(): void {
         this.camera.fov = 1.3;
-        modelManager().addModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
+        modelManager().addSimpleModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
         this.initSceneContent();
         this.initMainMenuScenePostEffects();
     }

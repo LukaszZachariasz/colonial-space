@@ -15,7 +15,7 @@ export class MapModel extends SimpleModel<BABYLON.TransformNode> {
     public onCreate(): void {
         this.mesh = new BABYLON.TransformNode('Map', this.scene);
         selectSquares().flat().forEach((squareState: SquareState) => {
-            this.squareModels.push(modelManager().addModel(new SquareModel(this.scene, squareState)));
+            this.squareModels.push(modelManager().addSimpleModel(new SquareModel(this.scene, squareState)));
         });
 
         this.squareModels.forEach((el: SquareModel) => el.mesh.parent = this.mesh);

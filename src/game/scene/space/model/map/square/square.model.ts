@@ -35,7 +35,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createFogOfWarModel(): void {
-        this.fogOfWarModel = modelManager().addModel(new FogOfWarModel(this.scene, this.state));
+        this.fogOfWarModel = modelManager().addSimpleModel(new FogOfWarModel(this.scene, this.state));
         this.fogOfWarModel.mesh.parent = this.mesh;
         this.fogOfWarModel.emitter.parent = this.mesh;
         this.fogOfWarRemovedSubscription = this.fogOfWarModel.destroyed$.pipe(
@@ -46,7 +46,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareBorderModel(): void {
-        this.squareBorderModel = modelManager().addModel(new SquareBorderModel(this.scene));
+        this.squareBorderModel = modelManager().addSimpleModel(new SquareBorderModel(this.scene));
         this.squareBorderModel.mesh.parent = this.mesh;
         if (this.state.playerId) {
             this.squareBorderModel.setPlayer();
@@ -54,7 +54,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareSurfaceModel(): void {
-        this.squareSurfaceModel = modelManager().addModel(new SquareSurfaceModel(this.scene, this.state));
+        this.squareSurfaceModel = modelManager().addSimpleModel(new SquareSurfaceModel(this.scene, this.state));
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 

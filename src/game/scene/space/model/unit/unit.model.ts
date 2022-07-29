@@ -34,7 +34,7 @@ export abstract class UnitModel extends ImportModelAbstract implements AfterCrea
     }
 
     public createUnitSignModel(): void {
-        this.unitSignModel = modelManager().addModel(new UnitSignModel(this.scene, this.state));
+        this.unitSignModel = modelManager().addSimpleModel(new UnitSignModel(this.scene, this.state));
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }
