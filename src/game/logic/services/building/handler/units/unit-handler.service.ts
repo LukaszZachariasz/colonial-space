@@ -52,7 +52,7 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                modelManager().addModel(this.createModel(unit.id));
+                modelManager().addImportModel(this.createModel(unit.id));
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id

@@ -18,21 +18,21 @@ export class TerritoryFactory {
     public static create(scene: BABYLON.Scene, territoryState: TerritoryState): TerritoryModel {
         switch (territoryState.type) {
             case TerritoryType.PLANET_GREEN:
-                return modelManager().addModel(new PlanetGreenModel(scene, territoryState));
+                return modelManager().addImportModel(new PlanetGreenModel(scene, territoryState));
             case TerritoryType.PLANET_SAND:
-                return modelManager().addModel(new PlanetSandModel(scene, territoryState));
+                return modelManager().addImportModel(new PlanetSandModel(scene, territoryState));
             case TerritoryType.PLANET_RINGED:
-                return modelManager().addModel(new PlanetRingedModel(scene, territoryState));
+                return modelManager().addImportModel(new PlanetRingedModel(scene, territoryState));
             case TerritoryType.PLANET_METAL:
-                return modelManager().addModel(new PlanetMetalModel(scene, territoryState));
+                return modelManager().addImportModel(new PlanetMetalModel(scene, territoryState));
             case TerritoryType.STAR_SOLAR:
-                return modelManager().addModel(new StarSolarModel(scene, territoryState));
+                return modelManager().addImportModel(new StarSolarModel(scene, territoryState));
             case TerritoryType.BLACK_HOLE:
-                return modelManager().addModel(new BlackHoleModel(scene, territoryState));
+                return modelManager().addImportModel(new BlackHoleModel(scene, territoryState));
             case TerritoryType.SATELLITE_MOON:
-                return modelManager().addModel(new SatelliteMoonModel(scene, territoryState));
+                return modelManager().addImportModel(new SatelliteMoonModel(scene, territoryState));
             case TerritoryType.ASTEROID_VOLCANIC:
-                return modelManager().addModel(new AsteroidVolcanicModel(scene, territoryState));
+                return modelManager().addImportModel(new AsteroidVolcanicModel(scene, territoryState));
         }
     }
 }

@@ -15,7 +15,7 @@ export class LoadingScene extends Scene<BABYLON.FreeCamera, LoadingGui> implemen
     public gui: LoadingGui = new LoadingGui();
 
     public gameAfterCreated(): void {
-        modelManager().addModel(new SpaceSkybox(this.scene));
+        modelManager().addSimpleModel(new SpaceSkybox(this.scene));
 
         this.scene.registerBeforeRender(() => {
             this.camera.fov -= 0.0001;

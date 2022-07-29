@@ -11,11 +11,11 @@ export class UnitFactory {
     public static create(scene: BABYLON.Scene, unitState: UnitState): UnitModel {
         switch (unitState.type) {
             case UnitType.SCOUT:
-                return modelManager().addModel(new ScoutShipModel(scene, unitState));
+                return modelManager().addImportModel(new ScoutShipModel(scene, unitState));
             case UnitType.ANALYSIS:
-                return modelManager().addModel(new AnalysisShipModel(scene, unitState));
+                return modelManager().addImportModel(new AnalysisShipModel(scene, unitState));
             case UnitType.COLONIAL:
-                return modelManager().addModel(new ColonialShipModel(scene, unitState));
+                return modelManager().addImportModel(new ColonialShipModel(scene, unitState));
         }
     }
 }
