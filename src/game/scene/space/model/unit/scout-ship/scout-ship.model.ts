@@ -23,6 +23,6 @@ export class ScoutShipModel extends UnitModel implements OnReady, AfterCreated {
 
     public gameOnReady(): void {
         this.primaryMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
-
+        super.gameOnReady();
     }
 }

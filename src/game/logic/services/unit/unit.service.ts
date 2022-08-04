@@ -3,6 +3,8 @@ import {HasTourEffects} from '../tour/tour-effect/has-tour-effects';
 import {Observable, Subject, Subscriber} from 'rxjs';
 import {TourEffectPriorityEnum} from '../tour/tour-effect/tour-effect-priority.enum';
 import {refillUnits, removeUnit} from '../../store/unit/unit.slice';
+import {selectSquareByUnitId} from '../../store/map/square/square.selectors';
+import {setSquareUnitId} from '../../store/map/map.slice';
 import {store} from '../../store/store';
 
 @HasTourEffects()
@@ -12,6 +14,10 @@ export class UnitService {
 
     public removeUnit(id: string): void {
         store.dispatch(removeUnit(id));
+        store.dispatch(setSquareUnitId({
+            squareId: selectSquareByUnitId(id).id,
+            unitId: null
+        }));
         this.removeUnitId$.next(id);
     }
 

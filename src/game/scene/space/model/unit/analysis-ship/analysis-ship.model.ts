@@ -24,5 +24,6 @@ export class AnalysisShipModel extends UnitModel implements OnReady, AfterCreate
     public gameOnReady(): void {
         this.actionMesh = this.primaryMesh.getChildMeshes().find((el: BABYLON.AbstractMesh) => el.name.toLowerCase().includes('body'));
         this.primaryMesh.position = new BABYLON.Vector3(selectSquareByUnitId(this.state.id).x + 3, 2, selectSquareByUnitId(this.state.id).y - 4);
+        super.gameOnReady();
     }
 }

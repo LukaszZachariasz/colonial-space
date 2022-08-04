@@ -10,6 +10,7 @@ export function HasTourEffects(): (constructor: any) => any {
 
         const overrideConstructor: any = function (...args: any[]) {
             const instance = new original(...args);
+            const tourEffects: TourEffect[] = [];
 
             setTimeout(() => {
                 let metadataKeys = Reflect.getMetadataKeys(instance);
@@ -17,15 +18,22 @@ export function HasTourEffects(): (constructor: any) => any {
                 metadataKeys.forEach((key: string) => {
                     const metadataValue = Reflect.getMetadata(key, instance);
 
-                    logic().tourService.addTourEffect(
-                        new TourEffect(
-                            metadataValue.priority,
-                            instance[metadataValue.fromTourFieldName],
-                            instance[metadataValue.toTourFieldName],
-                            metadataValue.effect.bind(instance)
-                        )
+                    const tourEffect = new TourEffect(
+                        metadataValue.priority,
+                        instance[metadataValue.fromTourFieldName],
+                        instance[metadataValue.toTourFieldName],
+                        metadataValue.effect.bind(instance)
                     );
+                    tourEffects.push(tourEffect);
+
+                    logic().tourService.addTourEffect(tourEffect);
                 });
+
+                instance.clearTourEffects = (): void => {
+                    tourEffects.forEach((effect: TourEffect) => {
+                        logic().tourService.removeTourEffect(effect);
+                    });
+                };
             }, 0);
 
             return instance;

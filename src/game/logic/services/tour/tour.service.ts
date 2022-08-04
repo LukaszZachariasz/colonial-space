@@ -56,6 +56,10 @@ export class TourService {
         this.tourEffectService.addTourEffect(effect);
     }
 
+    public removeTourEffect(effect: TourEffect): void {
+        this.tourEffectService.removeTourEffect(effect);
+    }
+
     public addTourBlocker(blocker: TourBlocker): void {
         this.tourBlockerService.addTourBlocker(blocker);
     }
