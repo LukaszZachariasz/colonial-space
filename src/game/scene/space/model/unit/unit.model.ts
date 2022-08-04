@@ -39,7 +39,6 @@ export abstract class UnitModel extends ImportModelAbstract implements AfterCrea
     }
 
     public gameOnReady(): void {
-        console.log('test');
         this.runEnterAnimation();
     }
 

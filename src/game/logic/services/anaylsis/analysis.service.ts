@@ -12,7 +12,7 @@ import {logic} from '../../../game';
 import {reduceAnalysis, startAnalyse, stopAnalyse} from '../../store/unit/unit.slice';
 import {selectSquareByUnitId} from '../../store/map/square/square.selectors';
 import {selectTerritoryById} from '../../store/territory/territory.selectors';
-import {selectUnitsByType} from '../../store/unit/unit.selectors';
+import {selectUnitById, selectUnitsByType} from '../../store/unit/unit.selectors';
 import {store} from '../../store/store';
 
 @HasTourEffects()
@@ -37,9 +37,6 @@ export class AnalysisService {
                 if (el.data.isAnalysing) {
                     const power = Math.min(el.data.analysisPower, el.data.analysisLeft);
                     store.dispatch(reduceAnalysis(el));
-                    if (el.data.analysisLeft === 0) {
-                        logic().unitService.removeUnit(el.id);
-                    }
 
                     const square = selectSquareByUnitId(el.id);
                     store.dispatch(analysePlanet({
@@ -51,6 +48,11 @@ export class AnalysisService {
                     if (territory.data.isAnalysed) {
                         this.stopAnalysis(el);
                         this.analyzedPlanetCompleted$.next(territory.id);
+                    }
+                    el = selectUnitById(el.id);
+
+                    if (el.data.analysisLeft === 0) {
+                        logic().unitService.removeUnit(el.id);
                     }
                 }
             });
