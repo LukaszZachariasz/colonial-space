@@ -7,6 +7,7 @@ import {store} from '../../store/store';
 
 @HasTourEffects()
 export class UnitService {
+    public addUnit$: Subject<string> = new Subject<string>();
     public removeUnitId$: Subject<string> = new Subject<string>();
 
     public removeUnit(id: string): void {

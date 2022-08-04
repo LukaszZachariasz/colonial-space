@@ -19,6 +19,8 @@ export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, On
         this.control.height = '20%';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.control.alpha = 1;
+        this.control.zIndex = 9999;
     }
 
     public gameOnReady(): void {
@@ -34,10 +36,11 @@ export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, On
         height = (height * this.camera.radius) / this.camera.upperRadiusLimit;
         this.widthInPercentage = width;
         this.heightInPercentage = height;
+
         this.control.width = this.widthInPercentage + '%';
         this.control.height = this.heightInPercentage + '%';
 
-        this.control.left = this.camera.getXPositionPercentage() * (1 - (this.widthInPercentage / 100)) + '%';
-        this.control.top = this.camera.getZPositionPercentage() * (1 - (this.heightInPercentage / 100)) + '%';
+        this.control.left = (this.camera.getXPositionPercentage() - (this.widthInPercentage / 2)) + '%';
+        this.control.top = (this.camera.getZPositionPercentage() - (this.heightInPercentage / 2)) + '%';
     }
 }

@@ -7,6 +7,7 @@ import {FromAboveCamera} from '../../camera/from-above-camera';
 import {GuiControl} from '../../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../engine/gui-manager/gui-elements/gui-element';
 import {MinimapIndicatorGuiElement} from './minimap-indicator/minimap-indicator.gui-element';
+import {MinimapObjectsGuiElement} from './minimap-objects/minimap-objects.gui-element';
 import {sceneManager} from 'engine';
 
 @GuiElement()
@@ -14,6 +15,7 @@ export class MinimapGuiElement implements GuiControl<GUI.Container>, AfterCreate
     public control: GUI.Container = new GUI.Container('minimap');
     
     @AppendGuiControl() public minimapIndicator: MinimapIndicatorGuiElement = new MinimapIndicatorGuiElement();
+    @AppendGuiControl() public minimapObjects: MinimapObjectsGuiElement = new MinimapObjectsGuiElement();
 
     private isActiveMoving = false;
     private camera: FromAboveCamera = sceneManager().currentCamera as FromAboveCamera;
