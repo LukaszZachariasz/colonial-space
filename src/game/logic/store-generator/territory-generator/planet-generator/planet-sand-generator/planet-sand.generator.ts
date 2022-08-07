@@ -18,9 +18,11 @@ export class PlanetSandGenerator {
                 isAnalysed: false,
                 analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(3, 6)),
                 isColonized: false,
+                buildingId: null,
+
                 water: Math.floor(BABYLON.Scalar.RandomRange(10, 20)),
                 sunlight: Math.floor(BABYLON.Scalar.RandomRange(70, 90)),
-                buildingId: null
+                pollution: Math.floor(BABYLON.Scalar.RandomRange(5, 10))
             }
         };
     }

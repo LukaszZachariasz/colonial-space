@@ -9,5 +9,6 @@ export enum GameIcon {
     SPYGLASS = 'spyglass',
     SUN = 'sun',
     WATER_DROP = 'water-drop',
-    WIND_HOLE = 'wind-hole'
+    WIND_HOLE = 'wind-hole',
+    NUCLEAR_PLANT = 'nuclear-plant'
 }

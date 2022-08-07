@@ -18,9 +18,11 @@ export class PlanetRingedGenerator {
                 isAnalysed: false,
                 analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(10, 15)),
                 isColonized: false,
+                buildingId: null,
+
                 water: Math.floor(BABYLON.Scalar.RandomRange(20, 30)),
                 sunlight: Math.floor(BABYLON.Scalar.RandomRange(20, 30)),
-                buildingId: null
+                pollution: Math.floor(BABYLON.Scalar.RandomRange(60, 80))
             }
         };
     }

@@ -18,9 +18,11 @@ export class PlanetGreenGenerator {
                 isAnalysed: false,
                 analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(3, 6)),
                 isColonized: false,
+                buildingId: null,
+
                 water: Math.floor(BABYLON.Scalar.RandomRange(40, 60)),
                 sunlight: Math.floor(BABYLON.Scalar.RandomRange(40, 60)),
-                buildingId: null
+                pollution: Math.floor(BABYLON.Scalar.RandomRange(5, 10))
             }
         };
     }

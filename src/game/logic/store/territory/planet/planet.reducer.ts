@@ -38,5 +38,12 @@ export const planetReducer = {
     }>): void => {
         const territory: TerritoryState<PlanetState> = state.territories.find((el: TerritoryState) => el.id === action.payload.territoryId);
         territory.data.sunlight = action.payload.value;
+    },
+    setPollutionPercentage: (state: TerritorySliceState, action: PayloadAction<{
+        territoryId: string,
+        value: number
+    }>): void => {
+        const territory: TerritoryState<PlanetState> = state.territories.find((el: TerritoryState) => el.id === action.payload.territoryId);
+        territory.data.pollution = action.payload.value;
     }
 };

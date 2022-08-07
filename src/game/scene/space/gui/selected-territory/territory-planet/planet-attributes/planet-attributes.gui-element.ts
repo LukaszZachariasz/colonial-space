@@ -7,6 +7,7 @@ import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-des
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
+import {PollutionAttributeGuiElement} from './pollution-attribute/pollution-attribute.gui-element';
 import {SunlightAttributeGuiElement} from './sunlight-attribute/sunlight-attribute.gui-element';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {WaterAttributeGuiElement} from './water-attribute/water-attribute.gui-element';
@@ -19,6 +20,7 @@ export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, Af
     
     @AppendGuiControl() public sunlightAttribute: SunlightAttributeGuiElement = new SunlightAttributeGuiElement(this.planetState);
     @AppendGuiControl() public waterAttribute: WaterAttributeGuiElement = new WaterAttributeGuiElement(this.planetState);
+    @AppendGuiControl() public pollutionAttribute: PollutionAttributeGuiElement = new PollutionAttributeGuiElement(this.planetState);
 
     private subscription: Subscription;
 
@@ -30,6 +32,7 @@ export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, Af
         this.control.height = '50px';
         this.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.waterAttribute.control.left = '70px';
+        this.pollutionAttribute.control.left = '140px';
     }
 
     public gameOnReady(): void {

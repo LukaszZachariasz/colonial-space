@@ -18,9 +18,11 @@ export class PlanetMetalGenerator {
                 isAnalysed: false,
                 analysisTourLeft: Math.floor(BABYLON.Scalar.RandomRange(15, 25)),
                 isColonized: false,
+                buildingId: null,
+
                 water: 0,
                 sunlight: 10,
-                buildingId: null
+                pollution: Math.floor(BABYLON.Scalar.RandomRange(25, 30))
             }
         };
     }
