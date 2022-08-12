@@ -6,8 +6,8 @@ import {GuiElement} from '../../../../../../../engine/gui-manager/gui-elements/g
 import {OnDestroy} from '../../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../../../../../../engine/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../logic/store/territory/planet/planet.state';
-import {Subscription, tap} from 'rxjs';
 import {PollutionAttributeGuiElement} from './pollution-attribute/pollution-attribute.gui-element';
+import {Subscription, tap} from 'rxjs';
 import {SunlightAttributeGuiElement} from './sunlight-attribute/sunlight-attribute.gui-element';
 import {TerritoryState} from '../../../../../../logic/store/territory/territory.state';
 import {WaterAttributeGuiElement} from './water-attribute/water-attribute.gui-element';
