@@ -19,11 +19,11 @@ export function GameObjectFromFile(definition: GameObjectDefinition): any {
 
     function addActionManager(that: any): any {
         that.actionManager = new BABYLON.ActionManager(that.scene);
+        const highlightLayer = new BABYLON.HighlightLayer('hover_highlight_layer', that.scene);
+
         that.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                that.actionMesh.overlayColor = new BABYLON.Color3(0.1, 1, 0.2);
-                that.actionMesh.overlayAlpha = 0.3;
-                that.actionMesh.renderOverlay = true;
+                highlightLayer.addMesh(that.actionMesh, BABYLON.Color3.Yellow());
             })
         );
         that.actionManager.registerAction(
@@ -33,7 +33,7 @@ export function GameObjectFromFile(definition: GameObjectDefinition): any {
         );
         that.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                that.actionMesh.renderOverlay = false;
+                highlightLayer.removeAllMeshes();
             })
         );
         that.actionMesh.actionManager = that.actionManager;

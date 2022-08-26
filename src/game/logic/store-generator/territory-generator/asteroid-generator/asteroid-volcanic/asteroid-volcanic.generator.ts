@@ -12,7 +12,7 @@ export class AsteroidVolcanicGenerator {
             type: TerritoryType.ASTEROID_VOLCANIC,
             icon: GameIcon.BURNING_METEOR,
             name: AsteroidNameGenerator.generate(),
-            artUrl: './resources/territory/asteroid/asteroid-volcanic/asteroid-art.png',
+            artUrl: './resources/territory/asteroid/asteroid-volcanic/asteroid-volcanic-art.png',
             data: {}
         };
     }
