@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {AbstractMesh} from 'babylonjs/Meshes/abstractMesh';
 import {AfterCreated} from '../engine/lifecycle/after-created/after-created';
-import {OnDestroy} from '../engine/lifecycle/on-destroy/on-destroy';
 import {GameScene} from '../engine/scene-manager/game-scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
+import {OnDestroy} from '../engine/lifecycle/on-destroy/on-destroy';
 import {Scene} from '../engine/scene-manager/scene';
 import {SpaceSkybox} from '../game/scene/space/model/skybox/space/space.skybox';
 import {SpaceSkyboxConst} from '../game/scene/space/model/skybox/space/space-skybox.const';
