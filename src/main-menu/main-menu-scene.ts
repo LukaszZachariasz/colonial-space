@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {AbstractMesh} from 'babylonjs/Meshes/abstractMesh';
 import {AfterCreated} from '../engine/lifecycle/after-created/after-created';
+import {OnDestroy} from '../engine/lifecycle/on-destroy/on-destroy';
 import {GameScene} from '../engine/scene-manager/game-scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
 import {Scene} from '../engine/scene-manager/scene';
@@ -14,10 +15,14 @@ import Color4 = BABYLON.Color4;
     name: 'MainMenuScene',
     preload: true
 })
-export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneGui> implements AfterCreated {
+export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneGui> implements AfterCreated, OnDestroy {
     public camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera('MainMenuCamera', 5.5, 1, 2, Vector3.Zero(), this.scene);
     public gui: MainMenuSceneGui = new MainMenuSceneGui();
-
+    public music = new BABYLON.Sound('Music', 'resources/sound/main-menu/main-menu.mp3', this.scene, null, {
+            loop: true,
+            autoplay: true
+    });
+    
     public gameAfterCreated(): void {
         this.camera.fov = 1.3;
         modelManager().addSimpleModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
@@ -51,5 +56,9 @@ export class MainMenuScene extends Scene<BABYLON.ArcRotateCamera, MainMenuSceneG
             'scout_ship_01.glb',
             this.scene,
             (meshes: AbstractMesh[]) => this.camera.lockedTarget = meshes[0]);
+    }
+
+    public gameOnDestroy(): void {
+        this.music.stop();
     }
 }
