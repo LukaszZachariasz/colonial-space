@@ -15,7 +15,7 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
     }
 
     public onCreate(): void {
-        this.mesh = BABYLON.MeshBuilder.CreateBox('SpaceSkyBox', {size: 1000.0}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateBox('SpaceSkyBox', {size: 10000.0}, this.scene);
         this.mesh.infiniteDistance = true;
 
         this.material = new BABYLON.StandardMaterial('SpaceSkyBoxMaterial', this.scene);
@@ -28,6 +28,9 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
         this.material.alphaCutOff = 0.5;
 
         this.mesh.material = this.material;
+
+        this.mesh.rotation.y = 0.4;
+        this.mesh.rotation.z = 10;
 
         this.scene.registerAfterRender(() => {
             this.mesh.rotation.x += 0.00001;

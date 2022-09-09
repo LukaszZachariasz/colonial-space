@@ -27,6 +27,7 @@ export abstract class UnitModel extends ImportModelAbstract implements AfterCrea
 
     public gameAfterCreated(): void {
         this.createUnitSignModel();
+        if (this.state) {
         this.unitMovement = new UnitMovement(this.scene, this.state.id, this.primaryMesh);
 
         this.removeUnitSubscription = logic().unitService.removeUnitId$.pipe(
@@ -36,6 +37,7 @@ export abstract class UnitModel extends ImportModelAbstract implements AfterCrea
             tap(() => this.primaryMesh.dispose()),
             tap(() => this.unitSignModel.mesh.dispose())
         ).subscribe();
+        }
     }
 
     public gameOnReady(): void {
@@ -43,16 +45,27 @@ export abstract class UnitModel extends ImportModelAbstract implements AfterCrea
     }
 
     public createUnitSignModel(): void {
+        if (!this.state) {
+            return;
+        }
+
         this.unitSignModel = modelManager().addSimpleModel(new UnitSignModel(this.scene, this.state));
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }
 
     protected select(): void {
+        if (!this.state) {
+            return;
+        }
         logic().selectedUnitService.select(this.state.id);
     }
 
     private runEnterAnimation(): void {
+        if (!this.state) {
+            return;
+        }
+
         this.actionMesh.parent.getChildMeshes().forEach((childMesh: BABYLON.AbstractMesh) => {
             FadeInAnimation.run(childMesh);
         });
