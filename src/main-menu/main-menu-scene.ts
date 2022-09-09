@@ -1,13 +1,13 @@
 import * as BABYLON from 'babylonjs';
-import {modelManager} from 'engine';
 import {AfterCreated} from '../engine/lifecycle/after-created/after-created';
-import {OnDestroy} from '../engine/lifecycle/on-destroy/on-destroy';
 import {GameScene} from '../engine/scene-manager/game-scene';
-import {Scene} from '../engine/scene-manager/scene';
-import {SpaceSkyboxConst} from '../game/scene/space/model/skybox/space/space-skybox.const';
-import {SpaceSkybox} from '../game/scene/space/model/skybox/space/space.skybox';
-import {ScoutShipModel} from '../game/scene/space/model/unit/scout-ship/scout-ship.model';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
+import {OnDestroy} from '../engine/lifecycle/on-destroy/on-destroy';
+import {Scene} from '../engine/scene-manager/scene';
+import {ScoutShipModel} from '../game/scene/space/model/unit/scout-ship/scout-ship.model';
+import {SpaceSkybox} from '../game/scene/space/model/skybox/space/space.skybox';
+import {SpaceSkyboxConst} from '../game/scene/space/model/skybox/space/space-skybox.const';
+import {modelManager} from 'engine';
 import Color4 = BABYLON.Color4;
 import Vector3 = BABYLON.Vector3;
 
