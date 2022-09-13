@@ -1,13 +1,12 @@
 import * as BABYLON from 'babylonjs';
-import {sceneManager} from 'engine';
 import {AddTourEffect} from '../../../../../logic/services/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../../logic/services/tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {TourEffectPriorityEnum} from '../../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
-import {gameEngine} from '../../../../../../game-platform';
 import {logic} from '../../../../../game';
+import {sceneManager} from 'engine';
 
 @HasTourEffects()
 export class UnitMovement implements OnDestroy {
