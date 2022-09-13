@@ -1,5 +1,6 @@
+import {Container} from 'typedi';
 import {GameSceneConfig} from './game-scene-config';
-import {gamePlatform} from '../../core/game-platform';
+import {LoadingManager} from '../../core/loading-manager/loading-manager';
 import {ipcRenderer} from 'electron';
 import {sceneManager} from 'engine';
 
@@ -30,10 +31,10 @@ function setInitialConfig(scene: any, config: GameSceneConfig): void {
     scene.name = config.name;
     scene.scene.detachControl();
     if (config.registerInLoadingManager) {
-        gamePlatform().loadingManager.start(scene.scene.uid);
+        Container.get(LoadingManager).start(scene.scene.uid);
 
         scene.scene.executeWhenReady(() => {
-            gamePlatform().loadingManager.stop(scene.scene.uid);
+            Container.get(LoadingManager).stop(scene.scene.uid);
         });
     }
 }

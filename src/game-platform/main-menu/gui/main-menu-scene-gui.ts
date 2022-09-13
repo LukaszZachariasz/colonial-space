@@ -7,7 +7,7 @@ import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.co
 import {OnDestroy} from '../../engine/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '../../engine/lifecycle/on-ready/on-ready';
 import {Subscription, tap} from 'rxjs';
-import {gameEngine} from '../../core/game-platform';
+import {gameEngine} from '../../game-platform';
 import {guiManager} from 'engine';
 
 @GuiScene()

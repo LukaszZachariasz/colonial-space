@@ -5,8 +5,10 @@ import {LoadingScene} from '../loading/loading.scene';
 import {MainMenuScene} from '../main-menu/main-menu-scene';
 import {ModelManager} from './model-manager/model-manager';
 import {SceneManager} from './scene-manager/scene-manager';
-import {gameEngine} from '../core/game-platform';
+import {Service} from 'typedi';
+import {gameEngine} from '../game-platform';
 
+@Service()
 export class Engine {
     public engine: BABYLON.Engine;
     public canvas: HTMLCanvasElement;

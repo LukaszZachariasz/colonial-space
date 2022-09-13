@@ -1,13 +1,18 @@
-import {gameEngine} from '../../game-platform';
+import {Engine} from 'engine';
+import {Service} from 'typedi';
 
-export class FpsCounter {
+@Service()
+export class FpsCounterService {
     private div: HTMLDivElement;
+
+    constructor(private engine: Engine) {
+    }
 
     public start(): void {
         this.createDivElement();
 
-        gameEngine().engine.runRenderLoop(() => {
-            this.div.innerHTML = gameEngine().engine.getFps().toFixed() + ' fps';
+        this.engine.engine.runRenderLoop(() => {
+            this.div.innerHTML = this.engine.engine.getFps().toFixed() + ' fps';
         });
     }
 

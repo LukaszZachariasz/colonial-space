@@ -1,5 +1,6 @@
 import 'babylonjs-loaders';
-import {Engine} from 'engine';
-import {gamePlatform} from './core/game-platform';
+import 'reflect-metadata';
+import {Container} from 'typedi';
+import {GamePlatform} from './game-platform/game-platform';
 
-gamePlatform().startEngine(new Engine(), document.getElementById('render-canvas') as HTMLCanvasElement);
+Container.get(GamePlatform).bootstrap(document.getElementById('render-canvas') as HTMLCanvasElement);

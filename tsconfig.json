@@ -12,9 +12,10 @@
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "paths": {
       "engine": [
-        "src/engine/engine"
+        "src/game-platform/engine/engine"
       ],
       "*": [
         "node_modules/*"

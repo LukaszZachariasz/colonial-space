@@ -1,5 +1,7 @@
 import {BehaviorSubject} from 'rxjs';
+import {Service} from 'typedi';
 
+@Service()
 export class LoadingManager {
   public isLoading$ = new BehaviorSubject(false);
   public loadingUuid: string[] = [];

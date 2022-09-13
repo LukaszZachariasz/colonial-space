@@ -1,9 +1,10 @@
+import {Container} from 'typedi';
 import {GameBuilder} from './game-builder/game-builder';
+import {LoadingManager} from '../core/loading-manager/loading-manager';
 import {Logic} from './logic/logic';
 import {WelcomeGuiElement} from './scene/space/gui/dialogs/welcome/welcome.gui-element';
 import {filter, take, tap} from 'rxjs';
 import {game, sceneManager} from 'engine';
-import {gamePlatform} from '../core/game-platform';
 
 export class Game {
     public logic: Logic;
@@ -19,7 +20,7 @@ export class Game {
     public start(): void {
         this.gameBuilder.build();
 
-        gamePlatform().loadingManager.isLoading$.pipe(
+        Container.get(LoadingManager).isLoading$.pipe(
             filter((isLoading: boolean) => isLoading === false),
             take(1),
             tap(() => sceneManager().navigateToScene('SpaceScene')),

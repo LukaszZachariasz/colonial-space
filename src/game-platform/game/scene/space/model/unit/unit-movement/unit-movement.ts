@@ -1,11 +1,12 @@
 import * as BABYLON from 'babylonjs';
+import {sceneManager} from 'engine';
 import {AddTourEffect} from '../../../../../logic/services/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../../logic/services/tour/tour-effect/has-tour-effects';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '../../../../../../engine/lifecycle/on-destroy/on-destroy';
 import {TourEffectPriorityEnum} from '../../../../../logic/services/tour/tour-effect/tour-effect-priority.enum';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
-import {gameEngine} from '../../../../../../core/game-platform';
+import {gameEngine} from '../../../../../../game-platform';
 import {logic} from '../../../../../game';
 
 @HasTourEffects()
@@ -65,7 +66,7 @@ export class UnitMovement implements OnDestroy {
                 return;
             }
             this.unitRotationSubscriber = subscriber;
-            gameEngine().sceneManager.currentScene.scene.registerBeforeRender(this.unitRotate);
+            sceneManager().currentScene.scene.registerBeforeRender(this.unitRotate);
         });
     }
 
@@ -106,7 +107,7 @@ export class UnitMovement implements OnDestroy {
 
     private lerpUnitRotate(): void {
         if (this.position === undefined) {
-            gameEngine().sceneManager.currentScene.scene.unregisterBeforeRender(this.unitRotate);
+            sceneManager().currentScene.scene.unregisterBeforeRender(this.unitRotate);
             this.unitRotationSubscriber.next();
             this.unitRotationSubscriber.complete();
             return;
@@ -119,7 +120,7 @@ export class UnitMovement implements OnDestroy {
         BABYLON.Quaternion.SlerpToRef(tempQuat, this.transformMesh.rotationQuaternion, slerpAmount, this.transformMesh.rotationQuaternion);
 
         if (this.transformMesh.rotationQuaternion.equalsWithEpsilon(tempQuat)) {
-            gameEngine().sceneManager.currentScene.scene.unregisterBeforeRender(this.unitRotate);
+            sceneManager().currentScene.scene.unregisterBeforeRender(this.unitRotate);
             this.unitRotationSubscriber.next();
             this.unitRotationSubscriber.complete();
         }
