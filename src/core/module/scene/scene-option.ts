@@ -9,4 +9,5 @@ export interface SceneOption {
 
     gui: GuiDefinition;
     root?: boolean;
+    components?: unknown[];
 }

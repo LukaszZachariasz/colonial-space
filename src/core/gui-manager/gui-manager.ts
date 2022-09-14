@@ -10,7 +10,7 @@ export class GuiManager {
     public createGuiScene(): void {
         const currentScene = Injector.inject(SceneManager).currentSceneRoute;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-        isOnLoad(currentScene.gui) && currentScene.gui.gameOnLoad();
+        isOnLoad(currentScene.guiDefinition) && currentScene.guiDefinition.gameOnLoad();
     }
 
     public disposeGuiScene(): void {
@@ -18,7 +18,7 @@ export class GuiManager {
             this.advancedDynamicTexture.dispose();
         }
         const currentScene = Injector.inject(SceneManager).currentSceneRoute;
-        isOnDestroy(currentScene?.gui) && currentScene.gui.gameOnDestroy();
+        isOnDestroy(currentScene?.guiDefinition) && currentScene.guiDefinition.gameOnDestroy();
     }
 
     public appendToRoot(control: any): any {

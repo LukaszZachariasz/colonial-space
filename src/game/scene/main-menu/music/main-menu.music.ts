@@ -1,24 +1,33 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
+import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
-export class MainMenuMusic {
+export class MainMenuMusic implements OnInit, OnLoad, OnUnload {
     @Inject(SCENE('main-menu')) private scene: BABYLON.Scene;
 
     public music: BABYLON.Sound;
 
-    constructor() {
-        this.music = new BABYLON.Sound('Music', 'resources/sound/main-menu/main-menu.mp3', this.scene, null, {
-            loop: true,
-            autoplay: false
-        });
+    public gameOnInit(): void {
+        this.music = new BABYLON.Sound(
+            'Music',
+            'resources/sound/main-menu/main-menu.mp3',
+            this.scene,
+            null,
+            {
+                loop: true,
+                autoplay: false
+            }
+        );
     }
 
-    public play(): void {
-        this.music.play(0);
+    public gameOnLoad(): void {
+        this.music.autoplay = true;
     }
 
-    public stop(): void {
-        this.music.stop();
+    public gameOnUnload(): void {
+        this.music.autoplay = false;
     }
 }

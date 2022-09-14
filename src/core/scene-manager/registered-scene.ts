@@ -4,5 +4,8 @@ export interface RegisteredScene {
     name: string;
     scene: BABYLON.Scene;
     camera: BABYLON.Camera;
-    gui: any;
+
+    sceneDefinition: any;
+    guiDefinition: any;
+    componentDefinitions: any[];
 }

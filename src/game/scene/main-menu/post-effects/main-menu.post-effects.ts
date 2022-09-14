@@ -1,27 +1,35 @@
 import * as BABYLON from 'babylonjs';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
+import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
-export class MainMenuPostEffects {
+export class MainMenuPostEffects implements OnLoad, OnUnload {
     @Inject(SCENE('main-menu')) private scene: BABYLON.Scene;
     @Inject(CAMERA('main-menu')) private camera: BABYLON.ArcRotateCamera;
     
-    constructor() {
-        const pipeline = new BABYLON.DefaultRenderingPipeline(
+    public pipeline: BABYLON.DefaultRenderingPipeline;
+
+    public gameOnLoad(): void {
+        this.pipeline = new BABYLON.DefaultRenderingPipeline(
             'PostEffects',
             false,
             this.scene,
             [this.camera]
         );
 
-        pipeline.fxaaEnabled = true;
-        pipeline.samples = 8;
-        pipeline.chromaticAberrationEnabled = true;
-        pipeline.chromaticAberration.aberrationAmount = 800;
-        pipeline.chromaticAberration.radialIntensity = 4;
+        this.pipeline.fxaaEnabled = true;
+        this.pipeline.samples = 8;
+        this.pipeline.chromaticAberrationEnabled = true;
+        this.pipeline.chromaticAberration.aberrationAmount = 800;
+        this.pipeline.chromaticAberration.radialIntensity = 4;
 
-        pipeline.chromaticAberration.direction.x = Math.sin(Math.PI);
-        pipeline.chromaticAberration.direction.y = Math.cos(Math.PI);
+        this.pipeline.chromaticAberration.direction.x = Math.sin(Math.PI);
+        this.pipeline.chromaticAberration.direction.y = Math.cos(Math.PI);
+    }
+    
+    public gameOnUnload(): void {
+        this.pipeline.dispose();
     }
 }

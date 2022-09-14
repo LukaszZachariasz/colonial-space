@@ -1,7 +1,7 @@
-import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
 import * as BABYLON from 'babylonjs';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
+import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
@@ -17,6 +17,7 @@ export class SceneManager {
     public register(sceneOption: SceneOption): void {
         const sceneDefinition = new sceneOption.scene();
         const guiDefinition = new sceneOption.gui();
+        const componentsDefinitions = sceneOption.components?.map((component: any) => new component());
 
         const babylonScene = new BABYLON.Scene(Injector.inject(ENGINE));
         const camera = sceneOption.cameraFactory(babylonScene);
@@ -26,12 +27,15 @@ export class SceneManager {
 
         isOnInit(sceneDefinition) && sceneDefinition.gameOnInit();
         isOnInit(guiDefinition) && guiDefinition.gameOnInit();
+        componentsDefinitions?.forEach((component: any) => isOnInit(component) && component.gameOnInit());
 
         this.allScenes.push({
             name: sceneOption.name,
             scene: babylonScene,
-            gui: guiDefinition,
-            camera: camera
+            camera: camera,
+            sceneDefinition: sceneDefinition,
+            guiDefinition: guiDefinition,
+            componentDefinitions: componentsDefinitions
         });
 
         if (sceneOption.root) {
@@ -45,14 +49,24 @@ export class SceneManager {
 
     private setScene(gameScene: RegisteredScene): void {
         if (this.currentSceneRoute) {
-            isOnUnload(this.currentSceneRoute) && this.currentSceneRoute.gameOnUnload();
-            Injector.inject(GuiManager).disposeGuiScene();
-            this.currentSceneRoute.scene.detachControl();
+            this.unloadScene();
         }
-        this.currentSceneRoute = gameScene;
-        isOnLoad(this.currentSceneRoute) && this.currentSceneRoute.gameOnLoad();
-        Injector.inject(GuiManager).createGuiScene();
 
+        this.currentSceneRoute = gameScene;
+        this.loadScene();
+    }
+
+    private unloadScene(): void {
+        isOnUnload(this.currentSceneRoute.sceneDefinition) && this.currentSceneRoute.sceneDefinition.gameOnUnload();
+        this.currentSceneRoute.componentDefinitions?.forEach((component: any) => isOnUnload(component) && component.gameOnUnload());
+        Injector.inject(GuiManager).disposeGuiScene();
+        this.currentSceneRoute.scene.detachControl();
+    }
+
+    private loadScene(): void {
+        isOnLoad(this.currentSceneRoute) && this.currentSceneRoute.gameOnLoad();
+        this.currentSceneRoute.componentDefinitions?.forEach((component: any) => isOnLoad(component) && component.gameOnLoad());
+        Injector.inject(GuiManager).createGuiScene();
         this.currentSceneRoute.scene.attachControl();
     }
 }
