@@ -1,6 +1,6 @@
 # Colonial Space
 
-3d economic strategy game based in cosmos. Game is supported by webgl rendering from BABYLONJS library.
+3d economic strategy game based in cosmos. ColonialSpace is supported by webgl rendering from BABYLONJS library.
 
 ## Development
 
@@ -23,7 +23,7 @@
 Insane skybox generator
 https://tools.wwwtyro.net/space-3d/index.html
 
-Game icons 
+ColonialSpace icons 
 https://game-icons.net/
 
 Planet name generator

@@ -48,11 +48,7 @@ module.exports = (env) => {
                         to: './index.css'
                     },
                     {
-                        from: './assets',
-                        to: './assets'
-                    },
-                    {
-                        from: './resources',
+                        from: './src/resources',
                         to: './resources'
                     }
                 ]

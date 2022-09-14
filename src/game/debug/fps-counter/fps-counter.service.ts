@@ -1,4 +1,5 @@
-import {GameService} from '../../game.service';
+import * as BABYLON from 'babylonjs';
+import {ENGINE} from '@colonial-space/core/engine/engine';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -7,13 +8,13 @@ import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 export class FpsCounterService implements OnReady {
     private div: HTMLDivElement;
     
-    @Inject(GameService) private gameService: GameService;
+    @Inject(ENGINE) private engine: BABYLON.Engine;
     
     public gameOnReady(): void {
         this.createDivElement();
 
-        this.gameService.engine.runRenderLoop(() => {
-            this.div.innerHTML = this.gameService.engine.getFps().toFixed() + ' fps';
+        this.engine.runRenderLoop(() => {
+            this.div.innerHTML = this.engine.getFps().toFixed() + ' fps';
         });
     }
 

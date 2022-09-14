@@ -5,10 +5,6 @@ export function Module(options: ModuleOptions): any {
         return class extends constructor {
             constructor(...args: any[]) {
                 super(...args);
-
-                if (options.imports) {
-                    options.imports.forEach((module: any) => new module());
-                }
             }
         };
     };

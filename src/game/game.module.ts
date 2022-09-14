@@ -1,6 +1,6 @@
+import {ColonialSpace} from './colonial-space';
 import {CoreModule} from './core/core.module';
 import {DebugModule} from './debug/debug.module';
-import {GameService} from './game.service';
 import {Module} from '@colonial-space/core/module/module';
 
 @Module({
@@ -8,7 +8,7 @@ import {Module} from '@colonial-space/core/module/module';
         CoreModule,
         DebugModule
     ],
-    providers: [GameService]
+    gameEntry: ColonialSpace
 })
 export class GameModule {
 }

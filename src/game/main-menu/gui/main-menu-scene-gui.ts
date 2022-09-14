@@ -1,6 +1,6 @@
 import {AfterCreated} from '../../../core/lifecycle/after-created/after-created';
 import {Container} from 'typedi';
-import {GameService} from '../../game.service';
+import {ColonialSpace} from '../../colonial-space';
 import {GuiManagerService} from '../../core/gui-manager/gui-manager.service';
 import {GuiScene} from '../../core/gui-manager/gui-scene/gui-scene';
 import {Inject} from '@colonial-space/core/injector/inject';
@@ -32,7 +32,7 @@ export class MainMenuSceneGui implements AfterCreated, OnReady, OnDestroy {
 
     public gameOnReady(): void {
         this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnControl.onClick$.pipe(
-            tap(() => Container.get(GameService).newGame())
+            tap(() => Container.get(ColonialSpace).newGame())
         ).subscribe();
     }
 

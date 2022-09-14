@@ -1,3 +1,6 @@
+import {ENGINE} from '@colonial-space/core/engine/engine';
+import {Inject} from '@colonial-space/core/injector/inject';
+import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import * as BABYLON from 'babylonjs';
 import {GuiManagerService} from '../gui-manager/gui-manager.service';
 import {Injectable} from '@colonial-space/core/injector/injectable';
@@ -8,7 +11,7 @@ import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destr
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 @Injectable()
-export class SceneManagerService {
+export class SceneManagerService implements OnReady {
     public scene: Scene;
     public allScenes: Scene[] = [];
     public preloadingScenes: Set<Scene> = new Set();
@@ -23,6 +26,19 @@ export class SceneManagerService {
 
     public get currentCamera(): BABYLON.Camera {
         return this.scene.camera;
+    }
+
+    @Inject(ENGINE) private engine: BABYLON.Engine;
+
+    public gameOnReady(): void {
+        this.engine.runRenderLoop(() => {
+            this.scene?.scene.render();
+        });
+
+        window.addEventListener('resize', () => {
+            this.engine.resize();
+        });
+
     }
 
     public register<T extends Scene>(gameScene: T): T {
