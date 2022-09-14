@@ -1,16 +1,16 @@
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
-import {SceneManagerService} from '../../core/scene-manager/scene-manager.service';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
+import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
 import {ipcRenderer} from 'electron';
 
 @Injectable()
-export class OpenDebugLayerService implements OnReady {
-    @Inject(SceneManagerService) private sceneManagerService: SceneManagerService;
+export class OpenDebugLayerService implements OnInit {
+    @Inject(SceneManager) private sceneManager: SceneManager;
 
-    public gameOnReady(): void {
+    public gameOnInit(): void {
         ipcRenderer.on('open-debug-layer', () => {
-            this.sceneManagerService.currentBabylonScene.debugLayer.show({
+            this.sceneManager.currentSceneRoute.scene.debugLayer.show({
                 showInspector: true,
                 overlay: true
             });

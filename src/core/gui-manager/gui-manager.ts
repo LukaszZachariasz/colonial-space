@@ -1,41 +1,36 @@
-import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from './gui-elements/gui-control';
-import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {SceneManagerService} from '../scene-manager/scene-manager.service';
+import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
-import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
-import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
+import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
 
-@Injectable()
-export class GuiManagerService {
+export class GuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
 
     public createGuiScene(): void {
-        const currentScene = Injector.inject(SceneManagerService).currentScene;
+        const currentScene = Injector.inject(SceneManager).currentSceneRoute;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-        isOnInit(currentScene.gui) && currentScene.gui.gameOnInit();
-        isOnReady(currentScene.gui) && currentScene.gui.gameOnReady();
+        isOnLoad(currentScene.gui) && currentScene.gui.gameOnLoad();
     }
 
     public disposeGuiScene(): void {
         if (this.advancedDynamicTexture) {
             this.advancedDynamicTexture.dispose();
         }
-        const currentScene = Injector.inject(SceneManagerService).currentScene;
+        const currentScene = Injector.inject(SceneManager).currentSceneRoute;
         isOnDestroy(currentScene?.gui) && currentScene.gui.gameOnDestroy();
     }
 
-    public appendToRoot<T extends GuiControl<GUI.Control>>(control: T): T {
+    public appendToRoot(control: any): any {
         this.advancedDynamicTexture.addControl(control.control);
         return control;
     }
 
+    /*
     public createForMesh<T extends GuiControl<GUI.Control>>(name: string, mesh: BABYLON.Mesh, control: T, width?: number, height?: number): GUI.AdvancedDynamicTexture {
         const advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateForMesh(mesh, width, height);
         advancedDynamicTexture.name = name;
         advancedDynamicTexture.addControl(control.control);
         return advancedDynamicTexture;
-    }
+    }*/
 }

@@ -1,3 +1,4 @@
+import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
 import * as BABYLON from 'babylonjs';
 import {CANVAS_ELEMENT} from '@colonial-space/core/injector/tokens/canvas-element/canvas-element.token';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
@@ -15,6 +16,7 @@ export class Platform {
         Injector.set(CANVAS_ELEMENT, canvasElement);
         Injector.set(ENGINE, new BABYLON.Engine(canvasElement, true));
         Injector.set(SceneManager.name, new SceneManager());
+        Injector.set(GuiManager.name, new GuiManager());
 
         this.renderLoop.run();
     }

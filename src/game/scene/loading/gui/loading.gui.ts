@@ -1,14 +1,12 @@
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {GuiManagerService} from '../../../core/gui-manager/gui-manager.service';
-import {GuiScene} from '../../../core/gui-manager/gui-scene/gui-scene';
+import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {TextGuiElement} from '../../game/scene/space/gui/shared/text/text.gui-element';
 
-@GuiScene()
-export class LoadingGui implements OnInit {
-    @Inject(GuiManagerService) private guiManagerService: GuiManagerService;
+export class LoadingGui implements OnLoad {
+    @Inject(GuiManager) private guiManagerService: GuiManager;
     
-    public gameOnInit(): void {
+    public gameOnLoad(): void {
         this.guiManagerService.appendToRoot(new TextGuiElement('Loading...'));
     }
 }

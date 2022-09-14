@@ -4,12 +4,11 @@ import {FromAboveCamera} from './camera/from-above-camera';
 import {GalaxyDustModel} from './model/galaxy-dust/galaxy-dust.model';
 import {ModelManagerService} from '../../../../core/model-manager/model-manager.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {Scene} from '../../../../core/scene-manager/scene';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceSkybox} from './model/skybox/space/space.skybox';
 import {selectMapSkybox} from '../../logic/store/map/tour.selectors';
 
-export class SpaceScene extends Scene<FromAboveCamera, SpaceGui> implements OnInit {
+export class SpaceScene implements OnInit {
     public gui: SpaceGui = new SpaceGui();
     public camera = new FromAboveCamera('FromAboveCamera', -Math.PI / 2, 0.5, 20, new BABYLON.Vector3(20, 0, -30), this.scene);
 
