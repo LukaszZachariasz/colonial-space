@@ -14,8 +14,11 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "paths": {
+      "@colonial-space/core/*": [
+        "src/core/*"
+      ],
       "engine": [
-        "src/game-platform/engine/engine"
+        "src/game/engine/engine"
       ],
       "*": [
         "node_modules/*"
