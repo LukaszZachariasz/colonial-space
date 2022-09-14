@@ -1,4 +1,3 @@
-import {CANVAS_ELEMENT} from '@colonial-space/core/canvas-element/canvas-element';
 import {Game} from './game/game';
 import {GameEntry} from '@colonial-space/core/game-entry/game-entry';
 import {Inject} from '@colonial-space/core/injector/inject';
