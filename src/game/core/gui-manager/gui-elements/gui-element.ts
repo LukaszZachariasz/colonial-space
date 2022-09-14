@@ -3,8 +3,8 @@ import {APPEND_CONTROL_METADATA_KEY} from './append-gui-control/append-gui-contr
 import {AppendGuiControlConfig} from './append-gui-control/append-gui-control-config';
 import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listener';
 import {GuiControl} from './gui-control';
-import {isAfterCreated} from '@colonial-space/core/lifecycle/after-created/is-after-created';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
+import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 export function GuiElement(): any {
@@ -13,8 +13,8 @@ export function GuiElement(): any {
             constructor(...args: any[]) {
                 super(...args);
 
-                if (isAfterCreated(this)) {
-                    this.gameAfterCreated();
+                if (isOnInit(this)) {
+                    this.gameOnInit();
                 }
                 appendControls(this);
                 registerControlEventListeners(this);

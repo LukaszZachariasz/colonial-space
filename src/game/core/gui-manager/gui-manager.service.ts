@@ -4,8 +4,8 @@ import {GuiControl} from './gui-elements/gui-control';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SceneManagerService} from '../scene-manager/scene-manager.service';
-import {isAfterCreated} from '@colonial-space/core/lifecycle/after-created/is-after-created';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
+import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class GuiManagerService {
     public createGuiScene(): void {
         const currentScene = Injector.inject(SceneManagerService).currentScene;
         this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-        isAfterCreated(currentScene.gui) && currentScene.gui.gameAfterCreated();
+        isOnInit(currentScene.gui) && currentScene.gui.gameOnInit();
         isOnReady(currentScene.gui) && currentScene.gui.gameOnReady();
     }
 

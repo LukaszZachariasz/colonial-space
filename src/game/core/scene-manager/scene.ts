@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {ENGINE} from '@colonial-space/core/engine/engine';
+import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
 import {Injector} from '@colonial-space/core/injector/injector';
 
 export abstract class Scene<T extends BABYLON.Camera = BABYLON.Camera, Q = {}> {

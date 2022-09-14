@@ -1,5 +1,5 @@
 import {Injector} from '@colonial-space/core/injector/injector';
-import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
+import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 
 export function Injectable(): any {
     return function (constructor: any): any {
@@ -7,8 +7,8 @@ export function Injectable(): any {
         Injector.set(constructor.name, instance);
 
         setTimeout(() => {
-            if (isOnReady(instance)) {
-                instance.gameOnReady();
+            if (isOnInit(instance)) {
+                instance.gameOnInit();
             }
         });
     };

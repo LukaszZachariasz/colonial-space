@@ -1,17 +1,17 @@
-import {ENGINE} from '@colonial-space/core/engine/engine';
-import {Inject} from '@colonial-space/core/injector/inject';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import * as BABYLON from 'babylonjs';
+import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
 import {GuiManagerService} from '../gui-manager/gui-manager.service';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Scene} from './scene';
-import {isAfterCreated} from '@colonial-space/core/lifecycle/after-created/is-after-created';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
+import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 @Injectable()
-export class SceneManagerService implements OnReady {
+export class SceneManagerService implements OnInit {
     public scene: Scene;
     public allScenes: Scene[] = [];
     public preloadingScenes: Set<Scene> = new Set();
@@ -30,7 +30,7 @@ export class SceneManagerService implements OnReady {
 
     @Inject(ENGINE) private engine: BABYLON.Engine;
 
-    public gameOnReady(): void {
+    public gameOnInit(): void {
         this.engine.runRenderLoop(() => {
             this.scene?.scene.render();
         });
@@ -42,7 +42,7 @@ export class SceneManagerService implements OnReady {
     }
 
     public register<T extends Scene>(gameScene: T): T {
-        isAfterCreated(gameScene) && gameScene.gameAfterCreated();
+        isOnInit(gameScene) && gameScene.gameOnInit();
         this.allScenes.push(gameScene);
         return gameScene;
     }
@@ -68,7 +68,7 @@ export class SceneManagerService implements OnReady {
         const scene = this.allScenes.find((el: Scene) => el.name === name);
 
         if (!scene) {
-            throw new Error('Scene not found, are you sure scene is registered?');
+            throw new Error('RegisteredScene not found, are you sure scene is registered?');
         }
 
         return scene;
