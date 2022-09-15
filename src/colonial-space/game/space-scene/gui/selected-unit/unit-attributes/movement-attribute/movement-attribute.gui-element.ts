@@ -8,7 +8,7 @@ import {IconGuiElement} from '../../../shared/icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {Subscription, filter, map, merge, tap} from 'rxjs';
 import {TextGuiElement} from '../../../shared/text/text.gui-element';
 import {TourService} from '../../../../../game-logic/tour/tour.service';
@@ -17,7 +17,7 @@ import {UnitState} from '../../../../../game-logic/store/unit/unit.state';
 import {selectUnitById} from '../../../../../game-logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad, OnDestroy {
     @Inject(TourService) private tourService: TourService;
     @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
     
@@ -41,7 +41,7 @@ export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, O
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.refreshUnitPointsSubscription = merge(
             this.tourService.completeTour$,
             this.unitMovementService.moveUnit$.pipe(

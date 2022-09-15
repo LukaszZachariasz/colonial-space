@@ -13,7 +13,7 @@ import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {TourService} from '../../../../../../../../game-logic/tour/tour.service';
 import {
     selectBuildingObjectById,
@@ -21,7 +21,7 @@ import {
 } from '../../../../../../../../game-logic/store/building/building.selector';
 
 @GuiElement()
-export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, OnInit, OnReady, OnDestroy {
+export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, OnInit, OnLoad, OnDestroy {
     @Inject(BuildingService) private buildingService: BuildingService;
     @Inject(TourService) private tourService: TourService;
     
@@ -50,7 +50,7 @@ export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, O
         }
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.startBuildingSubscription = merge(
             of(EMPTY),
             this.buildingService.startBuildingObject$,

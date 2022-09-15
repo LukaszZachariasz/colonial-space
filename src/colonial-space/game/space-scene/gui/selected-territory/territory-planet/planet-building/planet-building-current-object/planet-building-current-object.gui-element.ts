@@ -6,7 +6,7 @@ import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../game-logic/store/territory/territory.state';
 import {TextGuiElement} from '../../../../shared/text/text.gui-element';
@@ -16,7 +16,7 @@ import {
 } from '../../../../../../game-logic/store/building/building.selector';
 
 @GuiElement()
-export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Container>, OnReady, OnDestroy {
+export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Container>, OnLoad, OnDestroy {
     @Inject(BuildingService) private buildingService: BuildingService;
     @Inject(TourService) private tourService: TourService;
     
@@ -30,7 +30,7 @@ export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Con
     constructor(private planetState: TerritoryState<PlanetState>) {
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.currentBuildingObjectChangedSubscription = merge(
             of(EMPTY),
             this.buildingService.startBuildingObject$,

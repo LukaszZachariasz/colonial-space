@@ -7,7 +7,7 @@ import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetAnalysisGuiElement} from './planet-analysis/planet-analysis.gui-element';
 import {PlanetAttributesGuiElement} from './planet-attributes/planet-attributes.gui-element';
 import {PlanetBuildingGuiElement} from './planet-building/planet-building.gui-element';
@@ -17,7 +17,7 @@ import {Subscription, filter, tap} from 'rxjs';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
 
 @GuiElement()
-export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, OnInit, OnReady, OnDestroy {
+export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, OnInit, OnLoad, OnDestroy {
     @Inject(ColonizationService) private colonizationService: ColonizationService;
     @Inject(AnalysisService) private analysisService: AnalysisService;
     
@@ -50,7 +50,7 @@ export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, On
         }
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.planetAnalysedSubscription = this.analysisService.analyzedPlanetCompleted$.pipe(
             filter((id: string) => this.planetState.id === id),
             tap(() => this.planetAnalysis.control.dispose()),

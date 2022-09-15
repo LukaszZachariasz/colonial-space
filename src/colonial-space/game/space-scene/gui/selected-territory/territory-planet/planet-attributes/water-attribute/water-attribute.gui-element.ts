@@ -8,7 +8,7 @@ import {IconGuiElement} from '../../../../shared/icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetProductionService} from '../../../../../../game-logic/territory/planet/planet-production.service';
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
@@ -18,7 +18,7 @@ import {TourService} from '../../../../../../game-logic/tour/tour.service';
 import {selectTerritoryById} from '../../../../../../game-logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad, OnDestroy {
     @Inject(TourService) private tourService: TourService;
     @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
     
@@ -40,7 +40,7 @@ export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnIn
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.refreshAfterTourEndSubscription = this.tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
             tap(() => (this.attribute.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())

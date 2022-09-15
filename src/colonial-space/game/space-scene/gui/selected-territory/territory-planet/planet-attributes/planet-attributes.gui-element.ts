@@ -5,7 +5,7 @@ import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetState} from '../../../../../game-logic/store/territory/planet/planet.state';
 import {PollutionAttributeGuiElement} from './pollution-attribute/pollution-attribute.gui-element';
 import {Subscription, tap} from 'rxjs';
@@ -16,7 +16,7 @@ import {WaterAttributeGuiElement} from './water-attribute/water-attribute.gui-el
 import {selectTerritoryById} from '../../../../../game-logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad, OnDestroy {
     @Inject(TourService) private tourService: TourService;
     
     public control: GUI.Container = new GUI.Container('attributes');
@@ -38,7 +38,7 @@ export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, On
         this.pollutionAttribute.control.left = '140px';
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.subscription = this.tourService.completeTour$.pipe(
             tap(() => {
                 this.planetState = selectTerritoryById(this.planetState.id);

@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {selectCurrentTour} from '../../../../game-logic/store/tour/tour.selectors';
 
 @GuiElement()
-export class CurrentTourLabelGuiElement implements GuiControl<GUI.TextBlock>, OnReady {
+export class CurrentTourLabelGuiElement implements GuiControl<GUI.TextBlock>, OnLoad {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
     
     public control = new GUI.TextBlock('currentTour', 'Current tour: ' + selectCurrentTour());
@@ -22,7 +22,7 @@ export class CurrentTourLabelGuiElement implements GuiControl<GUI.TextBlock>, On
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.scene.registerBeforeRender(() => {
             this.control.text = 'Current tour: ' + selectCurrentTour();
         });

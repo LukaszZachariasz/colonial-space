@@ -9,7 +9,7 @@ import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetState} from '../../../../../game-logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../game-logic/store/territory/territory.state';
 import {TourService} from '../../../../../game-logic/tour/tour.service';
@@ -18,7 +18,7 @@ import {UnitType} from '../../../../../game-logic/store/unit/unit-type';
 import {selectUnitByTerritoryId} from '../../../../../game-logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad, OnDestroy {
     @Inject(AnalysisService) private analysisService: AnalysisService;
     @Inject(TourService) private tourService: TourService;
 
@@ -48,7 +48,7 @@ export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, OnIn
         this.stopAnalysisButton.control.isVisible = false;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.subscription = merge(
             of(EMPTY),
             this.tourService.completeTour$

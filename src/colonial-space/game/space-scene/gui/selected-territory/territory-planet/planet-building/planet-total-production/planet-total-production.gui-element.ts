@@ -7,7 +7,7 @@ import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetProductionService} from '../../../../../../game-logic/territory/planet/planet-production.service';
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
@@ -17,7 +17,7 @@ import {TourService} from '../../../../../../game-logic/tour/tour.service';
 import {selectTerritoryById} from '../../../../../../game-logic/store/territory/territory.selectors';
 
 @GuiElement()
-export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad, OnDestroy {
     @Inject(PlanetProductionService) private planetProductionService!: PlanetProductionService;
     @Inject(TourService) private tourService: TourService;
     
@@ -34,7 +34,7 @@ export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container
         this.text.control.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.endOfTourSubscription = this.tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
             tap(() => this.text.control.text = 'Production: ' + this.planetProductionService.getTotalProduction(this.planetState.data))

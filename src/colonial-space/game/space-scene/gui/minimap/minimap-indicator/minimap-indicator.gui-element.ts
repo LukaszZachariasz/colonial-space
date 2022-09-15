@@ -2,14 +2,14 @@ import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
-import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 @GuiElement()
-export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, OnReady {
+export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, OnLoad {
     @Inject(CAMERA('space')) private camera: FromAboveCamera;
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
     
@@ -27,7 +27,7 @@ export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, On
         this.control.zIndex = 9999;
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.scene.registerBeforeRender(() => {
             this.calculatePosition();
         });

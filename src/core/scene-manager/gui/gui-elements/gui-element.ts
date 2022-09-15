@@ -5,7 +5,8 @@ import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listen
 import {GuiControl} from './gui-control';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
 import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
-import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
+import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
+import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
 
 export function GuiElement(): any {
     return function (constructor: any): any {
@@ -13,19 +14,12 @@ export function GuiElement(): any {
             constructor(...args: any[]) {
                 super(...args);
 
-                if (isOnInit(this)) {
-                    this.gameOnInit();
-                }
+                isOnInit(this) && this.gameOnInit();
                 appendControls(this);
                 registerControlEventListeners(this);
-                if (isOnDestroy(this)) {
-                    this.control.onDisposeObservable.add(() => {
-                        this.gameOnDestroy();
-                    });
-                }
-                if (isOnReady(this)) {
-                    this.gameOnReady();
-                }
+                isOnUnload(this) && this.control.onDisposeObservable.add(() => this.gameOnUnload());
+                isOnDestroy(this) && this.control.onDisposeObservable.add(() => this.gameOnDestroy());
+                isOnLoad(this) && this.gameOnLoad();
             }
         };
     };
