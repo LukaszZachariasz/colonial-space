@@ -6,10 +6,10 @@ import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SpaceSkybox} from '../../shared/skybox/space.skybox';
 
 export class LoadingSkybox implements OnInit {
-    @Inject(ModelManager) private modelManagerService: ModelManager;
+    @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(SCENE('loading')) private scene: BABYLON.Scene;
 
     public gameOnInit(): void {
-        this.modelManagerService.addSimpleModel(new SpaceSkybox(this.scene));
+        this.modelManager.addSimpleModel(new SpaceSkybox(this.scene));
     }
 }

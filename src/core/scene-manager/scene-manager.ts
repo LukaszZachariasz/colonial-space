@@ -45,6 +45,7 @@ export class SceneManager {
         if (!sceneOption.lazy) {
             this.load(sceneOption.name).then(() => {
                 if (sceneOption.root) {
+                    console.log('test');
                     ipcRenderer.send('game-root-scene-ready');
                 }
             });

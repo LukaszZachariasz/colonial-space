@@ -2,8 +2,20 @@ import {BrowserWindow, app, ipcMain} from 'electron';
 const electronLocalShortcut = require('electron-localshortcut');
 
 let mainWindow: Electron.BrowserWindow;
+let splashWindow: Electron.BrowserWindow;
 
 function createWindow(): void {
+    splashWindow = new BrowserWindow({
+        height: 110,
+        width: 400,
+        alwaysOnTop: true,
+        transparent: true,
+        frame: false,
+        resizable: false
+    });
+    splashWindow.loadFile('splash-art.html');
+    splashWindow.center();
+
     mainWindow = new BrowserWindow({
         height: 1080,
         width: 1920,
@@ -53,6 +65,7 @@ ipcMain.on('re-render', () => {
 });
 
 ipcMain.on('game-root-scene-ready', () => {
+    splashWindow.close();
     mainWindow.show();
 });
 
