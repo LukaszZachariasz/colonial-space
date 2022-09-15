@@ -3,14 +3,14 @@ import {
     BuildingObjectState
 } from '../../../../../../../../game-logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingService} from '../../../../../../../../game-logic/building/building.service';
-import {ControlEvent} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/events/control-event';
+import {ControlEvent} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event';
 import {
     ControlEventListener
-} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
+} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event-listener';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -22,6 +22,9 @@ import {
 
 @GuiElement()
 export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, OnInit, OnReady, OnDestroy {
+    @Inject(BuildingService) private buildingService: BuildingService;
+    @Inject(TourService) private tourService: TourService;
+    
     public readonly startBuildingLabel = 'Start building';
     public readonly stopBuildingLabel = 'Stop building';
     public control = GUI.Button.CreateSimpleButton('select', this.startBuildingLabel);
@@ -50,8 +53,8 @@ export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, O
     public gameOnReady(): void {
         this.startBuildingSubscription = merge(
             of(EMPTY),
-            Injector.inject(BuildingService).startBuildingObject$,
-            Injector.inject(TourService).completeTour$
+            this.buildingService.startBuildingObject$,
+            this.tourService.completeTour$
         ).pipe(
             tap(() => this.isCurrentBuilding = selectIsCurrentBuildingByBuildingObjectId(this.buildingObjectState.id)),
             tap(() => this.buildingObjectState = selectBuildingObjectById(this.buildingObjectState.id)),
@@ -61,9 +64,9 @@ export class BuildingObjectSelectGuiElement implements GuiControl<GUI.Button>, O
 
     private onClick(): void {
         if (this.isCurrentBuilding) {
-            Injector.inject(BuildingService).stopBuilding(this.buildingObjectState.id);
+            this.buildingService.stopBuilding(this.buildingObjectState.id);
         } else {
-            Injector.inject(BuildingService).startBuilding(this.buildingObjectState.id);
+            this.buildingService.startBuilding(this.buildingObjectState.id);
         }
     }
 

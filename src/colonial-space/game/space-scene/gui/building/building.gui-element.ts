@@ -5,15 +5,16 @@ import {BuildingScopesGuiElement} from './building-scopes/building-scopes.gui-el
 import {BuildingState} from '../../../game-logic/store/building/building.state';
 import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
 import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SelectionBuildingService} from '../../../game-logic/selection/building/selection-building.service';
 import {selectBuildingById} from '../../../game-logic/store/building/building.selector';
 
 @GuiElement()
 export class BuildingGuiElement implements GuiControl<GUI.Container>, OnInit {
+    @Inject(SelectionBuildingService) private selectionBuildingService!: SelectionBuildingService;
     public control: GUI.Container = new GUI.Container('buildingContainer');
-    public buildingState: BuildingState = selectBuildingById(Injector.inject(SelectionBuildingService).selectedBuildingId$.value);
+    public buildingState: BuildingState = selectBuildingById(this.selectionBuildingService.selectedBuildingId$.value);
 
     @AppendGuiControl() public buildingHeader: BuildingHeaderGuiElement = new BuildingHeaderGuiElement(this.buildingState);
     @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('sectorsScrollViewer');

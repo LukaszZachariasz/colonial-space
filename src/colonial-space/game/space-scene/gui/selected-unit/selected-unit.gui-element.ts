@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {AppendGuiControl} from '../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
 import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SelectionUnitService} from '../../../game-logic/selection/unit/selection-unit.service';
 import {UnitArtGuiElement} from './unit-art/unit-art.gui-element';
@@ -13,9 +13,11 @@ import {selectUnitById} from '../../../game-logic/store/unit/unit.selectors';
 
 @GuiElement()
 export class SelectedUnitGuiElement implements GuiControl<GUI.Container>, OnInit {
+    @Inject(SelectionUnitService) private selectionUnitService!: SelectionUnitService;
+    
     public control: GUI.Container = new GUI.Container('selectedUnitContainer');
     
-    public unitState: UnitState = selectUnitById(Injector.inject(SelectionUnitService).selectedUnitId$.value);
+    public unitState: UnitState = selectUnitById(this.selectionUnitService.selectedUnitId$.value);
 
     @AppendGuiControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
     @AppendGuiControl() public unitArt: UnitArtGuiElement = new UnitArtGuiElement(this.unitState);

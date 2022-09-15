@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {IconGuiElement} from '../../gui/shared/icon/icon.gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
@@ -9,6 +9,8 @@ import {TerritoryState} from '../../../game-logic/store/territory/territory.stat
 import {TextGuiElement} from '../../gui/shared/text/text.gui-element';
 
 export class TerritorySignModel extends SimpleModel<BABYLON.Mesh> {
+    @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;
+    
     public territorySignTitleContainer: TerritorySignTitleContainer;
 
     public icon: IconGuiElement;
@@ -42,6 +44,6 @@ export class TerritorySignModel extends SimpleModel<BABYLON.Mesh> {
         this.territorySignTitleContainer.clicked$.pipe(
             tap(() => this.clicked$.next())
         ).subscribe();
-        Injector.inject(SceneGuiManager).createForMesh('TerritorySignTitleContainer', this.mesh, this.territorySignTitleContainer, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);
+        this.sceneGuiManager.createForMesh('TerritorySignTitleContainer', this.mesh, this.territorySignTitleContainer, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);
     }
 }

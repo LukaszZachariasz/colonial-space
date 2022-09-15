@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
-import {ControlEvent} from '../../../../../../../core/scene-manager/gui/gui-elements/events/control-event';
-import {ControlEventListener} from '../../../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {ControlEvent} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event';
+import {ControlEventListener} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event-listener';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {
     PlanetBuildingCurrentObjectGuiElement
@@ -17,6 +17,8 @@ import {selectBuildingById} from '../../../../../game-logic/store/building/build
 
 @GuiElement()
 export class PlanetBuildingGuiElement implements GuiControl<GUI.Container>, OnInit {
+    @Inject(SelectionBuildingService) private selectionBuildingService: SelectionBuildingService;
+    
     public control: GUI.Container = new GUI.Container('buildingContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
@@ -35,6 +37,6 @@ export class PlanetBuildingGuiElement implements GuiControl<GUI.Container>, OnIn
 
     @ControlEventListener(ControlEvent.ON_POINTER_DOWN)
     public selectBuilding(): void {
-        Injector.inject(SelectionBuildingService).select(this.buildingState.id);
+        this.selectionBuildingService.select(this.buildingState.id);
     }
 }

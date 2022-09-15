@@ -6,7 +6,7 @@ import {BuildingObjectType} from '../../../store/building/building-scope/buildin
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {DialogService} from '../../../dialog/dialog.service';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {Observable, Subscriber} from 'rxjs';
 import {PlanetProductionService} from '../../../territory/planet/planet-production.service';
@@ -34,6 +34,13 @@ import {setSquareUnitId} from '../../../store/map/map.slice';
 import {store} from '../../../store/store';
 
 export abstract class UnitHandlerService {
+    @Inject(ModelManager) private modelManager: ModelManager;
+    @Inject(UnitService) private unitService: UnitService;
+    @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
+    @Inject(CAMERA('space')) private camera: FromAboveCamera;
+    @Inject(DialogService) private dialogService: DialogService;
+    @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
+
     public abstract createUnitState(): UnitState;
     public abstract createModel(id: string): UnitModel;
 
@@ -57,8 +64,8 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                Injector.inject(ModelManager).addImportModel(this.createModel(unit.id));
-                Injector.inject(UnitService).addUnit$.next(unit.id);
+                this.modelManager.addImportModel(this.createModel(unit.id));
+                this.unitService.addUnit$.next(unit.id);
 
                 store.dispatch(setProductionToBeginning({
                     buildingObjectId: object.id
@@ -77,7 +84,7 @@ export abstract class UnitHandlerService {
             let errorPlanet: TerritoryState<PlanetState> | null = null;
             buildingObjects.forEach((object: BuildingObjectState) => {
                 const planet = selectTerritoryByBuildingId(selectBuildingByBuildingObjectId(object.id).id);
-                const planetProduction = Injector.inject(PlanetProductionService).getTotalProduction(planet.data);
+                const planetProduction = this.planetProductionService.getTotalProduction(planet.data);
 
                 if (planetProduction >= object.productionLeft) {
                     const unit = selectUnitByTerritoryId(planet.id);
@@ -104,10 +111,10 @@ export abstract class UnitHandlerService {
     }
 
     private showUnitOnSquareWarning(position: BABYLON.Vector3, planet: TerritoryState<PlanetState>): void {
-        const animation = (Injector.inject(CAMERA('space')) as FromAboveCamera).lookAtAnimation(position);
+        const animation = this.camera.lookAtAnimation(position);
         animation.onAnimationEndObservable.add(() => {
-            Injector.inject(DialogService).open$.next(new UnitOnSquareWarningGuiElement());
-            Injector.inject(SelectionTerritoryService).select(planet.id);
+            this.dialogService.open$.next(new UnitOnSquareWarningGuiElement());
+            this.selectionTerritoryService.select(planet.id);
         });
     }
 }

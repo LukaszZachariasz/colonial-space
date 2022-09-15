@@ -1,14 +1,14 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../../shared/button/button.gui-element';
 import {ColonialShipState} from '../../../../../game-logic/store/unit/colonial-ship/colonial-ship.state';
 import {ColonizationService} from '../../../../../game-logic/colonization/colonization.service';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {PlanetState} from '../../../../../game-logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../game-logic/store/territory/territory.state';
@@ -19,10 +19,13 @@ import {selectUnitByTerritoryId} from '../../../../../game-logic/store/unit/unit
 
 @GuiElement()
 export class PlanetColonizationGuiElement implements GuiControl<GUI.Container>, OnInit {
+    @Inject(ColonizationService) private colonizationService: ColonizationService;
+    @Inject(TourService) private tourService: TourService;
+
     public control: GUI.Container = new GUI.Container('colonization');
 
     @AppendGuiControl() public colonizePlanetButton: ButtonGuiElement = new ButtonGuiElement('Colonize planet', () => {
-        Injector.inject(ColonizationService).colonize(this.planetState);
+        this.colonizationService.colonize(this.planetState);
     });
 
     private colonialShip: UnitState<ColonialShipState>;
@@ -40,7 +43,7 @@ export class PlanetColonizationGuiElement implements GuiControl<GUI.Container>, 
     public gameOnReady(): void {
         this.subscription = merge(
             of(EMPTY),
-            Injector.inject(TourService).completeTour$
+            this.tourService.completeTour$
         ) .pipe(
             tap(() => this.setColonizationStatus())
         ).subscribe();

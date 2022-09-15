@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.service';
-import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {MinimapFogOfWarGuiElement} from './minimap-fog-of-war/minimap-fog-of-war.gui-element';
 import {MinimapTerritoryGuiElement} from './minimap-territory/minimap-territory.gui-element';
 import {MinimapUnitGuiElement} from './minimap-units/minimap-unit.gui-element';
@@ -22,6 +22,9 @@ import {
 
 @GuiElement()
 export class MinimapObjectsGuiElement implements GuiControl<GUI.Container>, OnInit, OnDestroy {
+    @Inject(UnitService) private unitService: UnitService;
+    @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
+    
     public control: GUI.Container = new GUI.Container('minimapObjects');
 
     @AppendGuiControl() public fogOfWarGuiElements: MinimapFogOfWarGuiElement[] = [];
@@ -45,17 +48,17 @@ export class MinimapObjectsGuiElement implements GuiControl<GUI.Container>, OnIn
             this.createSquareUnitObject(squareState);
         });
 
-        this.unitAddSubscription = Injector.inject(UnitService).addUnit$.pipe(
+        this.unitAddSubscription = this.unitService.addUnit$.pipe(
             tap((id: string) => this.createSquareUnitObject(selectSquareByUnitId(id)))
         ).subscribe();
 
-        this.removeFogOfWarSubscription = Injector.inject(FogOfWarService).removeFogOfWar$.pipe(
+        this.removeFogOfWarSubscription = this.fogOfWarService.removeFogOfWar$.pipe(
             tap((id: string) => this.fogOfWarGuiElements = this.fogOfWarGuiElements.filter((el: MinimapFogOfWarGuiElement) => el.squareId !== id)),
             delay(300),
             tap((id: string) => this.createSquareTerritoryObject(selectSquareById(id)))
         ).subscribe();
 
-        this.unitRemoveSubscription = Injector.inject(UnitService).removeUnitId$.pipe(
+        this.unitRemoveSubscription = this.unitService.removeUnitId$.pipe(
             tap((id: string) => this.unitGuiElements = this.unitGuiElements.filter((el: MinimapUnitGuiElement) => el.unitState.id !== id))
         ).subscribe();
     }

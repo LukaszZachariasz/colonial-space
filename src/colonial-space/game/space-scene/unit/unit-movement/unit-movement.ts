@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../game-logic/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../game-logic/tour/tour-effect/has-tour-effects';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {SelectionUnitService} from '../../../game-logic/selection/unit/selection-unit.service';
@@ -12,6 +12,10 @@ import {UnitMovementService} from '../../../game-logic/unit/unit-movement.servic
 
 @HasTourEffects()
 export class UnitMovement implements OnDestroy {
+    @Inject(TourService) private tourService: TourService;
+    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
+    @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
+    
     public unitMovementPathModel: UnitMovementPathModel;
 
     private position: BABYLON.Vector2;
@@ -21,21 +25,21 @@ export class UnitMovement implements OnDestroy {
     constructor(private scene: BABYLON.Scene,
                 private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
-        Injector.inject(SelectionUnitService).selectedUnitId$.pipe(
+        this.selectionUnitService.selectedUnitId$.pipe(
             tap(() => this.unitMovementPathModel?.lines?.dispose()),
             filter((id: string) => this.id === id),
             tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),
         ).subscribe();
 
         merge(
-            Injector.inject(UnitMovementService).addedPlanMovement$.pipe(filter((id: string) => this.id === id)),
-            Injector.inject(TourService).completeTour$
+            this.unitMovementService.addedPlanMovement$.pipe(filter((id: string) => this.id === id)),
+            this.tourService.completeTour$
         ).pipe(
             filter(() => !!this.unitMovementPathModel && !this.unitMovementPathModel.lines.isDisposed()),
             tap(() => this.unitMovementPathModel.recalculate())
         ).subscribe();
 
-        Injector.inject(UnitMovementService).moveUnit$.pipe(
+        this.unitMovementService.moveUnit$.pipe(
             filter((id: string) => this.id === id),
             switchMap(() => this.initMove().pipe(take(1))),
             switchMap(() => this.rotation().pipe(take(1))),
@@ -49,7 +53,7 @@ export class UnitMovement implements OnDestroy {
     })
     public initMove(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
-            this.position = Injector.inject(UnitMovementService).moveUnit(this.id);
+            this.position = this.unitMovementService.moveUnit(this.id);
             subscriber.next();
             subscriber.complete();
         });

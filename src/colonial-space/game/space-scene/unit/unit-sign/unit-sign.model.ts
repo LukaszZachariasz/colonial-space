@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
@@ -7,6 +7,8 @@ import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';
 
 export class UnitSignModel extends SimpleModel<BABYLON.Mesh> {
+    @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;
+    
     public unitSignIconControl: UnitSignIconContainer;
     public clicked$ = new Subject<void>();
 
@@ -30,6 +32,6 @@ export class UnitSignModel extends SimpleModel<BABYLON.Mesh> {
             tap(() => this.clicked$.next())
         ).subscribe();
 
-        Injector.inject(SceneGuiManager).createForMesh('UnitSignModel', this.mesh, this.unitSignIconControl);
+        this.sceneGuiManager.createForMesh('UnitSignModel', this.mesh, this.unitSignIconControl);
     }
 }

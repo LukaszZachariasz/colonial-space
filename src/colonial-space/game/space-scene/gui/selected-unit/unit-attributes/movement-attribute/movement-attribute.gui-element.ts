@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {AttributeGuiElement} from '../../../shared/attribute/attribute.gui-element';
 import {GameIcon} from '../../../shared/icon/game-icon';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../../../shared/icon/icon.gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -18,6 +18,9 @@ import {selectUnitById} from '../../../../../game-logic/store/unit/unit.selector
 
 @GuiElement()
 export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(TourService) private tourService: TourService;
+    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
+    
     public control: GUI.Container = new GUI.Container('movementAttribute');
     
     public textControl: TextGuiElement = new TextGuiElement(`This unit has ${this.unitState.movementPointsLeft} / ${this.unitState.movementPoints} movement.`);
@@ -40,8 +43,8 @@ export class MovementAttributeGuiElement implements GuiControl<GUI.Container>, O
 
     public gameOnReady(): void {
         this.refreshUnitPointsSubscription = merge(
-            Injector.inject(TourService).completeTour$,
-            Injector.inject(UnitMovementService).moveUnit$.pipe(
+            this.tourService.completeTour$,
+            this.unitMovementService.moveUnit$.pipe(
                 filter((id: string) => this.unitState.id === id)
             )
         ).pipe(

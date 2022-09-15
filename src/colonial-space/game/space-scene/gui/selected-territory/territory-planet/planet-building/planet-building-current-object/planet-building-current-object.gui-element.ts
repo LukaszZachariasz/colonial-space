@@ -4,7 +4,7 @@ import {BuildingService} from '../../../../../../game-logic/building/building.se
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
 import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
 import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
@@ -17,6 +17,9 @@ import {
 
 @GuiElement()
 export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Container>, OnReady, OnDestroy {
+    @Inject(BuildingService) private buildingService: BuildingService;
+    @Inject(TourService) private tourService: TourService;
+    
     public control: GUI.Container = new GUI.Container('currentObjectContainer');
     public buildingState = selectBuildingById(this.planetState.data.buildingId);
 
@@ -30,8 +33,8 @@ export class PlanetBuildingCurrentObjectGuiElement implements GuiControl<GUI.Con
     public gameOnReady(): void {
         this.currentBuildingObjectChangedSubscription = merge(
             of(EMPTY),
-            Injector.inject(BuildingService).startBuildingObject$,
-            Injector.inject(TourService).completeTour$
+            this.buildingService.startBuildingObject$,
+            this.tourService.completeTour$
         ).pipe(
             tap(() => this.buildingState = selectBuildingById(this.planetState.data.buildingId)),
             tap(() => this.text.control.text = 'Current: ' + this.buildingState.currentBuildingObjectId)

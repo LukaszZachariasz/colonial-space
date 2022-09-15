@@ -1,14 +1,13 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {FromAboveCamera} from '../../../../../../shared/camera/from-above-camera';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../../../shared/icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Injector} from '@colonial-space/core/injector/injector';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
@@ -22,6 +21,9 @@ import {selectUnitById} from '../../../../../game-logic/store/unit/unit.selector
 
 @GuiElement()
 export class MinimapUnitGuiElement implements GuiControl<GUI.Container>, OnInit, OnDestroy {
+    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
+    @Inject(TourService) private tourService: TourService;
+    @Inject(UnitService) private unitService: UnitService;
     @Inject(CAMERA('space')) private camera: FromAboveCamera;
     
     public control: GUI.Container = new GUI.Container('minimapUnit');
@@ -46,17 +48,17 @@ export class MinimapUnitGuiElement implements GuiControl<GUI.Container>, OnInit,
         this.setPosition();
 
         this.unitMovementSubscription = merge(
-            Injector.inject(UnitMovementService).moveUnit$.pipe(
+            this.unitMovementService.moveUnit$.pipe(
                 filter((id: string) => this.unitState.id === id)
             ),
-            Injector.inject(TourService).completeTour$
+            this.tourService.completeTour$
         ).pipe(
             tap(() => this.unitState = selectUnitById(this.unitState.id)),
             tap(() => this.squareState = selectSquareByUnitId(this.unitState.id)),
             tap(() => this.setPosition())
         ).subscribe();
 
-        Injector.inject(UnitService).removeUnitId$.pipe(
+        this.unitService.removeUnitId$.pipe(
             filter((id: string) => this.unitState.id === id),
             tap(() => this.control.dispose())
         ).subscribe();

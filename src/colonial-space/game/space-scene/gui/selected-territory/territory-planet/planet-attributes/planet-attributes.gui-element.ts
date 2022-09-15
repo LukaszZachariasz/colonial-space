@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -17,6 +17,8 @@ import {selectTerritoryById} from '../../../../../game-logic/store/territory/ter
 
 @GuiElement()
 export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(TourService) private tourService: TourService;
+    
     public control: GUI.Container = new GUI.Container('attributes');
     
     @AppendGuiControl() public sunlightAttribute: SunlightAttributeGuiElement = new SunlightAttributeGuiElement(this.planetState);
@@ -37,7 +39,7 @@ export class PlanetAttributesGuiElement implements GuiControl<GUI.Container>, On
     }
 
     public gameOnReady(): void {
-        this.subscription = Injector.inject(TourService).completeTour$.pipe(
+        this.subscription = this.tourService.completeTour$.pipe(
             tap(() => {
                 this.planetState = selectTerritoryById(this.planetState.id);
             })

@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {AnalysisService} from '../../../../game-logic/anaylsis/analysis.service';
-import {AppendGuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ColonizationService} from '../../../../game-logic/colonization/colonization.service';
-import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -18,6 +18,9 @@ import {TerritoryState} from '../../../../game-logic/store/territory/territory.s
 
 @GuiElement()
 export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, OnInit, OnReady, OnDestroy {
+    @Inject(ColonizationService) private colonizationService: ColonizationService;
+    @Inject(AnalysisService) private analysisService: AnalysisService;
+    
     public control: GUI.StackPanel = new GUI.StackPanel('planetStackPanel');
 
     @AppendGuiControl() public planetAttributes: PlanetAttributesGuiElement = new PlanetAttributesGuiElement(this.planetState);
@@ -48,14 +51,14 @@ export class TerritoryPlanetGuiElement implements GuiControl<GUI.StackPanel>, On
     }
 
     public gameOnReady(): void {
-        this.planetAnalysedSubscription = Injector.inject(AnalysisService).analyzedPlanetCompleted$.pipe(
+        this.planetAnalysedSubscription = this.analysisService.analyzedPlanetCompleted$.pipe(
             filter((id: string) => this.planetState.id === id),
             tap(() => this.planetAnalysis.control.dispose()),
             tap(() => this.planetColonization = new PlanetColonizationGuiElement(this.planetState)),
             tap(() => this.control.addControl(this.planetColonization.control)) // TODO: change detector
         ).subscribe();
 
-        this.planetColonizedSubscription = Injector.inject(ColonizationService).colonizedPlanetCompleted$.pipe(
+        this.planetColonizedSubscription = this.colonizationService.colonizedPlanetCompleted$.pipe(
             filter((id: string) => this.planetState.id === id),
             tap(() => this.planetColonization.control.dispose()),
             tap(() => this.planetBuilding = new PlanetBuildingGuiElement(this.planetState)),

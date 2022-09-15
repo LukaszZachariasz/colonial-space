@@ -5,7 +5,6 @@ import {DialogOverlayGuiElement} from './dialog-overlay/dialog-overlay.gui-eleme
 import {DialogService} from '../../game-logic/dialog/dialog.service';
 import {GuiControl} from '../../../../core/scene-manager/gui/gui-elements/gui-control';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Injector} from '@colonial-space/core/injector/injector';
 import {MinimapGuiElement} from './minimap/minimap.gui-element';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
@@ -20,6 +19,10 @@ import {ToolbarGuiElement} from './toolbar/toolbar.gui-element';
 
 export class SpaceGui implements OnLoad, OnUnload {
     @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
+    @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
+    @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
+    @Inject(SelectionBuildingService) private selectionBuildingService: SelectionBuildingService;
+    @Inject(DialogService) private dialogService: DialogService;
 
     private buildingContainer: BuildingGuiElement;
     private selectedUnitContainer: SelectedUnitGuiElement;
@@ -37,28 +40,28 @@ export class SpaceGui implements OnLoad, OnUnload {
         this.guiManager.appendToRoot(new CurrentTourContainer());
         this.guiManager.appendToRoot(new MinimapGuiElement());
         
-        this.selectedUnitSubscription = Injector.inject(SelectionUnitService).selectedUnitId$.pipe(
+        this.selectedUnitSubscription = this.selectionUnitService.selectedUnitId$.pipe(
             tap(() => this.selectedUnitContainer?.control.dispose()),
             filter((id: string) => !!id),
             tap(() => this.selectedUnitContainer = this.guiManager.appendToRoot(new SelectedUnitGuiElement())),
         ).subscribe();
 
-        this.selectedTerritorySubscription = Injector.inject(SelectionTerritoryService).selectedTerritoryId$.pipe(
+        this.selectedTerritorySubscription = this.selectionTerritoryService.selectedTerritoryId$.pipe(
             tap(() => this.selectedTerritoryContainer?.control.dispose()),
             filter((id: string) => !!id),
             tap(() => this.selectedTerritoryContainer = this.guiManager.appendToRoot(new SelectedTerritoryGuiElement()))
         ).subscribe();
 
-        this.dialogServiceOpenedSubscription = Injector.inject(DialogService).open$.pipe(
+        this.dialogServiceOpenedSubscription = this.dialogService.open$.pipe(
             tap(() => this.dialogOverlayContainer?.control.dispose()),
             tap((body: GuiControl<GUI.Control>) => this.dialogOverlayContainer = this.guiManager.appendToRoot(new DialogOverlayGuiElement(body)))
         ).subscribe();
 
-        this.dialogServiceClosedSubscription = Injector.inject(DialogService).close$.pipe(
+        this.dialogServiceClosedSubscription = this.dialogService.close$.pipe(
             tap(() => this.dialogOverlayContainer?.control.dispose())
         ).subscribe();
 
-        this.selectedBuildingSubscription = Injector.inject(SelectionBuildingService).selectedBuildingId$.pipe(
+        this.selectedBuildingSubscription = this.selectionBuildingService.selectedBuildingId$.pipe(
             tap(() => this.buildingContainer?.control.dispose()),
             filter((id: string) => !!id),
             tap(() => this.buildingContainer = this.guiManager.appendToRoot(new BuildingGuiElement()))

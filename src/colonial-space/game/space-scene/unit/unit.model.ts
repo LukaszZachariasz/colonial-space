@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../shared/animations/fade-in/fade-in.animation';
 import {FadeOutAnimation} from '../../../shared/animations/fade-out/fade-out.animation';
 import {ImportModelAbstract} from '../../../../core/scene-manager/model/model-elements/import-model';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
@@ -15,6 +15,10 @@ import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {UnitState} from '../../game-logic/store/unit/unit.state';
 
 export abstract class UnitModel extends ImportModelAbstract implements OnInit, OnReady, OnDestroy {
+    @Inject(ModelManager) private modelManager: ModelManager;
+    @Inject(UnitService) private unitService: UnitService;
+    @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
+
     public unitMovement: UnitMovement;
     public unitSignModel: UnitSignModel;
     public actionMesh: BABYLON.AbstractMesh;
@@ -31,7 +35,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
         this.createUnitSignModel();
         this.unitMovement = new UnitMovement(this.scene, this.state.id, this.primaryMesh);
 
-        this.removeUnitSubscription = Injector.inject(UnitService).removeUnitId$.pipe(
+        this.removeUnitSubscription = this.unitService.removeUnitId$.pipe(
             filter((id: string) => this.state.id === id),
             tap(() => this.runExitAnimation()),
             delay(1000),
@@ -45,13 +49,13 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
     }
 
     public createUnitSignModel(): void {
-        this.unitSignModel = Injector.inject(ModelManager).addSimpleModel(new UnitSignModel(this.scene, this.state));
+        this.unitSignModel = this.modelManager.addSimpleModel(new UnitSignModel(this.scene, this.state));
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }
 
     protected select(): void {
-        Injector.inject(SelectionUnitService).select(this.state.id);
+        this.selectionUnitService.select(this.state.id);
     }
 
     private runEnterAnimation(): void {

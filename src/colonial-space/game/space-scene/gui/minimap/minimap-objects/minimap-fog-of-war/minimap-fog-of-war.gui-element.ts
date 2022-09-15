@@ -4,8 +4,8 @@ import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {EMPTY, Subscription, delay, filter, of, tap} from 'rxjs';
 import {FogOfWarService} from '../../../../../game-logic/fog-of-war/fog-of-war.service';
 import {FromAboveCamera} from '../../../../../../shared/camera/from-above-camera';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {MapGeneratorService} from '../../../../../game-generator/map-generator/map-generator.service';
@@ -18,7 +18,8 @@ import {SquareState} from '../../../../../game-logic/store/map/square/square.sta
 export class MinimapFogOfWarGuiElement implements GuiControl<GUI.Container>, OnInit {
     @Inject(CAMERA('space')) private camera: FromAboveCamera;
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
-    
+    @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
+
     public control: GUI.Container = new GUI.Container('minimapObjects');
     public colors = [
         BABYLON.Color3.Purple().toHexString(),
@@ -48,7 +49,7 @@ export class MinimapFogOfWarGuiElement implements GuiControl<GUI.Container>, OnI
         this.control.top = (this.squareState.y * 100) / this.camera.maxBottom + '%';
         this.control.alpha = 0.5;
 
-        this.removeFogOfWarSubscription = Injector.inject(FogOfWarService).removeFogOfWar$.pipe(
+        this.removeFogOfWarSubscription = this.fogOfWarService.removeFogOfWar$.pipe(
             filter((id: string) => this.squareState.id === id),
             tap(() => this.destroy())
         ).subscribe();

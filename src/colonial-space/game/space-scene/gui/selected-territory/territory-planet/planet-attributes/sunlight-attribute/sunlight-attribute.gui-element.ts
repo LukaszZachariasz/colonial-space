@@ -1,3 +1,4 @@
+import {Inject} from '@colonial-space/core/injector/inject';
 import * as GUI from 'babylonjs-gui';
 import {AppendGuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {AttributeGuiElement} from '../../../../shared/attribute/attribute.gui-element';
@@ -19,6 +20,9 @@ import {selectTerritoryById} from '../../../../../../game-logic/store/territory/
 
 @GuiElement()
 export class SunlightAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(TourService) private tourService: TourService;
+    @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
+
     public control: GUI.Container = new GUI.Container('sunlightAttribute');
     
     @AppendGuiControl() public attribute: AttributeGuiElement = new AttributeGuiElement(
@@ -38,7 +42,7 @@ export class SunlightAttributeGuiElement implements GuiControl<GUI.Container>, O
     }
 
     public gameOnReady(): void {
-        this.refreshAfterTourEndSubscription = Injector.inject(TourService).completeTour$.pipe(
+        this.refreshAfterTourEndSubscription = this.tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
             tap(() => (this.attribute.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())
         ).subscribe();
@@ -50,7 +54,7 @@ export class SunlightAttributeGuiElement implements GuiControl<GUI.Container>, O
         }
         return `Sunlight ${this.planetState.data.sunlight}%
             
-            It's provide ${ Injector.inject(PlanetProductionService).getSunlightProduction(this.planetState.data.sunlight)} production.`;
+            It's provide ${this.planetProductionService.getSunlightProduction(this.planetState.data.sunlight)} production.`;
     }
 
     public gameOnDestroy(): void {

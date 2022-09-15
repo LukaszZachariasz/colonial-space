@@ -3,7 +3,6 @@ import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.service';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
@@ -14,7 +13,10 @@ import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.ser
 
 export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
     @Inject(SelectionService) private selectionService: SelectionService;
-    
+    @Inject(ModelManager) private modelManager: ModelManager;
+    @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
+    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
+
     public material: BABYLON.StandardMaterial;
     public destroyed$: Subject<void> = new Subject<void>();
 
@@ -62,11 +64,11 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
-                Injector.inject(UnitMovementService).handleMovement(this.state.id);
+                this.unitMovementService.handleMovement(this.state.id);
             })
         );
 
-        this.removeFogOfWarSubscription = Injector.inject(FogOfWarService).removeFogOfWar$.pipe(
+        this.removeFogOfWarSubscription = this.fogOfWarService.removeFogOfWar$.pipe(
             filter((id: string) => this.state.id === id),
             tap(() => this.destroy()),
         ).subscribe();
@@ -128,7 +130,7 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
                 };
             }),
             delay(1500),
-            tap(() => Injector.inject(ModelManager).removeModel(this))
+            tap(() => this.modelManager.removeModel(this))
         ).subscribe();
     }
 

@@ -1,6 +1,5 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Injector} from '@colonial-space/core/injector/injector';
 import {SelectionService} from '../../../../game-logic/selection/selection.service';
 import {SelectionUnitService} from '../../../../game-logic/selection/unit/selection-unit.service';
 import {SimpleModel} from '@colonial-space/core/scene-manager/model/model-elements/simple-model';
@@ -10,6 +9,8 @@ import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.ser
 
 export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
     @Inject(SelectionService) private selectionService: SelectionService;
+    @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
+    @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
 
     private material: BABYLON.StandardMaterial;
 
@@ -39,7 +40,7 @@ export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                if (Injector.inject(SelectionUnitService).selectedUnitId$.value) {
+                if (this.selectionUnitService.selectedUnitId$.value) {
                     this.material.alpha = 0.1;
                 }
             })
@@ -53,7 +54,7 @@ export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, () => {
-                Injector.inject(UnitMovementService).handleMovement(this.state.id);
+                this.unitMovementService.handleMovement(this.state.id);
             })
         );
     }

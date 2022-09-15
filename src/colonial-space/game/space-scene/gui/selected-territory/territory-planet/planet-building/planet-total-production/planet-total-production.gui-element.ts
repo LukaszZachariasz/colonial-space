@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
-import {GuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -18,9 +18,12 @@ import {selectTerritoryById} from '../../../../../../game-logic/store/territory/
 
 @GuiElement()
 export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(PlanetProductionService) private planetProductionService!: PlanetProductionService;
+    @Inject(TourService) private tourService: TourService;
+    
     public control: GUI.Container = new GUI.Container('planetTotalProduction');
 
-    @AppendGuiControl() public text: TextGuiElement = new TextGuiElement('Production: ' + Injector.inject(PlanetProductionService).getTotalProduction(this.planetState.data));
+    @AppendGuiControl() public text: TextGuiElement = new TextGuiElement('Production: ' + this.planetProductionService.getTotalProduction(this.planetState.data));
 
     private endOfTourSubscription: Subscription;
 
@@ -32,9 +35,9 @@ export class PlanetTotalProductionGuiElement implements GuiControl<GUI.Container
     }
 
     public gameOnReady(): void {
-        this.endOfTourSubscription = Injector.inject(TourService).completeTour$.pipe(
+        this.endOfTourSubscription = this.tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
-            tap(() => this.text.control.text = 'Production: ' + Injector.inject(PlanetProductionService).getTotalProduction(this.planetState.data))
+            tap(() => this.text.control.text = 'Production: ' + this.planetProductionService.getTotalProduction(this.planetState.data))
         ).subscribe();
     }
 

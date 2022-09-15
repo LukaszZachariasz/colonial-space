@@ -1,12 +1,12 @@
 import * as GUI from 'babylonjs-gui';
 import {AnalysisService} from '../../../../../game-logic/anaylsis/analysis.service';
 import {AnalysisShipState} from '../../../../../game-logic/store/unit/analysis-ship/analysis-ship.state';
-import {AppendGuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../../shared/button/button.gui-element';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -19,14 +19,17 @@ import {selectUnitByTerritoryId} from '../../../../../game-logic/store/unit/unit
 
 @GuiElement()
 export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(AnalysisService) private analysisService: AnalysisService;
+    @Inject(TourService) private tourService: TourService;
+
     public control: GUI.Container = new GUI.Container('analysis');
 
     @AppendGuiControl() public startAnalysisButton: ButtonGuiElement = new ButtonGuiElement('Start analysis', () => {
-        Injector.inject(AnalysisService).startAnalysis(this.analysisShip);
+        this.analysisService.startAnalysis(this.analysisShip);
         this.setAnalysisStatus();
     });
     @AppendGuiControl() public stopAnalysisButton: ButtonGuiElement = new ButtonGuiElement('Stop analysis', () => {
-        Injector.inject(AnalysisService).stopAnalysis(this.analysisShip);
+        this.analysisService.stopAnalysis(this.analysisShip);
         this.setAnalysisStatus();
     });
 
@@ -48,7 +51,7 @@ export class PlanetAnalysisGuiElement implements GuiControl<GUI.Container>, OnIn
     public gameOnReady(): void {
         this.subscription = merge(
             of(EMPTY),
-            Injector.inject(TourService).completeTour$
+            this.tourService.completeTour$
         ) .pipe(
             tap(() => this.setAnalysisStatus())
         ).subscribe();

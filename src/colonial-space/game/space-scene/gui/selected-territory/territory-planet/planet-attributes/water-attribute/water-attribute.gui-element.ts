@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {AttributeGuiElement} from '../../../../shared/attribute/attribute.gui-element';
 import {GameIcon} from '../../../../shared/icon/game-icon';
-import {GuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../../../../shared/icon/icon.gui-element';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -19,6 +19,9 @@ import {selectTerritoryById} from '../../../../../../game-logic/store/territory/
 
 @GuiElement()
 export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnReady, OnDestroy {
+    @Inject(TourService) private tourService: TourService;
+    @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
+    
     public control: GUI.Container = new GUI.Container('waterAttribute');
 
     @AppendGuiControl() public attribute: AttributeGuiElement = new AttributeGuiElement(
@@ -38,7 +41,7 @@ export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnIn
     }
 
     public gameOnReady(): void {
-        this.refreshAfterTourEndSubscription = Injector.inject(TourService).completeTour$.pipe(
+        this.refreshAfterTourEndSubscription = this.tourService.completeTour$.pipe(
             tap(() => this.planetState = selectTerritoryById(this.planetState.id)),
             tap(() => (this.attribute.tooltipContent.control as GUI.TextBlock).text = this.generateTooltipContent())
         ).subscribe();
@@ -50,7 +53,7 @@ export class WaterAttributeGuiElement implements GuiControl<GUI.Container>, OnIn
         }
         return `Water ${this.planetState.data.water}%. 
             
-            It's provide ${Injector.inject(PlanetProductionService).getWaterProduction(this.planetState.data.water)} production.`;
+            It's provide ${this.planetProductionService.getWaterProduction(this.planetState.data.water)} production.`;
     }
 
     public gameOnDestroy(): void {
