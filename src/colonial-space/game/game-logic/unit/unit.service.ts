@@ -8,8 +8,8 @@ import {selectSquareByUnitId} from '../store/map/square/square.selectors';
 import {setSquareUnitId} from '../store/map/map.slice';
 import {store} from '../store/store';
 
-@Injectable()
 @HasTourEffects()
+@Injectable()
 export class UnitService {
     public addUnit$: Subject<string> = new Subject<string>();
     public removeUnitId$: Subject<string> = new Subject<string>();

@@ -6,7 +6,7 @@ import {SelectionUnitService} from '../unit/selection-unit.service';
 
 @Injectable()
 export class SelectionTerritoryService {
-    @Inject(SelectionUnitService) private selectedUnitService: SelectionUnitService;
+    @Inject('SelectionUnitService') private selectedUnitService: SelectionUnitService;
     @Inject(SelectedBuildingService) private selectedBuildingService: SelectedBuildingService;
     
     public selectedTerritoryId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);

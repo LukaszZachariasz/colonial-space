@@ -41,6 +41,11 @@ export function HasTourEffects(): (constructor: any) => any {
         };
 
         overrideConstructor.prototype = original.prototype;
+        Object.defineProperty(overrideConstructor, 'name', {
+            get(): any {
+                return original.name;
+            }
+        });
         return overrideConstructor;
     };
 }

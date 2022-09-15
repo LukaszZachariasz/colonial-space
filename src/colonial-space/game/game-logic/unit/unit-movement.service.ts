@@ -26,7 +26,7 @@ const PathFinding = require('pathfinding');
 
 @Injectable()
 export class UnitMovementService {
-    @Inject(SelectionUnitService) private selectedUnitService: SelectionUnitService;
+    @Inject('SelectionUnitService') private selectedUnitService: SelectionUnitService;
     
     public addedPlanMovement$ = new Subject<string>();
     public moveUnit$ = new Subject<string>();
