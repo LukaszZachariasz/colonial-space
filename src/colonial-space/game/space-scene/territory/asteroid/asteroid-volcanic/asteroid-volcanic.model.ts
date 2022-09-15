@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {GameObjectFromFile} from '@colonial-space/core/scene-manager/model/game-object';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {TerritoryModel} from '../../territory.model';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
@@ -13,7 +13,7 @@ import {selectSquareByTerritoryId} from '../../../../game-logic/store/map/square
     meshUrl: 'resources/territory/asteroid/asteroid-volcanic/',
     meshName: 'asteroid_volcanic_01.glb'
 })
-export class AsteroidVolcanicModel extends TerritoryModel implements OnReady, OnInit {
+export class AsteroidVolcanicModel extends TerritoryModel implements OnLoad, OnInit {
     public type: TerritoryType = TerritoryType.ASTEROID_VOLCANIC;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
 
@@ -40,8 +40,8 @@ export class AsteroidVolcanicModel extends TerritoryModel implements OnReady, On
         this.attachParticles();
     }
 
-    public gameOnReady(): void {
-        super.gameOnReady();
+    public gameOnLoad(): void {
+        super.gameOnLoad();
     }
 
     private getRandom(min: number, max: number): number {

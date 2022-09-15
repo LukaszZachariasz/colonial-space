@@ -3,14 +3,14 @@ import {FadeInAnimation} from '../../../shared/animations/fade-in/fade-in.animat
 import {ImportModelAbstract} from '../../../../core/scene-manager/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SelectionTerritoryService} from '../../game-logic/selection/territory/selection-territory.service';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../game-logic/store/territory/territory-type';
 import {tap} from 'rxjs';
 
-export abstract class TerritoryModel extends ImportModelAbstract implements OnReady {
+export abstract class TerritoryModel extends ImportModelAbstract implements OnLoad {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
     
@@ -24,7 +24,7 @@ export abstract class TerritoryModel extends ImportModelAbstract implements OnRe
         super();
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.createTerritorySignModel();
         this.runEnterAnimation();
     }

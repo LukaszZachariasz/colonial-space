@@ -1,6 +1,7 @@
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
 import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
-import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
+import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
+import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
 
 export interface GameObjectDefinition {
     name: string;
@@ -50,7 +51,8 @@ export function GameObjectFromFile(definition: GameObjectDefinition): any {
                     .then(() => setRootMeshes(this))
                     .then(() => addActionManager(this))
                     .then(() => isOnInit(this) && this.gameOnInit())
-                    .then(() => isOnReady(this) && this.gameOnReady())
+                    .then(() => isOnLoad(this) && this.gameOnLoad())
+                    .then(() => isOnUnload(this) && this.primaryMesh.onDisposeObservable.add(() => this.gameOnUnload()))
                     .then(() => isOnDestroy(this) && this.primaryMesh.onDisposeObservable.add(() => this.gameOnDestroy()));
             }
         };

@@ -6,7 +6,7 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SelectionUnitService} from '../../game-logic/selection/unit/selection-unit.service';
 import {Subscription, delay, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
@@ -14,7 +14,7 @@ import {UnitService} from '../../game-logic/unit/unit.service';
 import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {UnitState} from '../../game-logic/store/unit/unit.state';
 
-export abstract class UnitModel extends ImportModelAbstract implements OnInit, OnReady, OnDestroy {
+export abstract class UnitModel extends ImportModelAbstract implements OnInit, OnLoad, OnDestroy {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(UnitService) private unitService: UnitService;
     @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
@@ -44,7 +44,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
         ).subscribe();
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.runEnterAnimation();
     }
 

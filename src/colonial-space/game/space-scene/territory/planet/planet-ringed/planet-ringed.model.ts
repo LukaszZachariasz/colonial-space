@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {GameObjectFromFile} from '@colonial-space/core/scene-manager/model/game-object';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {TerritoryModel} from '../../territory.model';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
@@ -13,7 +13,7 @@ import {selectSquareByTerritoryId} from '../../../../game-logic/store/map/square
     meshUrl: 'resources/territory/planet/planet-ringed/',
     meshName: 'planet_01.glb'
 })
-export class PlanetRingedModel extends TerritoryModel implements OnReady, OnInit {
+export class PlanetRingedModel extends TerritoryModel implements OnLoad, OnInit {
     public type: TerritoryType = TerritoryType.PLANET_RINGED;
     public square: SquareState = selectSquareByTerritoryId(this.state.id);
 
@@ -26,7 +26,7 @@ export class PlanetRingedModel extends TerritoryModel implements OnReady, OnInit
         this.primaryMesh.position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
     }
 
-    public gameOnReady(): void {
-        super.gameOnReady();
+    public gameOnLoad(): void {
+        super.gameOnLoad();
     }
 }

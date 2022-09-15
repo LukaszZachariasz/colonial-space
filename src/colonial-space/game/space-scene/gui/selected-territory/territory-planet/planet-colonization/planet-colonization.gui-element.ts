@@ -10,6 +10,7 @@ import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gu
 import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
+import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetState} from '../../../../../game-logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../game-logic/store/territory/territory.state';
 import {TourService} from '../../../../../game-logic/tour/tour.service';
@@ -18,7 +19,7 @@ import {UnitType} from '../../../../../game-logic/store/unit/unit-type';
 import {selectUnitByTerritoryId} from '../../../../../game-logic/store/unit/unit.selectors';
 
 @GuiElement()
-export class PlanetColonizationGuiElement implements GuiControl<GUI.Container>, OnInit {
+export class PlanetColonizationGuiElement implements GuiControl<GUI.Container>, OnInit, OnLoad {
     @Inject(ColonizationService) private colonizationService: ColonizationService;
     @Inject(TourService) private tourService: TourService;
 
@@ -40,7 +41,7 @@ export class PlanetColonizationGuiElement implements GuiControl<GUI.Container>, 
         this.control.paddingTop = '20px';
     }
 
-    public gameOnReady(): void {
+    public gameOnLoad(): void {
         this.subscription = merge(
             of(EMPTY),
             this.tourService.completeTour$
