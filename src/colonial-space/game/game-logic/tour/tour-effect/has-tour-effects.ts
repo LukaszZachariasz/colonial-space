@@ -25,7 +25,6 @@ export function HasTourEffects(): (constructor: any) => any {
                         instance[metadataValue.toTourFieldName],
                         metadataValue.effect.bind(instance)
                     );
-                    debugger;
                     tourEffects.push(tourEffect);
 
                     Injector.inject(TourService).addTourEffect(tourEffect);

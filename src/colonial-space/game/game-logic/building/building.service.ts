@@ -43,7 +43,6 @@ export class BuildingService {
     })
     private startBuildingProcesses(): Observable<any>{
         return new Observable((subscriber: Subscriber<any>) => {
-            debugger;
             selectTerritories().forEach((el: TerritoryState) => {
                 if (isPlanet(el)) {
                     store.dispatch(build({
