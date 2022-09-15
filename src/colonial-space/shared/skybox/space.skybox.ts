@@ -1,10 +1,7 @@
-import {Inject} from '@colonial-space/core/injector/inject';
 import * as BABYLON from 'babylonjs';
 import {ActionManager} from 'babylonjs/Actions/actionManager';
-import {Injector} from '@colonial-space/core/injector/injector';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {SelectionService} from '../../game/game-logic/selection/selection.service';
-import {SelectionTerritoryService} from '../../game/game-logic/selection/territory/selection-territory.service';
-import {SelectionUnitService} from '../../game/game-logic/selection/unit/selection-unit.service';
 import {SimpleModel} from '../../../core/scene-manager/model/model-elements/simple-model';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
