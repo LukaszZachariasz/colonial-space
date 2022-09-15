@@ -1,5 +1,5 @@
-import {Inject} from '@colonial-space/core/injector/inject';
 import {GameIcon} from '../../../../space-scene/gui/shared/icon/game-icon';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {PlanetNameGeneratorService} from '../planet-name/planet-name-generator.service';
 import {PlanetRingedState} from '../../../../game-logic/store/territory/planet/planet-ringed/planet-ringed.state';

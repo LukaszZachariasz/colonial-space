@@ -1,6 +1,6 @@
+import {GameIcon} from '../../../../space-scene/gui/shared/icon/game-icon';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {GameIcon} from '../../../../space-scene/gui/shared/icon/game-icon';
 import {SolarState} from '../../../../game-logic/store/territory/star/solar/solar.state';
 import {StarNameGeneratorService} from '../star-name/star-name-generator.service';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
