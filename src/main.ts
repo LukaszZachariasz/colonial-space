@@ -52,7 +52,7 @@ ipcMain.on('re-render', () => {
     mainWindow.loadFile('index.html');
 });
 
-ipcMain.on('game-engine-ready', () => {
+ipcMain.on('game-root-scene-ready', () => {
     mainWindow.show();
 });
 
