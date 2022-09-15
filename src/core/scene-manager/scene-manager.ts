@@ -7,6 +7,7 @@ import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-sce
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SceneOption} from '@colonial-space/core/module/scene/scene-option';
 import {Subject} from 'rxjs';
+import {ipcRenderer} from 'electron';
 import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 
 @Injectable()
@@ -38,8 +39,34 @@ export class SceneManager {
             componentDefinitions: componentsDefinitions
         });
 
+        if (!sceneOption.lazy) {
+            this.load(sceneOption.name).then(() => {
+                if (sceneOption.root) {
+                    ipcRenderer.send('game-root-scene-ready');
+                }
+            });
+        }
+
         if (sceneOption.root) {
             this.rootSceneAdded$.next(sceneOption.name);
         }
+    }
+
+    public getScene(name: string): RegisteredScene {
+        return this.allScenes.find((el: RegisteredScene) => el.name === name);
+    }
+
+    public async load(name: string): Promise<any> {
+        return new Promise<any>((resolve: any) => {
+            const scene = this.getScene(name);
+            scene.scene.onReadyObservable.add(() => {
+                resolve();
+            });
+
+            setTimeout(() => {
+                scene.scene.render();
+            });
+        });
+
     }
 }

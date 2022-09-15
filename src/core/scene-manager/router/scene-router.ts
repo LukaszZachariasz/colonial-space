@@ -23,8 +23,7 @@ export class SceneRouter implements OnInit {
     }
 
     public navigate(name: string): void {
-        console.log(name);
-        this.setScene(this.sceneManager.allScenes.find((el: RegisteredScene) => el.name === name));
+        this.setScene(this.sceneManager.getScene(name));
     }
 
     private setScene(gameScene: RegisteredScene): void {

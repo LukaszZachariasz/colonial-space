@@ -16,7 +16,6 @@ function createWindow(): void {
     });
 
     mainWindow.loadFile('index.html');
-    mainWindow.show();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
