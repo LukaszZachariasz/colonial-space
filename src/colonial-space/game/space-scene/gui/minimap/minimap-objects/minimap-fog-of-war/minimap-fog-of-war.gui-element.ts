@@ -7,7 +7,6 @@ import {FromAboveCamera} from '../../../../../../shared/camera/from-above-camera
 import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
 import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Injector} from '@colonial-space/core/injector/injector';
 import {MapGeneratorService} from '../../../../../game-generator/map-generator/map-generator.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
