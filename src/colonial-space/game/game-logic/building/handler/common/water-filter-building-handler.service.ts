@@ -14,8 +14,8 @@ import {setIsBuiltTrue} from '../../../store/building/building.slice';
 import {setWaterPercentage} from '../../../store/territory/territory.slice';
 import {store} from '../../../store/store';
 
-@HasTourEffects()
 @Injectable()
+@HasTourEffects()
 export class WaterFilterBuildingHandlerService {
     @AddTourEffect({
         name: 'after building process',

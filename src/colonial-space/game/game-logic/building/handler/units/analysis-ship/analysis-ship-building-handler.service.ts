@@ -15,9 +15,9 @@ import {UnitState} from '../../../../store/unit/unit.state';
 import {selectPlayerId} from '../../../../store/player/player.selectors';
 import {selectUnitById} from '../../../../store/unit/unit.selectors';
 
+@Injectable()
 @HasTourBlockers()
 @HasTourEffects()
-@Injectable()
 export class AnalysisShipBuildingHandlerService extends UnitHandlerService {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
     @Inject(AnalysisShipGeneratorService) private analysisShipGeneratorService: AnalysisShipGeneratorService;

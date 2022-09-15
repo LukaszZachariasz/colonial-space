@@ -12,8 +12,8 @@ import {selectBuildingByBuildingObjectId} from '../store/building/building.selec
 import {selectTerritories} from '../store/territory/territory.selectors';
 import {store} from '../store/store';
 
-@HasTourEffects()
 @Injectable()
+@HasTourEffects()
 export class BuildingService {
     @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
     
@@ -43,6 +43,7 @@ export class BuildingService {
     })
     private startBuildingProcesses(): Observable<any>{
         return new Observable((subscriber: Subscriber<any>) => {
+            debugger;
             selectTerritories().forEach((el: TerritoryState) => {
                 if (isPlanet(el)) {
                     store.dispatch(build({

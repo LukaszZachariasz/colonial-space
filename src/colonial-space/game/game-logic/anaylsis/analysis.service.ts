@@ -17,8 +17,8 @@ import {selectTerritoryById} from '../store/territory/territory.selectors';
 import {selectUnitById, selectUnitsByType} from '../store/unit/unit.selectors';
 import {store} from '../store/store';
 
-@HasTourEffects()
 @Injectable()
+@HasTourEffects()
 export class AnalysisService {
     @Inject(UnitService) private unitService: UnitService;
     

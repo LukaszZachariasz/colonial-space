@@ -14,8 +14,8 @@ import {setIsBuiltTrue} from '../../../store/building/building.slice';
 import {setSunlightPercentage} from '../../../store/territory/territory.slice';
 import {store} from '../../../store/store';
 
-@HasTourEffects()
 @Injectable()
+@HasTourEffects()
 export class SunlightAmplifierBuildingHandlerService {
     @AddTourEffect({
         name: 'after building process',
