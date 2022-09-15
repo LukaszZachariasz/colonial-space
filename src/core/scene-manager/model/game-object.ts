@@ -18,6 +18,7 @@ export function GameObjectFromFile(definition: GameObjectDefinition): any {
     function addActionManager(that: any): any {
         that.actionManager = new BABYLON.ActionManager(that.scene);
         const highlightLayer = new BABYLON.HighlightLayer('hover_highlight_layer', that.scene);
+        that.actionMesh.enablePointerMoveEvents = false;
 
         that.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
