@@ -29,6 +29,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "src/game/scene/game/**/*"
+    "src/colonial-space/game/scene/game/**/*"
   ]
 }

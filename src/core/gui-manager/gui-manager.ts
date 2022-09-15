@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
@@ -26,11 +27,10 @@ export class GuiManager {
         return control;
     }
 
-    /*
-    public createForMesh<T extends GuiControl<GUI.Control>>(name: string, mesh: BABYLON.Mesh, control: T, width?: number, height?: number): GUI.AdvancedDynamicTexture {
+    public createForMesh(name: string, mesh: BABYLON.Mesh, control: any, width?: number, height?: number): GUI.AdvancedDynamicTexture {
         const advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateForMesh(mesh, width, height);
         advancedDynamicTexture.name = name;
         advancedDynamicTexture.addControl(control.control);
         return advancedDynamicTexture;
-    }*/
+    }
 }
