@@ -4,8 +4,8 @@ import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManagerService} from '../../core/model-manager/model-manager.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SpaceSkybox} from '../../game/space-scene/skybox/space.skybox';
-import {SpaceSkyboxConst} from '../../game/space-scene/skybox/space-skybox.const';
+import {SpaceSkybox} from '../../shared/skybox/space.skybox';
+import {SpaceSkyboxConst} from '../../shared/skybox/space-skybox.const';
 
 export class MainMenuSkybox implements OnInit {
     @Inject(SCENE('main-menu')) private scene: BABYLON.Scene;

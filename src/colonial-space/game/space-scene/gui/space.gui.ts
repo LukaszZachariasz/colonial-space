@@ -1,11 +1,12 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingGuiElement} from './building/building.gui-element';
+import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayGuiElement} from './dialog-overlay/dialog-overlay.gui-element';
 import {DialogService} from '../../game-logic/dialog/dialog.service';
 import {GuiControl} from '../../../core/gui-manager/gui-elements/gui-control';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
+import {MinimapGuiElement} from './minimap/minimap.gui-element';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
@@ -15,8 +16,9 @@ import {SelectedUnitGuiElement} from './selected-unit/selected-unit.gui-element'
 import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
 import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
 import {Subscription, filter, tap} from 'rxjs';
+import {ToolbarGuiElement} from './toolbar/toolbar.gui-element';
 
-export class SpaceGui implements OnInit, OnLoad, OnUnload {
+export class SpaceGui implements OnLoad, OnUnload {
     @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
 
     private buildingContainer: BuildingGuiElement;
@@ -30,13 +32,11 @@ export class SpaceGui implements OnInit, OnLoad, OnUnload {
     private dialogServiceClosedSubscription: Subscription;
     private selectedBuildingSubscription: Subscription;
 
-    public gameOnInit(): void {
-/*        this.guiManager.appendToRoot(new ToolbarGuiElement());
-        this.guiManager.appendToRoot(new CurrentTourContainer());
-        this.guiManager.appendToRoot(new MinimapGuiElement());*/
-    }
-
     public gameOnLoad(): void {
+        this.guiManager.appendToRoot(new ToolbarGuiElement());
+        this.guiManager.appendToRoot(new CurrentTourContainer());
+        this.guiManager.appendToRoot(new MinimapGuiElement());
+        
         this.selectedUnitSubscription = Injector.inject(SelectionUnitService).selectedUnitId$.pipe(
             tap(() => this.selectedUnitContainer?.control.dispose()),
             filter((id: string) => !!id),

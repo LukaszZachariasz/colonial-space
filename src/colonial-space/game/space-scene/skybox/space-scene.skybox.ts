@@ -1,16 +1,16 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManagerService} from '../../../core/model-manager/model-manager.service';
-import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SpaceSkybox} from './space.skybox';
+import {SpaceSkybox} from '../../../shared/skybox/space.skybox';
 import {selectMapSkybox} from '../../game-logic/store/map/tour.selectors';
 
-export class SpaceSceneSkybox implements OnLoad {
+export class SpaceSceneSkybox implements OnInit {
     @Inject(ModelManagerService) private modelManagerService: ModelManagerService;
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
 
-    public gameOnLoad(): void {
+    public gameOnInit(): void {
         this.modelManagerService.addSimpleModel(new SpaceSkybox(this.scene, selectMapSkybox()));
     }
 }

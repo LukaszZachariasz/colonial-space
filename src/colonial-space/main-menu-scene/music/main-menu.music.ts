@@ -25,9 +25,11 @@ export class MainMenuMusic implements OnInit, OnLoad, OnUnload {
 
     public gameOnLoad(): void {
         this.music.autoplay = true;
+        this.music.play();
     }
 
     public gameOnUnload(): void {
         this.music.autoplay = false;
+        this.music.stop();
     }
 }

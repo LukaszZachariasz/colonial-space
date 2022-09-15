@@ -1,3 +1,4 @@
+import {EMPTY, delay, of, tap} from 'rxjs';
 import {GameBuilderService} from './game-builder/game-builder.service';
 import {GameGeneratorService} from './game-generator/game-generator.service';
 import {Inject} from '@colonial-space/core/injector/inject';
@@ -15,9 +16,12 @@ export class GameService {
     @Inject(SCENE('space')) private spaceScene: BABYLON.Scene;
 
     public newGame(): void {
-        this.sceneRouter.navigate('loading');
-        this.gameGeneratorService.generate();
-        this.gameBuilderService.build();
-        this.sceneRouter.navigate('space');
+        of(EMPTY).pipe(
+            tap(() => this.sceneRouter.navigate('loading')),
+            delay(0),
+            tap(() => this.gameGeneratorService.generate()),
+            tap(() => this.gameBuilderService.build()),
+            tap(() => this.sceneRouter.navigate('space'))
+        ).subscribe();
     }
 }
