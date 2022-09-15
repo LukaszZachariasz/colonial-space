@@ -3,7 +3,7 @@ import {AsteroidVolcanicModel} from '../../space-scene/territory/asteroid/astero
 import {BlackHoleModel} from '../../space-scene/territory/black-hole/black-hole.model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {ModelManagerService} from '../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {PlanetGreenModel} from '../../space-scene/territory/planet/planet-green/planet-green.model';
 import {PlanetMetalModel} from '../../space-scene/territory/planet/planet-metal/planet-metal.model';
 import {PlanetRingedModel} from '../../space-scene/territory/planet/planet-ringed/planet-ringed.model';
@@ -16,7 +16,7 @@ import {TerritoryType} from '../../game-logic/store/territory/territory-type';
 
 @Injectable()
 export class TerritoryFactoryService {
-    @Inject(ModelManagerService) private modelManagerService: ModelManagerService;
+    @Inject(ModelManager) private modelManagerService: ModelManager;
 
     public create(scene: BABYLON.Scene, territoryState: TerritoryState): TerritoryModel {
         switch (territoryState.type) {

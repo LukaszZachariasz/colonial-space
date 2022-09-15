@@ -7,7 +7,7 @@ import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {DialogService} from '../../../dialog/dialog.service';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {ModelManagerService} from '../../../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {Observable, Subscriber} from 'rxjs';
 import {PlanetProductionService} from '../../../territory/planet/planet-production.service';
 import {PlanetState} from '../../../store/territory/planet/planet.state';
@@ -57,7 +57,7 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                Injector.inject(ModelManagerService).addImportModel(this.createModel(unit.id));
+                Injector.inject(ModelManager).addImportModel(this.createModel(unit.id));
                 Injector.inject(UnitService).addUnit$.next(unit.id);
 
                 store.dispatch(setProductionToBeginning({

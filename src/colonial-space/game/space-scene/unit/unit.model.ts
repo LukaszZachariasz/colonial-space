@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../shared/animations/fade-in/fade-in.animation';
 import {FadeOutAnimation} from '../../../shared/animations/fade-out/fade-out.animation';
-import {ImportModelAbstract} from '../../../core/model-manager/model-elements/import-model';
+import {ImportModelAbstract} from '../../../../core/scene-manager/model/model-elements/import-model';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {ModelManagerService} from '../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
@@ -45,7 +45,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
     }
 
     public createUnitSignModel(): void {
-        this.unitSignModel = Injector.inject(ModelManagerService).addSimpleModel(new UnitSignModel(this.scene, this.state));
+        this.unitSignModel = Injector.inject(ModelManager).addSimpleModel(new UnitSignModel(this.scene, this.state));
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

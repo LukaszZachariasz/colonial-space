@@ -4,5 +4,4 @@ export interface ModuleOptions {
     imports?: unknown[];
     providers?: unknown[];
     scenes?: SceneOption[];
-    gameEntry?: unknown;
 }

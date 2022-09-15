@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
@@ -12,6 +13,8 @@ import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 
 @Injectable()
 export class SceneManager {
+    @Inject(ENGINE) private engine: BABYLON.Engine;
+    
     public allScenes: RegisteredScene[] = [];
     public rootSceneAdded$: Subject<string> = new Subject<string>();
     
@@ -20,7 +23,7 @@ export class SceneManager {
         const guiDefinition = new sceneOption.gui();
         const componentsDefinitions = sceneOption.components?.map((component: any) => new component());
 
-        const babylonScene = new BABYLON.Scene(Injector.inject(ENGINE));
+        const babylonScene = new BABYLON.Scene(this.engine);
         const camera = sceneOption.cameraFactory(babylonScene);
 
         Injector.set(SCENE(sceneOption.name), babylonScene);

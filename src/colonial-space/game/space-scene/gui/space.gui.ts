@@ -3,7 +3,7 @@ import {BuildingGuiElement} from './building/building.gui-element';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayGuiElement} from './dialog-overlay/dialog-overlay.gui-element';
 import {DialogService} from '../../game-logic/dialog/dialog.service';
-import {GuiControl} from '../../../core/gui-manager/gui-elements/gui-control';
+import {GuiControl} from '../../../../core/scene-manager/gui/gui-elements/gui-control';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {MinimapGuiElement} from './minimap/minimap.gui-element';

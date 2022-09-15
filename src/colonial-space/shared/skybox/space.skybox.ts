@@ -3,7 +3,7 @@ import {ActionManager} from 'babylonjs/Actions/actionManager';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SelectionTerritoryService} from '../../game/game-logic/territory/selection-territory.service';
 import {SelectionUnitService} from '../../game/game-logic/unit/selection-unit.service';
-import {SimpleModel} from '../../core/model-manager/model-elements/simple-model';
+import {SimpleModel} from '../../../core/scene-manager/model/model-elements/simple-model';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
 export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {

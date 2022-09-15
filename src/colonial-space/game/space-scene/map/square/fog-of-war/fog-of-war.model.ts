@@ -3,9 +3,9 @@ import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.service';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {ModelManagerService} from '../../../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {ParticleSystemModel} from '../../../../../core/model-manager/model-elements/particle-system-model';
+import {ParticleSystemModel} from '../../../../../../core/scene-manager/model/model-elements/particle-system-model';
 import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
 import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
 import {SquareModel} from '../square.model';
@@ -127,7 +127,7 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
                 };
             }),
             delay(1500),
-            tap(() => Injector.inject(ModelManagerService).removeModel(this))
+            tap(() => Injector.inject(ModelManager).removeModel(this))
         ).subscribe();
     }
 

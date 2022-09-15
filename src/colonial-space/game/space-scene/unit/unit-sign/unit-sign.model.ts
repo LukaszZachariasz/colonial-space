@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
-import {SimpleModel} from '../../../../core/model-manager/model-elements/simple-model';
+import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
 import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';

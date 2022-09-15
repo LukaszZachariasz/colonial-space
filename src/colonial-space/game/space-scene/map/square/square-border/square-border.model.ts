@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {SimpleModel} from '../../../../../core/model-manager/model-elements/simple-model';
+import {SimpleModel} from '../../../../../../core/scene-manager/model/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {selectPlayerColor} from '../../../../game-logic/store/player/player.selectors';
 

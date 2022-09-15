@@ -8,7 +8,7 @@ import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destr
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 @Injectable()
-export class ModelManagerService {
+export class ModelManager {
     public addSimpleModel<T extends Model<ModelElement>>(model: T): T {
         if (model instanceof SimpleModel || model instanceof ParticleSystemModel) {
             model.onCreate();

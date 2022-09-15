@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
 import {AnalysisService} from '../../../../../game-logic/anaylsis/analysis.service';
 import {AnalysisShipState} from '../../../../../game-logic/store/unit/analysis-ship/analysis-ship.state';
-import {AppendGuiControl} from '../../../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../../shared/button/button.gui-element';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';

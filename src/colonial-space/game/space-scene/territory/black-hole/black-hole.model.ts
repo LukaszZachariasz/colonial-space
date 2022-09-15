@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {GameObjectFromFile} from '../../../game-object';
+import {GameObjectFromFile} from '@colonial-space/core/scene-manager/model/game-object';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import {SquareState} from '../../../game-logic/store/map/square/square.state';

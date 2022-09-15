@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {BuildingService} from '../../../../../../game-logic/building/building.service';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';

@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {ModelManagerService} from '../../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {SimpleModel} from '../../../../core/model-manager/model-elements/simple-model';
+import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
 import {SquareBorderModel} from './square-border/square-border.model';
 import {SquareState} from '../../../game-logic/store/map/square/square.state';
 import {SquareSurfaceModel} from './square-surface/square-surface.model';
@@ -36,7 +36,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createFogOfWarModel(): void {
-        this.fogOfWarModel = Injector.inject(ModelManagerService).addSimpleModel(new FogOfWarModel(this.scene, this.state));
+        this.fogOfWarModel = Injector.inject(ModelManager).addSimpleModel(new FogOfWarModel(this.scene, this.state));
         this.fogOfWarModel.mesh.parent = this.mesh;
         this.fogOfWarModel.emitter.parent = this.mesh;
         this.fogOfWarRemovedSubscription = this.fogOfWarModel.destroyed$.pipe(
@@ -47,7 +47,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareBorderModel(): void {
-        this.squareBorderModel = Injector.inject(ModelManagerService).addSimpleModel(new SquareBorderModel(this.scene));
+        this.squareBorderModel = Injector.inject(ModelManager).addSimpleModel(new SquareBorderModel(this.scene));
         this.squareBorderModel.mesh.parent = this.mesh;
         if (this.state.playerId) {
             this.squareBorderModel.setPlayer();
@@ -55,7 +55,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareSurfaceModel(): void {
-        this.squareSurfaceModel = Injector.inject(ModelManagerService).addSimpleModel(new SquareSurfaceModel(this.scene, this.state));
+        this.squareSurfaceModel = Injector.inject(ModelManager).addSimpleModel(new SquareSurfaceModel(this.scene, this.state));
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 

@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {MapGenerator} from '../../game-generator/map-generator/map.generator';
-import {ParticleSystemModel} from '../../../core/model-manager/model-elements/particle-system-model';
+import {ParticleSystemModel} from '../../../../core/scene-manager/model/model-elements/particle-system-model';
 import {SquareModel} from '../map/square/square.model';
 
 export class GalaxyDustModel extends ParticleSystemModel {

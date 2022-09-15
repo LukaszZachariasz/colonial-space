@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {ControlEvent} from '../../../../../core/gui-manager/gui-elements/events/control-event';
-import {ControlEventListener} from '../../../../../core/gui-manager/gui-elements/events/control-event-listener';
-import {GuiControl} from '../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../core/gui-manager/gui-elements/gui-element';
+import {ControlEvent} from '../../../../../../core/scene-manager/gui/gui-elements/events/control-event';
+import {ControlEventListener} from '../../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
+import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TourService} from '../../../../game-logic/tour/tour.service';

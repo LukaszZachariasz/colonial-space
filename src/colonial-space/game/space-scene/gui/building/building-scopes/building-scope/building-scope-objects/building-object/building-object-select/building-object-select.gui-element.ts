@@ -3,13 +3,13 @@ import {
     BuildingObjectState
 } from '../../../../../../../../game-logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingService} from '../../../../../../../../game-logic/building/building.service';
-import {ControlEvent} from '../../../../../../../../../core/gui-manager/gui-elements/events/control-event';
+import {ControlEvent} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/events/control-event';
 import {
     ControlEventListener
-} from '../../../../../../../../../core/gui-manager/gui-elements/events/control-event-listener';
+} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '../../../../../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';

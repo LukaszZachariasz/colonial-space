@@ -4,7 +4,7 @@ import {FromAboveCamera} from '../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {MapModel} from '../space-scene/map/map.model';
-import {ModelManagerService} from '../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
 import {TerritoryFactoryService} from './territory-factory/territory-factory.service';
@@ -19,7 +19,7 @@ import {selectUnits} from '../game-logic/store/unit/unit.selectors';
 @Injectable()
 export class GameBuilderService {
     @Inject(SceneManager) private sceneManager: SceneManager;
-    @Inject(ModelManagerService) private modelManagerService: ModelManagerService;
+    @Inject(ModelManager) private modelManagerService: ModelManager;
     @Inject(TerritoryFactoryService) private territoryFactoryService: TerritoryFactoryService;
     @Inject(UnitFactoryService) private unitFactoryService: UnitFactoryService;
     @Inject(SCENE('space')) private spaceScene: BABYLON.Scene;

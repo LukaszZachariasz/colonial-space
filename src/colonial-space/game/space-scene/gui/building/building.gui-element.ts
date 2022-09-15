@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {BuildingHeaderGuiElement} from './building-header/building-header.gui-element';
 import {BuildingScopesGuiElement} from './building-scopes/building-scopes.gui-element';
 import {BuildingState} from '../../../game-logic/store/building/building.state';
-import {GuiControl} from '../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SelectedBuildingService} from '../../../game-logic/building/selected-building.service';

@@ -1,5 +1,5 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {BuildingObjectArtGuiElement} from './building-object-art/building-object-art.gui-element';
 import {BuildingObjectNameGuiElement} from './building-object-name/building-object-name.gui-element';
 import {BuildingObjectProductionGuiElement} from './building-object-production/building-object-production.gui-element';
@@ -7,8 +7,8 @@ import {BuildingObjectSelectGuiElement} from './building-object-select/building-
 import {
     BuildingObjectState
 } from '../../../../../../../game-logic/store/building/building-scope/building-object/building-object.state';
-import {GuiControl} from '../../../../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 
 @GuiElement()

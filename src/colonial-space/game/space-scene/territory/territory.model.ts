@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../shared/animations/fade-in/fade-in.animation';
-import {ImportModelAbstract} from '../../../core/model-manager/model-elements/import-model';
+import {ImportModelAbstract} from '../../../../core/scene-manager/model/model-elements/import-model';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {ModelManagerService} from '../../../core/model-manager/model-manager.service';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
@@ -31,7 +31,7 @@ export abstract class TerritoryModel extends ImportModelAbstract implements OnRe
     }
 
     private createTerritorySignModel(): void {
-        this.territorySignModel = Injector.inject(ModelManagerService).addSimpleModel(new TerritorySignModel(this.scene, this.state));
+        this.territorySignModel = Injector.inject(ModelManager).addSimpleModel(new TerritorySignModel(this.scene, this.state));
         this.territorySignModel.mesh.parent = this.primaryMesh;
         this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

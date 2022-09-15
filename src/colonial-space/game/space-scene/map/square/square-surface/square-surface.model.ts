@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
 import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
-import {SimpleModel} from '../../../../../core/model-manager/model-elements/simple-model';
+import {SimpleModel} from '../../../../../../core/scene-manager/model/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';

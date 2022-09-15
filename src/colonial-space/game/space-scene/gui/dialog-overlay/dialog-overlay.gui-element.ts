@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {DialogGuiElement} from './dialog/dialog.gui-element';
-import {GuiControl} from '../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 
 @GuiElement()

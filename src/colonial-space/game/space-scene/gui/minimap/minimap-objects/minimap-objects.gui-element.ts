@@ -1,10 +1,10 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
+} from '../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.service';
-import {GuiControl} from '../../../../../core/gui-manager/gui-elements/gui-control';
-import {GuiElement} from '../../../../../core/gui-manager/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {MinimapFogOfWarGuiElement} from './minimap-fog-of-war/minimap-fog-of-war.gui-element';
 import {MinimapTerritoryGuiElement} from './minimap-territory/minimap-territory.gui-element';
