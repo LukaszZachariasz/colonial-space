@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {ControlEvent} from '../../../core/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../core/gui-manager/gui-elements/events/control-event-listener';
 import {GuiControl} from '../../../core/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../core/gui-manager/gui-elements/gui-element';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 
 @GuiElement()

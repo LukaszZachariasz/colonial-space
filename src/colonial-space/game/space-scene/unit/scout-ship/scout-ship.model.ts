@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {GameObjectFromFile} from '../../../game-object';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
 import {UnitModel} from '../unit.model';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';

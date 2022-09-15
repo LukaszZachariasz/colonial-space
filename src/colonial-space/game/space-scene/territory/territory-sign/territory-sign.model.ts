@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {IconGuiElement} from '../../gui/shared/icon/icon.gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
+import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SimpleModel} from '../../../../core/model-manager/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
 import {TerritorySignTitleContainer} from './territory-sign-title.container';

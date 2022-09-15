@@ -4,9 +4,6 @@ import {Token} from '@colonial-space/core/injector/types/token';
 
 export function Inject(token: Token | Instance): any {
     return function (object: any, propertyKey: string) {
-        if (token === undefined) {
-            debugger
-        }
         const getter = function (): void {
             return Injector.inject(token);
         };

@@ -1,5 +1,5 @@
-import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
+import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
 import {isOnReady} from '@colonial-space/core/lifecycle/on-ready/is-on-ready';
 
 export interface GameObjectDefinition {

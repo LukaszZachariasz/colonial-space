@@ -1,5 +1,5 @@
-import * as GUI from 'babylonjs-gui';
 import * as BABYLON from 'babylonjs';
+import * as GUI from 'babylonjs-gui';
 import {GuiControl} from '../../../../../core/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../core/gui-manager/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';

@@ -1,23 +1,20 @@
 import * as GUI from 'babylonjs-gui';
 import {BuildingGuiElement} from './building/building.gui-element';
-import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayGuiElement} from './dialog-overlay/dialog-overlay.gui-element';
 import {DialogService} from '../../game-logic/dialog/dialog.service';
 import {GuiControl} from '../../../core/gui-manager/gui-elements/gui-control';
-import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {MinimapGuiElement} from './minimap/minimap.gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
+import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SelectedBuildingService} from '../../game-logic/building/selected-building.service';
 import {SelectedTerritoryGuiElement} from './selected-territory/selected-territory.gui-element';
-import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
 import {SelectedUnitGuiElement} from './selected-unit/selected-unit.gui-element';
+import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
 import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
 import {Subscription, filter, tap} from 'rxjs';
-import {ToolbarGuiElement} from './toolbar/toolbar.gui-element';
 
 export class SpaceGui implements OnInit, OnLoad, OnUnload {
     @Inject(SceneGuiManager) private guiManager: SceneGuiManager;

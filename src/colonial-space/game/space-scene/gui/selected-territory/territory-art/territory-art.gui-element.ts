@@ -1,7 +1,7 @@
 import * as GUI from 'babylonjs-gui';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {GuiControl} from '../../../../../core/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../core/gui-manager/gui-elements/gui-element';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
 
 @GuiElement()
