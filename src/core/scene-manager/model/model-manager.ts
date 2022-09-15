@@ -1,5 +1,3 @@
-import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
-import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
 import {ImportModelAbstract} from './model-elements/import-model';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Model} from './model-elements/model';
@@ -7,6 +5,8 @@ import {ModelElement} from './model-element';
 import {ParticleSystemModel} from './model-elements/particle-system-model';
 import {SimpleModel} from './model-elements/simple-model';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
+import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
+import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
 
 @Injectable()
 export class ModelManager {
