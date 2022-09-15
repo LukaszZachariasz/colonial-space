@@ -18,7 +18,7 @@ import {Module} from '@colonial-space/core/module/module';
             components: [
                 MainMenuShip,
                 MainMenuSkybox,
-                // MainMenuMusic,
+                MainMenuMusic,
                 MainMenuPostEffects
             ]
         }

@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {AppendGuiControl} from '../../../../core/gui-manager/gui-elements/append-gui-control/append-gui-control';
 import {ControlEvent} from '../../../../core/gui-manager/gui-elements/events/control-event';
 import {ControlEventListener} from '../../../../core/gui-manager/gui-elements/events/control-event-listener';
 import {GuiControl} from '../../../../core/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../core/gui-manager/gui-elements/gui-element';
 import {IconGuiElement} from '../../gui/shared/icon/icon.gui-element';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';
 import {TextGuiElement} from '../../gui/shared/text/text.gui-element';
