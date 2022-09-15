@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {
-    AnalysisShipGenerator
-} from '../../../../../game-generator/unit-generator/analysis-ship-generator/analysis-ship.generator';
+    AnalysisShipGeneratorService
+} from '../../../../../game-generator/unit-generator/analysis-ship-generator/analysis-ship-generator.service';
 import {AnalysisShipModel} from '../../../../../space-scene/unit/analysis-ship/analysis-ship.model';
 import {BuildingObjectType} from '../../../../store/building/building-scope/building-object/building-object-type';
 import {HasTourBlockers} from '../../../../tour/tour-blocker/has-tour-blockers';
@@ -20,7 +20,8 @@ import {selectUnitById} from '../../../../store/unit/unit.selectors';
 @Injectable()
 export class AnalysisShipBuildingHandlerService extends UnitHandlerService {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
-    
+    @Inject(AnalysisShipGeneratorService) private analysisShipGeneratorService: AnalysisShipGeneratorService;
+
     constructor() {
         super(BuildingObjectType.ANALYSIS_SHIP);
     }
@@ -30,6 +31,6 @@ export class AnalysisShipBuildingHandlerService extends UnitHandlerService {
     }
 
     public createUnitState(): UnitState {
-        return AnalysisShipGenerator.generate(selectPlayerId());
+        return this.analysisShipGeneratorService.generate(selectPlayerId());
     }
 }

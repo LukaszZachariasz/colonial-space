@@ -1,14 +1,15 @@
-import {BuildingGenerator} from './building-generator/building-generator';
+import {BuildingGeneratorService} from './building-generator/building-generator.service';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {MapGenerator} from './map-generator/map.generator';
+import {MapGeneratorService} from './map-generator/map-generator.service';
 import {PlanetState} from '../game-logic/store/territory/planet/planet.state';
-import {PlayerGenerator} from './player-generator/player-generator';
-import {ScoutShipGenerator} from './unit-generator/scout-ship-generator/scout-ship.generator';
+import {PlayerGeneratorService} from './player-generator/player-generator.service';
+import {ScoutShipGeneratorService} from './unit-generator/scout-ship-generator/scout-ship-generator.service';
 import {SquareState} from '../game-logic/store/map/square/square.state';
-import {TerritoryGenerator} from './territory-generator/territory-generator';
+import {TerritoryGeneratorService} from './territory-generator/territory-generator.service';
 import {TerritoryState} from '../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../game-logic/store/territory/territory-type';
-import {TourGenerator} from './tour-generator/tour-generator';
+import {TourGeneratorService} from './tour-generator/tour-generator.service';
 import {addBuilding} from '../game-logic/store/building/building.slice';
 import {addTerritory, completeAnalysis, completeColonization} from '../game-logic/store/territory/territory.slice';
 import {addUnit} from '../game-logic/store/unit/unit.slice';
@@ -26,19 +27,26 @@ import {store} from '../game-logic/store/store';
 
 @Injectable()
 export class GameGeneratorService {
+    @Inject(MapGeneratorService) private mapGeneratorService: MapGeneratorService;
+    @Inject(PlayerGeneratorService) private playerGeneratorService: PlayerGeneratorService;
+    @Inject(TourGeneratorService) private tourGeneratorService: TourGeneratorService;
+    @Inject(BuildingGeneratorService) private buildingGeneratorService: BuildingGeneratorService;
+    @Inject(TerritoryGeneratorService) private territoryGeneratorService: TerritoryGeneratorService;
+    @Inject(ScoutShipGeneratorService) private scoutShipGeneratorService: ScoutShipGeneratorService;
+
     public generate(): void {
-        store.dispatch(setMap(MapGenerator.generate()));
-        store.dispatch(setPlayer(PlayerGenerator.generate()));
-        store.dispatch(setTour(TourGenerator.generate()));
+        store.dispatch(setMap(this.mapGeneratorService.generate()));
+        store.dispatch(setPlayer(this.playerGeneratorService.generate()));
+        store.dispatch(setTour(this.tourGeneratorService.generate()));
 
         this.createTerritories();
         this.colonizeFirstGreenPlanet();
     }
 
     private createTerritories(): void {
-        TerritoryGenerator.generate().forEach((territoryState: TerritoryState) => {
+        this.territoryGeneratorService.generate().forEach((territoryState: TerritoryState) => {
             if (isPlanet(territoryState)) {
-                const buildingState = BuildingGenerator.generate();
+                const buildingState = this.buildingGeneratorService.generate();
                 territoryState.data.buildingId = buildingState.id;
                 store.dispatch(addBuilding(buildingState));
             }
@@ -69,7 +77,7 @@ export class GameGeneratorService {
             range: 2
         }));
 
-        const unit = ScoutShipGenerator.generate(selectPlayerId());
+        const unit = this.scoutShipGeneratorService.generate(selectPlayerId());
         store.dispatch(addUnit(unit));
         store.dispatch(setSquareUnitId({
             unitId: unit.id,

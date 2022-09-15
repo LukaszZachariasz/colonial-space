@@ -8,7 +8,7 @@ import {GuiControl} from '../../../../../../../core/scene-manager/gui/gui-elemen
 import {GuiElement} from '../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {MapGenerator} from '../../../../../game-generator/map-generator/map.generator';
+import {MapGeneratorService} from '../../../../../game-generator/map-generator/map-generator.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SquareModel} from '../../../../map/square/square.model';
@@ -41,8 +41,8 @@ export class MinimapFogOfWarGuiElement implements GuiControl<GUI.Container>, OnI
         this.control.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.control.background = this.colors[Math.floor(Math.random() * this.colors.length)];
 
-        this.control.width = ((SquareModel.SquareEdgeSize / (MapGenerator.MapWidth * SquareModel.SquareEdgeSize)) * 100) + 0.3 + '%';
-        this.control.height = ((SquareModel.SquareEdgeSize / (MapGenerator.MapHeight * SquareModel.SquareEdgeSize)) * 100) + 1 + '%';
+        this.control.width = ((SquareModel.SquareEdgeSize / (MapGeneratorService.MapWidth * SquareModel.SquareEdgeSize)) * 100) + 0.3 + '%';
+        this.control.height = ((SquareModel.SquareEdgeSize / (MapGeneratorService.MapHeight * SquareModel.SquareEdgeSize)) * 100) + 1 + '%';
 
         this.control.left = (this.squareState.x * 100) / this.camera.maxRight + '%';
         this.control.top = (this.squareState.y * 100) / this.camera.maxBottom + '%';

@@ -1,9 +1,11 @@
 import {BuildingObjectType} from '../../game-logic/store/building/building-scope/building-object/building-object-type';
 import {BuildingState} from '../../game-logic/store/building/building.state';
+import {Injectable} from '@colonial-space/core/injector/injectable';
 import {v4 as uuid} from 'uuid';
 
-export class BuildingGenerator {
-    public static generate(): BuildingState {
+@Injectable()
+export class BuildingGeneratorService {
+    public generate(): BuildingState {
         return {
             id: uuid(),
             currentBuildingObjectId: null,

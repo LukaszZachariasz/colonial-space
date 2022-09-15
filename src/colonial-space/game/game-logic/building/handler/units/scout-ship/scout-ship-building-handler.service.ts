@@ -6,8 +6,8 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {
-    ScoutShipGenerator
-} from '../../../../../game-generator/unit-generator/scout-ship-generator/scout-ship.generator';
+    ScoutShipGeneratorService
+} from '../../../../../game-generator/unit-generator/scout-ship-generator/scout-ship-generator.service';
 import {ScoutShipModel} from '../../../../../space-scene/unit/scout-ship/scout-ship.model';
 import {UnitHandlerService} from '../unit-handler.service';
 import {UnitModel} from '../../../../../space-scene/unit/unit.model';
@@ -20,6 +20,7 @@ import {selectUnitById} from '../../../../store/unit/unit.selectors';
 @Injectable()
 export class ScoutShipBuildingHandlerService extends UnitHandlerService {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
+    @Inject(ScoutShipGeneratorService) private scoutShipGeneratorService: ScoutShipGeneratorService;
     
     constructor() {
         super(BuildingObjectType.SCOUT_SHIP);
@@ -30,6 +31,6 @@ export class ScoutShipBuildingHandlerService extends UnitHandlerService {
     }
 
     public createUnitState(): UnitState {
-        return ScoutShipGenerator.generate(selectPlayerId());
+        return this.scoutShipGeneratorService.generate(selectPlayerId());
     }
 }

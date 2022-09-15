@@ -1,11 +1,13 @@
 import {AnalysisShipState} from '../../../game-logic/store/unit/analysis-ship/analysis-ship.state';
 import {GameIcon} from '../../../space-scene/gui/shared/icon/game-icon';
+import {Injectable} from '@colonial-space/core/injector/injectable';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';
 import {UnitType} from '../../../game-logic/store/unit/unit-type';
 import {v4 as uuid} from 'uuid';
 
-export class AnalysisShipGenerator {
-    public static generate(playerId: string): UnitState<AnalysisShipState> {
+@Injectable()
+export class AnalysisShipGeneratorService {
+    public generate(playerId: string): UnitState<AnalysisShipState> {
         return {
             id: uuid(),
             name: 'Analysis ship',

@@ -1,17 +1,22 @@
 import {GameIcon} from '../../../../space-scene/gui/shared/icon/game-icon';
-import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
+import {Inject} from '@colonial-space/core/injector/inject';
+import {Injectable} from '@colonial-space/core/injector/injectable';
+import {PlanetNameGeneratorService} from '../planet-name/planet-name-generator.service';
 import {PlanetSandState} from '../../../../game-logic/store/territory/planet/planet-sand/planet-sand.state';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../game-logic/store/territory/territory-type';
 import {v4 as uuid} from 'uuid';
 
-export class PlanetSandGenerator {
-    public static generate(): TerritoryState<PlanetSandState> {
+@Injectable()
+export class PlanetSandGeneratorService {
+    @Inject(PlanetNameGeneratorService) private planetNameGeneratorService: PlanetNameGeneratorService;
+    
+    public generate(): TerritoryState<PlanetSandState> {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_SAND,
             icon: GameIcon.PLANET,
-            name: PlanetNameGenerator.generate(),
+            name: this.planetNameGeneratorService.generate(),
             artUrl: './resources/territory/planet/planet-sand/planet-art.png',
             data: {
                 basicProduction: 0,

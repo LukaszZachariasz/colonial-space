@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {MapGenerator} from '../../game/game-generator/map-generator/map.generator';
+import {MapGeneratorService} from '../../game/game-generator/map-generator/map-generator.service';
 import {SquareModel} from '../../game/space-scene/map/square/square.model';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {
@@ -8,9 +8,9 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public boundary = 5;
 
     public maxLeft = 0;
-    public maxRight = MapGenerator.MapWidth * SquareModel.SquareEdgeSize;
+    public maxRight = MapGeneratorService.MapWidth * SquareModel.SquareEdgeSize;
     public maxTop = 0;
-    public maxBottom = -MapGenerator.MapHeight * SquareModel.SquareEdgeSize;
+    public maxBottom = -MapGeneratorService.MapHeight * SquareModel.SquareEdgeSize;
 
     public movingSpeed = 0.4;
 

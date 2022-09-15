@@ -1,17 +1,22 @@
+import {Inject} from '@colonial-space/core/injector/inject';
+import {Injectable} from '@colonial-space/core/injector/injectable';
 import {GameIcon} from '../../../../space-scene/gui/shared/icon/game-icon';
-import {PlanetNameGenerator} from '../planet-name/planet-name.generator';
+import {PlanetNameGeneratorService} from '../planet-name/planet-name-generator.service';
 import {PlanetRingedState} from '../../../../game-logic/store/territory/planet/planet-ringed/planet-ringed.state';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../../../game-logic/store/territory/territory-type';
 import {v4 as uuid} from 'uuid';
 
-export class PlanetRingedGenerator {
-    public static generate(): TerritoryState<PlanetRingedState> {
+@Injectable()
+export class PlanetRingedGeneratorService {
+    @Inject(PlanetNameGeneratorService) private planetNameGeneratorService: PlanetNameGeneratorService;
+
+    public generate(): TerritoryState<PlanetRingedState> {
         return {
             id: uuid(),
             type: TerritoryType.PLANET_RINGED,
             icon: GameIcon.PLANET,
-            name: PlanetNameGenerator.generate(),
+            name: this.planetNameGeneratorService.generate(),
             artUrl: './resources/territory/planet/planet-ringed/planet-art.png',
             data: {
                 basicProduction: 0,

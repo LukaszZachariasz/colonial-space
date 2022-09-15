@@ -1,22 +1,24 @@
+import {Injectable} from '@colonial-space/core/injector/injectable';
 import {MapState} from '../../game-logic/store/map/map.state';
 import {SquareModel} from '../../space-scene/map/square/square.model';
 import {SquareState} from '../../game-logic/store/map/square/square.state';
 import {randomSpaceSkybox} from '../../../shared/skybox/space-skybox.const';
 import {v4 as uuid} from 'uuid';
 
-export class MapGenerator {
+@Injectable()
+export class MapGeneratorService {
     public static readonly MapHeight = 15;
     public static readonly MapWidth = 20;
 
-    public static generate(): MapState {
+    public generate(): MapState {
         const map: MapState = {
             skyboxType: randomSpaceSkybox(),
             squares: []
         };
 
-        for (let y = 0; y < MapGenerator.MapHeight; y++) {
+        for (let y = 0; y < MapGeneratorService.MapHeight; y++) {
             const row: SquareState[] = [];
-            for (let x = 0; x < MapGenerator.MapWidth; x++) {
+            for (let x = 0; x < MapGeneratorService.MapWidth; x++) {
                 const square: SquareState = {
                     id: uuid(),
                     x: x * SquareModel.SquareEdgeSize,

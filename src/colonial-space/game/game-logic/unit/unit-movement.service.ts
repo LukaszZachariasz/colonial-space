@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {MapGenerator} from '../../game-generator/map-generator/map.generator';
+import {MapGeneratorService} from '../../game-generator/map-generator/map-generator.service';
 import {SelectionUnitService} from './selection-unit.service';
 import {SquareState} from '../store/map/square/square.state';
 import {Subject} from 'rxjs';
@@ -55,7 +55,7 @@ export class UnitMovementService {
     public createPlanMovement(unitId: string, destinationSquareId: string): void {
         store.dispatch(clearUnitPlanningMovement(unitId));
 
-        const grid = new PathFinding.Grid(MapGenerator.MapWidth, MapGenerator.MapHeight);
+        const grid = new PathFinding.Grid(MapGeneratorService.MapWidth, MapGeneratorService.MapHeight);
 
         selectSquares()
             .forEach((squareRow: SquareState[], i: number) => {

@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {MapGenerator} from '../../game-generator/map-generator/map.generator';
+import {MapGeneratorService} from '../../game-generator/map-generator/map-generator.service';
 import {ParticleSystemModel} from '../../../../core/scene-manager/model/model-elements/particle-system-model';
 import {SquareModel} from '../map/square/square.model';
 
@@ -32,7 +32,7 @@ export class GalaxyDustModel extends ParticleSystemModel {
         this.particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
 
         this.particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0);
-        this.particleSystem.maxEmitBox = new BABYLON.Vector3(MapGenerator.MapWidth * SquareModel.SquareEdgeSize, 5, -(MapGenerator.MapHeight * SquareModel.SquareEdgeSize));
+        this.particleSystem.maxEmitBox = new BABYLON.Vector3(MapGeneratorService.MapWidth * SquareModel.SquareEdgeSize, 5, -(MapGeneratorService.MapHeight * SquareModel.SquareEdgeSize));
 
         this.particleSystem.direction1 = new BABYLON.Vector3(10, -1, 1);
         this.particleSystem.direction2 = new BABYLON.Vector3(-10, -5, 10);
