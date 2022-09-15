@@ -2,7 +2,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 
 @Injectable()
-export class SelectedBuildingService {
+export class SelectionBuildingService {
     public selectedBuildingId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
     public select(id: string): void {

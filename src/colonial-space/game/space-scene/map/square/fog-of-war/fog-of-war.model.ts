@@ -2,17 +2,19 @@ import * as BABYLON from 'babylonjs';
 import {EMPTY, Subject, Subscription, delay, filter, of, take, tap} from 'rxjs';
 import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.service';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {ParticleSystemModel} from '../../../../../../core/scene-manager/model/model-elements/particle-system-model';
-import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
-import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
+import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
+import {SelectionService} from '../../../../game-logic/selection/selection.service';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';
 
 export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
+    @Inject(SelectionService) private selectionService: SelectionService;
+    
     public material: BABYLON.StandardMaterial;
     public destroyed$: Subject<void> = new Subject<void>();
 
@@ -54,8 +56,7 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                Injector.inject(SelectionUnitService).deselect();
-                Injector.inject(SelectionTerritoryService).deselect();
+                this.selectionService.deselectAll();
             })
         );
 

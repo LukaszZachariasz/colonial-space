@@ -4,7 +4,7 @@ import {ImportModelAbstract} from '../../../../core/scene-manager/model/model-el
 import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
-import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
+import {SelectionTerritoryService} from '../../game-logic/selection/territory/selection-territory.service';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../game-logic/store/territory/territory-type';

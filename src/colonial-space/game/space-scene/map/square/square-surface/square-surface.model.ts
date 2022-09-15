@@ -1,13 +1,15 @@
 import * as BABYLON from 'babylonjs';
+import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
-import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
-import {SimpleModel} from '../../../../../../core/scene-manager/model/model-elements/simple-model';
+import {SelectionService} from '../../../../game-logic/selection/selection.service';
+import {SelectionUnitService} from '../../../../game-logic/selection/unit/selection-unit.service';
+import {SimpleModel} from '@colonial-space/core/scene-manager/model/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';
 
 export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
+    @Inject(SelectionService) private selectionService: SelectionService;
 
     private material: BABYLON.StandardMaterial;
 
@@ -31,8 +33,7 @@ export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                Injector.inject(SelectionUnitService).deselect();
-                Injector.inject(SelectionTerritoryService).deselect();
+                this.selectionService.deselectAll();
             })
         );
 

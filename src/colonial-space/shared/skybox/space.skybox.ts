@@ -1,12 +1,16 @@
+import {Inject} from '@colonial-space/core/injector/inject';
 import * as BABYLON from 'babylonjs';
 import {ActionManager} from 'babylonjs/Actions/actionManager';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {SelectionTerritoryService} from '../../game/game-logic/territory/selection-territory.service';
-import {SelectionUnitService} from '../../game/game-logic/unit/selection-unit.service';
+import {SelectionService} from '../../game/game-logic/selection/selection.service';
+import {SelectionTerritoryService} from '../../game/game-logic/selection/territory/selection-territory.service';
+import {SelectionUnitService} from '../../game/game-logic/selection/unit/selection-unit.service';
 import {SimpleModel} from '../../../core/scene-manager/model/model-elements/simple-model';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
 export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
+    @Inject(SelectionService) private selectionService: SelectionService;
+
     public material: BABYLON.StandardMaterial;
 
     private actionManager: ActionManager;
@@ -40,8 +44,7 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
         this.mesh.actionManager = this.actionManager;
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                Injector.inject(SelectionUnitService).deselect();
-                Injector.inject(SelectionTerritoryService).deselect();
+                this.selectionService.deselectAll();
             })
         );
     }

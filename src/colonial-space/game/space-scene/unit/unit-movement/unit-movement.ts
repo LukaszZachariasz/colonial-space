@@ -4,7 +4,7 @@ import {HasTourEffects} from '../../../game-logic/tour/tour-effect/has-tour-effe
 import {Injector} from '@colonial-space/core/injector/injector';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {SelectionUnitService} from '../../../game-logic/unit/selection-unit.service';
+import {SelectionUnitService} from '../../../game-logic/selection/unit/selection-unit.service';
 import {TourEffectPriorityEnum} from '../../../game-logic/tour/tour-effect/tour-effect-priority.enum';
 import {TourService} from '../../../game-logic/tour/tour.service';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';

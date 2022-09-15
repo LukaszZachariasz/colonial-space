@@ -4,7 +4,7 @@ import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui
 import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SelectionUnitService} from '../../../game-logic/unit/selection-unit.service';
+import {SelectionUnitService} from '../../../game-logic/selection/unit/selection-unit.service';
 import {UnitArtGuiElement} from './unit-art/unit-art.gui-element';
 import {UnitAttributesGuiElement} from './unit-attributes/unit-attributes.gui-element';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';

@@ -11,7 +11,7 @@ import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manag
 import {Observable, Subscriber} from 'rxjs';
 import {PlanetProductionService} from '../../../territory/planet/planet-production.service';
 import {PlanetState} from '../../../store/territory/planet/planet.state';
-import {SelectionTerritoryService} from '../../../territory/selection-territory.service';
+import {SelectionTerritoryService} from '../../../selection/territory/selection-territory.service';
 import {TerritoryState} from '../../../store/territory/territory.state';
 import {TourBlockerState} from '../../../tour/tour-blocker/tour-blocker';
 import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';

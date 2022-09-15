@@ -10,11 +10,11 @@ import {MinimapGuiElement} from './minimap/minimap.gui-element';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
-import {SelectedBuildingService} from '../../game-logic/building/selected-building.service';
+import {SelectionBuildingService} from '../../game-logic/selection/building/selection-building.service';
 import {SelectedTerritoryGuiElement} from './selected-territory/selected-territory.gui-element';
 import {SelectedUnitGuiElement} from './selected-unit/selected-unit.gui-element';
-import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
-import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
+import {SelectionTerritoryService} from '../../game-logic/selection/territory/selection-territory.service';
+import {SelectionUnitService} from '../../game-logic/selection/unit/selection-unit.service';
 import {Subscription, filter, tap} from 'rxjs';
 import {ToolbarGuiElement} from './toolbar/toolbar.gui-element';
 
@@ -58,7 +58,7 @@ export class SpaceGui implements OnLoad, OnUnload {
             tap(() => this.dialogOverlayContainer?.control.dispose())
         ).subscribe();
 
-        this.selectedBuildingSubscription = Injector.inject(SelectedBuildingService).selectedBuildingId$.pipe(
+        this.selectedBuildingSubscription = Injector.inject(SelectionBuildingService).selectedBuildingId$.pipe(
             tap(() => this.buildingContainer?.control.dispose()),
             filter((id: string) => !!id),
             tap(() => this.buildingContainer = this.guiManager.appendToRoot(new BuildingGuiElement()))

@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {MapGeneratorService} from '../../game-generator/map-generator/map-generator.service';
-import {SelectionUnitService} from './selection-unit.service';
+import {SelectionUnitService} from '../selection/unit/selection-unit.service';
 import {SquareState} from '../store/map/square/square.state';
 import {Subject} from 'rxjs';
 import {UnitState} from '../store/unit/unit.state';
@@ -26,7 +26,7 @@ const PathFinding = require('pathfinding');
 
 @Injectable()
 export class UnitMovementService {
-    @Inject('SelectionUnitService') private selectedUnitService: SelectionUnitService;
+    @Inject(SelectionUnitService) private selectedUnitService: SelectionUnitService;
     
     public addedPlanMovement$ = new Subject<string>();
     public moveUnit$ = new Subject<string>();

@@ -8,9 +8,7 @@ import {FogOfWarService} from './fog-of-war/fog-of-war.service';
 import {Module} from '@colonial-space/core/module/module';
 import {PlanetProductionService} from './territory/planet/planet-production.service';
 import {ScoutShipBuildingHandlerService} from './building/handler/units/scout-ship/scout-ship-building-handler.service';
-import {SelectedBuildingService} from './building/selected-building.service';
-import {SelectionTerritoryService} from './territory/selection-territory.service';
-import {SelectionUnitService} from './unit/selection-unit.service';
+import {SelectionModule} from './selection/selection.module';
 import {SunlightAmplifierBuildingHandlerService} from './building/handler/common/sunlight-amplifier-building-handler.service';
 import {TourService} from './tour/tour.service';
 import {UnitMovementService} from './unit/unit-movement.service';
@@ -18,6 +16,9 @@ import {UnitService} from './unit/unit.service';
 import {WaterFilterBuildingHandlerService} from './building/handler/common/water-filter-building-handler.service';
 
 @Module({
+    imports: [
+        SelectionModule
+    ],
     providers: [
         AnalysisService,
         
@@ -27,18 +28,15 @@ import {WaterFilterBuildingHandlerService} from './building/handler/common/water
         ColonialShipBuildingHandlerService,
         ScoutShipBuildingHandlerService,
         BuildingService,
-        SelectedBuildingService,
         
         ColonizationService,
         DialogService,
         FogOfWarService,
         
         PlanetProductionService,
-        SelectionTerritoryService,
         
         TourService,
         
-        SelectionUnitService,
         UnitService,
         UnitMovementService
     ]

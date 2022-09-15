@@ -7,13 +7,13 @@ import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui
 import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SelectedBuildingService} from '../../../game-logic/building/selected-building.service';
+import {SelectionBuildingService} from '../../../game-logic/selection/building/selection-building.service';
 import {selectBuildingById} from '../../../game-logic/store/building/building.selector';
 
 @GuiElement()
 export class BuildingGuiElement implements GuiControl<GUI.Container>, OnInit {
     public control: GUI.Container = new GUI.Container('buildingContainer');
-    public buildingState: BuildingState = selectBuildingById(Injector.inject(SelectedBuildingService).selectedBuildingId$.value);
+    public buildingState: BuildingState = selectBuildingById(Injector.inject(SelectionBuildingService).selectedBuildingId$.value);
 
     @AppendGuiControl() public buildingHeader: BuildingHeaderGuiElement = new BuildingHeaderGuiElement(this.buildingState);
     @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('sectorsScrollViewer');

@@ -11,7 +11,7 @@ import {
 } from './planet-building-current-object/planet-building-current-object.gui-element';
 import {PlanetState} from '../../../../../game-logic/store/territory/planet/planet.state';
 import {PlanetTotalProductionGuiElement} from './planet-total-production/planet-total-production.gui-element';
-import {SelectedBuildingService} from '../../../../../game-logic/building/selected-building.service';
+import {SelectionBuildingService} from '../../../../../game-logic/selection/building/selection-building.service';
 import {TerritoryState} from '../../../../../game-logic/store/territory/territory.state';
 import {selectBuildingById} from '../../../../../game-logic/store/building/building.selector';
 
@@ -35,6 +35,6 @@ export class PlanetBuildingGuiElement implements GuiControl<GUI.Container>, OnIn
 
     @ControlEventListener(ControlEvent.ON_POINTER_DOWN)
     public selectBuilding(): void {
-        Injector.inject(SelectedBuildingService).select(this.buildingState.id);
+        Injector.inject(SelectionBuildingService).select(this.buildingState.id);
     }
 }

@@ -4,7 +4,7 @@ import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui
 import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SelectionTerritoryService} from '../../../game-logic/territory/selection-territory.service';
+import {SelectionTerritoryService} from '../../../game-logic/selection/territory/selection-territory.service';
 import {TerritoryArtGuiElement} from './territory-art/territory-art.gui-element';
 import {TerritoryPlanetGuiElement} from './territory-planet/territory-planet.gui-element';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';

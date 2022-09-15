@@ -7,7 +7,7 @@ import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manag
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
-import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
+import {SelectionUnitService} from '../../game-logic/selection/unit/selection-unit.service';
 import {Subscription, delay, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitService} from '../../game-logic/unit/unit.service';
