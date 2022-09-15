@@ -11,7 +11,7 @@ import {ModelManagerService} from '../../../../../core/model-manager/model-manag
 import {Observable, Subscriber} from 'rxjs';
 import {PlanetProductionService} from '../../../territory/planet/planet-production.service';
 import {PlanetState} from '../../../store/territory/planet/planet.state';
-import {SelectedTerritoryService} from '../../../territory/selected-territory.service';
+import {SelectionTerritoryService} from '../../../territory/selection-territory.service';
 import {TerritoryState} from '../../../store/territory/territory.state';
 import {TourBlockerState} from '../../../tour/tour-blocker/tour-blocker';
 import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';
@@ -107,7 +107,7 @@ export abstract class UnitHandlerService {
         const animation = (Injector.inject(CAMERA('space')) as FromAboveCamera).lookAtAnimation(position);
         animation.onAnimationEndObservable.add(() => {
             Injector.inject(DialogService).open$.next(new UnitOnSquareWarningGuiElement());
-            Injector.inject(SelectedTerritoryService).select(planet.id);
+            Injector.inject(SelectionTerritoryService).select(planet.id);
         });
     }
 }

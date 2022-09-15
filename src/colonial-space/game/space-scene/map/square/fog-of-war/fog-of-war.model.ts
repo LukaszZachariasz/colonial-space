@@ -6,8 +6,8 @@ import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManagerService} from '../../../../../core/model-manager/model-manager.service';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {ParticleSystemModel} from '../../../../../core/model-manager/model-elements/particle-system-model';
-import {SelectedTerritoryService} from '../../../../game-logic/territory/selected-territory.service';
-import {SelectedUnitService} from '../../../../game-logic/unit/selected-unit.service';
+import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
+import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';
@@ -54,8 +54,8 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                Injector.inject(SelectedUnitService).deselect();
-                Injector.inject(SelectedTerritoryService).deselect();
+                Injector.inject(SelectionUnitService).deselect();
+                Injector.inject(SelectionTerritoryService).deselect();
             })
         );
 

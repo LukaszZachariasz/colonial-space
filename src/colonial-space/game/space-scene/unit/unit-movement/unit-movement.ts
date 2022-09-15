@@ -4,7 +4,7 @@ import {HasTourEffects} from '../../../game-logic/tour/tour-effect/has-tour-effe
 import {Injector} from '@colonial-space/core/injector/injector';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {SelectedUnitService} from '../../../game-logic/unit/selected-unit.service';
+import {SelectionUnitService} from '../../../game-logic/unit/selection-unit.service';
 import {TourEffectPriorityEnum} from '../../../game-logic/tour/tour-effect/tour-effect-priority.enum';
 import {TourService} from '../../../game-logic/tour/tour.service';
 import {UnitMovementPathModel} from './unit-movement-path/unit-movement-path.model';
@@ -21,7 +21,7 @@ export class UnitMovement implements OnDestroy {
     constructor(private scene: BABYLON.Scene,
                 private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
-        Injector.inject(SelectedUnitService).selectedUnitId$.pipe(
+        Injector.inject(SelectionUnitService).selectedUnitId$.pipe(
             tap(() => this.unitMovementPathModel?.lines?.dispose()),
             filter((id: string) => this.id === id),
             tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),

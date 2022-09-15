@@ -5,7 +5,7 @@ import {ControlEvent} from '../../../../../core/gui-manager/gui-elements/events/
 import {ControlEventListener} from '../../../../../core/gui-manager/gui-elements/events/control-event-listener';
 import {GuiControl} from '../../../../../core/gui-manager/gui-elements/gui-control';
 import {GuiElement} from '../../../../../core/gui-manager/gui-elements/gui-element';
-import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {IconGuiElement} from '../icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
@@ -14,7 +14,7 @@ import {TooltipGuiElement} from '../tooltip/tooltip.gui-element';
 
 @GuiElement()
 export class AttributeGuiElement implements GuiControl<GUI.Container>, OnInit, OnDestroy {
-    @Inject(GuiManager) private guiManager: GuiManager;
+    @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
     
     public control = new GUI.Container('attribute');
 

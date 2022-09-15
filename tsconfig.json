@@ -17,8 +17,8 @@
       "@colonial-space/core/*": [
         "src/core/*"
       ],
-      "engine": [
-        "src/game/engine/engine"
+      "@colonial-space/debug/*": [
+        "src/debug/*"
       ],
       "*": [
         "node_modules/*"
@@ -27,8 +27,5 @@
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": [
-    "src/colonial-space/game/scene/game/**/*"
   ]
 }

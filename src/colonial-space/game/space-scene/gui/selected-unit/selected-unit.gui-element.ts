@@ -4,7 +4,7 @@ import {GuiControl} from '../../../../core/gui-manager/gui-elements/gui-control'
 import {GuiElement} from '../../../../core/gui-manager/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SelectedUnitService} from '../../../game-logic/unit/selected-unit.service';
+import {SelectionUnitService} from '../../../game-logic/unit/selection-unit.service';
 import {UnitArtGuiElement} from './unit-art/unit-art.gui-element';
 import {UnitAttributesGuiElement} from './unit-attributes/unit-attributes.gui-element';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';
@@ -15,7 +15,7 @@ import {selectUnitById} from '../../../game-logic/store/unit/unit.selectors';
 export class SelectedUnitGuiElement implements GuiControl<GUI.Container>, OnInit {
     public control: GUI.Container = new GUI.Container('selectedUnitContainer');
     
-    public unitState: UnitState = selectUnitById(Injector.inject(SelectedUnitService).selectedUnitId$.value);
+    public unitState: UnitState = selectUnitById(Injector.inject(SelectionUnitService).selectedUnitId$.value);
 
     @AppendGuiControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
     @AppendGuiControl() public unitArt: UnitArtGuiElement = new UnitArtGuiElement(this.unitState);

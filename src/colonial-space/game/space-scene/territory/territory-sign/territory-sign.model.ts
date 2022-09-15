@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {IconGuiElement} from '../../gui/shared/icon/icon.gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {SimpleModel} from '../../../../core/model-manager/model-elements/simple-model';
@@ -42,6 +42,6 @@ export class TerritorySignModel extends SimpleModel<BABYLON.Mesh> {
         this.territorySignTitleContainer.clicked$.pipe(
             tap(() => this.clicked$.next())
         ).subscribe();
-        Injector.inject(GuiManager).createForMesh('TerritorySignTitleContainer', this.mesh, this.territorySignTitleContainer, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);
+        Injector.inject(SceneGuiManager).createForMesh('TerritorySignTitleContainer', this.mesh, this.territorySignTitleContainer, this.GUI_SIZE * this.WIDTH, this.GUI_SIZE * this.HEIGHT);
     }
 }

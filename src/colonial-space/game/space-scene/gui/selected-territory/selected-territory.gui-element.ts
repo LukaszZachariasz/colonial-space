@@ -4,7 +4,7 @@ import {GuiControl} from '../../../../core/gui-manager/gui-elements/gui-control'
 import {GuiElement} from '../../../../core/gui-manager/gui-elements/gui-element';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SelectedTerritoryService} from '../../../game-logic/territory/selected-territory.service';
+import {SelectionTerritoryService} from '../../../game-logic/territory/selection-territory.service';
 import {TerritoryArtGuiElement} from './territory-art/territory-art.gui-element';
 import {TerritoryPlanetGuiElement} from './territory-planet/territory-planet.gui-element';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';
@@ -15,7 +15,7 @@ import {selectTerritoryById} from '../../../game-logic/store/territory/territory
 @GuiElement()
 export class SelectedTerritoryGuiElement implements GuiControl<GUI.StackPanel>, OnInit {
     public control: GUI.StackPanel = new GUI.StackPanel('selectedTerritoryStackPanel');
-    public territoryState: TerritoryState = selectTerritoryById(Injector.inject(SelectedTerritoryService).selectedTerritoryId$.value);
+    public territoryState: TerritoryState = selectTerritoryById(Injector.inject(SelectionTerritoryService).selectedTerritoryId$.value);
 
     @AppendGuiControl() public backgroundImage: GUI.Image = new GUI.Image('image', 'resources/gui/selected-unit/background.png');
     @AppendGuiControl() public territoryTitle: TerritoryTitleGuiElement = new TerritoryTitleGuiElement(this.territoryState);

@@ -2,11 +2,11 @@ import {BehaviorSubject} from 'rxjs';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {SelectedBuildingService} from '../building/selected-building.service';
-import {SelectedUnitService} from '../unit/selected-unit.service';
+import {SelectionUnitService} from '../unit/selection-unit.service';
 
 @Injectable()
-export class SelectedTerritoryService {
-    @Inject(SelectedUnitService) private selectedUnitService: SelectedUnitService;
+export class SelectionTerritoryService {
+    @Inject(SelectionUnitService) private selectedUnitService: SelectionUnitService;
     @Inject(SelectedBuildingService) private selectedBuildingService: SelectedBuildingService;
     
     public selectedTerritoryId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);

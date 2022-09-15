@@ -1,5 +1,5 @@
 import {GameService} from '../../game/game.service';
-import {GuiManager} from '@colonial-space/core/gui-manager/gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {MainMenuBeginBtnControl} from './menu-buttons/main-menu-begin-btn.control';
 import {MainMenuLeaveBtnControl} from './menu-buttons/main-menu-leave-btn.control';
@@ -17,7 +17,7 @@ export class MainMenuSceneGui implements OnLoad, OnUnload {
 
     private mainMenuBeginBtnClicked: Subscription;
 
-    @Inject(GuiManager) private guiManager: GuiManager;
+    @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
     @Inject(GameService) private gameService: GameService;
 
     public gameOnLoad(): void {

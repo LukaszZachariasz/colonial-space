@@ -4,7 +4,7 @@ import {ImportModelAbstract} from '../../../core/model-manager/model-elements/im
 import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManagerService} from '../../../core/model-manager/model-manager.service';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
-import {SelectedTerritoryService} from '../../game-logic/territory/selected-territory.service';
+import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../game-logic/store/territory/territory-type';
@@ -27,7 +27,7 @@ export abstract class TerritoryModel extends ImportModelAbstract implements OnRe
     }
 
     protected select(): void {
-        Injector.inject(SelectedTerritoryService).select(this.state.id);
+        Injector.inject(SelectionTerritoryService).select(this.state.id);
     }
 
     private createTerritorySignModel(): void {

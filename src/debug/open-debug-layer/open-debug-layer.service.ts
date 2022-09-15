@@ -1,16 +1,16 @@
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
+import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
 import {ipcRenderer} from 'electron';
 
 @Injectable()
 export class OpenDebugLayerService implements OnInit {
-    @Inject(SceneManager) private sceneManager: SceneManager;
+    @Inject(SceneRouter) private sceneRouter: SceneRouter;
 
     public gameOnInit(): void {
         ipcRenderer.on('open-debug-layer', () => {
-            this.sceneManager.currentSceneRoute.scene.debugLayer.show({
+            this.sceneRouter.activeScene.scene.debugLayer.show({
                 showInspector: true,
                 overlay: true
             });

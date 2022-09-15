@@ -9,8 +9,8 @@ import {Module} from '@colonial-space/core/module/module';
 import {PlanetProductionService} from './territory/planet/planet-production.service';
 import {ScoutShipBuildingHandlerService} from './building/handler/units/scout-ship/scout-ship-building-handler.service';
 import {SelectedBuildingService} from './building/selected-building.service';
-import {SelectedTerritoryService} from './territory/selected-territory.service';
-import {SelectedUnitService} from './unit/selected-unit.service';
+import {SelectionTerritoryService} from './territory/selection-territory.service';
+import {SelectionUnitService} from './unit/selection-unit.service';
 import {SunlightAmplifierBuildingHandlerService} from './building/handler/common/sunlight-amplifier-building-handler.service';
 import {TourService} from './tour/tour.service';
 import {UnitMovementService} from './unit/unit-movement.service';
@@ -34,11 +34,11 @@ import {WaterFilterBuildingHandlerService} from './building/handler/common/water
         FogOfWarService,
         
         PlanetProductionService,
-        SelectedTerritoryService,
+        SelectionTerritoryService,
         
         TourService,
         
-        SelectedUnitService,
+        SelectionUnitService,
         UnitService,
         UnitMovementService
     ]

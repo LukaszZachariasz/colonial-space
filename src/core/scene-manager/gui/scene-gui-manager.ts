@@ -1,25 +1,24 @@
+import {Injectable} from '@colonial-space/core/injector/injectable';
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {Injector} from '@colonial-space/core/injector/injector';
-import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
+import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
 import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
 import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
 
-export class GuiManager {
+@Injectable()
+export class SceneGuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
 
-    public createGuiScene(): void {
-        const currentScene = Injector.inject(SceneManager).currentSceneRoute;
-        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, currentScene.scene);
-        isOnLoad(currentScene.guiDefinition) && currentScene.guiDefinition.gameOnLoad();
+    public createGuiScene(scene: RegisteredScene): void {
+        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, scene.scene);
+        isOnLoad(scene.guiDefinition) && scene.guiDefinition.gameOnLoad();
     }
 
-    public disposeGuiScene(): void {
+    public disposeGuiScene(scene: RegisteredScene): void {
         if (this.advancedDynamicTexture) {
             this.advancedDynamicTexture.dispose();
         }
-        const currentScene = Injector.inject(SceneManager).currentSceneRoute;
-        isOnDestroy(currentScene?.guiDefinition) && currentScene.guiDefinition.gameOnDestroy();
+        isOnDestroy(scene?.guiDefinition) && scene.guiDefinition.gameOnDestroy();
     }
 
     public appendToRoot(control: any): any {

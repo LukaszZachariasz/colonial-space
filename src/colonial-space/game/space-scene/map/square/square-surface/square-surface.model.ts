@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {SelectedTerritoryService} from '../../../../game-logic/territory/selected-territory.service';
-import {SelectedUnitService} from '../../../../game-logic/unit/selected-unit.service';
+import {SelectionTerritoryService} from '../../../../game-logic/territory/selection-territory.service';
+import {SelectionUnitService} from '../../../../game-logic/unit/selection-unit.service';
 import {SimpleModel} from '../../../../../core/model-manager/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
@@ -31,14 +31,14 @@ export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, () => {
-                Injector.inject(SelectedUnitService).deselect();
-                Injector.inject(SelectedTerritoryService).deselect();
+                Injector.inject(SelectionUnitService).deselect();
+                Injector.inject(SelectionTerritoryService).deselect();
             })
         );
 
         actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                if (Injector.inject(SelectedUnitService).selectedUnitId$.value) {
+                if (Injector.inject(SelectionUnitService).selectedUnitId$.value) {
                     this.material.alpha = 0.1;
                 }
             })

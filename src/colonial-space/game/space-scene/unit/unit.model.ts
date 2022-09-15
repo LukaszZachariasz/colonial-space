@@ -7,7 +7,7 @@ import {ModelManagerService} from '../../../core/model-manager/model-manager.ser
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnReady} from '@colonial-space/core/lifecycle/on-ready/on-ready';
-import {SelectedUnitService} from '../../game-logic/unit/selected-unit.service';
+import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
 import {Subscription, delay, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
 import {UnitService} from '../../game-logic/unit/unit.service';
@@ -51,7 +51,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
     }
 
     protected select(): void {
-        Injector.inject(SelectedUnitService).select(this.state.id);
+        Injector.inject(SelectionUnitService).select(this.state.id);
     }
 
     private runEnterAnimation(): void {

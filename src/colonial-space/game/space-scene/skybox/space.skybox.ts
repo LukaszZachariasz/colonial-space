@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {ActionManager} from 'babylonjs/Actions/actionManager';
 import {Injector} from '@colonial-space/core/injector/injector';
-import {SelectedTerritoryService} from '../../game-logic/territory/selected-territory.service';
-import {SelectedUnitService} from '../../game-logic/unit/selected-unit.service';
+import {SelectionTerritoryService} from '../../game-logic/territory/selection-territory.service';
+import {SelectionUnitService} from '../../game-logic/unit/selection-unit.service';
 import {SimpleModel} from '../../../core/model-manager/model-elements/simple-model';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
@@ -40,8 +40,8 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
         this.mesh.actionManager = this.actionManager;
         this.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                Injector.inject(SelectedUnitService).deselect();
-                Injector.inject(SelectedTerritoryService).deselect();
+                Injector.inject(SelectionUnitService).deselect();
+                Injector.inject(SelectionTerritoryService).deselect();
             })
         );
     }
