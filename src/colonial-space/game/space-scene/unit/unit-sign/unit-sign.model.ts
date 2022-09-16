@@ -1,12 +1,13 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
-import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
 import {Subject, tap} from 'rxjs';
 import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';
 
-export class UnitSignModel extends SimpleModel<BABYLON.Mesh> {
+export class UnitSignModel extends Model<BABYLON.Mesh> implements OnInit {
     @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;
     
     public unitSignIconControl: UnitSignIconContainer;
@@ -17,7 +18,7 @@ export class UnitSignModel extends SimpleModel<BABYLON.Mesh> {
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = BABYLON.Mesh.CreatePlane('sign', 2, this.scene);
         this.mesh.rotation.x = Math.PI;
         this.mesh.position.y = -5; // TODO: why -5 instead of 5?

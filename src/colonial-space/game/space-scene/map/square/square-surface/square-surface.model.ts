@@ -1,13 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SelectionService} from '../../../../game-logic/selection/selection.service';
 import {SelectionUnitService} from '../../../../game-logic/selection/unit/selection-unit.service';
-import {SimpleModel} from '@colonial-space/core/scene-manager/model/model-elements/simple-model';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';
 
-export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
+export class SquareSurfaceModel extends Model<BABYLON.Mesh> implements OnInit {
     @Inject(SelectionService) private selectionService: SelectionService;
     @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
     @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
@@ -19,7 +20,7 @@ export class SquareSurfaceModel extends SimpleModel<BABYLON.Mesh>{
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = BABYLON.MeshBuilder.CreatePlane('SquareSurface', {
             width: SquareModel.SquareEdgeSize,
             height: SquareModel.SquareEdgeSize

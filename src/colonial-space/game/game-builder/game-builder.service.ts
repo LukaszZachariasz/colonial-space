@@ -26,7 +26,7 @@ export class GameBuilderService {
     @Inject(CAMERA('space')) private spaceCamera: FromAboveCamera;
     
     public build(): void {
-        this.modelManagerService.addSimpleModel(new MapModel(this.spaceScene));
+        this.modelManagerService.addModel(new MapModel(this.spaceScene));
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)

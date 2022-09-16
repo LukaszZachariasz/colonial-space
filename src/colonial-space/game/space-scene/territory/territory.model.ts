@@ -34,7 +34,7 @@ export abstract class TerritoryModel extends ImportModelAbstract implements OnLo
     }
 
     private createTerritorySignModel(): void {
-        this.territorySignModel = this.modelManager.addSimpleModel(new TerritorySignModel(this.scene, this.state));
+        this.territorySignModel = this.modelManager.addModel(new TerritorySignModel(this.scene, this.state));
         this.territorySignModel.mesh.parent = this.primaryMesh;
         this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

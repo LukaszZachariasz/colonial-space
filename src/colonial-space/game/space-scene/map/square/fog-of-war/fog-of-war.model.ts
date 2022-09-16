@@ -5,13 +5,14 @@ import {FogOfWarService} from '../../../../game-logic/fog-of-war/fog-of-war.serv
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
 import {SelectionService} from '../../../../game-logic/selection/selection.service';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../game-logic/unit/unit-movement.service';
 
-export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
+export class FogOfWarModel extends ParticleSystemModel implements OnInit, OnDestroy {
     @Inject(SelectionService) private selectionService: SelectionService;
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
@@ -38,7 +39,7 @@ export class FogOfWarModel extends ParticleSystemModel implements OnDestroy {
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = BABYLON.MeshBuilder.CreatePlane('FogOfWar', {
             width: SquareModel.SquareEdgeSize,
             height: SquareModel.SquareEdgeSize

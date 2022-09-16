@@ -1,14 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import {MapGeneratorService} from '../../game-generator/map-generator/map-generator.service';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {ParticleSystemModel} from '../../../../core/scene-manager/model/model-elements/particle-system-model';
 import {SquareModel} from '../map/square/square.model';
 
-export class GalaxyDustModel extends ParticleSystemModel {
+export class GalaxyDustModel extends ParticleSystemModel implements OnInit {
     constructor(private scene: BABYLON.Scene) {
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.particleSystem = new BABYLON.ParticleSystem('galaxyDust', 20000, this.scene);
         this.particleSystem.particleTexture = new BABYLON.Texture('resources/galaxy-dust/galaxy-dust.png', this.scene);
 

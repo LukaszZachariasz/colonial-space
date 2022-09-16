@@ -12,6 +12,6 @@ export class MainMenuSkybox implements OnInit {
     @Inject(SCENE(Routes.MainMenuScene)) private scene: BABYLON.Scene;
     
     public gameOnInit(): void {
-        this.modelManager.addSimpleModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
+        this.modelManager.addModel(new SpaceSkybox(this.scene, SpaceSkyboxConst[3]));
     }
 }

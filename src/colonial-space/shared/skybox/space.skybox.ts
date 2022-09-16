@@ -1,11 +1,12 @@
 import * as BABYLON from 'babylonjs';
 import {ActionManager} from 'babylonjs/Actions/actionManager';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SelectionService} from '../../game/game-logic/selection/selection.service';
-import {SimpleModel} from '../../../core/scene-manager/model/model-elements/simple-model';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
-export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
+export class SpaceSkybox extends Model<BABYLON.Mesh> implements OnInit {
     @Inject(SelectionService) private selectionService: SelectionService;
 
     public material: BABYLON.StandardMaterial;
@@ -17,7 +18,7 @@ export class SpaceSkybox extends SimpleModel<BABYLON.Mesh> {
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = BABYLON.MeshBuilder.CreateBox('SpaceSkyBox', {size: 1000.0}, this.scene);
         this.mesh.infiniteDistance = true;
 

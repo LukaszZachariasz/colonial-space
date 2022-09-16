@@ -10,6 +10,6 @@ export class GalaxyDust implements OnInit {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
     
     public gameOnInit(): void {
-        this.modelManagerService.addSimpleModel(new GalaxyDustModel(this.scene));
+        this.modelManagerService.addModel(new GalaxyDustModel(this.scene));
     }
 }

@@ -49,7 +49,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnInit, O
     }
 
     public createUnitSignModel(): void {
-        this.unitSignModel = this.modelManager.addSimpleModel(new UnitSignModel(this.scene, this.state));
+        this.unitSignModel = this.modelManager.addModel(new UnitSignModel(this.scene, this.state));
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

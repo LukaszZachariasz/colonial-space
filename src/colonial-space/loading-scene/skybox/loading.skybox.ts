@@ -10,6 +10,6 @@ export class LoadingSkybox implements OnInit {
     @Inject(SCENE('loading')) private scene: BABYLON.Scene;
 
     public gameOnInit(): void {
-        this.modelManager.addSimpleModel(new SpaceSkybox(this.scene));
+        this.modelManager.addModel(new SpaceSkybox(this.scene));
     }
 }

@@ -11,6 +11,6 @@ export class SpaceSceneSkybox implements OnInit {
     @Inject(SCENE('space')) private scene: BABYLON.Scene;
 
     public gameOnInit(): void {
-        this.modelManagerService.addSimpleModel(new SpaceSkybox(this.scene, selectMapSkybox()));
+        this.modelManagerService.addModel(new SpaceSkybox(this.scene, selectMapSkybox()));
     }
 }

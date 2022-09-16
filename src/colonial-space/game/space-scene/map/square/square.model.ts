@@ -1,15 +1,16 @@
 import * as BABYLON from 'babylonjs';
 import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
-import {SimpleModel} from '../../../../../core/scene-manager/model/model-elements/simple-model';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SquareBorderModel} from './square-border/square-border.model';
 import {SquareState} from '../../../game-logic/store/map/square/square.state';
 import {SquareSurfaceModel} from './square-surface/square-surface.model';
 import {Subscription, tap} from 'rxjs';
 
-export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements OnDestroy {
+export class SquareModel extends Model<BABYLON.TransformNode> implements OnInit, OnDestroy {
     @Inject(ModelManager) private modelManager: ModelManager;
     
     public static readonly SquareEdgeSize = 10;
@@ -25,7 +26,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = new BABYLON.TransformNode(`Square[${this.state.x}, ${this.state.y}]`, this.scene);
         this.mesh.position.x = this.state.x;
         this.mesh.position.z = this.state.y;
@@ -38,7 +39,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createFogOfWarModel(): void {
-        this.fogOfWarModel = this.modelManager.addSimpleModel(new FogOfWarModel(this.scene, this.state));
+        this.fogOfWarModel = this.modelManager.addModel(new FogOfWarModel(this.scene, this.state));
         this.fogOfWarModel.mesh.parent = this.mesh;
         this.fogOfWarModel.emitter.parent = this.mesh;
         this.fogOfWarRemovedSubscription = this.fogOfWarModel.destroyed$.pipe(
@@ -49,7 +50,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareBorderModel(): void {
-        this.squareBorderModel = this.modelManager.addSimpleModel(new SquareBorderModel(this.scene));
+        this.squareBorderModel = this.modelManager.addModel(new SquareBorderModel(this.scene));
         this.squareBorderModel.mesh.parent = this.mesh;
         if (this.state.playerId) {
             this.squareBorderModel.setPlayer();
@@ -57,7 +58,7 @@ export class SquareModel extends SimpleModel<BABYLON.TransformNode> implements O
     }
 
     private createSquareSurfaceModel(): void {
-        this.squareSurfaceModel = this.modelManager.addSimpleModel(new SquareSurfaceModel(this.scene, this.state));
+        this.squareSurfaceModel = this.modelManager.addModel(new SquareSurfaceModel(this.scene, this.state));
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 

@@ -1,14 +1,15 @@
 import * as BABYLON from 'babylonjs';
-import {SimpleModel} from '../../../../../../core/scene-manager/model/model-elements/simple-model';
+import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SquareModel} from '../square.model';
 import {selectPlayerColor} from '../../../../game-logic/store/player/player.selectors';
 
-export class SquareBorderModel extends SimpleModel<BABYLON.LinesMesh>{
+export class SquareBorderModel extends Model<BABYLON.LinesMesh> implements OnInit {
     constructor(private scene: BABYLON.Scene) {
         super();
     }
 
-    public onCreate(): void {
+    public gameOnInit(): void {
         this.mesh = BABYLON.MeshBuilder.CreateLines('SquareBorder', {points: this.generateSquarePolygon()}, this.scene);
         this.mesh.alpha = 0.05;
     }
