@@ -1,5 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import {Routes} from '../../../../../../core/routing/routing.enum';
 import {
     AnalysisShipGeneratorService
 } from '../../../../../game-generator/unit-generator/analysis-ship-generator/analysis-ship-generator.service';

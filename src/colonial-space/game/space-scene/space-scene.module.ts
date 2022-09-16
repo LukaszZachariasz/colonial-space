@@ -1,5 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import {Routes} from '../../core/routing/routing.enum';
 import {FromAboveCamera} from '../../shared/camera/from-above-camera';
 import {GalaxyDust} from './galaxy-dust/galaxy-dust';
 import {Module} from '@colonial-space/core/module/module';

@@ -1,6 +1,5 @@
 import * as BABYLON from 'babylonjs';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
-import {Routes} from '../../core/routing/routing.enum';
 import {FromAboveCamera} from '../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
