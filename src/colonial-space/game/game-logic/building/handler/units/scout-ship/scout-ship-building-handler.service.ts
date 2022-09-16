@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {Routes} from '../../../../../../core/routing/routing.enum';
 import {BuildingObjectType} from '../../../../store/building/building-scope/building-object/building-object-type';
 import {HasTourBlockers} from '../../../../tour/tour-blocker/has-tour-blockers';
 import {HasTourEffects} from '../../../../tour/tour-effect/has-tour-effects';

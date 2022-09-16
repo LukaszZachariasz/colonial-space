@@ -1,0 +1,13 @@
+import * as BABYLON from 'babylonjs';
+import {Inject} from '@colonial-space/core/injector/inject';
+import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
+import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+
+export class SpaceLight implements OnInit {
+    @Inject(SCENE('space')) private scene: BABYLON.Scene;
+    
+    public gameOnInit(): void {
+        const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(20, 0, -30), this.scene);
+        light.intensity = 0.5;
+    }
+}

@@ -24,9 +24,33 @@ export class PlanetGreenModel extends TerritoryModel implements OnLoad, OnInit {
 
     public gameOnInit(): void {
         this.primaryMesh.position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
+        this.createGlowLayer('PlanetGreenGlowLayer', 1);
+        this.addWaterGlare();
     }
 
     public gameOnLoad(): void {
         super.gameOnLoad();
+    }
+
+    private createGlowLayer(glareName: string, intensity: number): void {
+        const glowLayer = new BABYLON.GlowLayer(glareName, this.scene, {
+            mainTextureFixedSize: 256,
+            blurKernelSize: 10
+        });
+
+        glowLayer.intensity = intensity;
+    }
+
+    private addWaterGlare(): void {
+        const PLANET_GREEN_WATER_GLOW = 'PLANET_GREEN_WATER_GLOW';
+        const PLANET_GREEN_WATER_GLOW_MAT = 'PLANET_GREEN_WATER_GLOW_MAT';
+        const mesh = this.meshes.find((mesh: BABYLON.AbstractMesh) => mesh.name === PLANET_GREEN_WATER_GLOW) as BABYLON.Mesh;
+        mesh.material = this.getGlareMaterial(PLANET_GREEN_WATER_GLOW_MAT, BABYLON.Color3.Blue());
+    }
+
+    private getGlareMaterial(glareMatName: string, color: BABYLON.Color3): BABYLON.PBRMaterial {
+        const mat = new BABYLON.PBRMaterial(glareMatName);
+        mat.emissiveColor = color;
+        return mat;
     }
 }

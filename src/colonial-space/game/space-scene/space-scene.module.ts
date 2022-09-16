@@ -1,9 +1,10 @@
 import * as BABYLON from 'babylonjs';
+import {Routes} from '../../core/routing/routing.enum';
 import {FromAboveCamera} from '../../shared/camera/from-above-camera';
 import {GalaxyDust} from './galaxy-dust/galaxy-dust';
 import {Module} from '@colonial-space/core/module/module';
 import {SpaceGui} from './gui/space.gui';
-import {SpaceHemisphericLight} from './light/space-hemispheric.light';
+import {SpaceLight} from './light/space.light';
 import {SpaceScene} from './space.scene';
 import {SpaceSceneSkybox} from './skybox/space-scene.skybox';
 
@@ -16,7 +17,7 @@ import {SpaceSceneSkybox} from './skybox/space-scene.skybox';
             gui: SpaceGui,
             arrangement: [
                 SpaceSceneSkybox,
-                SpaceHemisphericLight,
+                SpaceLight,
                 GalaxyDust
             ]
         }

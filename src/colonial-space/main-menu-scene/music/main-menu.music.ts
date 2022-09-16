@@ -3,10 +3,11 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
+import {Routes} from '../../core/routing/routing.enum';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 export class MainMenuMusic implements OnInit, OnLoad, OnUnload {
-    @Inject(SCENE('main-menu')) private scene: BABYLON.Scene;
+    @Inject(SCENE(Routes.MainMenuScene)) private scene: BABYLON.Scene;
 
     public music: BABYLON.Sound;
 

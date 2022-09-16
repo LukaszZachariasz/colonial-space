@@ -27,7 +27,7 @@ export class FromAboveCamera extends BABYLON.ArcRotateCamera {
         super(name, alpha, beta, radius, position, scene);
 
         this.listenOnBoundaries();
-        this.lowerRadiusLimit = 40;
+        this.lowerRadiusLimit = 20;
         this.upperRadiusLimit = 90;
         this.upperBetaLimit = Math.PI / 4;
         this.lowerAlphaLimit = -Math.PI / 2;
