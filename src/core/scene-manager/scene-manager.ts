@@ -21,7 +21,7 @@ export class SceneManager {
     public register(sceneOption: SceneOption): void {
         const sceneDefinition = new sceneOption.scene();
         const guiDefinition = new sceneOption.gui();
-        const componentsDefinitions = sceneOption.components?.map((component: any) => new component());
+        const arrangementDefinitions = sceneOption.arrangement?.map((arrangement: any) => new arrangement());
 
         const babylonScene = new BABYLON.Scene(this.engine);
         const camera = sceneOption.cameraFactory(babylonScene);
@@ -31,7 +31,7 @@ export class SceneManager {
 
         isOnInit(sceneDefinition) && sceneDefinition.gameOnInit();
         isOnInit(guiDefinition) && guiDefinition.gameOnInit();
-        componentsDefinitions?.forEach((component: any) => isOnInit(component) && component.gameOnInit());
+        arrangementDefinitions?.forEach((arrangement: any) => isOnInit(arrangement) && arrangement.gameOnInit());
 
         this.allScenes.push({
             name: sceneOption.name,
@@ -39,7 +39,7 @@ export class SceneManager {
             camera: camera,
             sceneDefinition: sceneDefinition,
             guiDefinition: guiDefinition,
-            componentDefinitions: componentsDefinitions
+            arrangementDefinitions: arrangementDefinitions
         });
 
         if (!sceneOption.lazy) {

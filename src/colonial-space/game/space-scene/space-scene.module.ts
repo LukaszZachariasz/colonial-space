@@ -14,7 +14,7 @@ import {SpaceSceneSkybox} from './skybox/space-scene.skybox';
             scene: SpaceScene,
             cameraFactory: (scene: BABYLON.Scene): BABYLON.Camera => new FromAboveCamera('Camera', -Math.PI / 2, 0.5, 20, new BABYLON.Vector3(20, 0, -30), scene),
             gui: SpaceGui,
-            components: [
+            arrangement: [
                 SpaceSceneSkybox,
                 SpaceHemisphericLight,
                 GalaxyDust

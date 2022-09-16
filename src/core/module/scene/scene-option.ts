@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {ComponentDefinition} from '@colonial-space/core/module/scene/definitions/component-definition';
+import {ArrangementDefinition} from '@colonial-space/core/module/scene/definitions/arrangement-definition';
 import {GuiDefinition} from '@colonial-space/core/module/scene/definitions/gui-definition';
 import {SceneDefinition} from '@colonial-space/core/module/scene/definitions/scene-definition';
 
@@ -11,5 +11,5 @@ export interface SceneOption {
 
     scene: SceneDefinition;
     gui: GuiDefinition;
-    components?: ComponentDefinition[];
+    arrangement?: ArrangementDefinition[];
 }

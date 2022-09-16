@@ -44,14 +44,14 @@ export class SceneRouter implements OnInit {
 
     private unloadScene(): void {
         isOnUnload(this.activeScene.sceneDefinition) && this.activeScene.sceneDefinition.gameOnUnload();
-        this.activeScene.componentDefinitions?.forEach((component: any) => isOnUnload(component) && component.gameOnUnload());
+        this.activeScene.arrangementDefinitions?.forEach((arrangement: any) => isOnUnload(arrangement) && arrangement.gameOnUnload());
         this.guiManager.disposeGuiScene(this.activeScene);
         this.activeScene.scene.detachControl();
     }
 
     private loadScene(): void {
         isOnLoad(this.activeScene) && this.activeScene.gameOnLoad();
-        this.activeScene.componentDefinitions?.forEach((component: any) => isOnLoad(component) && component.gameOnLoad());
+        this.activeScene.arrangementDefinitions?.forEach((component: any) => isOnLoad(component) && component.gameOnLoad());
         this.guiManager.createGuiScene(this.activeScene);
         this.activeScene.scene.attachControl();
     }
