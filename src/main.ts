@@ -29,7 +29,7 @@ export class Main {
         });
 
         ipcMain.on('game-root-scene-ready', () => {
-            this.splashWindow.close();
+            this.splashWindow.hide();
             this.mainWindow.show();
         });
     }
