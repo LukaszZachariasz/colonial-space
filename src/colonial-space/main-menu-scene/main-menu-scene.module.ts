@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import {MainMenuMusic} from './music/main-menu.music';
 import {MainMenuPostEffects} from './post-effects/main-menu.post-effects';
 import {MainMenuScene} from './main-menu.scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
@@ -17,7 +18,7 @@ import {Module} from '@colonial-space/core/module/module';
             components: [
                 MainMenuShip,
                 MainMenuSkybox,
-                // MainMenuMusic,
+                MainMenuMusic,
                 MainMenuPostEffects
             ]
         }

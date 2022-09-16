@@ -45,14 +45,10 @@ export class SceneManager {
         if (!sceneOption.lazy) {
             this.load(sceneOption.name).then(() => {
                 if (sceneOption.root) {
-                    console.log('test');
+                    this.rootSceneAdded$.next(sceneOption.name);
                     ipcRenderer.send('game-root-scene-ready');
                 }
             });
-        }
-
-        if (sceneOption.root) {
-            this.rootSceneAdded$.next(sceneOption.name);
         }
     }
 
