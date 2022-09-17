@@ -1,3 +1,4 @@
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import * as GUI from 'babylonjs-gui';
 import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ControlEvent} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event';
@@ -8,6 +9,7 @@ import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../../../game-logic/store/unit/unit.state';
 
+@GuiElement()
 export class UnitSignIconContainer implements GuiControl<GUI.Container>, OnInit {
     public control: GUI.Container = new GUI.Container('unitSignIcon');
     public clicked$ = new Subject<void>();
