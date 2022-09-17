@@ -4,8 +4,10 @@ import {Token} from '@colonial-space/core/injector/types/token';
 
 export function Inject(token: Token | Instance): any {
     return function (object: any, propertyKey: string) {
-        const getter = function (): void {
-            return Injector.inject(token);
+        const getter = function (): any {
+            return Injector.inject(this['_sceneUid'] + '.' + token.injectionToken) ||
+                Injector.inject(this['_sceneUid'] + '.' + token.name) ||
+                Injector.inject(token);
         };
 
         Object.defineProperty(object, propertyKey, {

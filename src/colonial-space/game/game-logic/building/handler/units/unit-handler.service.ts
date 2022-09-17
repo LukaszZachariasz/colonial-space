@@ -15,7 +15,7 @@ import {SelectionTerritoryService} from '../../../selection/territory/selection-
 import {TerritoryState} from '../../../store/territory/territory.state';
 import {TourBlockerState} from '../../../tour/tour-blocker/tour-blocker';
 import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';
-import {UnitModel} from '../../../../space-scene/unit/unit.model';
+import {UnitModel} from '../../../../space-scene/model/unit/unit.model';
 import {
     UnitOnSquareWarningGuiElement
 } from '../../../../space-scene/gui/dialogs/complete-building/unit-on-square-warning.gui-element';
@@ -37,7 +37,7 @@ export abstract class UnitHandlerService {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(UnitService) private unitService: UnitService;
     @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
+    @Inject(CAMERA) private camera: FromAboveCamera;
     @Inject(DialogService) private dialogService: DialogService;
     @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
 
@@ -64,7 +64,7 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                this.modelManager.addImportModel(this.createModel(unit.id));
+                // this.modelManager.addImportModel(this.createModel(unit.id));
                 this.unitService.addUnit$.next(unit.id);
 
                 store.dispatch(setProductionToBeginning({

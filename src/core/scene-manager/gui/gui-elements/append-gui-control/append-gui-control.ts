@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import * as GUI from 'babylonjs-gui';
 import {AppendGuiControlConfig} from './append-gui-control-config';
 import {GuiControl} from '../gui-control';

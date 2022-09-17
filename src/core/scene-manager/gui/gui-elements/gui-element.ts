@@ -3,23 +3,23 @@ import {APPEND_CONTROL_METADATA_KEY} from './append-gui-control/append-gui-contr
 import {AppendGuiControlConfig} from './append-gui-control/append-gui-control-config';
 import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listener';
 import {GuiControl} from './gui-control';
-import {isOnDestroy} from '@colonial-space/core/lifecycle/on-destroy/is-on-destroy';
-import {isOnInit} from '@colonial-space/core/lifecycle/on-init/is-on-init';
-import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
-import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
+import {Injector} from '@colonial-space/core/injector/injector';
+import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
+import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
 
 export function GuiElement(): any {
     return function (constructor: any): any {
         return class extends constructor {
             constructor(...args: any[]) {
                 super(...args);
+                this['_sceneUid'] = Injector.inject(SceneRouter).activeScene.scene.uid;
 
-                isOnInit(this) && this.gameOnInit();
+                Lifecycle.onInit(this);
                 appendControls(this);
                 registerControlEventListeners(this);
-                isOnUnload(this) && this.control.onDisposeObservable.add(() => this.gameOnUnload());
-                isOnDestroy(this) && this.control.onDisposeObservable.add(() => this.gameOnDestroy());
-                isOnLoad(this) && this.gameOnLoad();
+                this.control.onDisposeObservable.add(() => Lifecycle.onUnload(this));
+                this.control.onDisposeObservable.add(() => Lifecycle.onDestroy(this));
+                Lifecycle.onLoad(this);
             }
         };
     };

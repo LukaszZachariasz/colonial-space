@@ -1,6 +1,6 @@
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {MapState} from '../../game-logic/store/map/map.state';
-import {SquareModel} from '../../space-scene/map/square/square.model';
+import {SquareModel} from '../../space-scene/model/map/square/square.model';
 import {SquareState} from '../../game-logic/store/map/square/square.state';
 import {randomSpaceSkybox} from '../../../shared/skybox/space-skybox.const';
 import {v4 as uuid} from 'uuid';

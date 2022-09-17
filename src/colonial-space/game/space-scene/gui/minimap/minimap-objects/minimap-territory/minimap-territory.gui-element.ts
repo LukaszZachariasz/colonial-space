@@ -15,7 +15,7 @@ import {selectTerritoryById} from '../../../../../game-logic/store/territory/ter
 
 @GuiElement()
 export class MinimapTerritoryGuiElement implements GuiControl<GUI.Container>, OnInit {
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
+    @Inject(CAMERA) private camera: FromAboveCamera;
     
     public control: GUI.Container = new GUI.Container('minimapTerritory');
     public territoryState: TerritoryState = selectTerritoryById(this.squareState.territoryId);

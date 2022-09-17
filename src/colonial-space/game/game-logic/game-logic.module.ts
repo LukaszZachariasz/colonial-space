@@ -28,15 +28,12 @@ import {WaterFilterBuildingHandlerService} from './building/handler/common/water
         ColonialShipBuildingHandlerService,
         ScoutShipBuildingHandlerService,
         BuildingService,
+        FogOfWarService,
         
         ColonizationService,
         DialogService,
-        FogOfWarService,
-        
         PlanetProductionService,
-        
         TourService,
-        
         UnitService,
         UnitMovementService
     ]

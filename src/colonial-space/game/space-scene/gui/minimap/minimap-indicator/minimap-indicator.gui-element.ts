@@ -10,8 +10,8 @@ import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 @GuiElement()
 export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, OnLoad {
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
-    @Inject(SCENE('space')) private scene: BABYLON.Scene;
+    @Inject(CAMERA) private camera: FromAboveCamera;
+    @Inject(SCENE) private scene: BABYLON.Scene;
     
     public control = new GUI.Rectangle('minimapIndicator');
 

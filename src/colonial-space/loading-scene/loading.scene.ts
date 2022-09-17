@@ -4,8 +4,8 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 export class LoadingScene {
-    @Inject(SCENE('loading')) private scene: BABYLON.Scene;
-    @Inject(CAMERA('loading')) private camera: BABYLON.Camera;
+    @Inject(SCENE) private scene: BABYLON.Scene;
+    @Inject(CAMERA) private camera: BABYLON.Camera;
 
     public gameOnInit(): void {
         this.scene.registerBeforeRender(() => {

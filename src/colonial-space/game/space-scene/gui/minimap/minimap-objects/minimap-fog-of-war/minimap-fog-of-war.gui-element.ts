@@ -10,13 +10,13 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {MapGeneratorService} from '../../../../../game-generator/map-generator/map-generator.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SquareModel} from '../../../../map/square/square.model';
+import {SquareModel} from '../../../../model/map/square/square.model';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
 
 @GuiElement()
 export class MinimapFogOfWarGuiElement implements GuiControl<GUI.Container>, OnInit {
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
-    @Inject(SCENE('space')) private scene: BABYLON.Scene;
+    @Inject(CAMERA) private camera: FromAboveCamera;
+    @Inject(SCENE) private scene: BABYLON.Scene;
     @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
 
     public control: GUI.Container = new GUI.Container('minimapObjects');

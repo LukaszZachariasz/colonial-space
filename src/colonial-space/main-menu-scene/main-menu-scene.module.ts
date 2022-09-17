@@ -1,11 +1,11 @@
 import * as BABYLON from 'babylonjs';
-import {MainMenuLight} from './light/main-menu.light';
-import {MainMenuMusic} from './music/main-menu.music';
-import {MainMenuPostEffects} from './post-effects/main-menu.post-effects';
+import {MainMenuLight} from './arrangement/light/main-menu.light';
+import {MainMenuMusic} from './arrangement/music/main-menu.music';
+import {MainMenuPostEffects} from './arrangement/post-effects/main-menu.post-effects';
 import {MainMenuScene} from './main-menu.scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
-import {MainMenuShip} from './ship/main-menu.ship';
-import {MainMenuSkybox} from './skybox/main-menu.skybox';
+import {MainMenuShip} from './arrangement/ship/main-menu.ship';
+import {MainMenuSkybox} from './arrangement/skybox/main-menu.skybox';
 import {Module} from '@colonial-space/core/module/module';
 import {Routes} from '../core/routing/routing.enum';
 
@@ -21,7 +21,7 @@ import {Routes} from '../core/routing/routing.enum';
                 MainMenuShip,
                 MainMenuSkybox,
                 MainMenuLight,
-                MainMenuMusic,
+                // MainMenuMusic,
                 MainMenuPostEffects
             ]
         }

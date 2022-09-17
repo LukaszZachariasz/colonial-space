@@ -4,7 +4,9 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RenderLoop {
     @Inject(ENGINE) private engine: BABYLON.Engine;
     @Inject(SceneRouter) private sceneRouter: SceneRouter;

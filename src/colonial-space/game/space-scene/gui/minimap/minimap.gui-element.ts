@@ -13,7 +13,7 @@ import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 
 @GuiElement()
 export class MinimapGuiElement implements GuiControl<GUI.Container>, OnInit {
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
+    @Inject(CAMERA) private camera: FromAboveCamera;
     
     public control: GUI.Container = new GUI.Container('minimap');
     

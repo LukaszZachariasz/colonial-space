@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {MapGeneratorService} from '../../game/game-generator/map-generator/map-generator.service';
-import {SquareModel} from '../../game/space-scene/map/square/square.model';
+import {SquareModel} from '../../game/space-scene/model/map/square/square.model';
 
 export class FromAboveCamera extends BABYLON.ArcRotateCamera {
     public static readonly CameraUnitPerPixel = 30;

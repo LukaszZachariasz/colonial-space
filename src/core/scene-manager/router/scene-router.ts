@@ -1,14 +1,15 @@
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
+import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SceneManager} from '@colonial-space/core/scene-manager/scene-manager';
-import {isOnLoad} from '@colonial-space/core/lifecycle/on-load/is-on-load';
-import {isOnUnload} from '@colonial-space/core/lifecycle/on-unload/in-on-unload';
 import {take, tap} from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SceneRouter implements OnInit {
     @Inject(SceneManager) private sceneManager: SceneManager;
     @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
@@ -23,8 +24,9 @@ export class SceneRouter implements OnInit {
     }
 
     public navigate(name: string): void {
+        console.log(name);
         const scene = this.sceneManager.getScene(name);
-        if (scene.scene.isReady()) {
+        if (scene.initialized && scene.scene.isReady()) {
             this.setScene(scene);
         } else {
             this.sceneManager.load(name).then(() => {
@@ -43,15 +45,17 @@ export class SceneRouter implements OnInit {
     }
 
     private unloadScene(): void {
-        isOnUnload(this.activeScene.sceneDefinition) && this.activeScene.sceneDefinition.gameOnUnload();
-        this.activeScene.arrangementDefinitions?.forEach((arrangement: any) => isOnUnload(arrangement) && arrangement.gameOnUnload());
+        Lifecycle.onUnload(this.activeScene.sceneDefinition);
+        this.activeScene.arrangementDefinitions?.forEach((arrangement: any) => Lifecycle.onUnload(arrangement));
+        this.activeScene.providerDefinitions?.forEach((provider: any) => Lifecycle.onUnload(provider));
         this.guiManager.disposeGuiScene(this.activeScene);
         this.activeScene.scene.detachControl();
     }
 
     private loadScene(): void {
-        isOnLoad(this.activeScene) && this.activeScene.gameOnLoad();
-        this.activeScene.arrangementDefinitions?.forEach((component: any) => isOnLoad(component) && component.gameOnLoad());
+        Lifecycle.onLoad(this.activeScene);
+        this.activeScene.arrangementDefinitions?.forEach((component: any) => Lifecycle.onLoad(component));
+        this.activeScene.providerDefinitions?.forEach((provider: any) => Lifecycle.onLoad(provider));
         this.guiManager.createGuiScene(this.activeScene);
         this.activeScene.scene.attachControl();
     }

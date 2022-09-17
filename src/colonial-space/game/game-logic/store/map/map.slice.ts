@@ -1,5 +1,5 @@
-import {FogOfWarService} from '../../fog-of-war/fog-of-war.service';
 import {Injector} from '@colonial-space/core/injector/injector';
+import {FogOfWarService} from '../../fog-of-war/fog-of-war.service';
 import {MapState} from './map.state';
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {SquareState} from './square/square.state';

@@ -24,7 +24,7 @@ export class MinimapUnitGuiElement implements GuiControl<GUI.Container>, OnInit,
     @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
     @Inject(TourService) private tourService: TourService;
     @Inject(UnitService) private unitService: UnitService;
-    @Inject(CAMERA('space')) private camera: FromAboveCamera;
+    @Inject(CAMERA) private camera: FromAboveCamera;
     
     public control: GUI.Container = new GUI.Container('minimapUnit');
     public unitState: UnitState = selectUnitById(this.squareState.unitId);

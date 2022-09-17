@@ -1,11 +1,13 @@
 import {Module} from '@colonial-space/core/module/module';
+import {StarGeneratorService} from './star-generator.service';
 import {StarNameGeneratorService} from './star-name/star-name-generator.service';
 import {StarSolarGeneratorService} from './star-solar-generator/star-solar-generator.service';
 
 @Module({
     providers: [
         StarNameGeneratorService,
-        StarSolarGeneratorService
+        StarSolarGeneratorService,
+        StarGeneratorService
     ]
 })
 export class StarGeneratorModule {

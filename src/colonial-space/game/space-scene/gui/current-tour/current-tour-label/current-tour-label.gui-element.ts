@@ -9,7 +9,7 @@ import {selectCurrentTour} from '../../../../game-logic/store/tour/tour.selector
 
 @GuiElement()
 export class CurrentTourLabelGuiElement implements GuiControl<GUI.TextBlock>, OnLoad {
-    @Inject(SCENE('space')) private scene: BABYLON.Scene;
+    @Inject(SCENE) private scene: BABYLON.Scene;
     
     public control = new GUI.TextBlock('currentTour', 'Current tour: ' + selectCurrentTour());
 
