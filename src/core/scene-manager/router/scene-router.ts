@@ -24,7 +24,6 @@ export class SceneRouter implements OnInit {
     }
 
     public navigate(name: string): void {
-        console.log(name);
         const scene = this.sceneManager.getScene(name);
         if (scene.initialized && scene.scene.isReady()) {
             this.setScene(scene);

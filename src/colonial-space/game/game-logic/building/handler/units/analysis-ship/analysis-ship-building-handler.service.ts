@@ -1,17 +1,14 @@
 import {
     AnalysisShipGeneratorService
 } from '../../../../../game-generator/unit-generator/analysis-ship-generator/analysis-ship-generator.service';
-import {AnalysisShipModel} from '../../../../../space-scene/model/unit/analysis-ship/analysis-ship.model';
 import {BuildingObjectType} from '../../../../store/building/building-scope/building-object/building-object-type';
 import {HasTourBlockers} from '../../../../tour/tour-blocker/has-tour-blockers';
 import {HasTourEffects} from '../../../../tour/tour-effect/has-tour-effects';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {UnitHandlerService} from '../unit-handler.service';
-import {UnitModel} from '../../../../../space-scene/model/unit/unit.model';
 import {UnitState} from '../../../../store/unit/unit.state';
 import {selectPlayerId} from '../../../../store/player/player.selectors';
-import {selectUnitById} from '../../../../store/unit/unit.selectors';
 
 @Injectable()
 @HasTourBlockers()
@@ -21,10 +18,6 @@ export class AnalysisShipBuildingHandlerService extends UnitHandlerService {
 
     constructor() {
         super(BuildingObjectType.ANALYSIS_SHIP);
-    }
-
-    public createModel(id: string): UnitModel {
-        return new AnalysisShipModel(selectUnitById(id));
     }
 
     public createUnitState(): UnitState {

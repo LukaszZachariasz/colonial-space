@@ -18,12 +18,7 @@ export class BuildingGuiElement implements GuiControl<GUI.Container>, OnInit {
 
     @AppendGuiControl() public buildingHeader: BuildingHeaderGuiElement = new BuildingHeaderGuiElement(this.buildingState);
     @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('sectorsScrollViewer');
-    @AppendGuiControl({
-        parent: 'scrollViewer'
-    }) public buildingScopes: BuildingScopesGuiElement = new BuildingScopesGuiElement(this.buildingState);
-
-    constructor() {
-    }
+    @AppendGuiControl('scrollViewer') public buildingScopes: BuildingScopesGuiElement = new BuildingScopesGuiElement(this.buildingState);
 
     public gameOnInit(): void {
         this.control.background = 'rgba(0, 0, 0, 0.4)';

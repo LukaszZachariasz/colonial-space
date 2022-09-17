@@ -27,6 +27,7 @@ export const buildingSlice = createSlice({
             buildingId: string,
             production: number
         }>) => {
+            debugger;
             const building = state.buildings.find((el: BuildingState) => el.id === action.payload.buildingId);
             if (building.currentBuildingObjectId) {
                 const currentBuildingObject: BuildingObjectState = building.scopes.map((el: BuildingScopeState) => el.objects).flat().find((el: BuildingObjectState) => el.id === building.currentBuildingObjectId);

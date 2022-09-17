@@ -22,7 +22,6 @@ export class PlanetGreenModel extends TerritoryModel implements OnLoad {
 
     public gameOnLoad(): void {
         this.primaryMesh.position = new BABYLON.Vector3(this.square.x, 0, this.square.y);
-        debugger;
         this.createGlowLayer('PlanetGreenGlowLayer', 1);
         this.addWaterGlare();
         super.gameOnLoad();

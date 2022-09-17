@@ -7,7 +7,6 @@ import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
 import {DialogService} from '../../../dialog/dialog.service';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {Observable, Subscriber} from 'rxjs';
 import {PlanetProductionService} from '../../../territory/planet/planet-production.service';
 import {PlanetState} from '../../../store/territory/planet/planet.state';
@@ -15,7 +14,6 @@ import {SelectionTerritoryService} from '../../../selection/territory/selection-
 import {TerritoryState} from '../../../store/territory/territory.state';
 import {TourBlockerState} from '../../../tour/tour-blocker/tour-blocker';
 import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';
-import {UnitModel} from '../../../../space-scene/model/unit/unit.model';
 import {
     UnitOnSquareWarningGuiElement
 } from '../../../../space-scene/gui/dialogs/complete-building/unit-on-square-warning.gui-element';
@@ -34,7 +32,6 @@ import {setSquareUnitId} from '../../../store/map/map.slice';
 import {store} from '../../../store/store';
 
 export abstract class UnitHandlerService {
-    @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(UnitService) private unitService: UnitService;
     @Inject(PlanetProductionService) private planetProductionService: PlanetProductionService;
     @Inject(CAMERA) private camera: FromAboveCamera;
@@ -42,7 +39,6 @@ export abstract class UnitHandlerService {
     @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
 
     public abstract createUnitState(): UnitState;
-    public abstract createModel(id: string): UnitModel;
 
     protected constructor(private type: BuildingObjectType) {
     }
@@ -64,7 +60,6 @@ export abstract class UnitHandlerService {
                     unitId: unit.id,
                     squareId: selectSquareByTerritoryId(planet.id).id
                 }));
-                // this.modelManager.addImportModel(this.createModel(unit.id));
                 this.unitService.addUnit$.next(unit.id);
 
                 store.dispatch(setProductionToBeginning({

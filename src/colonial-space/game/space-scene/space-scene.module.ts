@@ -8,8 +8,9 @@ import {SpaceLight} from './arrangement/light/space.light';
 import {SpaceScene} from './space.scene';
 import {SpaceSceneBuilderService} from './services/space-scene-builder/space-scene-builder.service';
 import {SpaceSceneSkybox} from './arrangement/skybox/space-scene.skybox';
-import {TerritoryFactoryService} from './services/space-scene-builder/territory-factory/territory-factory.service';
-import {UnitFactoryService} from './services/space-scene-builder/unit-factory/unit-factory.service';
+import {SpaceSceneUnitCreatorService} from './services/space-scene-builder/unit/space-scene-unit-creator.service';
+import {TerritoryFactoryService} from './services/space-scene-builder/territory/territory-factory.service';
+import {UnitFactoryService} from './services/space-scene-builder/unit/unit-factory.service';
 
 @Module({
     scenes: [
@@ -28,6 +29,7 @@ import {UnitFactoryService} from './services/space-scene-builder/unit-factory/un
                 SpaceSceneBuilderService,
                 TerritoryFactoryService,
                 UnitFactoryService,
+                SpaceSceneUnitCreatorService,
                 RemoveFogOfWarHandlerService
             ]
         }

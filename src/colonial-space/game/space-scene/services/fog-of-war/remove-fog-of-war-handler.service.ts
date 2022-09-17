@@ -5,7 +5,7 @@ import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SquareState} from '../../../game-logic/store/map/square/square.state';
 import {Subscription, delay, filter, map, tap} from 'rxjs';
-import {TerritoryFactoryService} from '../space-scene-builder/territory-factory/territory-factory.service';
+import {TerritoryFactoryService} from '../space-scene-builder/territory/territory-factory.service';
 import {selectSquareById} from '../../../game-logic/store/map/square/square.selectors';
 import {selectTerritoryById} from '../../../game-logic/store/territory/territory.selectors';
 

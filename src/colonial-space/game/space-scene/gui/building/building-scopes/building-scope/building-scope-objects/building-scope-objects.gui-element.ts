@@ -16,12 +16,8 @@ export class BuildingScopeObjectsGuiElement implements GuiControl<GUI.Container>
     public control: GUI.Container = new GUI.Container('sectorObjects');
 
     @AppendGuiControl() public scrollViewer: GUI.ScrollViewer = new GUI.ScrollViewer('scrollViewer');
-    @AppendGuiControl({
-        parent: 'scrollViewer'
-    }) public stackPanel: GUI.StackPanel = new GUI.StackPanel('stackPanel');
-    @AppendGuiControl({
-        parent: 'stackPanel'
-    }) public buildingObject: BuildingObjectGuiElement[] = [];
+    @AppendGuiControl('scrollViewer') public stackPanel: GUI.StackPanel = new GUI.StackPanel('stackPanel');
+    @AppendGuiControl('stackPanel') public buildingObject: BuildingObjectGuiElement[] = [];
 
     constructor(private buildingScope: BuildingScopeState) {
     }
@@ -39,8 +35,6 @@ export class BuildingScopeObjectsGuiElement implements GuiControl<GUI.Container>
 
         this.stackPanel.isVertical = false;
 
-        this.buildingScope.objects.forEach((object: BuildingObjectState) => {
-            this.buildingObject.push(new BuildingObjectGuiElement(object));
-        });
+        this.buildingObject = this.buildingScope.objects.map((object: BuildingObjectState) => new BuildingObjectGuiElement(object));
     }
 }

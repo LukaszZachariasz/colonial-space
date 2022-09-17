@@ -7,20 +7,13 @@ import {BuildingScopeState} from '../../../../game-logic/store/building/building
 import {BuildingState} from '../../../../game-logic/store/building/building.state';
 import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
-import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 
 @GuiElement()
-export class BuildingScopesGuiElement implements GuiControl<GUI.StackPanel>, OnInit {
+export class BuildingScopesGuiElement implements GuiControl<GUI.StackPanel> {
     public control: GUI.StackPanel = new GUI.StackPanel('sectorsStackPanel');
 
-    @AppendGuiControl() public buildingScope: BuildingScopeGuiElement[] = [];
+    @AppendGuiControl() public buildingScope: BuildingScopeGuiElement[] = this.buildingState.scopes.map((el:BuildingScopeState) => new BuildingScopeGuiElement(el));
 
     constructor(private buildingState: BuildingState) {
-    }
-
-    public gameOnInit(): void {
-        this.buildingState.scopes.forEach((scope: BuildingScopeState) => {
-            this.buildingScope.push(new BuildingScopeGuiElement(scope));
-        });
     }
 }
