@@ -1,12 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {MapGeneratorService} from '../../../game-generator/map-generator/map-generator.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SquareModel} from '../../model/map/square/square.model';
 
 export class GalaxyDustModel extends ParticleSystemModel implements OnInit, OnLoad, OnUnload {
     @Inject(SCENE) private scene: BABYLON.Scene;
@@ -33,9 +31,6 @@ export class GalaxyDustModel extends ParticleSystemModel implements OnInit, OnLo
 
         this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
         this.particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
-
-        this.particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0);
-        this.particleSystem.maxEmitBox = new BABYLON.Vector3(MapGeneratorService.MapWidth * SquareModel.SquareEdgeSize, 5, -(MapGeneratorService.MapHeight * SquareModel.SquareEdgeSize));
 
         this.particleSystem.direction1 = new BABYLON.Vector3(10, -1, 1);
         this.particleSystem.direction2 = new BABYLON.Vector3(-10, -5, 10);

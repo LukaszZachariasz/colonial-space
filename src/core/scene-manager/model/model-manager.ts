@@ -42,7 +42,6 @@ export class ModelManager {
         BABYLON.SceneLoader.ImportMeshAsync('', definition.meshUrl, definition.meshName, scene)
             .then((result: BABYLON.ISceneLoaderAsyncResult) => Object.keys(result).forEach((key: keyof BABYLON.ISceneLoaderAsyncResult) => (instance as any)[key] = result[key]))
             .then(() => this.setRootMeshes(instance))
-            .then(() => this.addActionManager(instance))
             .then(() => instance.primaryMesh.onDisposeObservable.add(() => Lifecycle.onUnload(instance)))
             .then(() => instance.primaryMesh.onDisposeObservable.add(() => Lifecycle.onDestroy(instance)))
             .then(() => Lifecycle.onLoad(instance));
@@ -57,31 +56,6 @@ export class ModelManager {
     private setRootMeshes(that: any): any {
         that.primaryMesh = that.meshes[0];
         that.actionMesh = that.primaryMesh.getChildMeshes()[0];
-        return that;
-    }
-    
-    private addActionManager(that: any): any {
-        that.actionManager = new BABYLON.ActionManager(that.scene);
-        const highlightLayer = new BABYLON.HighlightLayer('hover_highlight_layer', that.scene);
-        that.actionMesh.enablePointerMoveEvents = false;
-
-        that.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, () => {
-                highlightLayer.addMesh(that.actionMesh, BABYLON.Color3.Yellow());
-            })
-        );
-        that.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickDownTrigger, () => {
-                that.select();
-            })
-        );
-        that.actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, () => {
-                highlightLayer.removeAllMeshes();
-            })
-        );
-        that.actionMesh.actionManager = that.actionManager;
-
         return that;
     }
 }

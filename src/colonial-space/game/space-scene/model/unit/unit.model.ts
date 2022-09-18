@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../../shared/animations/fade-in/fade-in.animation';
 import {FadeOutAnimation} from '../../../../shared/animations/fade-out/fade-out.animation';
+import {HighlightSelect} from '../../../../shared/highlight-select/highlight-select';
 import {ImportModelAbstract} from '@colonial-space/core/scene-manager/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
@@ -23,9 +24,11 @@ export abstract class UnitModel extends ImportModelAbstract implements OnLoad, O
     public unitMovement: UnitMovement;
     public unitSignModel: UnitSignModel;
     public actionMesh: BABYLON.AbstractMesh;
+    public highlightSelect: HighlightSelect;
 
     private removeUnitSubscription: Subscription;
     private unitSignModelClickedSubscription: Subscription;
+    private highlightClickedSubscription: Subscription;
 
     protected constructor(protected state: UnitState) {
         super();
@@ -44,6 +47,15 @@ export abstract class UnitModel extends ImportModelAbstract implements OnLoad, O
         ).subscribe();
         
         this.runEnterAnimation();
+
+        this.highlightSelect = new HighlightSelect(this.actionMesh as BABYLON.Mesh);
+        this.highlightClickedSubscription = this.highlightSelect.clicked$.pipe(
+            tap(() => this.select())
+        ).subscribe();
+    }
+
+    public gameOnUnload(): void {
+        this.highlightClickedSubscription?.unsubscribe();
     }
 
     public createUnitSignModel(): void {

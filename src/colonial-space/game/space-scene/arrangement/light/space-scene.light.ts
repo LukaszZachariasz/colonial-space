@@ -3,7 +3,7 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
-export class SpaceLight implements OnInit {
+export class SpaceSceneLight implements OnInit {
     @Inject(SCENE) private scene: BABYLON.Scene;
     
     public gameOnInit(): void {

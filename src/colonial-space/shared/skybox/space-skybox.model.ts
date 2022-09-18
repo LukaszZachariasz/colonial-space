@@ -7,7 +7,7 @@ import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SelectionService} from '../../game/game-logic/selection/selection.service';
 import {SpaceSkyboxConst} from './space-skybox.const';
 
-export class SpaceSkybox extends Model<BABYLON.Mesh> implements OnInit {
+export class SpaceSkyboxModel extends Model<BABYLON.Mesh> implements OnInit {
     @Inject(SelectionService) private selectionService: SelectionService;
     @Inject(SCENE) private scene: BABYLON.Scene;
 

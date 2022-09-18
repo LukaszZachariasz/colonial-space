@@ -1,7 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {ArrangementDefinition} from '@colonial-space/core/module/scene/definitions/arrangement-definition';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
-import {GuiDefinition} from '@colonial-space/core/module/scene/definitions/gui-definition';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
