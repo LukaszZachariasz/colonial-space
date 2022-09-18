@@ -19,7 +19,7 @@ import {Routes} from '../core/routing/routing.enum';
             arrangement: [
                 MainMenuSkybox,
                 MainMenuLight,
-                // MainMenuMusic,
+                MainMenuMusic,
                 MainMenuPostEffects
             ]
         }
