@@ -1,4 +1,3 @@
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import * as BABYLON from 'babylonjs';
 import {ArrangementDefinition} from '@colonial-space/core/module/scene/definitions/arrangement-definition';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
@@ -6,6 +5,7 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {ProviderDefinition} from '@colonial-space/core/module/scene/definitions/provider-definition';
 import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
 import {SceneDefinition} from '@colonial-space/core/module/scene/definitions/scene-definition';
