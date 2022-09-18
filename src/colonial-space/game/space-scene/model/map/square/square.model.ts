@@ -40,7 +40,7 @@ export class SquareModel extends Model<BABYLON.TransformNode> implements OnInit,
     }
 
     private createFogOfWarModel(): void {
-        this.fogOfWarModel = this.modelManager.addModel(FogOfWarModel, this.scene, this.state);
+        this.fogOfWarModel = this.modelManager.addModel(FogOfWarModel, this.state);
         this.fogOfWarModel.mesh.parent = this.mesh;
         this.fogOfWarModel.emitter.parent = this.mesh;
         this.fogOfWarRemovedSubscription = this.fogOfWarModel.destroyed$.pipe(
@@ -51,7 +51,7 @@ export class SquareModel extends Model<BABYLON.TransformNode> implements OnInit,
     }
 
     private createSquareBorderModel(): void {
-        this.squareBorderModel = this.modelManager.addModel(SquareBorderModel, this.scene);
+        this.squareBorderModel = this.modelManager.addModel(SquareBorderModel);
         this.squareBorderModel.mesh.parent = this.mesh;
         if (this.state.playerId) {
             this.squareBorderModel.setPlayer();
@@ -59,7 +59,7 @@ export class SquareModel extends Model<BABYLON.TransformNode> implements OnInit,
     }
 
     private createSquareSurfaceModel(): void {
-        this.squareSurfaceModel = this.modelManager.addModel(SquareSurfaceModel, this.scene, this.state);
+        this.squareSurfaceModel = this.modelManager.addModel(SquareSurfaceModel, this.state);
         this.squareSurfaceModel.mesh.parent = this.mesh;
     }
 

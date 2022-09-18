@@ -12,7 +12,7 @@ import {selectSquares} from '../../../game-logic/store/map/square/square.selecto
 export class MapModel extends Model<BABYLON.TransformNode> implements OnInit {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(SCENE) private scene: BABYLON.Scene;
-    
+
     public squareModels: SquareModel[] = [];
     public galaxyDustModel: GalaxyDustModel;
 
@@ -20,11 +20,11 @@ export class MapModel extends Model<BABYLON.TransformNode> implements OnInit {
         this.mesh = new BABYLON.TransformNode('Map', this.scene);
 
         selectSquares().flat().forEach((squareState: SquareState) => {
-            this.squareModels.push(this.modelManager.addModel(SquareModel, this.scene, squareState));
+            this.squareModels.push(this.modelManager.addModel(SquareModel, squareState));
         });
         this.squareModels.forEach((el: SquareModel) => el.mesh.parent = this.mesh);
 
-        this.galaxyDustModel = this.modelManager.addParticleSystem(GalaxyDustModel, this.scene);
+        this.galaxyDustModel = this.modelManager.addParticleSystem(GalaxyDustModel);
         this.galaxyDustModel.particleSystem.minEmitBox = this.squareModels.flat()[0].mesh.position;
         this.galaxyDustModel.particleSystem.maxEmitBox = this.squareModels.flat()[this.squareModels.flat().length -1].mesh.position;
     }

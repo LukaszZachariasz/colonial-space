@@ -14,6 +14,6 @@ export class MainMenuScene implements OnInit {
     public gameOnInit(): void {
         this.scene.clearColor = BABYLON.Color4.FromInts(0, 0, 0, 255);
         this.camera.fov = 1.3;
-        this.modelManager.addImportModel(MainMenuShipModel, this.scene);
+        this.modelManager.addImportModel(MainMenuShipModel);
     }
 }

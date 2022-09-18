@@ -1,3 +1,4 @@
+import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import * as BABYLON from 'babylonjs';
 import {ArrangementDefinition} from '@colonial-space/core/module/scene/definitions/arrangement-definition';
 import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
@@ -29,12 +30,15 @@ export class SceneManager {
 
         const babylonScene = new BABYLON.Scene(this.engine);
         const camera = sceneOption.cameraFactory(babylonScene);
+        const modelManager = new ModelManager();
 
         sceneDefinition['_sceneUid'] = babylonScene.uid;
         arrangementDefinitions?.forEach((arrangement: ArrangementDefinition) => arrangement['_sceneUid'] = babylonScene.uid);
         providerDefinitions?.forEach((provider: ProviderDefinition) => provider['_sceneUid'] = babylonScene.uid);
+        (modelManager as any)['_sceneUid'] = babylonScene.uid;
         Injector.set(new Token(`${babylonScene.uid}.SCENE`, true), babylonScene);
         Injector.set(new Token(`${babylonScene.uid}.CAMERA`, true), camera);
+        Injector.set(new Token(`${babylonScene.uid}.${(ModelManager as any).name}`, true), modelManager);
         providerDefinitions?.forEach((provider: ProviderDefinition) => Injector.set(new Token(`${babylonScene.uid}.${provider.constructor.name}`, true), provider));
 
         if (!sceneOption.lazy) {
