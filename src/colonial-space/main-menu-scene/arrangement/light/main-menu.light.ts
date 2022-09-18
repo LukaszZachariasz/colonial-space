@@ -1,7 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {Routes} from '../../../core/routing/routing.enum';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 export class MainMenuLight implements OnInit {

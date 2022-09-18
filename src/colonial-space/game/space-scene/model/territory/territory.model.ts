@@ -1,4 +1,3 @@
-import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../../shared/animations/fade-in/fade-in.animation';
 import {HighlightSelect} from '../../../../shared/highlight-select/highlight-select';
@@ -6,12 +5,13 @@ import {ImportModelAbstract} from '@colonial-space/core/scene-manager/model/mode
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
+import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SelectionTerritoryService} from '../../../game-logic/selection/territory/selection-territory.service';
+import {Subscription, tap} from 'rxjs';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../../game-logic/store/territory/territory-type';
-import {Subscription, tap} from 'rxjs';
 
 export abstract class TerritoryModel extends ImportModelAbstract implements OnLoad, OnUnload {
     @Inject(ModelManager) private modelManager: ModelManager;

@@ -1,9 +1,9 @@
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import * as GUI from 'babylonjs-gui';
 import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
 import {ControlEvent} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event';
 import {ControlEventListener} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event-listener';
 import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
