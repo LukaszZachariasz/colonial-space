@@ -1,13 +1,13 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+} from '@colonial-space/core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../../shared/button/button.gui-element';
 import {ColonialShipState} from '../../../../../game-logic/store/unit/colonial-ship/colonial-ship.state';
 import {ColonizationService} from '../../../../../game-logic/colonization/colonization.service';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';

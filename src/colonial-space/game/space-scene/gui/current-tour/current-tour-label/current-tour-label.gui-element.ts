@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';

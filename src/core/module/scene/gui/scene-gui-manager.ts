@@ -1,9 +1,10 @@
+import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
-import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-scene';
+import {RegisteredScene} from '@colonial-space/core/module/scene/registered-scene';
 
 @Injectable({
     providedIn: 'root'
@@ -11,10 +12,10 @@ import {RegisteredScene} from '@colonial-space/core/scene-manager/registered-sce
 export class SceneGuiManager {
     public advancedDynamicTexture: GUI.AdvancedDynamicTexture;
 
-    public createGuiScene(scene: RegisteredScene): void {
-        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, scene.scene);
-        const gui = new scene.guiDefinition();
-        gui._sceneUid = scene.scene.uid;
+    public createGuiScene(registeredScene: RegisteredScene): void {
+        this.advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('GUI', true, registeredScene.scene);
+        const gui = new registeredScene.gui() as SceneObject;
+        gui._sceneUid = registeredScene.scene.uid;
         Lifecycle.onInit(gui);
         Lifecycle.onLoad(gui);
     }
@@ -23,8 +24,8 @@ export class SceneGuiManager {
         if (this.advancedDynamicTexture) {
             this.advancedDynamicTexture.dispose();
         }
-        Lifecycle.onUnload(scene?.guiDefinition);
-        Lifecycle.onDestroy(scene?.guiDefinition);
+        Lifecycle.onUnload(scene?.gui);
+        Lifecycle.onDestroy(scene?.gui);
     }
 
     public appendToRoot<T extends GuiControl<GUI.Control>>(control: T): T {

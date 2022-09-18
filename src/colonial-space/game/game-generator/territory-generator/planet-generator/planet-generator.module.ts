@@ -1,4 +1,4 @@
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 import {PlanetGeneratorService} from './planet-generator.service';
 import {PlanetGreenGeneratorService} from './planet-green-generator/planet-green-generator.service';
 import {PlanetMetalGeneratorService} from './planet-metal-generator/planet-metal-generator.service';

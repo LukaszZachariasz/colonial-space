@@ -1,11 +1,11 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
-import {ControlEvent} from '../../../../../core/scene-manager/gui/gui-elements/events/control-event';
-import {ControlEventListener} from '../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
+import {ControlEvent} from '../../../../../core/module/scene/gui/gui-elements/events/control-event';
+import {ControlEventListener} from '../../../../../core/module/scene/gui/gui-elements/events/control-event-listener';
 import {FromAboveCamera} from '../../../../shared/camera/from-above-camera';
-import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '../../../../../core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {MinimapIndicatorGuiElement} from './minimap-indicator/minimap-indicator.gui-element';
 import {MinimapObjectsGuiElement} from './minimap-objects/minimap-objects.gui-element';

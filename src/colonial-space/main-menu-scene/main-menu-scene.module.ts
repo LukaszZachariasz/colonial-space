@@ -5,7 +5,7 @@ import {MainMenuPostEffects} from './arrangement/post-effects/main-menu.post-eff
 import {MainMenuScene} from './main-menu.scene';
 import {MainMenuSceneGui} from './gui/main-menu-scene-gui';
 import {MainMenuSkybox} from './arrangement/skybox/main-menu.skybox';
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 import {Routes} from '../core/routing/routing.enum';
 
 @Module({

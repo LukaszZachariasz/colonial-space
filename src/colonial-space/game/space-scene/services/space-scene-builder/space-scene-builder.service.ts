@@ -4,7 +4,7 @@ import {FromAboveCamera} from '../../../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {MapModel} from '../../model/map/map.model';
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {TerritoryFactoryService} from './territory/territory-factory.service';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';
 import {UnitFactoryService} from './unit/unit-factory.service';

@@ -8,7 +8,7 @@ import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.co
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {Subscription, tap} from 'rxjs';
 
 export class MainMenuSceneGui implements OnLoad, OnUnload {

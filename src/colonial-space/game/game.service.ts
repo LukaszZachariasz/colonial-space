@@ -2,7 +2,7 @@ import {EMPTY, delay, of, tap} from 'rxjs';
 import {GameGeneratorService} from './game-generator/game-generator.service';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
+import {SceneRouter} from '@colonial-space/core/module/scene/scene-router';
 
 @Injectable()
 export class GameService {

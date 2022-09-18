@@ -4,7 +4,7 @@ import {CONTROL_EVENT_LISTENER_METADATA_KEY} from './events/control-event-listen
 import {GuiControl} from './gui-control';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
-import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
+import {SceneRouter} from '@colonial-space/core/module/scene/scene-router';
 
 export function GuiElement(): any {
     return function (constructor: any): any {

@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {LoadingGui} from './gui/loading.gui';
 import {LoadingScene} from './loading.scene';
 import {LoadingSkybox} from './arrangement/skybox/loading.skybox';
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 
 @Module({
     scenes: [

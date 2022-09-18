@@ -1,6 +1,6 @@
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TextOptions} from './text-options';
 

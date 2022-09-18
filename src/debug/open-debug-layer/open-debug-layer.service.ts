@@ -1,7 +1,7 @@
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SceneRouter} from '@colonial-space/core/scene-manager/router/scene-router';
+import {SceneRouter} from '@colonial-space/core/module/scene/scene-router';
 import {ipcRenderer} from 'electron';
 
 @Injectable()

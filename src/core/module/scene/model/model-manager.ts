@@ -1,12 +1,13 @@
+import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import * as BABYLON from 'babylonjs';
-import {IMPORT_DEFINITION_METADATA_KEY} from '@colonial-space/core/scene-manager/model/game-object';
+import {IMPORT_DEFINITION_METADATA_KEY} from '@colonial-space/core/module/scene/model/game-object';
 import {ImportModelAbstract} from './model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
 import {Model} from './model-elements/model';
 import {ModelElement} from './model-element';
-import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
+import {ParticleSystemModel} from '@colonial-space/core/module/scene/model/model-elements/particle-system-model';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {Type} from '@colonial-space/core/type';
 

@@ -3,13 +3,13 @@ import {
     BuildingObjectState
 } from '../../../../../../../../game-logic/store/building/building-scope/building-object/building-object.state';
 import {BuildingService} from '../../../../../../../../game-logic/building/building.service';
-import {ControlEvent} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event';
+import {ControlEvent} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event';
 import {
     ControlEventListener
-} from '@colonial-space/core/scene-manager/gui/gui-elements/events/control-event-listener';
+} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event-listener';
 import {EMPTY, Subscription, merge, of, tap} from 'rxjs';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';

@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../../shared/animations/fade-in/fade-in.animation';
 import {HighlightSelect} from '../../../../shared/highlight-select/highlight-select';
-import {ImportModelAbstract} from '@colonial-space/core/scene-manager/model/model-elements/import-model';
+import {ImportModelAbstract} from '@colonial-space/core/module/scene/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';

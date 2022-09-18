@@ -5,7 +5,7 @@ import {ColonialShipBuildingHandlerService} from './building/handler/units/colon
 import {ColonizationService} from './colonization/colonization.service';
 import {DialogService} from './dialog/dialog.service';
 import {FogOfWarService} from './fog-of-war/fog-of-war.service';
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 import {PlanetProductionService} from './territory/planet/planet-production.service';
 import {ScoutShipBuildingHandlerService} from './building/handler/units/scout-ship/scout-ship-building-handler.service';
 import {SelectionModule} from './selection/selection.module';

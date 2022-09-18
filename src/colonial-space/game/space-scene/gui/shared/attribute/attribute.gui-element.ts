@@ -1,15 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
-import {ControlEvent} from '../../../../../../core/scene-manager/gui/gui-elements/events/control-event';
-import {ControlEventListener} from '../../../../../../core/scene-manager/gui/gui-elements/events/control-event-listener';
-import {GuiControl} from '../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {AppendGuiControl} from '../../../../../../core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
+import {ControlEvent} from '../../../../../../core/module/scene/gui/gui-elements/events/control-event';
+import {ControlEventListener} from '../../../../../../core/module/scene/gui/gui-elements/events/control-event-listener';
+import {GuiControl} from '../../../../../../core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../core/module/scene/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {TooltipGuiElement} from '../tooltip/tooltip.gui-element';
 
 @GuiElement()

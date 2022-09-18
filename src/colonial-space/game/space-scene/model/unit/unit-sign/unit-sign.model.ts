@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
-import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
+import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {Subject, tap} from 'rxjs';
 import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../../game-logic/store/unit/unit.state';

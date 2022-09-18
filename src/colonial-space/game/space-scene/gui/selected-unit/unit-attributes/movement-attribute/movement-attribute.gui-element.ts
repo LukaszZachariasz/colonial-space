@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {AttributeGuiElement} from '../../../shared/attribute/attribute.gui-element';
 import {GameIcon} from '../../../shared/icon/game-icon';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {IconGuiElement} from '../../../shared/icon/icon.gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';

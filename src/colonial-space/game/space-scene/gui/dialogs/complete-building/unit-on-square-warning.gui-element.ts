@@ -1,9 +1,9 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {ButtonGuiElement} from '../../shared/button/button.gui-element';
 import {DialogService} from '../../../../game-logic/dialog/dialog.service';
-import {GuiControl} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TextGuiElement} from '../../shared/text/text.gui-element';

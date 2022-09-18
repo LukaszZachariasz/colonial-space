@@ -1,4 +1,4 @@
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 import {PlayerGeneratorService} from './player-generator.service';
 
 @Module({

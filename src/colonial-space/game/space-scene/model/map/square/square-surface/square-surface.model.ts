@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
+import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SelectionService} from '../../../../../game-logic/selection/selection.service';

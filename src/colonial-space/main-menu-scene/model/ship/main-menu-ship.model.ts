@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
-import {GameObjectFromFile} from '@colonial-space/core/scene-manager/model/game-object';
-import {ImportModelAbstract} from '@colonial-space/core/scene-manager/model/model-elements/import-model';
+import {GameObjectFromFile} from '@colonial-space/core/module/scene/model/game-object';
+import {ImportModelAbstract} from '@colonial-space/core/module/scene/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 

@@ -1,8 +1,8 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+import {AppendGuiControl} from '../../../../../core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {CurrentTourLabelGuiElement} from './current-tour-label/current-tour-label.gui-element';
-import {GuiControl} from '../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '../../../../../core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../core/module/scene/gui/gui-elements/gui-element';
 import {NextTourGuiElement} from './next-tour/next-tour.gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 

@@ -1,12 +1,12 @@
 import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
-} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/append-gui-control/append-gui-control';
+} from '../../../../../../../../../../core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
 import {
     BuildingObjectState
 } from '../../../../../../../../game-logic/store/building/building-scope/building-object/building-object.state';
-import {GuiControl} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-control';
-import {GuiElement} from '../../../../../../../../../../core/scene-manager/gui/gui-elements/gui-element';
+import {GuiControl} from '../../../../../../../../../../core/module/scene/gui/gui-elements/gui-control';
+import {GuiElement} from '../../../../../../../../../../core/module/scene/gui/gui-elements/gui-element';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TextGuiElement} from '../../../../../../shared/text/text.gui-element';
 

@@ -1,5 +1,5 @@
 import {BuildingGeneratorService} from './building-generator.service';
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 
 @Module({
     providers: [

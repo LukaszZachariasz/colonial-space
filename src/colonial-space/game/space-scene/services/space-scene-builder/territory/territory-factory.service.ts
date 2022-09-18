@@ -2,7 +2,7 @@ import {AsteroidVolcanicModel} from '../../../model/territory/asteroid/asteroid-
 import {BlackHoleModel} from '../../../model/territory/black-hole/black-hole.model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {PlanetGreenModel} from '../../../model/territory/planet/planet-green/planet-green.model';
 import {PlanetMetalModel} from '../../../model/territory/planet/planet-metal/planet-metal.model';
 import {PlanetRingedModel} from '../../../model/territory/planet/planet-ringed/planet-ringed.model';

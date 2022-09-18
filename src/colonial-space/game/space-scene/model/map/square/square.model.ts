@@ -1,8 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import {FogOfWarModel} from './fog-of-war/fog-of-war.model';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/scene-manager/model/model-elements/model';
-import {ModelManager} from '@colonial-space/core/scene-manager/model/model-manager';
+import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';

@@ -3,7 +3,7 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {ParticleSystemModel} from '@colonial-space/core/scene-manager/model/model-elements/particle-system-model';
+import {ParticleSystemModel} from '@colonial-space/core/module/scene/model/model-elements/particle-system-model';
 import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 
 export class GalaxyDustModel extends ParticleSystemModel implements OnInit, OnLoad, OnUnload {

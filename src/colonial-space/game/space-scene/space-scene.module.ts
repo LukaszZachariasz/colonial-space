@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {FromAboveCamera} from '../../shared/camera/from-above-camera';
-import {Module} from '@colonial-space/core/module/module';
+import {Module} from '@colonial-space/core/module/module.decorator';
 import {RemoveFogOfWarHandlerService} from './services/fog-of-war/remove-fog-of-war-handler.service';
 import {SpaceGui} from './gui/space.gui';
 import {SpaceScene} from './space.scene';
