@@ -1,4 +1,3 @@
-import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {BuildingGuiElement} from './building/building.gui-element';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
@@ -9,7 +8,6 @@ import {Inject} from '@colonial-space/core/injector/inject';
 import {MinimapGuiElement} from './minimap/minimap.gui-element';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
 import {SceneGuiManager} from '@colonial-space/core/scene-manager/gui/scene-gui-manager';
 import {SelectedTerritoryGuiElement} from './selected-territory/selected-territory.gui-element';
 import {SelectedUnitGuiElement} from './selected-unit/selected-unit.gui-element';
@@ -25,7 +23,6 @@ export class SpaceGui implements OnLoad, OnUnload {
     @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
     @Inject(SelectionBuildingService) private selectionBuildingService: SelectionBuildingService;
     @Inject(DialogService) private dialogService: DialogService;
-    @Inject(SCENE) private scene: BABYLON.Scene;
 
     private buildingContainer: BuildingGuiElement;
     private selectedUnitContainer: SelectedUnitGuiElement;
