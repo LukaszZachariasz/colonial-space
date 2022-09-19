@@ -43,7 +43,7 @@ export class Main {
                 nodeIntegration: true,
                 contextIsolation: false
             },
-            show: true
+            show: false
         });
         this.mainWindow.loadFile('index.html');
 
@@ -75,8 +75,7 @@ export class Main {
             alwaysOnTop: true,
             transparent: true,
             frame: false,
-            resizable: false,
-            show: false
+            resizable: false
         });
         this.splashWindow.loadFile('splash-art.html');
         this.splashWindow.center();
