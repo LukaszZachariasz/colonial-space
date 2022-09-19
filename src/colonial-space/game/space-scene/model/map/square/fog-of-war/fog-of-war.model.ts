@@ -4,16 +4,16 @@ import {FogOfWarParticlesConfig} from './fog-of-war-particles-config';
 import {FogOfWarService} from '../../../../../game-logic/fog-of-war/fog-of-war.service';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
+import {ModelParticleSystem} from '@colonial-space/core/module/scene/model/particle-system/model-particle-system';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {ParticleSystemModel} from '@colonial-space/core/module/scene/model/model-elements/particle-system-model';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SelectionService} from '../../../../../game-logic/selection/selection.service';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../../game-logic/unit/unit-movement.service';
 
-export class FogOfWarModel extends ParticleSystemModel implements OnInit, OnDestroy {
+export class FogOfWarModel extends ModelParticleSystem implements OnInit, OnDestroy {
     @Inject(SelectionService) private selectionService: SelectionService;
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(FogOfWarService) private fogOfWarService: FogOfWarService;
@@ -41,20 +41,18 @@ export class FogOfWarModel extends ParticleSystemModel implements OnInit, OnDest
     }
 
     public gameOnInit(): void {
-        this.mesh = BABYLON.MeshBuilder.CreatePlane('FogOfWar', {
+        this.emitter = BABYLON.MeshBuilder.CreatePlane('FogOfWar', {
             width: SquareModel.SquareEdgeSize,
             height: SquareModel.SquareEdgeSize
         }, this.scene);
-        this.mesh.position.y = 1;
+        this.emitter.position.y = 1;
 
         this.material = new BABYLON.StandardMaterial('SquarePolygonMaterial', this.scene);
         this.material.alpha = 0;
-        this.mesh.material = this.material;
-
-        this.emitter = this.mesh;
+        this.emitter.material = this.material;
 
         const actionManager: BABYLON.ActionManager = new BABYLON.ActionManager(this.scene);
-        this.mesh.actionManager = actionManager;
+        this.emitter.actionManager = actionManager;
 
         this.createNewSystem(this.fogConfig);
 

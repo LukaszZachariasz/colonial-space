@@ -4,7 +4,7 @@ import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui
 import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {selectCurrentTour} from '../../../../game-logic/store/tour/tour.selectors';
 
 @GuiElement()

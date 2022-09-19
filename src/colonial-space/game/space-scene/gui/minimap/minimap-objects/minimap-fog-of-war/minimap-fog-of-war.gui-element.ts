@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
 import {EMPTY, Subscription, delay, filter, of, tap} from 'rxjs';
 import {FogOfWarService} from '../../../../../game-logic/fog-of-war/fog-of-war.service';
 import {FromAboveCamera} from '../../../../../../shared/camera/from-above-camera';
@@ -9,7 +9,7 @@ import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui
 import {Inject} from '@colonial-space/core/injector/inject';
 import {MapGeneratorService} from '../../../../../game-generator/map-generator/map-generator.service';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SquareModel} from '../../../../model/map/square/square.model';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
 

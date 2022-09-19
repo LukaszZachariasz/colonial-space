@@ -3,7 +3,7 @@ import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
 import {ModuleOption} from './module-option';
 import {ModuleSceneOption} from '@colonial-space/core/module/module-scene-option';
 import {SceneRegister} from '@colonial-space/core/module/scene/scene-register';
-import {Token} from '@colonial-space/core/injector/types/token';
+import {Token} from '@colonial-space/core/injector/token';
 import {Type} from '@colonial-space/core/type';
 
 export function Module(options: ModuleOption): (constructor: Type<unknown>) => Type<unknown> {

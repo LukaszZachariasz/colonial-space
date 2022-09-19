@@ -1,7 +1,7 @@
-import {InjectableOptions} from '@colonial-space/core/injector/types/injectable-options';
+import {InjectableOptions} from '@colonial-space/core/injector/injectable-options';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
-import {Token} from '@colonial-space/core/injector/types/token';
+import {Token} from '@colonial-space/core/injector/token';
 
 export function Injectable(injectableOptions?: InjectableOptions): any {
     return function (constructor: any): any {

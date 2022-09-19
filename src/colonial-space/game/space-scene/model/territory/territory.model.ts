@@ -1,26 +1,25 @@
 import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../../shared/animations/fade-in/fade-in.animation';
 import {HighlightSelect} from '../../../../shared/highlight-select/highlight-select';
-import {ImportModelAbstract} from '@colonial-space/core/module/scene/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {ModelFromFile} from '@colonial-space/core/module/scene/model/from-file/model-from-file';
 import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SelectionTerritoryService} from '../../../game-logic/selection/territory/selection-territory.service';
 import {Subscription, tap} from 'rxjs';
 import {TerritorySignModel} from './territory-sign/territory-sign.model';
 import {TerritoryState} from '../../../game-logic/store/territory/territory.state';
 import {TerritoryType} from '../../../game-logic/store/territory/territory-type';
 
-export abstract class TerritoryModel extends ImportModelAbstract implements OnLoad, OnUnload {
+export abstract class TerritoryModel extends ModelFromFile implements OnLoad, OnUnload {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(SelectionTerritoryService) private selectionTerritoryService: SelectionTerritoryService;
     @Inject(SCENE) protected scene: BABYLON.Scene;
     
     public abstract type: TerritoryType;
 
-    public actionMesh: BABYLON.AbstractMesh;
     public territorySignModel: TerritorySignModel;
     public highlightSelect: HighlightSelect;
 
@@ -48,7 +47,7 @@ export abstract class TerritoryModel extends ImportModelAbstract implements OnLo
     }
 
     private createTerritorySignModel(): void {
-        this.territorySignModel = this.modelManager.addModel(TerritorySignModel, this.state);
+        this.territorySignModel = this.modelManager.create(TerritorySignModel, this.state);
         this.territorySignModel.mesh.parent = this.primaryMesh;
         this.territorySignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

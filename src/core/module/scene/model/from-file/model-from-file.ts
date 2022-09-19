@@ -1,7 +1,8 @@
 import * as BABYLON from 'babylonjs';
 
-export abstract class ImportModelAbstract {
+export abstract class ModelFromFile {
     private _primaryMesh: BABYLON.AbstractMesh;
+    private _actionMesh: BABYLON.AbstractMesh;
     private _animationGroups: BABYLON.AnimationGroup[];
     private _geometries: BABYLON.Geometry[];
     private _lights: BABYLON.Light[];
@@ -16,6 +17,14 @@ export abstract class ImportModelAbstract {
 
     public set primaryMesh(value: BABYLON.AbstractMesh) {
         this._primaryMesh = value;
+    }
+
+    public get actionMesh(): BABYLON.AbstractMesh {
+        return this._actionMesh;
+    }
+
+    public set actionMesh(value: BABYLON.AbstractMesh) {
+        this._actionMesh = value;
     }
 
     public get animationGroups(): BABYLON.AnimationGroup[] {

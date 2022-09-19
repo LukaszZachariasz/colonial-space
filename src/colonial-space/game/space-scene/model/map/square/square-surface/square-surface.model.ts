@@ -1,15 +1,15 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
+import {ModelMesh} from '@colonial-space/core/module/scene/model/mesh/model-mesh';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SelectionService} from '../../../../../game-logic/selection/selection.service';
 import {SelectionUnitService} from '../../../../../game-logic/selection/unit/selection-unit.service';
 import {SquareModel} from '../square.model';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
 import {UnitMovementService} from '../../../../../game-logic/unit/unit-movement.service';
 
-export class SquareSurfaceModel extends Model<BABYLON.Mesh> implements OnInit {
+export class SquareSurfaceModel extends ModelMesh<BABYLON.Mesh> implements OnInit {
     @Inject(SelectionService) private selectionService: SelectionService;
     @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
     @Inject(UnitMovementService) private unitMovementService: UnitMovementService;

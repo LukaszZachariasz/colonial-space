@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {CANVAS_ELEMENT} from '@colonial-space/core/injector/tokens/canvas-element/canvas-element.token';
-import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
+import {CANVAS_ELEMENT} from '@colonial-space/core/canvas-element.token';
+import {ENGINE} from '@colonial-space/core/engine.token';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {RenderLoop} from '@colonial-space/core/render-loop/render-loop';

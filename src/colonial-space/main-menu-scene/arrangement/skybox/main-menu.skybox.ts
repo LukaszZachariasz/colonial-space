@@ -8,6 +8,6 @@ export class MainMenuSkybox implements OnInit {
     @Inject(ModelManager) private modelManager: ModelManager;
 
     public gameOnInit(): void {
-        this.modelManager.addModel(SpaceSkyboxModel, SpaceSkyboxConst[3]);
+        this.modelManager.create(SpaceSkyboxModel, SpaceSkyboxConst[3]);
     }
 }

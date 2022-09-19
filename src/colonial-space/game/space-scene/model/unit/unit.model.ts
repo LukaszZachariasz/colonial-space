@@ -2,12 +2,12 @@ import * as BABYLON from 'babylonjs';
 import {FadeInAnimation} from '../../../../shared/animations/fade-in/fade-in.animation';
 import {FadeOutAnimation} from '../../../../shared/animations/fade-out/fade-out.animation';
 import {HighlightSelect} from '../../../../shared/highlight-select/highlight-select';
-import {ImportModelAbstract} from '@colonial-space/core/module/scene/model/model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {ModelFromFile} from '@colonial-space/core/module/scene/model/from-file/model-from-file';
 import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SelectionUnitService} from '../../../game-logic/selection/unit/selection-unit.service';
 import {Subscription, delay, filter, tap} from 'rxjs';
 import {UnitMovement} from './unit-movement/unit-movement';
@@ -15,7 +15,7 @@ import {UnitService} from '../../../game-logic/unit/unit.service';
 import {UnitSignModel} from './unit-sign/unit-sign.model';
 import {UnitState} from '../../../game-logic/store/unit/unit.state';
 
-export abstract class UnitModel extends ImportModelAbstract implements OnLoad, OnDestroy {
+export abstract class UnitModel extends ModelFromFile implements OnLoad, OnDestroy {
     @Inject(ModelManager) private modelManager: ModelManager;
     @Inject(UnitService) private unitService: UnitService;
     @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
@@ -23,7 +23,6 @@ export abstract class UnitModel extends ImportModelAbstract implements OnLoad, O
 
     public unitMovement: UnitMovement;
     public unitSignModel: UnitSignModel;
-    public actionMesh: BABYLON.AbstractMesh;
     public highlightSelect: HighlightSelect;
 
     private removeUnitSubscription: Subscription;
@@ -36,7 +35,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnLoad, O
 
     public gameOnLoad(): void {
         this.createUnitSignModel();
-        this.unitMovement = new UnitMovement(this.scene, this.state.id, this.primaryMesh);
+        this.unitMovement = new UnitMovement(this.modelManager, this.scene, this.state.id, this.primaryMesh);
 
         this.removeUnitSubscription = this.unitService.removeUnitId$.pipe(
             filter((id: string) => this.state.id === id),
@@ -59,7 +58,7 @@ export abstract class UnitModel extends ImportModelAbstract implements OnLoad, O
     }
 
     public createUnitSignModel(): void {
-        this.unitSignModel = this.modelManager.addModel(UnitSignModel, this.state);
+        this.unitSignModel = this.modelManager.create(UnitSignModel, this.state);
         this.unitSignModel.mesh.parent = this.primaryMesh;
         this.unitSignModelClickedSubscription = this.unitSignModel.clicked$.pipe(tap(() => this.select())).subscribe();
     }

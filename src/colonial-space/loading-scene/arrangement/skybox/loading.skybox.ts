@@ -7,6 +7,6 @@ export class LoadingSkybox implements OnInit {
     @Inject(ModelManager) private modelManager: ModelManager;
 
     public gameOnInit(): void {
-        this.modelManager.addModel(SpaceSkyboxModel);
+        this.modelManager.create(SpaceSkyboxModel);
     }
 }

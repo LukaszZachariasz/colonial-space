@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
+import {ENGINE} from '@colonial-space/core/engine.token';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';

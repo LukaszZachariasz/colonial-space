@@ -1,6 +1,6 @@
-import {Injection} from '@colonial-space/core/injector/types/injection';
-import {Instance} from '@colonial-space/core/injector/types/instance';
-import {Token} from '@colonial-space/core/injector/types/token';
+import {Injection} from '@colonial-space/core/injector/injection';
+import {Instance} from '@colonial-space/core/injector/instance';
+import {Token} from '@colonial-space/core/injector/token';
 import {Type} from '@colonial-space/core/type';
 
 export class Injector {

@@ -3,7 +3,7 @@ import {AddTourBlocker} from '../../../tour/tour-blocker/add-tour-blocker';
 import {AddTourEffect} from '../../../tour/tour-effect/add-tour-effect';
 import {BuildingObjectState} from '../../../store/building/building-scope/building-object/building-object.state';
 import {BuildingObjectType} from '../../../store/building/building-scope/building-object/building-object-type';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
 import {DialogService} from '../../../dialog/dialog.service';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';

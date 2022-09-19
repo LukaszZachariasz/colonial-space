@@ -1,3 +1,4 @@
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../../game-logic/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../game-logic/tour/tour-effect/has-tour-effects';
@@ -15,27 +16,28 @@ export class UnitMovement implements OnDestroy {
     @Inject(TourService) private tourService: TourService;
     @Inject(UnitMovementService) private unitMovementService: UnitMovementService;
     @Inject(SelectionUnitService) private selectionUnitService: SelectionUnitService;
-    
+
     public unitMovementPathModel: UnitMovementPathModel;
 
     private position: BABYLON.Vector2;
     private unitRotate = (): void => this.lerpUnitRotate();
     private unitRotationSubscriber: Subscriber<any>;
 
-    constructor(private scene: BABYLON.Scene,
+    constructor(private modelManager: ModelManager,
+                private scene: BABYLON.Scene,
                 private id: string,
                 private transformMesh: BABYLON.AbstractMesh) {
         this.selectionUnitService.selectedUnitId$.pipe(
-            tap(() => this.unitMovementPathModel?.lines?.dispose()),
+            tap(() => this.unitMovementPathModel?.mesh?.dispose()),
             filter((id: string) => this.id === id),
-            tap(() => this.unitMovementPathModel = new UnitMovementPathModel(this.scene, this.id)),
+            tap(() => this.unitMovementPathModel = this.modelManager.create(UnitMovementPathModel, this.id)),
         ).subscribe();
 
         merge(
             this.unitMovementService.addedPlanMovement$.pipe(filter((id: string) => this.id === id)),
             this.tourService.completeTour$
         ).pipe(
-            filter(() => !!this.unitMovementPathModel && !this.unitMovementPathModel.lines.isDisposed()),
+            filter(() => !!this.unitMovementPathModel && !this.unitMovementPathModel.mesh.isDisposed()),
             tap(() => this.unitMovementPathModel.recalculate())
         ).subscribe();
 
@@ -81,7 +83,7 @@ export class UnitMovement implements OnDestroy {
     })
     public move(): Observable<any> {
         return new Observable<any>((subscriber: Subscriber<any>) => {
-            if (this.unitMovementPathModel?.lines?.isDisposed() === false) {
+            if (this.unitMovementPathModel?.mesh?.isDisposed() === false) {
                 this.unitMovementPathModel.recalculate();
             }
             if (this.position === undefined) {

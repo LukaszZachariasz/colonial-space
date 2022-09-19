@@ -7,7 +7,7 @@ import {MainMenuLoadBtnControl} from './menu-buttons/main-menu-load-btn.control'
 import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.control';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {Subscription, tap} from 'rxjs';
 

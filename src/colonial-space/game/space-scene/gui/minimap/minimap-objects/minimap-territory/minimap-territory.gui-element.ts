@@ -2,7 +2,7 @@ import * as GUI from 'babylonjs-gui';
 import {
     AppendGuiControl
 } from '../../../../../../../core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
 import {FromAboveCamera} from '../../../../../../shared/camera/from-above-camera';
 import {GuiControl} from '../../../../../../../core/module/scene/gui/gui-elements/gui-control';
 import {GuiElement} from '../../../../../../../core/module/scene/gui/gui-elements/gui-element';

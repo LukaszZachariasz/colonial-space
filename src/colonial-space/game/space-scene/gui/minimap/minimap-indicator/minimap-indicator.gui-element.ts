@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
 import {FromAboveCamera} from '../../../../../shared/camera/from-above-camera';
 import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
 import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 
 @GuiElement()
 export class MinimapIndicatorGuiElement implements GuiControl<GUI.Rectangle>, OnLoad {

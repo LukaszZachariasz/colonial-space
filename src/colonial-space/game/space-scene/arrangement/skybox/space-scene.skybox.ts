@@ -5,9 +5,9 @@ import {SpaceSkyboxModel} from '../../../../shared/skybox/space-skybox.model';
 import {selectMapSkybox} from '../../../game-logic/store/map/tour.selectors';
 
 export class SpaceSceneSkybox implements OnInit {
-    @Inject(ModelManager) private modelManagerService: ModelManager;
+    @Inject(ModelManager) private modelManager: ModelManager;
 
     public gameOnInit(): void {
-        this.modelManagerService.addModel(SpaceSkyboxModel, selectMapSkybox());
+        this.modelManager.create(SpaceSkyboxModel, selectMapSkybox());
     }
 }

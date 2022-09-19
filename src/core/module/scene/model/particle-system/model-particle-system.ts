@@ -1,7 +1,6 @@
 import * as BABYLON from 'babylonjs';
-import {Model} from './model';
 
-export abstract class ParticleSystemModel extends Model<BABYLON.Mesh> {
+export abstract class ModelParticleSystem {
     public emitter: BABYLON.Mesh;
     public particleSystem: BABYLON.ParticleSystem;
 }

@@ -1,5 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import {GameObjectFromFile} from '@colonial-space/core/module/scene/model/game-object';
+import {
+    ModelResource
+} from '@colonial-space/core/module/scene/model/from-file/model-resource.decorator';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {SquareState} from '../../../../../game-logic/store/map/square/square.state';
 import {TerritoryModel} from '../../territory.model';
@@ -7,7 +9,7 @@ import {TerritoryState} from '../../../../../game-logic/store/territory/territor
 import {TerritoryType} from '../../../../../game-logic/store/territory/territory-type';
 import {selectSquareByTerritoryId} from '../../../../../game-logic/store/map/square/square.selectors';
 
-@GameObjectFromFile({
+@ModelResource({
     name: 'StarSolarModel',
     meshUrl: 'resources/territory/star/star-solar/',
     meshName: 'star_01.glb'

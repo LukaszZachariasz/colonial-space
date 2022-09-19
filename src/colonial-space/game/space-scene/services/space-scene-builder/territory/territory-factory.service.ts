@@ -20,21 +20,21 @@ export class TerritoryFactoryService {
     public create(territoryState: TerritoryState): TerritoryModel {
         switch (territoryState.type) {
             case TerritoryType.PLANET_GREEN:
-                return this.modelManager.addImportModel(PlanetGreenModel, territoryState);
+                return this.modelManager.create(PlanetGreenModel, territoryState);
             case TerritoryType.PLANET_SAND:
-                return this.modelManager.addImportModel(PlanetSandModel, territoryState);
+                return this.modelManager.create(PlanetSandModel, territoryState);
             case TerritoryType.PLANET_RINGED:
-                return this.modelManager.addImportModel(PlanetRingedModel, territoryState);
+                return this.modelManager.create(PlanetRingedModel, territoryState);
             case TerritoryType.PLANET_METAL:
-                return this.modelManager.addImportModel(PlanetMetalModel, territoryState);
+                return this.modelManager.create(PlanetMetalModel, territoryState);
             case TerritoryType.STAR_SOLAR:
-                return this.modelManager.addImportModel(StarSolarModel, territoryState);
+                return this.modelManager.create(StarSolarModel, territoryState);
             case TerritoryType.BLACK_HOLE:
-                return this.modelManager.addImportModel(BlackHoleModel, territoryState);
+                return this.modelManager.create(BlackHoleModel, territoryState);
             case TerritoryType.SATELLITE_MOON:
-                return this.modelManager.addImportModel(SatelliteMoonModel, territoryState);
+                return this.modelManager.create(SatelliteMoonModel, territoryState);
             case TerritoryType.ASTEROID_VOLCANIC:
-                return this.modelManager.addImportModel(AsteroidVolcanicModel, territoryState);
+                return this.modelManager.create(AsteroidVolcanicModel, territoryState);
         }
     }
 }

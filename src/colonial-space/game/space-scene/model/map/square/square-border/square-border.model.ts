@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
+import {ModelMesh} from '@colonial-space/core/module/scene/model/mesh/model-mesh';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SquareModel} from '../square.model';
 import {selectPlayerColor} from '../../../../../game-logic/store/player/player.selectors';
 
-export class SquareBorderModel extends Model<BABYLON.LinesMesh> implements OnInit {
+export class SquareBorderModel extends ModelMesh<BABYLON.LinesMesh> implements OnInit {
     @Inject(SCENE) private scene: BABYLON.Scene;
 
     public gameOnInit(): void {

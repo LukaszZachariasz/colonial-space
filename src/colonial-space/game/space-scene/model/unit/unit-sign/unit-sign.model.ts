@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {Model} from '@colonial-space/core/module/scene/model/model-elements/model';
+import {ModelMesh} from '@colonial-space/core/module/scene/model/mesh/model-mesh';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {Subject, tap} from 'rxjs';
 import {UnitSignIconContainer} from './unit-sign-icon.container';
 import {UnitState} from '../../../../game-logic/store/unit/unit.state';
 
-export class UnitSignModel extends Model<BABYLON.Mesh> implements OnInit {
+export class UnitSignModel extends ModelMesh<BABYLON.Mesh> implements OnInit {
     @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;
     @Inject(SCENE) private scene: BABYLON.Scene;
 

@@ -15,11 +15,11 @@ export class UnitFactoryService {
     public create(unitState: UnitState): UnitModel {
         switch (unitState.type) {
             case UnitType.SCOUT:
-                return this.modelManager.addImportModel(ScoutShipModel, unitState);
+                return this.modelManager.create(ScoutShipModel, unitState);
             case UnitType.ANALYSIS:
-                return this.modelManager.addImportModel(AnalysisShipModel, unitState);
+                return this.modelManager.create(AnalysisShipModel, unitState);
             case UnitType.COLONIAL:
-                return this.modelManager.addImportModel(ColonialShipModel, unitState);
+                return this.modelManager.create(ColonialShipModel, unitState);
         }
     }
 }

@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
 import {FromAboveCamera} from '../../../../shared/camera/from-above-camera';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
@@ -22,7 +22,7 @@ export class SpaceSceneBuilderService {
     @Inject(CAMERA) private camera: FromAboveCamera;
     
     public build(): void {
-        this.modelManagerService.addModel(MapModel);
+        this.modelManagerService.create(MapModel);
 
         selectTerritories()
             .filter((el: TerritoryState) => !selectSquareByTerritoryId(el.id).fogOfWar)

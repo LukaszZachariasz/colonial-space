@@ -1,18 +1,18 @@
 import * as BABYLON from 'babylonjs';
-import {CAMERA} from '@colonial-space/core/injector/tokens/camera/camera.token';
-import {ENGINE} from '@colonial-space/core/injector/tokens/engine/engine.token';
+import {CAMERA} from '@colonial-space/core/module/scene/camera.token';
+import {ENGINE} from '@colonial-space/core/engine.token';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Injector} from '@colonial-space/core/injector/injector';
 import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {ModuleSceneOption} from '@colonial-space/core/module/module-scene-option';
 import {RegisteredScene} from '@colonial-space/core/module/scene/registered-scene';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SceneLoader} from '@colonial-space/core/module/scene/scene-loader';
 import {SceneManager} from '@colonial-space/core/module/scene/scene-manager';
 import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import {Subject} from 'rxjs';
-import {Token} from '@colonial-space/core/injector/types/token';
+import {Token} from '@colonial-space/core/injector/token';
 import {Type} from '@colonial-space/core/type';
 import {ipcRenderer} from 'electron';
 

@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {ModelParticleSystem} from '@colonial-space/core/module/scene/model/particle-system/model-particle-system';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {ParticleSystemModel} from '@colonial-space/core/module/scene/model/model-elements/particle-system-model';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 
-export class GalaxyDustModel extends ParticleSystemModel implements OnInit, OnLoad, OnUnload {
+export class GalaxyDustModel extends ModelParticleSystem implements OnInit, OnLoad, OnUnload {
     @Inject(SCENE) private scene: BABYLON.Scene;
 
     public gameOnInit(): void {

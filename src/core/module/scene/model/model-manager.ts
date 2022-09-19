@@ -1,64 +1,54 @@
-import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import * as BABYLON from 'babylonjs';
-import {IMPORT_DEFINITION_METADATA_KEY} from '@colonial-space/core/module/scene/model/game-object';
-import {ImportModelAbstract} from './model-elements/import-model';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
-import {Model} from './model-elements/model';
-import {ModelElement} from './model-element';
-import {ParticleSystemModel} from '@colonial-space/core/module/scene/model/model-elements/particle-system-model';
-import {SCENE} from '@colonial-space/core/injector/tokens/scene/scene.token';
+import {ModelFromFile} from '@colonial-space/core/module/scene/model/from-file/model-from-file';
+import {ModelImporterFromFile} from '@colonial-space/core/module/scene/model/from-file/model-importer-from-file';
+import {ModelImporterMesh} from '@colonial-space/core/module/scene/model/mesh/model-importer-mesh';
+import {ModelImporterNode} from '@colonial-space/core/module/scene/model/node/model-importer-node';
+import {ModelImporterParticleSystem} from '@colonial-space/core/module/scene/model/particle-system/model-importer-particle-system';
+import {ModelMesh} from '@colonial-space/core/module/scene/model/mesh/model-mesh';
+import {ModelNode} from '@colonial-space/core/module/scene/model/node/model-node';
+import {ModelParticleSystem} from '@colonial-space/core/module/scene/model/particle-system/model-particle-system';
+import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {Type} from '@colonial-space/core/type';
 
 @Injectable()
 export class ModelManager {
     @Inject(SCENE) private scene: BABYLON.Scene;
 
-    public addModel<T extends Model<ModelElement>>(model: Type<T>, ...args: any): T {
-        const instance = new model(...args);
-        (instance as any)['_sceneUid'] = this.scene.uid;
-        Lifecycle.onInit(instance);
-        instance.mesh.onDisposeObservable.add(() => Lifecycle.onUnload(instance));
-        instance.mesh.onDisposeObservable.add(() => Lifecycle.onDestroy(instance));
-        Lifecycle.onLoad(instance);
-        return instance;
-    }
-
-    public addParticleSystem<T extends ParticleSystemModel>(model: Type<T>, ...args: any): T {
-        const instance = new model(...args);
-        (instance as any)['_sceneUid'] = this.scene.uid;
-        Lifecycle.onInit(instance);
-        instance.particleSystem.onDisposeObservable.add(() => Lifecycle.onUnload(instance));
-        instance.particleSystem.onDisposeObservable.add(() => Lifecycle.onDestroy(instance));
-        Lifecycle.onLoad(instance);
-        return instance;
-    }
-
-    public addImportModel<T extends ImportModelAbstract>(model: Type<T>, ...args: any): T {
+    public create<T extends ModelMesh | ModelNode | ModelParticleSystem | ModelFromFile>(model: Type<T>, ...args: any[]): T {
         const instance = new model(...args);
         (instance as any)['_sceneUid'] = this.scene.uid;
         Lifecycle.onInit(instance);
 
-        const definition = Reflect.getMetadata(IMPORT_DEFINITION_METADATA_KEY, model);
-
-        BABYLON.SceneLoader.ImportMeshAsync('', definition.meshUrl, definition.meshName, this.scene)
-            .then((result: BABYLON.ISceneLoaderAsyncResult) => Object.keys(result).forEach((key: keyof BABYLON.ISceneLoaderAsyncResult) => (instance as any)[key] = result[key]))
-            .then(() => this.setRootMeshes(instance))
-            .then(() => instance.primaryMesh.onDisposeObservable.add(() => Lifecycle.onUnload(instance)))
-            .then(() => instance.primaryMesh.onDisposeObservable.add(() => Lifecycle.onDestroy(instance)))
-            .then(() => Lifecycle.onLoad(instance));
-        
-        return instance;
+        if (instance instanceof ModelMesh) {
+            return ModelImporterMesh.import(instance);
+        }
+        if (instance instanceof ModelNode) {
+            return ModelImporterNode.import(instance);
+        }
+        if (instance instanceof ModelParticleSystem) {
+            return ModelImporterParticleSystem.import(instance);
+        }
+        if (instance instanceof ModelFromFile) {
+            return ModelImporterFromFile.import(instance, this.scene);
+        }
     }
 
-    public removeModel(model: Model<ModelElement>): void {
-        model.mesh.dispose();
-    }
-    
-    private setRootMeshes(that: any): any {
-        that.primaryMesh = that.meshes[0];
-        that.actionMesh = that.primaryMesh.getChildMeshes()[0];
-        return that;
+    public removeModel<T extends ModelMesh | ModelNode | ModelParticleSystem | ModelFromFile>(model: T): void {
+        if (model instanceof ModelMesh) {
+            return model.mesh.dispose();
+        }
+        if (model instanceof ModelNode) {
+            return model.node.dispose();
+        }
+        if (model instanceof ModelParticleSystem) {
+            model.emitter.dispose();
+            return model.particleSystem.dispose();
+        }
+        if (model instanceof ModelFromFile) {
+            model.primaryMesh.dispose();
+        }
     }
 }
