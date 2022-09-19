@@ -1,20 +1,20 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
-import {ControlEvent} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event';
-import {ControlEventListener} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event-listener';
-import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
-import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
+import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-component/append-gui-control/append-gui-control';
+import {ControlEvent} from '@colonial-space/core/module/scene/gui/gui-component/events/control-event';
+import {ControlEventListener} from '@colonial-space/core/module/scene/gui/gui-component/events/control-event-listener';
+import {GuiComponent} from '@colonial-space/core/module/scene/gui/gui-component/gui-component';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-component/gui-control';
+import {IconGuiComponent} from '../../../gui/shared/icon/icon.gui-component';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 import {UnitState} from '../../../../game-logic/store/unit/unit.state';
 
-@GuiElement()
+@GuiComponent()
 export class UnitSignIconContainer implements GuiControl<GUI.Container>, OnInit {
     public control: GUI.Container = new GUI.Container('unitSignIcon');
     public clicked$ = new Subject<void>();
     
-    @AppendGuiControl() public iconControl: IconGuiElement = new IconGuiElement(this.unitState.icon);
+    @AppendGuiControl() public iconControl: IconGuiComponent = new IconGuiComponent(this.unitState.icon);
 
     constructor(private unitState: UnitState) {
     }

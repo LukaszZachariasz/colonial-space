@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
-import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-component/gui-control';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
 import {RegisteredScene} from '@colonial-space/core/module/scene/registered-scene';
@@ -28,12 +28,12 @@ export class SceneGuiManager {
         Lifecycle.onDestroy(scene?.gui);
     }
 
-    public appendToRoot<T extends GuiControl<GUI.Control>>(control: T): T {
+    public appendToRoot<T extends GuiControl>(control: T): T {
         this.advancedDynamicTexture.addControl(control.control);
         return control;
     }
 
-    public createForMesh<T extends GuiControl<GUI.Control>>(name: string, mesh: BABYLON.Mesh, control: T, width?: number, height?: number): GUI.AdvancedDynamicTexture {
+    public createForMesh<T extends GuiControl>(name: string, mesh: BABYLON.Mesh, control: T, width?: number, height?: number): GUI.AdvancedDynamicTexture {
         const advancedDynamicTexture = GUI.AdvancedDynamicTexture.CreateForMesh(mesh, width, height);
         advancedDynamicTexture.name = name;
         advancedDynamicTexture.addControl(control.control);

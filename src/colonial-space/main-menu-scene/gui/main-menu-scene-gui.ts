@@ -1,35 +1,32 @@
-import * as BABYLON from 'babylonjs';
 import {GameService} from '../../game/game.service';
 import {Inject} from '@colonial-space/core/injector/inject';
-import {MainMenuBeginBtnControl} from './menu-buttons/main-menu-begin-btn.control';
-import {MainMenuLeaveBtnControl} from './menu-buttons/main-menu-leave-btn.control';
-import {MainMenuLoadBtnControl} from './menu-buttons/main-menu-load-btn.control';
-import {MainMenuOptionsBtnControl} from './menu-buttons/main-menu-options-btn.control';
+import {MainMenuBeginBtnGuiComponent} from './menu-buttons/main-menu-begin-btn.gui-component';
+import {MainMenuLeaveBtnGuiComponent} from './menu-buttons/main-menu-leave-btn.gui-component';
+import {MainMenuLoadBtnGuiComponent} from './menu-buttons/main-menu-load-btn.gui-component';
+import {MainMenuOptionsBtnGuiComponent} from './menu-buttons/main-menu-options-btn.gui-component';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {OnUnload} from '@colonial-space/core/lifecycle/on-unload/on-unload';
-import {SCENE} from '@colonial-space/core/module/scene/scene.token';
 import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-manager';
 import {Subscription, tap} from 'rxjs';
 
 export class MainMenuSceneGui implements OnLoad, OnUnload {
-    private mainMenuBeginBtnControl = new MainMenuBeginBtnControl();
-    private mainMenuLoadBtnControl = new MainMenuLoadBtnControl();
-    private mainMenuOptionsBtnControl = new MainMenuOptionsBtnControl();
-    private mainMenuLeaveBtnControl = new MainMenuLeaveBtnControl();
+    @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
+    @Inject(GameService) private gameService: GameService;
+
+    private mainMenuBeginBtnGuiComponent = new MainMenuBeginBtnGuiComponent();
+    private mainMenuLoadBtnGuiComponent = new MainMenuLoadBtnGuiComponent();
+    private mainMenuOptionsBtnGuiComponent = new MainMenuOptionsBtnGuiComponent();
+    private mainMenuLeaveBtnGuiComponent = new MainMenuLeaveBtnGuiComponent();
 
     private mainMenuBeginBtnClicked: Subscription;
 
-    @Inject(SceneGuiManager) private guiManager: SceneGuiManager;
-    @Inject(GameService) private gameService: GameService;
-    @Inject(SCENE) private scene: BABYLON.Scene;
-
     public gameOnLoad(): void {
-        this.guiManager.appendToRoot(this.mainMenuBeginBtnControl);
-        this.guiManager.appendToRoot(this.mainMenuLoadBtnControl);
-        this.guiManager.appendToRoot(this.mainMenuOptionsBtnControl);
-        this.guiManager.appendToRoot(this.mainMenuLeaveBtnControl);
+        this.guiManager.appendToRoot(this.mainMenuBeginBtnGuiComponent);
+        this.guiManager.appendToRoot(this.mainMenuLoadBtnGuiComponent);
+        this.guiManager.appendToRoot(this.mainMenuOptionsBtnGuiComponent);
+        this.guiManager.appendToRoot(this.mainMenuLeaveBtnGuiComponent);
 
-        this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnControl.onClick$.pipe(
+        this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnGuiComponent.onClick$.pipe(
             tap(() => this.gameService.newGame())
         ).subscribe();
     }

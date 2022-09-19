@@ -15,8 +15,8 @@ import {TerritoryState} from '../../../store/territory/territory.state';
 import {TourBlockerState} from '../../../tour/tour-blocker/tour-blocker';
 import {TourEffectPriorityEnum} from '../../../tour/tour-effect/tour-effect-priority.enum';
 import {
-    UnitOnSquareWarningGuiElement
-} from '../../../../space-scene/gui/dialogs/complete-building/unit-on-square-warning.gui-element';
+    UnitOnSquareWarningGuiComponent
+} from '../../../../space-scene/gui/dialogs/complete-building/unit-on-square-warning.gui-component';
 import {UnitService} from '../../../unit/unit.service';
 import {UnitState} from '../../../store/unit/unit.state';
 import {addUnit} from '../../../store/unit/unit.slice';
@@ -108,7 +108,7 @@ export abstract class UnitHandlerService {
     private showUnitOnSquareWarning(position: BABYLON.Vector3, planet: TerritoryState<PlanetState>): void {
         const animation = this.camera.lookAtAnimation(position);
         animation.onAnimationEndObservable.add(() => {
-            this.dialogService.open$.next(new UnitOnSquareWarningGuiElement());
+            this.dialogService.open$.next(new UnitOnSquareWarningGuiComponent());
             this.selectionTerritoryService.select(planet.id);
         });
     }

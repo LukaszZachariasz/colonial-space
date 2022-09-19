@@ -1,22 +1,22 @@
 import * as GUI from 'babylonjs-gui';
-import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/append-gui-control/append-gui-control';
-import {ControlEvent} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event';
-import {ControlEventListener} from '@colonial-space/core/module/scene/gui/gui-elements/events/control-event-listener';
-import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
-import {GuiElement} from '@colonial-space/core/module/scene/gui/gui-elements/gui-element';
-import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
+import {AppendGuiControl} from '@colonial-space/core/module/scene/gui/gui-component/append-gui-control/append-gui-control';
+import {ControlEvent} from '@colonial-space/core/module/scene/gui/gui-component/events/control-event';
+import {ControlEventListener} from '@colonial-space/core/module/scene/gui/gui-component/events/control-event-listener';
+import {GuiComponent} from '@colonial-space/core/module/scene/gui/gui-component/gui-component';
+import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-component/gui-control';
+import {IconGuiComponent} from '../../../gui/shared/icon/icon.gui-component';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
-import {TextGuiElement} from '../../../gui/shared/text/text.gui-element';
+import {TextGuiComponent} from '../../../gui/shared/text/text.gui-component';
 
-@GuiElement()
+@GuiComponent()
 export class TerritorySignTitleContainer implements GuiControl<GUI.Container>, OnInit {
     public control: GUI.Container = new GUI.Container('territorySignTitle');
     public clicked$ = new Subject<void>();
 
-    @AppendGuiControl() public text: TextGuiElement = new TextGuiElement(this.territoryState.name);
-    @AppendGuiControl() public icon: IconGuiElement = new IconGuiElement(this.territoryState.icon);
+    @AppendGuiControl() public text: TextGuiComponent = new TextGuiComponent(this.territoryState.name);
+    @AppendGuiControl() public icon: IconGuiComponent = new IconGuiComponent(this.territoryState.icon);
 
     private readonly WIDTH = 10;
     private readonly HEIGHT = 2;

@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {IconGuiElement} from '../../../gui/shared/icon/icon.gui-element';
+import {IconGuiComponent} from '../../../gui/shared/icon/icon.gui-component';
 import {Inject} from '@colonial-space/core/injector/inject';
 import {ModelMesh} from '@colonial-space/core/module/scene/model/mesh/model-mesh';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
@@ -8,7 +8,7 @@ import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-m
 import {Subject, tap} from 'rxjs';
 import {TerritorySignTitleContainer} from './territory-sign-title.container';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
-import {TextGuiElement} from '../../../gui/shared/text/text.gui-element';
+import {TextGuiComponent} from '../../../gui/shared/text/text.gui-component';
 
 export class TerritorySignModel extends ModelMesh<BABYLON.Mesh> implements OnInit {
     @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;
@@ -16,8 +16,8 @@ export class TerritorySignModel extends ModelMesh<BABYLON.Mesh> implements OnIni
     
     public territorySignTitleContainer: TerritorySignTitleContainer;
 
-    public icon: IconGuiElement;
-    public text: TextGuiElement;
+    public icon: IconGuiComponent;
+    public text: TextGuiComponent;
 
     public clicked$ = new Subject<void>();
 
