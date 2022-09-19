@@ -8,7 +8,7 @@ import {IconGuiComponent} from '../../../gui/shared/icon/icon.gui-component';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {Subject} from 'rxjs';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
-import {TextGuiComponent} from '../../../gui/shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../shared/gui/text/text.gui-component';
 
 @GuiComponent()
 export class TerritorySignTitleContainer implements GuiControl<GUI.Container>, OnInit {

@@ -12,7 +12,7 @@ import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {Subscription, tap} from 'rxjs';
-import {TextGuiComponent} from '../../../../../../shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../../../../../shared/gui/text/text.gui-component';
 import {TourService} from '../../../../../../../../game-logic/tour/tour.service';
 import {selectBuildingObjectById} from '../../../../../../../../game-logic/store/building/building.selector';
 

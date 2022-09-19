@@ -8,7 +8,7 @@ import {SceneGuiManager} from '@colonial-space/core/module/scene/gui/scene-gui-m
 import {Subject, tap} from 'rxjs';
 import {TerritorySignTitleContainer} from './territory-sign-title.container';
 import {TerritoryState} from '../../../../game-logic/store/territory/territory.state';
-import {TextGuiComponent} from '../../../gui/shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../shared/gui/text/text.gui-component';
 
 export class TerritorySignModel extends ModelMesh<BABYLON.Mesh> implements OnInit {
     @Inject(SceneGuiManager) private sceneGuiManager: SceneGuiManager;

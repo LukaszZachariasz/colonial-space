@@ -3,12 +3,10 @@ import {GameModule} from './game/game.module';
 import {LoadingSceneModule} from './loading-scene/loading-scene.module';
 import {MainMenuSceneModule} from './main-menu-scene/main-menu-scene.module';
 import {Module} from '@colonial-space/core/module/module.decorator';
-import {SharedModule} from './shared/shared.module';
 
 @Module({
     imports: [
         DebugModule,
-        SharedModule,
         LoadingSceneModule,
         MainMenuSceneModule,
         GameModule

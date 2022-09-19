@@ -9,7 +9,7 @@ import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {OnLoad} from '@colonial-space/core/lifecycle/on-load/on-load';
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
 import {TerritoryState} from '../../../../../../game-logic/store/territory/territory.state';
-import {TextGuiComponent} from '../../../../shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../../../shared/gui/text/text.gui-component';
 import {TourService} from '../../../../../../game-logic/tour/tour.service';
 import {
     selectBuildingById

@@ -12,7 +12,7 @@ import {PlanetProductionService} from '../../../../../../game-logic/territory/pl
 import {PlanetState} from '../../../../../../game-logic/store/territory/planet/planet.state';
 import {Subscription, tap} from 'rxjs';
 import {TerritoryState} from '../../../../../../game-logic/store/territory/territory.state';
-import {TextGuiComponent} from '../../../../shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../../../shared/gui/text/text.gui-component';
 import {TourService} from '../../../../../../game-logic/tour/tour.service';
 import {selectTerritoryById} from '../../../../../../game-logic/store/territory/territory.selectors';
 

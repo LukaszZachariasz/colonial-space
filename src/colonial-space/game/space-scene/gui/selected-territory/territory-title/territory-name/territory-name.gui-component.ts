@@ -4,7 +4,7 @@ import {GuiComponent} from '@colonial-space/core/module/scene/gui/gui-component/
 import {GuiControl} from '../../../../../../../core/module/scene/gui/gui-component/gui-control';
 import {OnInit} from '@colonial-space/core/lifecycle/on-init/on-init';
 import {TerritoryState} from '../../../../../game-logic/store/territory/territory.state';
-import {TextGuiComponent} from '../../../shared/text/text.gui-component';
+import {TextGuiComponent} from '../../../../../../shared/gui/text/text.gui-component';
 
 @GuiComponent()
 export class TerritoryNameGuiComponent implements GuiControl<GUI.Container>, OnInit {
