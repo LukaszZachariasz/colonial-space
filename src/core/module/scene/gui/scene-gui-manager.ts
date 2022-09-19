@@ -1,10 +1,10 @@
-import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import * as BABYLON from 'babylonjs';
 import * as GUI from 'babylonjs-gui';
 import {GuiControl} from '@colonial-space/core/module/scene/gui/gui-elements/gui-control';
 import {Injectable} from '@colonial-space/core/injector/injectable';
 import {Lifecycle} from '@colonial-space/core/lifecycle/lifecycle';
 import {RegisteredScene} from '@colonial-space/core/module/scene/registered-scene';
+import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 
 @Injectable({
     providedIn: 'root'

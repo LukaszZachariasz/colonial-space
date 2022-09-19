@@ -1,8 +1,8 @@
-import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import * as BABYLON from 'babylonjs';
 import {AddTourEffect} from '../../../../game-logic/tour/tour-effect/add-tour-effect';
 import {HasTourEffects} from '../../../../game-logic/tour/tour-effect/has-tour-effects';
 import {Inject} from '@colonial-space/core/injector/inject';
+import {ModelManager} from '@colonial-space/core/module/scene/model/model-manager';
 import {Observable, Subscriber, filter, merge, switchMap, take, tap} from 'rxjs';
 import {OnDestroy} from '@colonial-space/core/lifecycle/on-destroy/on-destroy';
 import {SelectionUnitService} from '../../../../game-logic/selection/unit/selection-unit.service';
