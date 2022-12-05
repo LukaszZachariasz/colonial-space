@@ -41,6 +41,7 @@ export class Engine {
     }
 
     public newGame(): void {
+
         this.game = new Game();
         this.game.generate();
         this.game.start();
