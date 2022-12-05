@@ -3,6 +3,7 @@ import {AfterCreated} from '../../../../engine/lifecycle/after-created/after-cre
 import {BuildingGuiElement} from './building/building.gui-element';
 import {CurrentTourContainer} from './current-tour/current-tour.container';
 import {DialogOverlayGuiElement} from './dialog-overlay/dialog-overlay.gui-element';
+import {GameStatsGuiElement} from './game-stats/game-stats.gui-element';
 import {GuiControl} from '../../../../engine/gui-manager/gui-elements/gui-control';
 import {GuiScene} from '../../../../engine/gui-manager/gui-scene/gui-scene';
 import {MinimapGuiElement} from './minimap/minimap.gui-element';
@@ -32,6 +33,7 @@ export class SpaceGui implements AfterCreated, OnReady, OnDestroy {
         guiManager().appendToRoot(new ToolbarGuiElement());
         guiManager().appendToRoot(new CurrentTourContainer());
         guiManager().appendToRoot(new MinimapGuiElement());
+        guiManager().appendToRoot(new GameStatsGuiElement());
     }
 
     public gameOnReady(): void {
