@@ -1,5 +1,6 @@
 import 'babylonjs-loaders';
-import {Engine} from 'engine';
-import {gamePlatform} from './core/game-platform';
+import 'reflect-metadata';
+import {ColonialSpaceModule} from './colonial-space/colonial-space.module';
+import {Platform} from '@colonial-space/core/platform';
 
-gamePlatform().startEngine(new Engine(), document.getElementById('render-canvas') as HTMLCanvasElement);
+new Platform().bootstrap(ColonialSpaceModule, 'render-canvas');

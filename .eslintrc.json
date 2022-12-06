@@ -11,7 +11,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "ignorePatterns": ["webpack.config.js"],
+  "ignorePatterns": ["webpack.config.js", "src/game/scene/game/**"],
   "rules": {
     "no-case-declarations": 0,
     "@typescript-eslint/ban-types": 0,

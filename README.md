@@ -1,6 +1,6 @@
 # Colonial Space
 
-3d economic strategy game based in cosmos. Game is supported by webgl rendering from BABYLONJS library.
+3d economic strategy game based in cosmos. ColonialSpace is supported by webgl rendering from BabylonJs library.
 
 ## Development
 
@@ -10,20 +10,23 @@
 
 ## Project structure
 
+Project is divided to list of packages. 
+
 | Name      | Description                                                                                                                                                               |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| core      | This module provides gamePlatform instance. Using it allows to create game instance. <br/>In core module we should place other unrelated directly with game engine stuff. |
-| engine    | Stuff related with engine behaviour, scene management, gui management, save or load game, start scenario and so on is placed in src/engine.                               |
-| game      | Here should be places whole game scenes, gui, models and login                                                                                                            |
-| loading   | Loading scene                                                                                                                                                             |
-| main-menu | Main menu scene                                                                                                                                                           |
+| **src/colonial-space**      | The main package which contains whole page files
+| **src/core**      | Babylonjs framework.|
+| **src/debug**   |    The debug module. Support functions for development                                                                                                                                                          |
+| **src/resources** | List of resources for game.                                                                                                                                                           |
+
+All blender models are places in **blender_src**
 
 ## Thanks to
 
 Insane skybox generator
 https://tools.wwwtyro.net/space-3d/index.html
 
-Game icons 
+ColonialSpace icons 
 https://game-icons.net/
 
 Planet name generator

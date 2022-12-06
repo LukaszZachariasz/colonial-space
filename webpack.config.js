@@ -44,15 +44,15 @@ module.exports = (env) => {
             new CopyWebpackPlugin({
                 patterns: [
                     {
+                        from: './src/splash-art.html',
+                        to: './splash-art.html'
+                    },
+                    {
                         from: './src/index.css',
                         to: './index.css'
                     },
                     {
-                        from: './assets',
-                        to: './assets'
-                    },
-                    {
-                        from: './resources',
+                        from: './src/resources',
                         to: './resources'
                     }
                 ]

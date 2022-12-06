@@ -12,9 +12,13 @@
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "paths": {
-      "engine": [
-        "src/engine/engine"
+      "@colonial-space/core/*": [
+        "src/core/*"
+      ],
+      "@colonial-space/debug/*": [
+        "src/debug/*"
       ],
       "*": [
         "node_modules/*"
