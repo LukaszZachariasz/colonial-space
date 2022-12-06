@@ -1,5 +1,5 @@
 export declare interface Type<T> extends Function {
-    name?: string;
+    name: string;
 
-    new (...args: any[]): T;
+    new (...args: unknown[]): T;
 }
