@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="135.83716mm"
+   height="18.95388mm"
+   viewBox="0 0 135.83716 18.95388"
+   version="1.1"
+   id="svg135768"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="mm-leave-btn-idle.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview135770"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0469406"
+     inkscape:cx="80.71136"
+     inkscape:cy="50.146111"
+     inkscape:window-width="2560"
+     inkscape:window-height="1373"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs135765" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-88.82006,-31.38336)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:13.4736px;line-height:2.55;font-family:sans-serif;letter-spacing:1.34735px;display:inline;fill:#009cff;fill-opacity:1;stroke:none;stroke-width:0.336843"
+       x="114.55285"
+       y="41.298969"
+       id="text1233-9-4"
+       transform="scale(0.88649024,1.128044)"><tspan
+         sodipodi:role="line"
+         id="tspan1231-3-8"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';fill:#009cff;fill-opacity:1;stroke-width:0.336843"
+         x="114.55285"
+         y="41.298969">LEAVE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:13.4736px;line-height:2.55;font-family:sans-serif;letter-spacing:1.34735px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.336843"
+       x="116.09087"
+       y="41.086689"
+       id="text1233-3-0-7"
+       transform="scale(0.88649024,1.128044)"><tspan
+         sodipodi:role="line"
+         id="tspan1231-4-1-4"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';fill:#ffffff;stroke-width:0.336843"
+         x="116.09087"
+         y="41.086689">LEAVE</tspan></text>
+  </g>
+</svg>
