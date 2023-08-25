@@ -14,7 +14,6 @@ import {SceneObject} from '@colonial-space/core/module/scene/scene-object';
 import {Subject} from 'rxjs';
 import {Token} from '@colonial-space/core/injector/token';
 import {Type} from '@colonial-space/core/type';
-import {ipcRenderer} from 'electron';
 
 @Injectable({
     providedIn: 'root'
@@ -42,7 +41,6 @@ export class SceneRegister {
             this.sceneLoader.load(moduleSceneOption.name).then(() => {
                 if (moduleSceneOption.root) {
                     this.rootSceneAdded$.next(moduleSceneOption.name);
-                    ipcRenderer.send('game-root-scene-ready');
                 }
             });
         }

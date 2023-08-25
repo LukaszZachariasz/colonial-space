@@ -22,9 +22,9 @@ export class MainMenuSceneGui implements OnLoad, OnUnload {
 
     public gameOnLoad(): void {
         this.guiManager.appendToRoot(this.mainMenuBeginBtnGuiComponent);
-        this.guiManager.appendToRoot(this.mainMenuLoadBtnGuiComponent);
-        this.guiManager.appendToRoot(this.mainMenuOptionsBtnGuiComponent);
-        this.guiManager.appendToRoot(this.mainMenuLeaveBtnGuiComponent);
+        // this.guiManager.appendToRoot(this.mainMenuLoadBtnGuiComponent);
+        // this.guiManager.appendToRoot(this.mainMenuOptionsBtnGuiComponent);
+        // this.guiManager.appendToRoot(this.mainMenuLeaveBtnGuiComponent);
 
         this.mainMenuBeginBtnClicked = this.mainMenuBeginBtnGuiComponent.onClick$.pipe(
             tap(() => this.gameService.newGame())

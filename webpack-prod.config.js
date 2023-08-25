@@ -29,14 +29,6 @@ module.exports = (env) => {
             plugins: [new TsconfigPathsPlugin()],
             extensions: ['.ts', '.js'],
         },
-        devServer: {
-            static: {
-                directory: path.join(__dirname, 'dist'),
-            },
-            compress: true,
-            open: true,
-            port: 4200,
-        },
         plugins: [
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
