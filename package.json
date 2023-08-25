@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@reduxjs/toolkit": "1.8.0",
     "babylonjs": "5.7.0",
