@@ -2,6 +2,10 @@
 
 3d economic strategy game based in cosmos. ColonialSpace is supported by webgl rendering from BabylonJs library.
 
+## Demo
+
+https://lukaszzachariasz.github.io/colonial-space
+
 ## Development
 
 1. npm install
