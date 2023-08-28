@@ -42,6 +42,7 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: './src/index.html',
                 chunks: [
+                    'main',
                     'renderer'
                 ]
             }),
@@ -60,7 +61,7 @@ module.exports = (env) => {
         ],
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js'
+            filename: '[name].[contenthash].js'
         }
     };
 };

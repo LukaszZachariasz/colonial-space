@@ -2,12 +2,12 @@
   "name": "colonial-space",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.ts",
   "homepage": "https://LukaszZachariasz.github.io/colonial-space/",
   "scripts": {
     "prepare": "husky install",
     "start": "webpack serve",
-    "build": "webpack --config webpack-prod.config.js",
+    "build": "webpack",
     "lint": "eslint . --ext .ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

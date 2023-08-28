@@ -25,7 +25,14 @@ export class SpaceSkyboxModel extends ModelMesh<BABYLON.Mesh> implements OnInit 
 
         this.material = new BABYLON.StandardMaterial('SpaceSkyBoxMaterial', this.scene);
         this.material.backFaceCulling = false;
-        this.material.reflectionTexture = new BABYLON.CubeTexture(`resources/skybox/space/${this.type}/`, this.scene);
+        this.material.reflectionTexture = new BABYLON.CubeTexture(`resources/skybox/space/${this.type}/`, this.scene, [
+          'px.jpg',
+          'py.jpg',
+          'pz.jpg',
+          'nx.jpg',
+          'ny.jpg',
+          'nz.jpg',
+        ]);
         this.material.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         this.material.reflectionTexture.level = 1.5;
         this.material.diffuseColor = new BABYLON.Color3(0, 0, 0);
