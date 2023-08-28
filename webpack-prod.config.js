@@ -46,6 +46,10 @@ module.exports = (env) => {
                     {
                         from: './src/resources',
                         to: './resources'
+                    },
+                    {
+                        from: '.nojekyll',
+                        to: ''
                     }
                 ]
             })
